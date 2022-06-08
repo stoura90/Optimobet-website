@@ -1,0 +1,313 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.filters {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    gap: 24px;
+    z-index: 10;
+    background-color: #ffffff;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    padding: 38px 32px;
+    border-radius: 16px;
+    border: 1px solid #4B445333;
+    width: 100%;
+    gap: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 80%;
+    margin-left: calc(20% + 30px);
+}
+
+/* Provider Filter */
+.provider {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.providerName {
+    text-align: left;
+    font: normal normal medium 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    transition: all .3s ease-in-out;
+}
+
+.providerCount {
+    padding: 8px 16px;
+    border-radius: 24px;
+    background-color: #F2F2F2;
+    text-align: right;
+    font: normal normal normal 12px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #1A1C21;
+    transition: all .3s ease-in-out;
+}
+
+.provider.active::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 13px solid #7F3FFC;
+    border-radius: 13px;
+}
+
+.provider.active .providerName {
+    color: #7F3FFC;
+}
+
+.provider.active .providerCount {
+    background-color: #7F3FFC;
+    color: #FFFFFF;
+}
+
+/* Type Filter */
+
+.type {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.typeName {
+    text-align: left;
+    font: normal normal medium 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    transition: all .3s ease-in-out;
+}
+
+.typeCheckbox {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease-in-out;
+}
+
+.type.active::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 13px solid #7F3FFC;
+    border-radius: 13px;
+}
+
+.type.active .typeName {
+    color: #7F3FFC;
+}
+
+.type.active .typeCheckbox {
+    background-color: #7F3FFC;
+}
+
+.type.active .typeCheckbox:after {
+    content: '✔';
+    position: absolute;
+    color: #FFFFFF;
+}
+
+/* Page Content */
+
+.slide {
+    height: 469px;
+    background-color: #ccc;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.bullet {
+    height: 3px;
+    width: 24px;
+    background-color: #4B445333;
+    z-index: 99;
+    transition: all .3s ease-in-out;
+}
+
+.bulletActive {
+    background-color: #7F3FFC;
+}
+
+.pagination {
+    position: absolute;
+    right: 0;
+    bottom: 28px;
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    gap: 12px;
+    z-index: 99;
+}
+
+.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.sidebarControls {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    border-radius: 30px;
+    border: 3px solid #F2F2F2;
+    background-color: #F2F2F2;
+    cursor: pointer;
+}
+
+.sidebarControlsItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 30px;
+    z-index: 2;
+}
+
+.sidebarControlsSlide {
+    display: flex;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    border-radius: 30px;
+    position: absolute;
+    background-color: #7F3FFC;
+    z-index: 1;
+}
+
+.filterControls {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.filterControlsItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    padding: 12px 24px;
+    text-align: left;
+    font: normal normal 500 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.filterControlsItem.active {
+    background-color: #7F3FFC;
+    color: white;
+}
+
+.slots {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Slot */
+
+.slot {
+    position: relative;
+    width: calc(33% - 16px);
+    height: 520px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+.slot.big {
+    width: calc(33% * 2 - 2px)
+}
+
+.slot.big .slotInfo {
+    left: 32px;
+    bottom: 32px;
+}
+
+.slotInfo {
+    position: absolute;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+}
+
+.slotName {
+    text-align: center;
+    font: normal normal bold 24px/45px Samsung Sans;
+    letter-spacing: 0px;
+    color: #F2F2F2;
+    text-transform: uppercase;
+}
+
+.slotProvider {
+    text-align: center;
+    font: normal normal normal 15px/45px Samsung Sans;
+    letter-spacing: 0px;
+    color: #F2F2F2;
+}
+
+.slotRating {
+    position: absolute;
+    right: 32px;
+    top: 24px;
+    padding: 11px 24px;
+    border-radius: 24px;
+    background-color: #FFC448;
+}
+
+.slotButton {
+    position: absolute;
+    bottom: 38px;
+    right: 32px;
+    padding: 15px 40px;
+    background-color: #7F3FFC;
+    border-radius: 24px;
+    text-align: left;
+    font: normal normal 500 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #F2F2F2;
+}
