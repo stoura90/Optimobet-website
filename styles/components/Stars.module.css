@@ -1,0 +1,13 @@
+.star svg{
+    width: 15px;
+    height: 15px;
+}
+.activeStar path{
+    stroke: #FFC448;
+    fill: #FFC448;
+}
+.points{
+    font: normal normal bold 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
