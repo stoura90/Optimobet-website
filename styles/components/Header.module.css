@@ -1,0 +1,96 @@
+.container {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    padding: 22px 10%;
+    align-items: center;
+    background-color: #FFFFFF;
+    z-index: 999;
+}
+
+.logo {
+    margin-right: 60px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    margin-right: 96px;
+}
+
+.link {
+    position: relative;
+    text-align: left;
+    font: normal normal 500 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+}
+
+.link:hover {
+    color: #7F3FFC;
+}
+
+.link.active {
+    color: #7F3FFC;
+}
+
+.link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    height: 2px;
+    width: 16px;
+    border-radius: 100px;
+    background-color: #7F3FFC;
+}
+
+.search {
+    border: none;
+    border-radius: 24px;
+    padding: 15px 24px;
+    background-color: #F2F2F2;
+    text-align: left;
+    font: normal normal normal 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    outline: none;
+    display: flex;
+    margin-right: 44px;
+    width: 100%;
+    max-width: 405px;
+}
+
+.search::placeholder {
+    color: #4B445380;
+}
+
+.language {
+    cursor: pointer;
+    padding: 15px 32px;
+    border-radius: 24px;
+    border: 1px solid #4B445333;
+    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    font: normal normal medium 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    margin-right: 24px;
+}
+
+.login {
+    min-width: fit-content;
+    padding: 15px 32px;
+    border-radius: 24px;
+    background-color: #7F3FFC;
+    color: #F2F2F2;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    font: normal normal medium 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+}
