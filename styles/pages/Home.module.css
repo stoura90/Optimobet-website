@@ -1,0 +1,15 @@
+.container{
+
+}
+
+.sliderBlock{
+  width: 80%!important;
+}
+.sliderBlock > div{
+  height: 500px;
+  display: flex;
+  align-items: flex-end;
+}
+.sliderPicture{
+  width: 100%;
+}
