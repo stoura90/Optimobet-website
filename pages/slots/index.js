@@ -8,6 +8,7 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import CountFilter from '../../components/filters/CountFilter';
+import Slot from '../../components/Slot';
 
 const filter1 = [
     {
@@ -336,36 +337,6 @@ export default function SlotsPage() {
                 </motion.div>
             </motion.div>
         </div>
-    )
-}
-
-function Slot({ name, provider, rating, big, id, style }) {
-    return (
-        <motion.div
-            layout
-            className={`${styles.slot} ${big && styles.big}`}
-            style={style}
-        >
-            <Image
-                src={'/images/slot.png'}
-                alt={name}
-                layout={'fill'}
-                objectFit={'cover'}
-            />
-            <div className={styles.slotInfo}>
-                <span className={styles.slotName}>{name}</span>
-                <span className={styles.slotProvider}>{provider}</span>
-            </div>
-            <div className={styles.slotRating}>
-                {rating}
-            </div>
-            {
-                big &&
-                <div className={styles.slotButton}>
-                    Play Now
-                </div>
-            }
-        </motion.div>
     )
 }
 
