@@ -1,7 +1,7 @@
 .container {}
 
-.mainSlider{
-    width: 100%;
+.mainSlider {
+	width: 100%;
 }
 
 .sliderBlock {
@@ -76,7 +76,7 @@
 	align-items: flex-end;
 }
 
-.moreButtonArea{
+.moreButtonArea {
 	margin-top: 10px;
 	width: 100%;
 	display: flex;
@@ -84,7 +84,7 @@
 	justify-content: center;
 }
 
-.moreButton{
+.moreButton {
 	border: 1px solid #4B445333;
 	border-radius: 24px;
 	font: normal normal 500 15px/17px Samsung Sans;
@@ -94,7 +94,7 @@
 	cursor: pointer;
 }
 
-.sitesLine{
+.sitesLine {
 	background: #F2F2F2 0% 0% no-repeat padding-box;
 	width: 100%;
 	padding: 40px 10% 30px 10%;
@@ -106,15 +106,17 @@
 	justify-content: space-between;
 }
 
-.slotsSlider{
-	margin-top: 100px;	
-    width: 100%;
+.slotsSlider {
+	margin-top: 100px;
+	width: 100%;
 }
-.slotBlock{	
+
+.slotBlock {
 	width: 80% !important;
 	display: flex;
 	gap: 30px;
 }
+
 .slotBlock>div {
 	width: 25%;
 	height: 500px;
@@ -122,7 +124,227 @@
 	align-items: flex-end;
 	position: relative;
 }
-.headerBlockWrap{
+
+.headerBlockWrap {
 	margin-left: 10%;
 	margin-bottom: 16px;
+}
+
+.gamblingRules {
+	margin-top: 100px;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	background: url(/images/egypt.jpg);
+	padding-top: 40px;
+	position: relative;
+}
+
+.gamblingRules::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #F2F2F2E0 0% 0% no-repeat padding-box;
+}
+
+.gamblingRules>* {
+	z-index: 1;
+}
+
+.gamblingContent {
+	width: 100%;
+	margin: auto;
+	position: relative;
+	margin-top: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	gap: 24px;
+}
+
+.rulesList {
+	margin: 0;
+}
+
+.rulesList {
+	width: 40%;
+	list-style-type: none;
+	counter-reset: my-counter;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 12px;
+}
+.rulesList li {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	margin-bottom: 16px;
+	font: normal normal bold 20px/45px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453;
+}
+.rulesList span {
+	font: normal normal normal 15px/26px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453CC;
+	margin-bottom: 24px;
+	width: 100%;
+}
+.rulesList li::before {
+	content: counter(my-counter);
+	counter-increment: my-counter;
+	background: #7F3FFC;
+	border-radius: 100px;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font: normal normal bold 15px/26px Samsung Sans;
+	letter-spacing: 0px;
+	color: #F2F2F2;
+}
+.gamblingPicture{
+	position: relative;
+	width: 25%;
+	margin-bottom: -80px;
+}
+
+.faqBlock{
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: auto;
+	margin-top: 180px;
+}
+.faqBlockContent{
+	margin-top: 16px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.faqQuestions{
+	margin-left: 10%;
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+}
+.questionBlock{
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.questionHeader{
+	font: normal normal bold 20px/22px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453;
+}
+.questionAnswer{
+	font: normal normal normal 15px/26px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453CC;
+}
+.faqPicture{
+	display: flex;
+	width: 45%;
+	height: 100%;
+	margin-right: 2%;
+}
+
+.countries{
+	margin-top: 150px;
+	background: #7F3FFC 0% 0% no-repeat padding-box;
+	padding: 40px 10%;
+	width: 100%;
+}
+.countries *{
+	color: #F2F2F2;
+}
+.countriesContent{
+	margin-top: 24px;
+	display: flex;
+	gap: 30px;
+	flex-wrap: wrap;
+}
+.country{
+	display: flex;
+	padding: 17px 24px;
+	border: 2px solid #F2F2F2;
+	border-radius: 30px;
+	width: 360px;
+	justify-content: space-between;
+	align-items: center;
+	gap: 21px;
+}
+.countryName {
+	font: normal normal bold 18px/20px Samsung Sans;
+	letter-spacing: 0px;
+	color: #F2F2F2;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.countryName::before {
+    background-image: url("/images/icons/ок.png");
+    background-size: 18px;
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    content: "";
+    flex-shrink: 0;
+}
+.countryCount{
+	background: #00C69C 0% 0% no-repeat padding-box;
+	border-radius: 13px;
+	padding: 5px 12px;
+	font: normal normal bold 13px/15px Samsung Sans;
+	letter-spacing: 0px;
+	color: #FFFFFF;
+}
+
+.optimoText{
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 80%;
+	margin: auto;
+	margin-top: 100px;
+	font: normal normal normal 15px/26px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453CC;
+}
+
+.aboutSite{
+	margin: auto;
+	margin-top: 100px;
+	margin-bottom: 100px;
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+}
+.aboutSiteContent{
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	margin-top: 16px;
+}
+.aboutSiteContent{
+	font: normal normal normal 15px/26px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453CC;
+}
+.aboutSiteInfo{
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+.aboutSiteInfoTitle{
+	font: normal normal bold 20px/22px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453;
 }
