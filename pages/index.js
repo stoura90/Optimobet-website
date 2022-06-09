@@ -45,7 +45,7 @@ export default function Home() {
 				</div>
 
 				<div className={styles.promoBlocks}>
-					<div className={styles.promoBlocksHeader}>
+					<div className={styles.BlocksHeader}>
 						<span className={styles.promoBlocksSubTitle}>
 							subtitle
 						</span>
@@ -60,11 +60,111 @@ export default function Home() {
 				</div>
 
 				<div className={styles.sitesGallery}>
-					<SiteCard rep={1} />					
+					<SiteCard rep={1} />
+					<SiteCard rep={56} />
+					<SiteCard rep={78} />
+					<PromoBlock />
+					<SiteCard rep={99} />
 					<SiteCard rep={56} />
 					<SiteCard rep={78} />
 					<SiteCard rep={99} />
+					<div className={styles.moreButtonArea}>
+						<a
+							className={styles.moreButton}
+						>
+							See More
+						</a>
+					</div>
 				</div>
+
+				<div className={styles.sitesLine}>
+					<div className={styles.BlocksHeader}>
+						<span className={styles.promoBlocksSubTitle}>
+							subtitle
+						</span>
+						<span className={styles.promoBlocksTitle}>
+							title
+						</span>
+					</div>
+					<SiteCard rep={56} />
+					<SiteCard rep={78} />
+					<SiteCard rep={99} />
+					<div className={styles.moreButtonArea} style={{marginTop:"24px"}}>
+						<a
+							className={styles.moreButton}
+						>
+							See More
+						</a>
+					</div>
+				</div>
+
+				<div className={styles.promoBlocks}>
+					<div className={styles.BlocksHeader}>
+						<span className={styles.promoBlocksSubTitle}>
+							subtitle
+						</span>
+						<span className={styles.promoBlocksTitle}>
+							title
+						</span>
+					</div>
+					<div className={styles.promoBlocksContent}>
+						<PromoBlock />
+						<PromoBlock />
+					</div>
+				</div>
+
+				<div className={styles.slotsSlider}>
+					<div className={styles.headerBlockWrap}>
+						<div className={styles.BlocksHeader}>
+							<span className={styles.promoBlocksSubTitle}>
+								subtitle
+							</span>
+							<span className={styles.promoBlocksTitle}>
+								title
+							</span>
+						</div>
+					</div>
+					<SliderWithControls>
+						{[1,1,1,1,1,1].map(item => (
+							<SwiperSlide className={styles.slotBlock}>
+								<div>
+									<Image
+										className={styles.sliderPicture}
+										src="/placeholder.png"
+										layout='fill'
+										objectFit='cover'
+									/>
+								</div>
+								<div>
+									<Image
+										className={styles.sliderPicture}
+										src="/placeholder.png"
+										layout='fill'
+										objectFit='cover'
+									/>
+								</div>
+								<div>
+									<Image
+										className={styles.sliderPicture}
+										src="/placeholder.png"
+										layout='fill'
+										objectFit='cover'
+									/>
+								</div>
+								<div>
+									<Image
+										className={styles.sliderPicture}
+										src="/placeholder.png"
+										layout='fill'
+										objectFit='cover'
+									/>
+								</div>
+							</SwiperSlide>
+						))}
+					</SliderWithControls>
+				</div>
+
+				
 			</main>
 		</div>
 	)

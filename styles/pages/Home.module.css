@@ -1,5 +1,9 @@
 .container {}
 
+.mainSlider{
+    width: 100%;
+}
+
 .sliderBlock {
 	width: 80% !important;
 }
@@ -8,6 +12,7 @@
 	height: 500px;
 	display: flex;
 	align-items: flex-end;
+	position: relative;
 }
 
 .sliderPicture {
@@ -35,21 +40,23 @@
 	gap: 15px;
 }
 
-.promoBlocksHeader {
+.BlocksHeader {
 	display: flex;
 	flex-direction: column;
+	width: 100%;
+	gap: 6px;
 }
 
 .promoBlocksSubTitle {
 	text-transform: uppercase;
-	font: normal normal 500 18px/45px Samsung Sans;
+	font: normal normal 500 18px/20px Samsung Sans;
 	letter-spacing: 0px;
 	color: #4B445380;
 }
 
 .promoBlocksTitle {
 	text-transform: capitalize;
-	font: normal normal bold 28px/45px Samsung Sans;
+	font: normal normal bold 28px/30px Samsung Sans;
 	letter-spacing: 0px;
 	color: #4B4453;
 }
@@ -66,4 +73,56 @@
 	width: 80%;
 	margin: auto;
 	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.moreButtonArea{
+	margin-top: 10px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.moreButton{
+	border: 1px solid #4B445333;
+	border-radius: 24px;
+	font: normal normal 500 15px/17px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453;
+	padding: 15px 40px;
+	cursor: pointer;
+}
+
+.sitesLine{
+	background: #F2F2F2 0% 0% no-repeat padding-box;
+	width: 100%;
+	padding: 40px 10% 30px 10%;
+	margin-top: 32px;
+	margin-bottom: 100px;
+	display: flex;
+	gap: 16px;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.slotsSlider{
+	margin-top: 100px;	
+    width: 100%;
+}
+.slotBlock{	
+	width: 80% !important;
+	display: flex;
+	gap: 30px;
+}
+.slotBlock>div {
+	width: 25%;
+	height: 500px;
+	display: flex;
+	align-items: flex-end;
+	position: relative;
+}
+.headerBlockWrap{
+	margin-left: 10%;
+	margin-bottom: 16px;
 }
