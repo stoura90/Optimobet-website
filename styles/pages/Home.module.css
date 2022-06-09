@@ -1,247 +1,69 @@
-.container{
+.container {}
 
-}
-
-.sliderBlock{
-  width: 80%!important;
-}
-.sliderBlock > div{
-  height: 500px;
-  display: flex;
-  align-items: flex-end;
-}
-.sliderPicture{
-  width: 100%;
+.sliderBlock {
+	width: 80% !important;
 }
 
-.categoryBlocks{
-  width: 80%;
-  margin: 50px auto 100px auto;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-.categoryBlocks > *{
-  flex: 1 1;
-}
-.categoryBlock{
-  border: 1px solid #4B445333;
-  border-radius: 16px;
-  padding: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  flex-direction: column;
-  cursor: pointer;
-}
-.categoryInfo{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-}
-.categoryTitle{
-  font: normal normal bold 24px/26px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B4453;
-  text-align: center;
-}
-.categoryDescription{
-  font: normal normal normal 15px/17px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B445380;
-  text-align: center;
-  margin: 0;
+.sliderBlock>div {
+	height: 500px;
+	display: flex;
+	align-items: flex-end;
 }
 
-.promoBlocks{
-  display: flex;
-  width: 80%;
-  margin: auto;
-  margin-bottom: 30px;
-  flex-direction: column;
-  gap: 15px;
-}
-.promoBlocksHeader{
-  display: flex;
-  flex-direction: column;
-}
-.promoBlocksSubTitle{
-  text-transform: uppercase;
-  font: normal normal 500 18px/45px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B445380;
-}
-.promoBlocksTitle{
-  text-transform: capitalize;
-  font: normal normal bold 28px/45px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B4453;
-}
-.promoBlocksContent{
-  display: flex;
-  gap: 30px;
-}
-.promoBlock{
-  flex: 1 1;
-  position: relative;
-  height: 350px;
+.sliderPicture {
+	width: 100%;
 }
 
-.sitesGallery{
-  display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: auto;
-  justify-content: space-between;
+.categoryBlocks {
+	width: 80%;
+	margin: 50px auto 100px auto;
+	display: flex;
+	align-items: center;
+	gap: 30px;
 }
-.siteCard{
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #4B445333;
-  border-radius: 16px;
-  width: calc(33% - 15px);
+
+.categoryBlocks>* {
+	flex: 1 1;
 }
-.cardHeader{
-  padding: 21px;
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
-  width: calc(100% + 2px);
-  margin-left: -1px;
-  margin-top: -1px;
-  margin-right: -1px;
-  border-radius: 16px 16px 0px 0px;
+
+.promoBlocks {
+	display: flex;
+	width: 80%;
+	margin: auto;
+	margin-bottom: 30px;
+	flex-direction: column;
+	gap: 15px;
 }
-.badRep .cardHeader{
-  background: #EA000033 0% 0% no-repeat padding-box;
-  color: #EA0000;
+
+.promoBlocksHeader {
+	display: flex;
+	flex-direction: column;
 }
-.badRep:hover{
-  border: 1px solid #EA0000;
+
+.promoBlocksSubTitle {
+	text-transform: uppercase;
+	font: normal normal 500 18px/45px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B445380;
 }
-.badRep:hover .cardHeader{
-  background: #EA0000 0% 0% no-repeat padding-box;
-  color: #F2F2F2;
+
+.promoBlocksTitle {
+	text-transform: capitalize;
+	font: normal normal bold 28px/45px Samsung Sans;
+	letter-spacing: 0px;
+	color: #4B4453;
 }
-.badRep:hover text{
-  fill: #F2F2F2!important;
+
+.promoBlocksContent {
+	display: flex;
+	gap: 30px;
 }
-.goodRep .cardHeader{
-  background: #FF845733 0% 0% no-repeat padding-box;
-  color: #FF8457;
-}
-.veryGoodRep .cardHeader{
-  background: #00C69C33 0% 0% no-repeat padding-box;
-  color: #00C69C;
-}
-.perfectRep .cardHeader{
-  background: #7F3FFC33 0% 0% no-repeat padding-box;
-  color: #7F3FFC;
-}
-.reputation{
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.reputation span{
-  text-transform: capitalize;
-  text-align: right;
-  font: normal normal 500 15px/20px Samsung Sans;
-  letter-spacing: 0px;
-}
-.repVisualizer{
-  width: 60px;
-  height: 60px;
-}
-.repVisualizer *{  
-  font: normal normal normal 14px/20px Samsung Sans;
-}
-.cardContent{
-  padding: 24px 24px 32px 24px;
-}
-.contentTitle{
-  font: normal normal bold 24px/34px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B4453;
-  display: flex;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-.starsBlock{
-  display: flex;
-  gap: 6px;
-  align-items: center;
-}
-.contentData{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 27px;
-}
-.bonus{
-  font: normal normal bold 16px/18px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B4453;
-}
-.checkInfo{
-  font: normal normal normal 15px/17px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B4453;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.checkInfo::before{
-  background-image: url("/images/icons/ок.png");
-  background-size: 14px;
-  display: inline-block;
-  width: 14px; 
-  height: 14px;
-  content:"";
-  flex-shrink: 0;
-}
-.contentGames{
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 32px;
-}
-.gamesTitle{
-  font: normal normal normal 13px/15px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B4453B3;
-}
-.gamesCircles{
-  display: flex;
-  gap: 12px;
-}
-.gamesCircles > div {
-  width: 50px;
-  height: 50px;
-  border-radius: 100px;
-  background: #4B44531A 0% 0% no-repeat padding-box;
-  flex-shrink: 0;
-}
-.buttonBonus{
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-.getBonus{
-  background: #7F3FFC 0% 0% no-repeat padding-box;
-  border-radius: 24px;
-  padding: 15px 40px;
-  border: none;
-  outline: none;
-  color: #F2F2F2;
-  font: normal normal medium 15px/17px Samsung Sans;
-}
-.bonusApply{
-  font: normal normal medium 15px/24px Samsung Sans;
-  letter-spacing: 0px;
-  color: #4B445380;
+
+.sitesGallery {
+	display: flex;
+	gap: 30px;
+	flex-wrap: wrap;
+	width: 80%;
+	margin: auto;
+	justify-content: space-between;
 }
