@@ -1,0 +1,64 @@
+.filter {
+    display: flex;
+    flex-direction: column;
+    padding: 38px 32px;
+    border-radius: 16px;
+    border: 1px solid #4B445333;
+    width: 100%;
+    gap: 20px;
+}
+
+.type {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.typeName {
+    text-align: left;
+    font: normal normal medium 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    transition: all .3s ease-in-out;
+}
+
+.typeCheckbox {
+    position: relative;
+    height: 24px;
+    width: 24px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F2F2F2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease-in-out;
+}
+
+.type.active::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 13px solid #7F3FFC;
+    border-radius: 13px;
+}
+
+.type.active .typeName {
+    color: #7F3FFC;
+}
+
+.type.active .typeCheckbox {
+    background-color: #7F3FFC;
+}
+
+.type.active .typeCheckbox:after {
+    content: '✔';
+    position: absolute;
+    color: #FFFFFF;
+}

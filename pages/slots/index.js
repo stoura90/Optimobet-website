@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
+import CheckboxFilter from '../../components/CheckboxFilter';
+import CountFilter from '../../components/CountFilter';
 
 const filter1 = [
     {
@@ -204,8 +206,8 @@ export default function SlotsPage() {
                     exit="hidden"
                     className={styles.filters}
                 >
-                    <FilterProviders items={filter1} />
-                    <FilterTypes items={filter2} />
+                    <CountFilter items={filter1} />
+                    <CheckboxFilter items={filter2} />
                 </motion.div>}
             </AnimatePresence>
             <motion.div
@@ -289,44 +291,6 @@ export default function SlotsPage() {
                     }
                 </div>
             </motion.div>
-        </div>
-    )
-}
-
-function FilterProviders({ items }) {
-    const [active, setActive] = useState(items[0].id)
-
-    return (
-        <div className={styles.filter}>
-            {items.map(item => (
-                <div
-                    key={`provider_${item.id}`}
-                    className={`${styles.provider} ${active === item.id && styles.active}`}
-                    onClick={() => item.id !== active && setActive(item.id)}
-                >
-                    <div className={styles.providerName}>{item.name}</div>
-                    <div className={styles.providerCount}>{item.count}</div>
-                </div>
-            ))}
-        </div>
-    )
-}
-
-function FilterTypes({ items }) {
-    const [active, setActive] = useState(items[0].id)
-
-    return (
-        <div className={styles.filter}>
-            {items.map(item => (
-                <div
-                    key={`type_${item.id}`}
-                    className={`${styles.type} ${active === item.id && styles.active}`}
-                    onClick={() => item.id !== active && setActive(item.id)}
-                >
-                    <div className={styles.typeName}>{item.name}</div>
-                    <div className={styles.typeCheckbox} />
-                </div>
-            ))}
         </div>
     )
 }
