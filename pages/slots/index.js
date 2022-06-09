@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
-import CheckboxFilter from '../../components/CheckboxFilter';
-import CountFilter from '../../components/CountFilter';
+import CheckboxFilter from '../../components/filters/CheckboxFilter';
+import CountFilter from '../../components/filters/CountFilter';
 
 const filter1 = [
     {
