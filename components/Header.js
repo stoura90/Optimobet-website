@@ -7,7 +7,7 @@ import styles from '../styles/components/Header.module.css'
 const links = [
     {
         href: '/casinos',
-        name: 'Casinos'
+        name: 'Online Casinos'
     },
     {
         href: '/bonuses',
