@@ -1,18 +1,25 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 30px;
+    padding-bottom: 20px;
+}
+
+.contentContainer {
     position: relative;
     display: flex;
     flex-direction: row;
     width: 80%;
     margin: 0 auto;
     gap: 30px;
-    padding-bottom: 20px;
 }
 
 .filters {
     position: absolute;
     display: flex;
     flex-direction: column;
-    width: 25%;
+    width: 20%;
     gap: 24px;
     z-index: 10;
     background-color: #ffffff;
@@ -22,45 +29,27 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    width: 75%;
-    margin-left: calc(25% + 30px);
+    width: 80%;
+    margin-left: calc(20% + 30px);
 }
 
-/* Page Content */
+/* Slider */
 
-.slider {
-    border-radius: 16px;
-    overflow: hidden;
+.sliderBlock {
+    width: 80% !important;
 }
 
-.slide {
-    height: 469px;
-    background-color: #ccc;
-}
-
-.bullet {
-    height: 3px;
-    width: 24px;
-    background-color: #4B445333;
-    z-index: 99;
-    transition: all .3s ease-in-out;
-}
-
-.bulletActive {
-    background-color: #7F3FFC;
-}
-
-.pagination {
-    position: absolute;
-    right: 0;
-    bottom: 28px;
+.sliderBlock>div {
+    height: 500px;
     display: flex;
-    flex-direction: row;
-    width: fit-content;
-    gap: 12px;
-    z-index: 99;
+    align-items: flex-end;
 }
 
+.sliderPicture {
+    width: 100%;
+}
+
+/* Controls */
 .controls {
     display: flex;
     flex-direction: row;
@@ -122,74 +111,99 @@
     color: white;
 }
 
-.slots {
-    display: grid;
-    grid-template-columns: repeat(3, calc(33% - 15px));
-    gap: 30px;
-    width: 100%;
+.casinos {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
-/* Slot */
+/* Casino */
 
-.slot {
-    position: relative;
-    height: 520px;
-    min-width: 360px;
+.casino {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
     width: 100%;
     border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    background-color: rgb(88, 83, 83);
+    border: 1px solid #4B445333;
     overflow: hidden;
 }
 
-.slot.big .slotInfo {
-    left: 32px;
-    bottom: 32px;
+.casinoImage {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    background-color: #ccc;
 }
 
-.slotInfo {
-    position: absolute;
-    bottom: 30px;
+.casinoInfo {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 27px;
+    padding: 32px;
+}
+
+.casinoName {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.casinoNameText {
+    font: normal normal bold 24px/34px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+
+.casinoRating {
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    gap: 3px;
 }
 
-.slotName {
-    text-align: center;
-    font: normal normal bold 24px/45px Samsung Sans;
-    letter-spacing: 0px;
-    color: #F2F2F2;
-    text-transform: uppercase;
+.casinoTags {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.slotProvider {
-    text-align: center;
-    font: normal normal normal 15px/45px Samsung Sans;
-    letter-spacing: 0px;
-    color: #F2F2F2;
+.casinoGames {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
 }
 
-.slotRating {
-    position: absolute;
-    right: 32px;
-    top: 24px;
-    padding: 11px 24px;
-    border-radius: 24px;
-    background-color: #FFC448;
+.casinoGame {
+    position: relative;
+    display: flex;
+    height: 36px;
+    width: 36px;
+    background-color: #ccc;
+    border-radius: 100px;
+    overflow: hidden;
 }
 
-.slotButton {
-    position: absolute;
-    bottom: 38px;
-    right: 32px;
-    padding: 15px 40px;
-    background-color: #7F3FFC;
+.casinoButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.casinoButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 45px;
     border-radius: 24px;
     text-align: left;
     font: normal normal 500 15px/24px Samsung Sans;
     letter-spacing: 0px;
-    color: #F2F2F2;
+    color: #4B445380;
+    cursor: pointer;
+}
+
+.casinoButton.highlighted {
+    background-color: #7F3FFC;
+    color: white;
 }

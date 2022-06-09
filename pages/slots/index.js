@@ -1,11 +1,13 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../../styles/pages/Slots.module.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
+import CheckboxFilter from '../../components/filters/CheckboxFilter';
+import CountFilter from '../../components/filters/CountFilter';
 
 const filter1 = [
     {
@@ -85,7 +87,7 @@ const filter2 = [
 
 const sliderTemp = [1, 2, 3, 4, 5]
 
-const slots = [
+const _slots = [
     {
         id: 1,
         name: 'Slot 1',
@@ -141,13 +143,20 @@ const slots = [
         provider: 'BETSOFT',
         type: 'Bonus Buy',
         rating: 4.5,
+    },
+    {
+        id: 9,
+        name: 'Slot 9',
+        provider: '2by2gaming',
+        type: 'Sticky Features',
+        rating: 4.5,
     }
-
 ]
 
 export default function SlotsPage() {
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
+    const [slots, setSlots] = useState(_slots);
 
     const controlVariants = {
         left: {
@@ -184,12 +193,47 @@ export default function SlotsPage() {
             }
         },
         narrow: {
-            marginLeft: 'calc(20% + 30px)',
-            width: '80%',
+            marginLeft: 'calc(25% + 30px)',
+            width: '75%',
             transition: {
                 duration: 0.5,
             }
         }
+    }
+
+    const slotsVariants = {
+        wide: {
+            gridTemplateColumns: 'repeat(4, 360px)',
+        },
+        narrow: {
+            gridTemplateColumns: 'repeat(3, 360px)',
+        }
+    }
+
+    function renderSlots(sidebarShown) {
+        // breaks the layout when first slot is big
+        let column = 1;
+        let row = 1;
+        const maxColumns = sidebarShown ? 3 : 4;
+        return slots.map((item, index) => {
+            const slot = <Slot
+                {...item}
+                key={`slot_${item.id}`}
+                // big={index === 0}
+                style={{
+                    gridColumnStart: column,
+                    gridColumnEnd: column + 1,
+                    gridRowStart: row,
+                    gridRowEnd: row + 1,
+                }}
+            />
+            // if (index === 0) {
+            //     column = 3;
+            //     return slot;
+            // }
+            column < maxColumns ? column++ : (column = 1, row++)
+            return slot
+        })
     }
 
     return (
@@ -204,8 +248,8 @@ export default function SlotsPage() {
                     exit="hidden"
                     className={styles.filters}
                 >
-                    <FilterProviders items={filter1} />
-                    <FilterTypes items={filter2} />
+                    <CountFilter items={filter1} />
+                    <CheckboxFilter items={filter2} />
                 </motion.div>}
             </AnimatePresence>
             <motion.div
@@ -281,59 +325,27 @@ export default function SlotsPage() {
                         </div>
                     </div>
                 </div>
-                <div className={styles.slots}>
+                <motion.div
+                    variants={slotsVariants}
+                    animate={sidebarShown ? 'narrow' : 'wide'}
+                    className={styles.slots}
+                >
                     {
-                        slots.map((item, index) => (
-                            <Slot {...item} key={`slot_${item.id}`} big={index === 0} />
-                        ))
+                        renderSlots(sidebarShown)
                     }
-                </div>
+                </motion.div>
             </motion.div>
         </div>
     )
 }
 
-function FilterProviders({ items }) {
-    const [active, setActive] = useState(items[0].id)
-
+function Slot({ name, provider, rating, big, id, style }) {
     return (
-        <div className={styles.filter}>
-            {items.map(item => (
-                <div
-                    key={`provider_${item.id}`}
-                    className={`${styles.provider} ${active === item.id && styles.active}`}
-                    onClick={() => item.id !== active && setActive(item.id)}
-                >
-                    <div className={styles.providerName}>{item.name}</div>
-                    <div className={styles.providerCount}>{item.count}</div>
-                </div>
-            ))}
-        </div>
-    )
-}
-
-function FilterTypes({ items }) {
-    const [active, setActive] = useState(items[0].id)
-
-    return (
-        <div className={styles.filter}>
-            {items.map(item => (
-                <div
-                    key={`type_${item.id}`}
-                    className={`${styles.type} ${active === item.id && styles.active}`}
-                    onClick={() => item.id !== active && setActive(item.id)}
-                >
-                    <div className={styles.typeName}>{item.name}</div>
-                    <div className={styles.typeCheckbox} />
-                </div>
-            ))}
-        </div>
-    )
-}
-
-function Slot({ name, provider, rating, big }) {
-    return (
-        <div className={`${styles.slot} ${big && styles.big}`}>
+        <motion.div
+            layout
+            className={`${styles.slot} ${big && styles.big}`}
+            style={style}
+        >
             <Image
                 src={'/images/slot.png'}
                 alt={name}
@@ -353,7 +365,7 @@ function Slot({ name, provider, rating, big }) {
                     Play Now
                 </div>
             }
-        </div>
+        </motion.div>
     )
 }
 
