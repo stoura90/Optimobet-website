@@ -143,8 +143,14 @@ const _slots = [
         provider: 'BETSOFT',
         type: 'Bonus Buy',
         rating: 4.5,
+    },
+    {
+        id: 9,
+        name: 'Slot 9',
+        provider: '2by2gaming',
+        type: 'Sticky Features',
+        rating: 4.5,
     }
-
 ]
 
 export default function SlotsPage() {
@@ -197,11 +203,37 @@ export default function SlotsPage() {
 
     const slotsVariants = {
         wide: {
-            justifyContent: 'flex-start',
+            gridTemplateColumns: 'repeat(4, 360px)',
         },
         narrow: {
-            justifyContent: 'strech',
+            gridTemplateColumns: 'repeat(3, 360px)',
         }
+    }
+
+    function renderSlots(sidebarShown) {
+        // breaks the layout when first slot is big
+        let column = 1;
+        let row = 1;
+        const maxColumns = sidebarShown ? 3 : 4;
+        return slots.map((item, index) => {
+            const slot = <Slot
+                {...item}
+                key={`slot_${item.id}`}
+                // big={index === 0}
+                style={{
+                    gridColumnStart: column,
+                    gridColumnEnd: column + 1,
+                    gridRowStart: row,
+                    gridRowEnd: row + 1,
+                }}
+            />
+            // if (index === 0) {
+            //     column = 3;
+            //     return slot;
+            // }
+            column < maxColumns ? column++ : (column = 1, row++)
+            return slot
+        })
     }
 
     return (
@@ -298,29 +330,21 @@ export default function SlotsPage() {
                     animate={sidebarShown ? 'narrow' : 'wide'}
                     className={styles.slots}
                 >
-                    <LayoutGroup>
-                        {
-                            slots.map((item, index) => (
-                                <Slot
-                                    {...item}
-                                    key={`slot_${item.id}`}
-                                    big={index === 0}
-                                />
-                            ))
-                        }
-                    </LayoutGroup>
+                    {
+                        renderSlots(sidebarShown)
+                    }
                 </motion.div>
             </motion.div>
         </div>
     )
 }
 
-function Slot({ name, provider, rating, big, id }) {
+function Slot({ name, provider, rating, big, id, style }) {
     return (
         <motion.div
             layout
-            layoutId={id}
             className={`${styles.slot} ${big && styles.big}`}
+            style={style}
         >
             <Image
                 src={'/images/slot.png'}

@@ -123,10 +123,10 @@
 }
 
 .slots {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, 360px);
     gap: 30px;
-    flex-wrap: wrap;
+    width: 100%;
 }
 
 /* Slot */
@@ -135,19 +135,13 @@
     position: relative;
     height: 520px;
     min-width: 360px;
-    max-width: 360px;
+    width: 100%;
     flex: 1;
     border-radius: 16px;
     display: flex;
     justify-content: center;
     background-color: rgb(88, 83, 83);
     overflow: hidden;
-}
-
-.slot.big {
-    min-width: 750px;
-    max-width: 750px;
-    flex: 2;
 }
 
 .slot.big .slotInfo {
