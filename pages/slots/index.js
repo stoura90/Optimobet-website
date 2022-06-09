@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from '../../styles/pages/Slots.module.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
@@ -87,7 +87,7 @@ const filter2 = [
 
 const sliderTemp = [1, 2, 3, 4, 5]
 
-const slots = [
+const _slots = [
     {
         id: 1,
         name: 'Slot 1',
@@ -150,6 +150,7 @@ const slots = [
 export default function SlotsPage() {
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
+    const [slots, setSlots] = useState(_slots);
 
     const controlVariants = {
         left: {
@@ -186,11 +187,20 @@ export default function SlotsPage() {
             }
         },
         narrow: {
-            marginLeft: 'calc(20% + 30px)',
-            width: '80%',
+            marginLeft: 'calc(25% + 30px)',
+            width: '75%',
             transition: {
                 duration: 0.5,
             }
+        }
+    }
+
+    const slotsVariants = {
+        wide: {
+            justifyContent: 'flex-start',
+        },
+        narrow: {
+            justifyContent: 'strech',
         }
     }
 
@@ -283,21 +293,35 @@ export default function SlotsPage() {
                         </div>
                     </div>
                 </div>
-                <div className={styles.slots}>
-                    {
-                        slots.map((item, index) => (
-                            <Slot {...item} key={`slot_${item.id}`} big={index === 0} />
-                        ))
-                    }
-                </div>
+                <motion.div
+                    variants={slotsVariants}
+                    animate={sidebarShown ? 'narrow' : 'wide'}
+                    className={styles.slots}
+                >
+                    <LayoutGroup>
+                        {
+                            slots.map((item, index) => (
+                                <Slot
+                                    {...item}
+                                    key={`slot_${item.id}`}
+                                    big={index === 0}
+                                />
+                            ))
+                        }
+                    </LayoutGroup>
+                </motion.div>
             </motion.div>
         </div>
     )
 }
 
-function Slot({ name, provider, rating, big }) {
+function Slot({ name, provider, rating, big, id }) {
     return (
-        <div className={`${styles.slot} ${big && styles.big}`}>
+        <motion.div
+            layout
+            layoutId={id}
+            className={`${styles.slot} ${big && styles.big}`}
+        >
             <Image
                 src={'/images/slot.png'}
                 alt={name}
@@ -317,7 +341,7 @@ function Slot({ name, provider, rating, big }) {
                     Play Now
                 </div>
             }
-        </div>
+        </motion.div>
     )
 }
 
