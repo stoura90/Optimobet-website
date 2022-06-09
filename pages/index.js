@@ -464,7 +464,7 @@ export default function Home() {
 								If you can’t choose between two sites, the welcome bonus may overweigh. We opt the key bonus conditions to assist you in comparing bonus offerings on every site. Regardless the site offers free bets or online casino, has non-deposit welcome bonus. It’s important to understand betting demands and minimum coefficient and game limits before you make a bet. If you decide that bonus is suitable for you, then asking it is easier due to our links (get the bonus which will take you directly to the registration page.
 							</span>
 							<span>
-								Every gambling site we recommend is fully licensed and regulated by the gambling authorities. You can be sure regardless you use Optimobet.com for comparing online bookmakers , for comparing online games or for comparing any choice of poker games, you will find a safe and trustable gambling site.
+								Every gambling site we recommend is fully licensed and regulated by the gambling authorities. You can be sure regardless you use Optimobet.com for comparing online bookmakers, for comparing online games or for comparing any choice of poker games, you will find a safe and trustable gambling site.
 							</span>
 						</div>
 					</div>
@@ -473,3 +473,6 @@ export default function Home() {
 		</div>
 	)
 }
+
+Home.withHeader = true;
+Home.withFooter = true;
