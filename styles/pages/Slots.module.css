@@ -146,11 +146,14 @@
 
 /* Page Content */
 
+.slider {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
 .slide {
     height: 469px;
     background-color: #ccc;
-    border-radius: 16px;
-    overflow: hidden;
 }
 
 .bullet {

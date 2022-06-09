@@ -15,10 +15,6 @@ a {
     box-sizing: border-box;
 }
 
-.pageWrap {
-    padding-top: 118px;
-}
-
 @font-face {
     font-family: 'Samsung Sans';
     src: url(/fonts/SamsungSans-Regular.ttf) format('truetype');

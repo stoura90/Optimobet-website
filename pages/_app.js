@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }) {
     return (
         <>
             {withHeader && <Header />}
-            <div className="pageWrap">
+            <div style={{ paddingTop: withHeader ? 118 : 0 }}>
                 <Component {...pageProps} />
             </div>
         </>
