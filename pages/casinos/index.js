@@ -6,6 +6,7 @@ import styles from '../../styles/pages/Casinos.module.css'
 import { AnimatePresence, motion } from 'framer-motion';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import Stars from '../../components/Stars';
+import { ReactSVG } from 'react-svg';
 
 const filters = [
     {
@@ -279,8 +280,22 @@ export default function CasinosPage() {
                                 animate={sidebarShown ? 'left' : 'right'}
                                 className={styles.sidebarControlsSlide}
                             />
-                            <div className={styles.sidebarControlsItem}>On</div>
-                            <div className={styles.sidebarControlsItem}>Off</div>
+                            <div className={styles.sidebarControlsItem}>
+                                <ReactSVG
+                                    src='/images/icons/layout-sidebar.svg'
+                                    className={sidebarShown ? styles.light : styles.dark}
+                                    height={24}
+                                    width={24}
+                                />
+                            </div>
+                            <div className={styles.sidebarControlsItem}>
+                                <ReactSVG
+                                    src='/images/icons/layout-sidebar-left-collapse.svg'
+                                    className={sidebarShown ? styles.dark : styles.light}
+                                    height={24}
+                                    width={24}
+                                />
+                            </div>
                         </div>
                         <div className={styles.filterControls}>
                             <div
