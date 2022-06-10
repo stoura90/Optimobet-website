@@ -11,6 +11,7 @@ import CategoryBlock from '../components/CategoryBlock';
 import { useEffect, useState } from 'react';
 
 import useWindowSize from '../hooks/useWindowSize'
+import Slot from '../components/Slot'
 
 const _slots = [
     {
@@ -83,7 +84,7 @@ export default function Home() {
 	const [ offsetSlots, setOffsetSlots ] = useState()
 
 	useEffect(()=>{
-		const chunkSize = Math.trunc(width*0.8/250)
+		const chunkSize = Math.trunc(width*0.8/(250+19))
 		let offset = []
 		for (let i = 0; i < _slots.length; i += chunkSize) {
 			offset.push(_slots.slice(i, i + chunkSize))
@@ -209,13 +210,16 @@ export default function Home() {
 							{offsetSlots.map((item, index) => (
 								<SwiperSlide className={styles.slotBlock} key={index}>
 									{item.map(slot => (
-										<div style={{width:(item.length/Math.trunc(width*0.8/250))*100+"%", flex:"initial"}}>
-											<Image
-												className={styles.sliderPicture}
-												src="/placeholder.png"
-												layout='fill'
-												objectFit='cover'
-											/>
+										<div 
+											style={{
+												width:"calc((100% - "+30*(Math.trunc(width*0.8/(250+19)) - 1)+"px)/"+Math.trunc(width*0.8/(250+19))+")", 
+												flex:"initial"
+											}}
+											key={`slot_${slot.id}`}
+										>
+											<Slot
+            								    {...slot}
+            								/>
 										</div>
 									))}
 								</SwiperSlide>

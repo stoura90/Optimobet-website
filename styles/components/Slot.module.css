@@ -2,8 +2,9 @@
 
 .slot {
     position: relative;
-    height: 520px;
-    min-width: 360px;
+    min-height: 300px;
+    height: 100%;
+    min-width: 250px;
     width: 100%;
     border-radius: 16px;
     display: flex;
