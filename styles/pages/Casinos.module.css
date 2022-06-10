@@ -75,6 +75,14 @@
     z-index: 2;
 }
 
+.light * {
+    stroke: #fff;
+}
+
+.dark * {
+    stroke: black;
+}
+
 .sidebarControlsSlide {
     display: flex;
     top: 0;

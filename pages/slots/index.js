@@ -9,6 +9,7 @@ import Image from 'next/image';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import CountFilter from '../../components/filters/CountFilter';
 import Slot from '../../components/Slot';
+import { ReactSVG } from 'react-svg';
 
 const filter1 = [
     {
@@ -296,8 +297,22 @@ export default function SlotsPage() {
                             animate={sidebarShown ? 'left' : 'right'}
                             className={styles.sidebarControlsSlide}
                         />
-                        <div className={styles.sidebarControlsItem}>On</div>
-                        <div className={styles.sidebarControlsItem}>Off</div>
+                        <div className={styles.sidebarControlsItem}>
+                            <ReactSVG
+                                src='/images/icons/layout-sidebar.svg'
+                                className={sidebarShown ? styles.light : styles.dark}
+                                height={24}
+                                width={24}
+                            />
+                        </div>
+                        <div className={styles.sidebarControlsItem}>
+                            <ReactSVG
+                                src='/images/icons/layout-sidebar-left-collapse.svg'
+                                className={sidebarShown ? styles.dark : styles.light}
+                                height={24}
+                                width={24}
+                            />
+                        </div>
                     </div>
                     <div className={styles.filterControls}>
                         <div
