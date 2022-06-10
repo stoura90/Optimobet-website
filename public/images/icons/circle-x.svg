@@ -1,0 +1,5 @@
+<svg id="circle-x" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path id="Path_20945" data-name="Path 20945" d="M0,0H24V24H0Z" fill="none"/>
+  <circle id="Ellipse_615" data-name="Ellipse 615" cx="9" cy="9" r="9" transform="translate(3 3)" fill="none" stroke="#ea0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <path id="Path_20946" data-name="Path 20946" d="M10,10l4,4m0-4-4,4" fill="none" stroke="#ea0000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+</svg>

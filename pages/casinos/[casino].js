@@ -67,7 +67,199 @@ export default function CasinoPage({ casino }) {
                 </div>
             </div>
             <div className={styles.mainCol}>
-
+                <div className={styles.infoBlocksWrap}>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/current-location.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    IP Address From
+                                </span>
+                                <span>
+                                    Georgia
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/users.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    Support From
+                                </span>
+                                <span>
+                                    United Kingdom
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/language.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    Website Language
+                                </span>
+                                <span>
+                                    United Kingdom
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/messages.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    Live Chat
+                                </span>
+                                <span>
+                                    Georgia
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                            <Image 
+                                src="/placeholder.png"
+                                width={27}
+                                height={20}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/user.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    Residents From
+                                </span>
+                                <span>
+                                    Georgia
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            <Image 
+                                src="/images/icons/circle-check.svg"
+                                width={24}
+                                height={24}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/shield.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    VPN
+                                </span>
+                                <span>
+                                    United Kingdom
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            <Image 
+                                src="/images/icons/circle-x.svg"
+                                width={24}
+                                height={24}
+                            />
+                        </div>
+                    </div>
+                    <div className={styles.infoBlock}>
+                        <div className={styles.infoBlockLeft}>
+                            <div className={styles.infoIcon}>
+                                <Image 
+                                    src="/images/icons/casino/license.svg"
+                                    layout='fill'
+                                />
+                            </div>
+                            <div className={styles.infoText}>
+                                <span className={styles.infoTitle}>
+                                    Licensing Authorities
+                                </span>
+                                <span>
+                                    Government of Curacao
+                                </span>
+                            </div>
+                        </div>
+                        <div className={styles.infoData}>
+                            2018
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
