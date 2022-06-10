@@ -8,8 +8,88 @@ import SliderWithControls from '../components/SliderWithControls'
 import PromoBlock from '../components/PromoBlock';
 import SiteCard from '../components/SiteCard';
 import CategoryBlock from '../components/CategoryBlock';
+import { useEffect, useState } from 'react';
+
+import useWindowSize from '../hooks/useWindowSize'
+
+const _slots = [
+    {
+        id: 1,
+        name: 'Slot 1',
+        provider: 'ELK Studio',
+        type: 'Achievement',
+        rating: 4.5,
+    },
+    {
+        id: 2,
+        name: 'Slot 2',
+        provider: 'Netend',
+        type: 'Megaways',
+        rating: 4.5,
+    },
+    {
+        id: 3,
+        name: 'Slot 3',
+        provider: 'YGGDRASIL',
+        type: 'Bonus Buy',
+        rating: 4.5,
+    },
+    {
+        id: 4,
+        name: 'Slot 4',
+        provider: 'EGT',
+        type: 'Sticky Features',
+        rating: 4.5,
+    },
+    {
+        id: 5,
+        name: 'Slot 5',
+        provider: 'PRAGMATICPLAY',
+        type: 'Jackpot',
+        rating: 4.5,
+    },
+    {
+        id: 6,
+        name: 'Slot 6',
+        provider: 'Booming Games',
+        type: 'Achievement',
+        rating: 4.5,
+    },
+    {
+        id: 7,
+        name: 'Slot 7',
+        provider: 'IRON DOG',
+        type: 'Megaways',
+        rating: 4.5,
+    },
+    {
+        id: 8,
+        name: 'Slot 8',
+        provider: 'BETSOFT',
+        type: 'Bonus Buy',
+        rating: 4.5,
+    },
+    {
+        id: 9,
+        name: 'Slot 9',
+        provider: '2by2gaming',
+        type: 'Sticky Features',
+        rating: 4.5,
+    }
+]
 
 export default function Home() {
+	const { width, height } = useWindowSize()
+	const [ offsetSlots, setOffsetSlots ] = useState()
+
+	useEffect(()=>{
+		const chunkSize = Math.trunc(width*0.8/250)
+		let offset = []
+		for (let i = 0; i < _slots.length; i += chunkSize) {
+			offset.push(_slots.slice(i, i + chunkSize))
+		}
+		setOffsetSlots(offset)
+	},[width])
 
 	return (
 		<div className={styles.container}>
@@ -124,44 +204,24 @@ export default function Home() {
 							</span>
 						</div>
 					</div>
-					<SliderWithControls>
-						{[1, 1, 1, 1, 1, 1].map(item => (
-							<SwiperSlide className={styles.slotBlock}>
-								<div>
-									<Image
-										className={styles.sliderPicture}
-										src="/placeholder.png"
-										layout='fill'
-										objectFit='cover'
-									/>
-								</div>
-								<div>
-									<Image
-										className={styles.sliderPicture}
-										src="/placeholder.png"
-										layout='fill'
-										objectFit='cover'
-									/>
-								</div>
-								<div>
-									<Image
-										className={styles.sliderPicture}
-										src="/placeholder.png"
-										layout='fill'
-										objectFit='cover'
-									/>
-								</div>
-								<div>
-									<Image
-										className={styles.sliderPicture}
-										src="/placeholder.png"
-										layout='fill'
-										objectFit='cover'
-									/>
-								</div>
-							</SwiperSlide>
-						))}
-					</SliderWithControls>
+					{offsetSlots && offsetSlots.length>0 &&
+						<SliderWithControls>
+							{offsetSlots.map((item, index) => (
+								<SwiperSlide className={styles.slotBlock} key={index}>
+									{item.map(slot => (
+										<div style={{width:(item.length/Math.trunc(width*0.8/250))*100+"%", flex:"initial"}}>
+											<Image
+												className={styles.sliderPicture}
+												src="/placeholder.png"
+												layout='fill'
+												objectFit='cover'
+											/>
+										</div>
+									))}
+								</SwiperSlide>
+							))}
+						</SliderWithControls>
+					}
 				</div>
 
 				<div className={styles.gamblingRules}>
