@@ -1,0 +1,59 @@
+.bonusBlock{
+    display: flex;
+    width: 100%;
+}
+.bonusData{
+    border: 1px solid #7F3FFC;
+    border-radius: 16px 0px 0px 16px;
+    width: 80%;
+    padding: 24px 40px;
+    display: flex;
+    gap: 24px;
+    flex-direction: column;
+}
+.getBonusArea{
+    background: #7F3FFC 0% 0% no-repeat padding-box;
+    border-radius: 0px 16px 16px 0px;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    min-width: 200px;
+    width: 24%;
+}
+.getBonusButton{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 24px;
+    font: normal normal 500 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #7F3FFC;
+    border: none;
+    outline: none;
+    padding: 15px 40px;
+    cursor: pointer;
+}
+.bonusTitle{
+    font: normal normal bold 16px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+.bonusOptions{
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.option{
+    display: flex;
+    flex-direction: column;
+}
+.optionTitle{
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+}
+.optionData{
+    font: normal normal 500 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}

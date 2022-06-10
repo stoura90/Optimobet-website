@@ -190,3 +190,8 @@
     letter-spacing: 0px;
     color: #4B4453;
 }
+.bonusesBlocks{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

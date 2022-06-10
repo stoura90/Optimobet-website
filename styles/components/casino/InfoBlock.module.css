@@ -48,5 +48,5 @@
 }
 .infoBlock{
     min-width: 250px;
-    flex: 1 1;
+    max-width: 360px;
 }
