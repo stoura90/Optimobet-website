@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/components/Header.module.css'
+import Language from '../components/Language'
 
 const links = [
     {
@@ -32,8 +33,10 @@ const links = [
 ]
 
 export default function Header() {
+    const [bordered, setBordered] = useState(false)
+
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${bordered && styles.bordered}`}>
             <Link href={'/'}>
                 <a className={styles.logo}>
                     <Image
@@ -56,9 +59,7 @@ export default function Header() {
                 placeholder="Search"
                 className={styles.search}
             />
-            <div className={styles.language}>
-                Eng | O
-            </div>
+            <Language setBorder={setBordered}/>
             <Link href="/login">
                 <a className={styles.login}>
                     Sign In

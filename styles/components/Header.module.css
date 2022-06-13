@@ -3,10 +3,12 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding: 22px 10%;
+    padding: 16px 10%;
     align-items: center;
     background-color: #FFFFFF;
     z-index: 999;
+    border-bottom: 1px solid transparent;
+    transition: .2s;
 }
 
 .logo {
@@ -24,7 +26,7 @@
     min-width: fit-content;
     position: relative;
     text-align: left;
-    font: normal normal 500 15px/24px Samsung Sans;
+    font: normal normal 500 15px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
 }
@@ -54,7 +56,7 @@
     padding: 15px 24px;
     background-color: #F2F2F2;
     text-align: left;
-    font: normal normal normal 15px/24px Samsung Sans;
+    font: normal normal normal 15px/18px Samsung Sans;
     letter-spacing: 0px;
     outline: none;
     display: flex;
@@ -67,22 +69,6 @@
     color: #4B445380;
 }
 
-.language {
-    cursor: pointer;
-    padding: 15px 32px;
-    border-radius: 24px;
-    border: 1px solid #4B445333;
-    min-width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: left;
-    font: normal normal medium 15px/24px Samsung Sans;
-    letter-spacing: 0px;
-    color: #4B4453;
-    margin-right: 24px;
-}
-
 .login {
     min-width: fit-content;
     padding: 15px 32px;
@@ -92,6 +78,10 @@
     align-items: center;
     justify-content: center;
     text-align: left;
-    font: normal normal medium 15px/24px Samsung Sans;
+    font: normal normal 500 15px/18px Samsung Sans;
     letter-spacing: 0px;
+}
+
+.bordered{
+    border-bottom: 1px solid #4B445333;
 }
