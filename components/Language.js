@@ -26,6 +26,7 @@ export default function Language({ setBorder }) {
             <div 
                 className={styles.language}
                 onClick={()=>setOpen(!open)}
+                style={open ? {borderColor:"#7F3FFC"} : {}}
             >
                 <span>EN</span> 
                 <span className={styles.separator} />

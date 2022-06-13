@@ -18,6 +18,7 @@
     letter-spacing: 0px;
     color: #4B4453;
     gap: 8px;
+    transition: .2s;
 }
 .separator{
     background: #4B445333;
