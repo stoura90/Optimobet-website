@@ -136,6 +136,173 @@ export default function CasinoPage({ casino }) {
                     <BonusBlock />
                     <BonusBlock />
                 </div>
+                <div className={styles.paymentTableBlock}>
+                    <span className={styles.paymentTableHeader}>
+                        IVI casino Payment Methods
+                    </span>
+                    <table className={styles.paymentTable}>
+                        <thead>
+                            <tr>
+                                <th>
+                                    Payment method
+                                </th>
+                                <th>
+                                    Deposit Limit And Fees
+                                </th>
+                                <th>
+                                    Withdrawal Limit and Fees
+                                </th>
+                                <th>
+                                    Withdrawal Time
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div className={styles.payment}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={48}
+                                            height={32}
+                                        /> 
+                                        Payment method
+                                    </div>
+                                </td>
+                                <td>
+                                    Deposit Limit And Fees
+                                </td>
+                                <td>
+                                    Withdrawal Limit and Fees
+                                </td>
+                                <td>
+                                    Withdrawal Time
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Payment method
+                                </td>
+                                <td>
+                                    Deposit Limit And Fees
+                                </td>
+                                <td>
+                                    Withdrawal Limit and Fees
+                                </td>
+                                <td>
+                                    Withdrawal Time
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div className={styles.providers}>
+                    <span className={styles.providersHeader}>
+                        IVI casino Game Providers
+                    </span>
+                    <div className={styles.providerCard}>
+                        <div className={styles.provider}>
+                            <Image
+                                src="/placeholder.png"
+                                width={48}
+                                height={32}
+                            /> 
+                        </div>
+                        <div className={styles.providerInfo}>
+                            <span className={styles.providerName}>
+                                Name
+                            </span>
+                            <span className={styles.providerCount}>
+                                28 slots
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.providerCard}>
+                        <div className={styles.provider}>
+                            <Image
+                                src="/placeholder.png"
+                                width={48}
+                                height={32}
+                            /> 
+                        </div>
+                        <div className={styles.providerInfo}>
+                            <span className={styles.providerName}>
+                                Name
+                            </span>
+                            <span className={styles.providerCount}>
+                                28 slots
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.providerCard}>
+                        <div className={styles.provider}>
+                            <Image
+                                src="/placeholder.png"
+                                width={48}
+                                height={32}
+                            /> 
+                        </div>
+                        <div className={styles.providerInfo}>
+                            <span className={styles.providerName}>
+                                Name
+                            </span>
+                            <span className={styles.providerCount}>
+                                28 slots
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.providerCard}>
+                        <div className={styles.provider}>
+                            <Image
+                                src="/placeholder.png"
+                                width={48}
+                                height={32}
+                            /> 
+                        </div>
+                        <div className={styles.providerInfo}>
+                            <span className={styles.providerName}>
+                                Name
+                            </span>
+                            <span className={styles.providerCount}>
+                                28 slots
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.providerCard}>
+                        <div className={styles.provider}>
+                            <Image
+                                src="/placeholder.png"
+                                width={48}
+                                height={32}
+                            /> 
+                        </div>
+                        <div className={styles.providerInfo}>
+                            <span className={styles.providerName}>
+                                Name
+                            </span>
+                            <span className={styles.providerCount}>
+                                28 slots
+                            </span>
+                        </div>
+                    </div>
+                    <div className={styles.providerCard}>
+                        <div className={styles.provider}>
+                            <Image
+                                src="/placeholder.png"
+                                width={48}
+                                height={32}
+                            /> 
+                        </div>
+                        <div className={styles.providerInfo}>
+                            <span className={styles.providerName}>
+                                Name
+                            </span>
+                            <span className={styles.providerCount}>
+                                28 slots
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
