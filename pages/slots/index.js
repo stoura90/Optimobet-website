@@ -210,7 +210,7 @@ export default function SlotsPage() {
             gridTemplateColumns: 'repeat(4, 1fr)',
         },
         narrow: {
-            gridTemplateColumns: 'repeat(3, 1fr) 0px',
+            gridTemplateColumns: 'repeat(3, 1fr)',
         }
     }
 

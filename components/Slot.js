@@ -18,6 +18,7 @@ export default function Slot({ name, provider, rating, big, id, style }) {
     return (
         <motion.div
             layout
+            layoutId={`slot_${name}_${id}`}
             className={`${styles.slot} ${big && styles.big}`}
             style={style}
             onHoverStart={() => {
