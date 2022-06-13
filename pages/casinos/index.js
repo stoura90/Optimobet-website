@@ -348,39 +348,88 @@ function Casino({ name, rating, tags, games }) {
                 />
             </div>
             <div className={styles.casinoInfo}>
-                <div className={styles.casinoName}>
-                    <span className={styles.casinoNameText}>{name}</span>
-                    <div className={styles.casinoRating}>
-                        <Stars points={rating} />
+                <div className={styles.casinoColumn}>
+
+                    <div className={styles.casinoName}>
+                        <span className={styles.casinoNameText}>{name}</span>
+                        <div className={styles.casinoRating}>
+                            <Stars points={rating} />
+                        </div>
+                    </div>
+                    <div className={styles.casinoTags}>
+                        {
+                            tags.map(tag => (
+                                <div className={styles.casinoTag} key={tag}>
+                                    <Image
+                                        src="/images/icons/circle-check.svg"
+                                        height={12}
+                                        width={12}
+                                    />
+                                    {tag}
+                                </div>
+                            ))
+                        }
+                    </div>
+                    <span className={styles.subtitle}>
+                        Available games
+                    </span>
+                    <div className={styles.casinoGames}>
+                        {
+                            games.map(game => (
+                                <div className={styles.casinoGame} key={game} >
+                                    <Image
+                                        src="/images/game.png"
+                                        layout='fill'
+                                        objectFit='cover'
+                                        alt={game}
+                                    />
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
-                <div className={styles.casinoTags}>
-                    {
-                        tags.map(tag => (
-                            <div className={styles.casinoTag} key={tag}>o {tag}</div>
-                        ))
-                    }
-                </div>
-                <div className={styles.casinoGames}>
-                    {
-                        games.map(game => (
-                            <div className={styles.casinoGame} key={game} >
-                                <Image
-                                    src="/images/game.png"
-                                    layout='fill'
-                                    objectFit='cover'
-                                    alt={game}
-                                />
+                <div className={`${styles.casinoColumn} ${styles.right}`}>
+                    <div className={styles.casinoLanguages}>
+                        <div className={styles.languageContainer}>
+                            <span className={styles.languageTitle}>Website</span>
+                            <div className={styles.languageContent}>
+                                {
+                                    [1, 2, 3].map(item => (
+                                        <div className={styles.language} key={item}>
+                                            <Image
+                                                src="/images/icons/flag-en.svg"
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
                             </div>
-                        ))
-                    }
-                </div>
-                <div className={styles.casinoButtons}>
-                    <div className={`${styles.casinoButton} ${styles.highlighted}`}>
-                        Get Bonus
+                        </div>
+                        <div className={styles.languageContainer}>
+                            <span className={styles.languageTitle}>Live chat</span>
+                            <div className={styles.languageContent}>
+                                {
+                                    [1, 2, 3].map(item => (
+                                        <div className={styles.language} key={item}>
+                                            <Image
+                                                src="/images/icons/flag-en.svg"
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <div className={styles.casinoButton}>
-                        T&C Apply
+                    <div className={styles.casinoButtons}>
+                        <div className={styles.casinoButton}>
+                            T&C Apply
+                        </div>
+                        <div className={`${styles.casinoButton} ${styles.highlighted}`}>
+                            Get Bonus
+                        </div>
                     </div>
                 </div>
             </div>
