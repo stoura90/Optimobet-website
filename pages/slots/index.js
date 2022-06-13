@@ -10,6 +10,7 @@ import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import CountFilter from '../../components/filters/CountFilter';
 import Slot from '../../components/Slot';
 import { ReactSVG } from 'react-svg';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const filter1 = [
     {
@@ -159,6 +160,7 @@ export default function SlotsPage() {
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
     const [slots, setSlots] = useState(_slots);
+    const { height, width } = useWindowSize();
 
     const controlVariants = {
         left: {
@@ -205,10 +207,10 @@ export default function SlotsPage() {
 
     const slotsVariants = {
         wide: {
-            gridTemplateColumns: 'repeat(4, 360px)',
+            gridTemplateColumns: 'repeat(4, 1fr)',
         },
         narrow: {
-            gridTemplateColumns: 'repeat(3, 360px)',
+            gridTemplateColumns: 'repeat(3, 1fr) 0px',
         }
     }
 
@@ -345,10 +347,13 @@ export default function SlotsPage() {
                     variants={slotsVariants}
                     animate={sidebarShown ? 'narrow' : 'wide'}
                     className={styles.slots}
+                    layout
                 >
-                    {
-                        renderSlots(sidebarShown)
-                    }
+                    <LayoutGroup>
+                        {
+                            renderSlots(sidebarShown)
+                        }
+                    </LayoutGroup>
                 </motion.div>
             </motion.div>
         </div>

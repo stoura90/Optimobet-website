@@ -7,10 +7,10 @@ export default function Slot({ name, provider, rating, big, id, style }) {
     const [hover, setHover] = useState(false)
 
     const variants = {
-        "top":{
+        "top": {
             bottom: "98px"
         },
-        "bot":{
+        "bot": {
             bottom: "30px"
         }
     }
@@ -20,10 +20,10 @@ export default function Slot({ name, provider, rating, big, id, style }) {
             layout
             className={`${styles.slot} ${big && styles.big}`}
             style={style}
-            onHoverStart={()=>{
+            onHoverStart={() => {
                 setHover(true)
             }}
-            onHoverEnd={()=>{
+            onHoverEnd={() => {
                 setHover(false)
             }}
         >
@@ -35,28 +35,28 @@ export default function Slot({ name, provider, rating, big, id, style }) {
                     objectFit={'cover'}
                 />
             </div>
-            <motion.div 
+            <motion.div
                 className={styles.slotInfo}
                 animate={hover ? "top" : "bot"}
                 variants={variants}
-                transition={{duration:0.2, ease:"easeInOut"}}
+                transition={{ duration: 0.2, ease: "easeInOut" }}
             >
                 <span className={styles.slotName}>{name}</span>
                 <span className={styles.slotProvider}>{provider}</span>
-            </motion.div>            
+            </motion.div>
             <AnimatePresence>
-                {hover && !big && 
-                    <motion.div 
+                {hover && !big &&
+                    <motion.div
                         className={styles.slotButtonCenter}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{duration:0.2, ease:"easeInOut"}}
+                        transition={{ duration: 0.2, ease: "easeInOut" }}
                     >
                         Play Now
                     </motion.div>
                 }
-            </AnimatePresence>  
+            </AnimatePresence>
             <div className={styles.slotRating}>
                 {rating}
             </div>
@@ -65,7 +65,7 @@ export default function Slot({ name, provider, rating, big, id, style }) {
                 <div className={styles.slotButton}>
                     Play Now
                 </div>
-            }          
+            }
         </motion.div>
     )
 }
