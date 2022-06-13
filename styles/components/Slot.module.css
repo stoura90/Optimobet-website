@@ -18,7 +18,7 @@
     bottom: 32px;
 }
 
-.pictureArea::after{
+.pictureArea::after {
     content: "";
     background: transparent linear-gradient(180deg, #4B445300 0%, #4B445380 100%);
     width: 100%;
@@ -28,7 +28,7 @@
     bottom: 0;
 }
 
-.slot:hover .pictureArea::after{
+.slot:hover .pictureArea::after {
     background: transparent linear-gradient(180deg, #4B445300 0%, #4B4453CC 100%);
 }
 
@@ -79,7 +79,7 @@
     cursor: pointer;
 }
 
-.slotButtonCenter{
+.slotButtonCenter {
     position: absolute;
     bottom: 30px;
     padding: 15px 40px;

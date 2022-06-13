@@ -132,7 +132,7 @@
 
 .slots {
     display: grid;
-    grid-template-columns: repeat(3, calc(33% - 15px));
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     width: 100%;
 }
