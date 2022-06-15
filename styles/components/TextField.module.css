@@ -12,3 +12,6 @@
 .input::placeholder{
     color: #4B4453B3;
 }
+.input[type="date"]{    
+    padding: 13px 24px 14px;
+}
