@@ -6,6 +6,7 @@ import PasswordField from '../../components/PasswordField'
 import useWindowSize from '../../hooks/useWindowSize'
 import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Language from '../../components/Language'
 
 export default function Login() {
     const { width, height } = useWindowSize()
@@ -25,27 +26,44 @@ export default function Login() {
     }, [width])
 
     return (
-        <div className={styles.container}>
-            <AnimatePresence>
-                {currentPage}
-            </AnimatePresence>
-            <div className={styles.picture}>
-                <div className={styles.landscape}>
-                    <Image
-                        src="/images/signin/Base_Landscape.png"
-                        objectFit='cover'
-                        layout='fill'
-                    />
-                </div>
-                <div className={styles.characters} style={imgLeft ? { left: imgLeft + "px" } : {}}>
-                    <Image
-                        src="/images/signin/2 – 4.png"
-                        objectFit='contain'
-                        layout='fill'
-                    />
+        <>
+            <header className={styles.loginHeader} style={imgLeft ? { padding: "16px 15px" } : {padding: `16px ${(0.4 * width - 520)/2+15}px`}}>
+                <Link href={'/'}>
+                    <a style={{display:"flex", alignItems:"center"}}>
+                        <Image
+                            src="/images/logo.svg"
+                            alt="logo"
+                            width={153}
+                            height={36}
+                        />
+                    </a>
+                </Link>
+                <div style={{marginRight:"-24px"}}>
+                    <Language />
+                </div>                
+            </header>
+            <div className={styles.container}>
+                <AnimatePresence>
+                    {currentPage}
+                </AnimatePresence>
+                <div className={styles.picture}>
+                    <div className={styles.landscape}>
+                        <Image
+                            src="/images/signin/Base_Landscape.png"
+                            objectFit='cover'
+                            layout='fill'
+                        />
+                    </div>
+                    <div className={styles.characters} style={imgLeft ? { left: imgLeft + "px" } : {}}>
+                        <Image
+                            src="/images/signin/2 – 4.png"
+                            objectFit='contain'
+                            layout='fill'
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
@@ -252,7 +270,13 @@ function Recovery({setCurrentPage}) {
             className={styles.formArea} 
             style={{ flexDirection: "column" }}
         >
-            <div className={styles.goLogin}>
+            <motion.div 
+                initial={{opacity:0}}
+                animate={{opacity:1}}
+                exit={{opacity:0}} 
+                transition={{ease:"easeInOut"}}
+                className={styles.goLogin}
+            >
                 <a className={styles.loginLink} onClick={()=>{setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)}}>
                     <Image
                         src="/images/icons/left-arrow-downloaded.svg"
@@ -261,7 +285,7 @@ function Recovery({setCurrentPage}) {
                     />
                     Back to Login
                 </a>
-            </div>
+            </motion.div>
             <form className={styles.authForm}>
                 <motion.span
                     initial={{opacity:0, translateY:-100}}

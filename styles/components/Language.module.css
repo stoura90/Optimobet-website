@@ -4,6 +4,7 @@
     margin-right: 24px;
 }
 .language {
+    background: #FFFFFF80;
     width: max-content;
     cursor: pointer;
     padding: 13px 24px;

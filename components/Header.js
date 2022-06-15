@@ -36,7 +36,7 @@ export default function Header() {
     const [bordered, setBordered] = useState(false)
 
     return (
-        <div className={`${styles.container} ${bordered && styles.bordered}`}>
+        <header className={`${styles.container} ${bordered && styles.bordered}`}>
             <Link href={'/'}>
                 <a className={styles.logo}>
                     <Image
@@ -65,7 +65,7 @@ export default function Header() {
                     Sign In
                 </a>
             </Link>
-        </div>
+        </header>
     )
 }
 

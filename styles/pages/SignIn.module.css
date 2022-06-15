@@ -13,8 +13,9 @@
     align-items: center;
     justify-content: center;
     overflow-y: auto;
+    margin-top: 80px;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 120px;
 }
 
 .picture {
@@ -273,4 +274,17 @@
 .recoveryWrap {
     display: flex;
     flex-direction: column;
+}
+
+.loginHeader{
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 5;
+    padding: 16px 15px;
 }
