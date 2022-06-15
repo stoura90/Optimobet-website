@@ -1,10 +1,11 @@
-.container{
+.container {
     width: 100vw;
     height: 100vh;
     display: flex;
     overflow: hidden;
 }
-.formArea{
+
+.formArea {
     width: 40%;
     min-width: 520px;
     z-index: 1;
@@ -14,17 +15,19 @@
     overflow-y: auto;
     padding-top: 30px;
     padding-bottom: 30px;
-    flex-direction: column;
 }
-.picture{
+
+.picture {
     position: relative;
     width: 60%;
     height: 100%;
 }
-.landscape{
+
+.landscape {
     z-index: 0;
 }
-.characters{
+
+.characters {
     position: fixed;
     height: 50%;
     width: 55%;
@@ -32,41 +35,48 @@
     left: calc((40vw - 520px)/2 + 520px);
     z-index: 2;
 }
-.characters *{    
+
+.characters * {
     z-index: 2;
 }
 
-.authForm{
+.authForm {
     width: 490px;
     max-width: 100%;
     margin: auto;
     display: flex;
     flex-direction: column;
 }
-.formTitle{
+
+.formTitle {
     font: normal normal bold 34px/36px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
     margin-bottom: 12px;
 }
-.formText{
+
+.formText {
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
 }
-.formText a{
+
+.formText a {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #7F3FFC;
+    cursor: pointer;
 }
-.socials{
+
+.socials {
     display: flex;
     justify-content: space-between;
     gap: 20px;
     margin-top: 52px;
     margin-bottom: 32px;
 }
-.social{
+
+.social {
     flex: 1 1;
     padding: 12px 38px;
     border: 1px solid #4B445333;
@@ -76,7 +86,8 @@
     justify-content: center;
     cursor: pointer;
 }
-.separatorOr{
+
+.separatorOr {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -89,26 +100,30 @@
     text-transform: uppercase;
     margin-bottom: 32px;
 }
-.separatorOr::before{
+
+.separatorOr::before {
     content: "";
     width: 100%;
     height: 1px;
     background: #1A1C2119 0% 0% no-repeat padding-box;
 }
-.separatorOr::after{
+
+.separatorOr::after {
     content: "";
     width: 100%;
     height: 1px;
     background: #1A1C2119 0% 0% no-repeat padding-box;
 }
-.buttons{
+
+.buttons {
     display: flex;
     justify-content: space-between;
     gap: 30px;
     align-items: center;
     margin-top: 24px;
 }
-.submit{
+
+.submit {
     background: #7F3FFC 0% 0% no-repeat padding-box;
     border-radius: 24px;
     border: none;
@@ -119,30 +134,36 @@
     letter-spacing: 0px;
     color: #F2F2F2;
 }
-.submit:disabled{
+
+.submit:disabled {
     background: #4B445380 0% 0% no-repeat padding-box;
     cursor: default;
 }
-.fieldsInRow{
+
+.fieldsInRow {
     display: flex;
     justify-content: space-between;
     gap: 30px;
 }
-.fieldsInRow > *{
+
+.fieldsInRow>* {
     flex: 1 1;
 }
-.passwordDescription{
+
+.passwordDescription {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-top: 24px;
 }
-.passwordTitle{
+
+.passwordTitle {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.checkOption{
+
+.checkOption {
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
@@ -150,17 +171,20 @@
     display: flex;
     align-items: center;
 }
-.checkOption::before{
+
+.checkOption::before {
     content: "";
     border: 1px solid #4B445333;
     border-radius: 100px;
     width: 18px;
     height: 18px;
 }
-.checkOption.active{
+
+.checkOption.active {
     color: #00C69C;
 }
-.checkOption.active::before{
+
+.checkOption.active::before {
     background-image: url(/images/icons/circle-check.svg);
     background-repeat: no-repeat;
     background-position: center;
@@ -168,25 +192,31 @@
     width: 16px;
     height: 16px;
 }
-.checkText{
+
+.checkText {
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
 }
-.checkText a{
+
+.checkText a {
     text-decoration: underline;
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #7F3FFC;
+    cursor: pointer;
 }
-.checkTerms input{
+
+.checkTerms input {
     display: none;
 }
-.checkTerms{
+
+.checkTerms {
     display: flex;
     gap: 12px;
 }
-.checkTerms .checkBox{
+
+.checkTerms .checkBox {
     flex-shrink: 0;
     width: 20px;
     height: 20px;
@@ -195,11 +225,13 @@
     margin-top: 4px;
     cursor: pointer;
 }
-.checkTerms input:checked ~ .checkBox{
+
+.checkTerms input:checked~.checkBox {
     background: #7F3FFC;
     position: relative;
 }
-.checkTerms input:checked ~ .checkBox:after {
+
+.checkTerms input:checked~.checkBox:after {
     content: "";
     position: absolute;
     left: 6px;
@@ -212,13 +244,15 @@
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
-.formDescription{
+
+.formDescription {
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
     margin-bottom: 32px;
 }
-.goLogin{
+
+.goLogin {
     font: normal normal 500 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #7F3FFC;
@@ -227,8 +261,16 @@
     margin-left: auto;
     margin-right: auto;
 }
-.loginLink{
+
+.loginLink {
     display: flex;
     align-items: center;
     gap: 12px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.recoveryWrap {
+    display: flex;
+    flex-direction: column;
 }
