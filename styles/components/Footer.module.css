@@ -1,23 +1,66 @@
 .container{
-    background: #4B4453 0% 0% no-repeat padding-box;
+    background: #F2F2F2 0% 0% no-repeat padding-box;
     padding: 40px 10%;
     display: flex;
-    gap: 8%;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+}
+.linksBlock{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+.colTitle{
+    font: normal normal 500 16px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    text-transform: uppercase;
+}
+.cols{    
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    width: calc(100% + 30px);
+    margin-right: -30px;
 }
 .column{
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     gap: 16px;
+    width: calc(25% - 30px);
 }
-.colTitle{
-    font: normal normal 500 16px/56px Samsung Sans;
+.column a{    
+    font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
-    color: #F2F2F2;
-    text-transform: uppercase;
+    color: #4B4453B3;
+    text-decoration: none;
 }
-.column a{
+.footerText{
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
-    color: #F2F2F2B3;
-    text-decoration: none;
+    color: #4B4453CC;
+    width: 50%;
+}
+.footerImg{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: 80%;
+}
+.footerImgContent{    
+    width: 30%;
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.copyright{
+    font: normal normal normal 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    width: 50%;
 }
