@@ -1,0 +1,83 @@
+.container{
+
+}
+.slotBlock{
+    background: #F2F2F2 0% 0% no-repeat padding-box;
+    display: flex;
+    padding: 32px 10% 80px;
+    flex-direction: column;
+    gap: 24px;
+}
+.slotButtons{
+    display: flex;
+    margin-left: auto;
+    gap: 16px;
+}
+.rateSlot{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border-radius: 100px;
+    padding: 12px 32px;
+    font: normal normal medium 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    cursor: pointer;
+}
+.buttonForSlot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-radius: 100px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    cursor: pointer;
+}
+.slotDemoBlock{
+    display: flex;
+    width: 100%;
+    gap: 30px;
+}
+.slotData{
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.slotDataInfo{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #4B445333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.slotDataInfo:last-child{    
+    border-bottom: none;
+}
+.dataInfoTitle{
+    font: normal normal 500 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+.dataInfoText{
+    font: normal normal normal 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+.slotButton{
+    font: normal normal 500 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #F2F2F2;
+    text-transform: uppercase;
+    background: #7F3FFC 0% 0% no-repeat padding-box;
+    border-radius: 24px;
+    padding: 15px;
+    width: 100%;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+.slotDemoView{
+    position: relative;
+    display: flex;
+    width: 100%;
+}
