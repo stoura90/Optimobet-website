@@ -29,6 +29,7 @@
 .languageSelector{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #4B445333;
+    border-top: none;
     border-radius: 0px 0px 16px 16px;
     position: absolute;
     padding: 28px 24px;

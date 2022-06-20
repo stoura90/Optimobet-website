@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
 import styles from '../styles/components/Header.module.css'
 import Language from '../components/Language'
+import Search from '../components/Search'
 
 const links = [
     {
@@ -33,10 +34,11 @@ const links = [
 ]
 
 export default function Header() {
-    const [bordered, setBordered] = useState(false)
+    const [borderedSearch, setBorderedSearch] = useState(false)    
+    const [borderedLanguage, setBorderedLanguage] = useState(false)
 
     return (
-        <header className={`${styles.container} ${bordered && styles.bordered}`}>
+        <header className={`${styles.container} ${borderedSearch && styles.bordered} ${borderedLanguage && styles.bordered}`}>
             <Link href={'/'}>
                 <a className={styles.logo}>
                     <Image
@@ -54,12 +56,8 @@ export default function Header() {
                     ))
                 }
             </nav>
-            <input
-                type="text"
-                placeholder="Search"
-                className={styles.search}
-            />
-            <Language setBorder={setBordered}/>
+            <Search setBorder={setBorderedSearch} />
+            <Language setBorder={setBorderedLanguage} />
             <Link href="/login">
                 <a className={styles.login}>
                     Sign In
