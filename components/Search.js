@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react'
 import styles from '../styles/components/Search.module.css'
 import Dropdown from './Dropdown'
 import { motion, AnimatePresence } from 'framer-motion'
+import Stars from '../components/Stars'
 
 export default function Search({ setBorder }) {
     const [open, setOpen] = useState(false)
+    const [filter, setFilter] = useState('All')
 
     const apply = () => {
         setOpen(false)
@@ -51,7 +53,150 @@ export default function Search({ setBorder }) {
                         exit={{ opacity: 0 }}
                         transition={{duration:0.2}}
                     >
-                        sss
+                        <div className={styles.searchCategories}>
+                            <div className={`${styles.searchFilter} ${filter === 'All' && styles.active}`}
+                                onClick={() => setFilter('All')}
+                            >
+                                All
+                            </div>
+                            <div className={`${styles.searchFilter} ${filter === 'Online Casinos' && styles.active}`}
+                                onClick={() => setFilter('Online Casinos')}
+                            >
+                                Online Casinos
+                            </div>
+                            <div className={`${styles.searchFilter} ${filter === 'Free slots' && styles.active}`}
+                                onClick={() => setFilter('Free slots')}
+                            >
+                                Free slots
+                            </div>
+                        </div>
+                        <div className={styles.resultList}>
+                            <div className={styles.resultCategory}>
+                                <span className={styles.categoryTitle}>
+                                    ONLINE CASINO
+                                </span>
+                                <span className={styles.categoryCount}>
+                                    245
+                                </span>
+                            </div>
+                            <div className={styles.resultContent}>
+                                <div className={styles.resultInfo}>
+                                    <div className={styles.resultLogo}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={80}
+                                            height={20}
+                                        />
+                                    </div>
+                                    <div className={styles.resultData}>
+                                        <span className={styles.resultName}>
+                                            Result name
+                                        </span>
+                                        <div className={styles.stars}>
+                                            <Stars points={4.4} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.resultInfo}>
+                                    <div className={styles.resultLogo}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={80}
+                                            height={20}
+                                        />
+                                    </div>
+                                    <div className={styles.resultData}>
+                                        <span className={styles.resultName}>
+                                            Result name
+                                        </span>
+                                        <div className={styles.stars}>
+                                            <Stars points={4.4} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.resultInfo}>
+                                    <div className={styles.resultLogo}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={80}
+                                            height={20}
+                                        />
+                                    </div>
+                                    <div className={styles.resultData}>
+                                        <span className={styles.resultName}>
+                                            Result name
+                                        </span>
+                                        <div className={styles.stars}>
+                                            <Stars points={4.4} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.resultCategory}>
+                                <span className={styles.categoryTitle}>
+                                    Slots
+                                </span>
+                                <span className={styles.categoryCount}>
+                                    245
+                                </span>
+                            </div>
+                            <div className={styles.resultContent}>
+                                <div className={styles.resultInfo}>
+                                    <div className={styles.resultLogo}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={80}
+                                            height={20}
+                                        />
+                                    </div>
+                                    <div className={styles.resultData}>
+                                        <span className={styles.resultName}>
+                                            Result name
+                                        </span>
+                                        <div className={styles.stars}>
+                                            <Stars points={4.4} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.resultInfo}>
+                                    <div className={styles.resultLogo}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={80}
+                                            height={20}
+                                        />
+                                    </div>
+                                    <div className={styles.resultData}>
+                                        <span className={styles.resultName}>
+                                            Result name
+                                        </span>
+                                        <div className={styles.stars}>
+                                            <Stars points={4.4} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className={styles.resultInfo}>
+                                    <div className={styles.resultLogo}>
+                                        <Image
+                                            src="/placeholder.png"
+                                            width={80}
+                                            height={20}
+                                        />
+                                    </div>
+                                    <div className={styles.resultData}>
+                                        <span className={styles.resultName}>
+                                            Result name
+                                        </span>
+                                        <div className={styles.stars}>
+                                            <Stars points={4.4} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.seeAllResults}>
+                            See All Results
+                        </div>
                     </motion.div>
                 }
             </AnimatePresence>

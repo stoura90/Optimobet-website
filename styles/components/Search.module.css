@@ -38,11 +38,124 @@
     border-radius: 0px 0px 16px 16px;
     position: absolute;
     padding: 28px 24px;
+    padding-bottom: 0px;
     top: calc(100% + 16px);
     right: 0;
     width: 360px;
     max-width: 100vw;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    max-height: 70vh;
+}
+
+.searchCategories{
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.searchFilter{
+    padding: 12px 24px;
+    border-radius: 30px;
+    font: normal normal 500 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.searchFilter.active{
+    background: #7F3FFC 0% 0% no-repeat padding-box;
+    font: normal normal 500 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #F2F2F2;
+}
+
+.resultList{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    padding-bottom: 24px;
+}
+
+.resultCategory{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.resultCategory:not(:first-child) {
+    margin-top: 24px;
+}
+
+.categoryTitle{
+    font: normal normal 500 16px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B445380;
+    text-transform: uppercase;
+}
+
+.categoryCount{
+    font: normal normal normal 12px/14px Samsung Sans;
+    letter-spacing: 0px;
+    color: #7F3FFC;
+    background: #7F3FFC33 0% 0% no-repeat padding-box;
+    border-radius: 100px;
+    padding: 6px 9px;
+}
+
+.resultContent{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.resultInfo{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.resultLogo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 30%;
+    min-width: 90px;
+    background: #4B4453 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+}
+
+.resultData{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.resultName{
+    font: normal normal 500 16px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    text-transform: uppercase;
+}
+
+.stars{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.seeAllResults{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0px;
+    border-top: 1px solid #4B44531A;
+    cursor: pointer;
 }
