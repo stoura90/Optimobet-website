@@ -142,7 +142,7 @@ function SignUp({setCurrentPage}) {
         >
             <form className={styles.authForm}>
                 <span className={styles.formTitle}>
-                    Sign In
+                    Sign Up
                 </span>
                 <span className={styles.formText}>
                     You already have an account? <a onClick={()=>{setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)}}>Sign In</a>
