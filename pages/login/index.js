@@ -199,8 +199,8 @@ function SignUp({setCurrentPage}) {
                     </span>
                     <span
                         className={`
-                                ${styles.checkOption} 
-                                ${password?.split("")
+                            ${styles.checkOption} 
+                            ${password?.split("")
                                 .filter(letter => (
                                     isNaN(letter * 1)
                                     &&
@@ -209,10 +209,10 @@ function SignUp({setCurrentPage}) {
                                     letter == letter.toUpperCase()
                                 ))
                                 .length > 0
-                            &&
-                            styles.active
+                                &&
+                                styles.active
                             }
-                            `}
+                        `}
                     >
                         Include at least one uppercase letter
                     </span>
