@@ -104,7 +104,7 @@ export default function Home() {
 				<div className={styles.mainSlider}>
 					<SliderWithControls>
 						{[1, 2, 3].map(item => (
-							<SwiperSlide className={styles.sliderBlock}>
+							<SwiperSlide key={item} className={styles.sliderBlock}>
 								<div>
 									<Image
 										className={styles.sliderPicture}
