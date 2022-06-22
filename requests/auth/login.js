@@ -1,10 +1,10 @@
-export default async function Register({
+export default async function Login(
     email,
     password
-}) {
+) {
     const body = {
-        "email": "maxwellhurst@kozgene.com",
-        "password": "123456"
+        email,
+        password
     }
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -12,14 +12,13 @@ export default async function Register({
     const options = {
         method: 'POST',
         headers,
-        body: JSON.stringify(body),
-        credentials: 'include'
+        body: JSON.stringify(body)
     }
     const result = await fetch(`${process.env.API_URL}/login`, options)
     const data = await result.json();
     if (result.status === 200) {
-        return data.content;
+        return data;
     } else {
-        throw new Error(data.message);
+        throw new Error(data.message ? data.message : data.error);
     }
 }

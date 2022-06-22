@@ -7,6 +7,9 @@ import useWindowSize from '../../hooks/useWindowSize'
 import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Language from '../../components/Language'
+import Register from '../../requests/auth/register'
+import LoginReq from '../../requests/auth/login'
+import { useCookies } from 'react-cookie'
 
 export default function Login() {
     const { width, height } = useWindowSize()
@@ -68,6 +71,21 @@ export default function Login() {
 }
 
 function SignIn({setCurrentPage}) {
+    const [cookie, setCookie] = useCookies("token")
+
+    function login(e){
+        e.preventDefault()
+        //"maxwellhurst@kozgene.com"
+        //"123456"
+        LoginReq(e.target.email.value, e.target.password.value)
+        .then(res => {
+            setCookie("token", res.token)
+        })
+        .catch(e => {
+            alert(e)
+        })
+    }
+
     return (
         <motion.div
             initial={{opacity:0}}
@@ -76,7 +94,7 @@ function SignIn({setCurrentPage}) {
             transition={{ease:"easeInOut"}}
             className={styles.formArea}
         >
-            <form className={styles.authForm}>
+            <form className={styles.authForm} onSubmit={login}>
                 <span className={styles.formTitle}>
                     Sign In
                 </span>
@@ -114,8 +132,8 @@ function SignIn({setCurrentPage}) {
                     </div>
                 </div>
                 <div className={styles.separatorOr}>Or</div>
-                <TextField placeholder="Email" type="email" style={{ marginBottom: "24px" }} />
-                <PasswordField placeholder="Password" />
+                <TextField name="email" placeholder="Email" type="email" style={{ marginBottom: "24px" }} />
+                <PasswordField name="password" placeholder="Password" />
                 <div className={styles.buttons}>
                     <span className={styles.formText}>
                         <a  onClick={()=>{setCurrentPage(<Recovery setCurrentPage={setCurrentPage} />)}}>Forgot Password?</a>
@@ -132,6 +150,13 @@ function SignIn({setCurrentPage}) {
 function SignUp({setCurrentPage}) {
     const [password, setPassword] = useState()
 
+    function register(e){
+        e.preventDefault()
+        Register()
+        .then()
+        .catch(e => alert(e.message))
+    }
+
     return (
         <motion.div
             initial={{opacity:0}}
@@ -140,7 +165,7 @@ function SignUp({setCurrentPage}) {
             transition={{ease:"easeInOut"}}
             className={styles.formArea}
         >
-            <form className={styles.authForm}>
+            <form className={styles.authForm} onSubmit={register}>
                 <span className={styles.formTitle}>
                     Sign Up
                 </span>
