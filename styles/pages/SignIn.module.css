@@ -288,3 +288,33 @@
     z-index: 5;
     padding: 16px 15px;
 }
+
+.genderPicker{
+    display: flex;
+    align-items: center;
+    font: normal normal bold 24px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+
+.genderPicker span{
+    border: 1px solid #1A1C2133;
+    flex: 1 1;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.genderPicker span:first-child{
+    border-radius: 24px 0px 0px 24px;
+}
+
+.genderPicker span:last-child{
+    border-radius: 0px 24px 24px 0px;
+}
+
+.selectedGender{
+    border-color: #7F3FFC!important;
+}

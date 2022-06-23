@@ -7,19 +7,18 @@ import useWindowSize from '../../hooks/useWindowSize'
 import { useEffect, useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Language from '../../components/Language'
-import Register from '../../requests/auth/register'
-import LoginReq from '../../requests/auth/login'
 import { useCookies } from 'react-cookie'
+import APIRequest from '../../functions/requests/APIRequest'
 
 export default function Login() {
     const { width, height } = useWindowSize()
     const [imgLeft, setImgLeft] = useState()
 
-    const [currentPage,setCurrentPage] = useState()
+    const [currentPage, setCurrentPage] = useState()
 
-    useEffect(()=>{ 
+    useEffect(() => {
         setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)
-    },[])
+    }, [])
 
     useEffect(() => {
         if ((0.4 * width - 520) > 0)
@@ -30,9 +29,9 @@ export default function Login() {
 
     return (
         <>
-            <header className={styles.loginHeader} style={imgLeft ? { padding: "16px 15px" } : {padding: `16px ${(0.4 * width - 520)/2+15}px`}}>
+            <header className={styles.loginHeader} style={imgLeft ? { padding: "16px 15px" } : { padding: `16px ${(0.4 * width - 520) / 2 + 15}px` }}>
                 <Link href={'/'}>
-                    <a style={{display:"flex", alignItems:"center"}}>
+                    <a style={{ display: "flex", alignItems: "center" }}>
                         <Image
                             src="/images/logo.svg"
                             alt="logo"
@@ -41,9 +40,9 @@ export default function Login() {
                         />
                     </a>
                 </Link>
-                <div style={{marginRight:"-24px"}}>
+                <div style={{ marginRight: "-24px" }}>
                     <Language />
-                </div>                
+                </div>
             </header>
             <div className={styles.container}>
                 <AnimatePresence>
@@ -70,14 +69,20 @@ export default function Login() {
     )
 }
 
-function SignIn({setCurrentPage}) {
+function SignIn({ setCurrentPage }) {
     const [cookie, setCookie] = useCookies("token")
 
-    function login(e){
+    function login(e) {
         e.preventDefault()
-        //"maxwellhurst@kozgene.com"
-        //"123456"
-        LoginReq(e.target.email.value, e.target.password.value)
+        const body = {
+            email: e.target.email.value,
+            password: e.target.password.value
+        }
+        APIRequest(
+            "/login",
+            "POST",
+            JSON.stringify(body)
+        )
         .then(res => {
             setCookie("token", res.token)
         })
@@ -88,10 +93,10 @@ function SignIn({setCurrentPage}) {
 
     return (
         <motion.div
-            initial={{opacity:0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}} 
-            transition={{ease:"easeInOut"}}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ ease: "easeInOut" }}
             className={styles.formArea}
         >
             <form className={styles.authForm} onSubmit={login}>
@@ -99,7 +104,11 @@ function SignIn({setCurrentPage}) {
                     Sign In
                 </span>
                 <span className={styles.formText}>
-                    Don't have an account? <a onClick={()=>{setCurrentPage(<SignUp setCurrentPage={setCurrentPage} />)}}>Create one</a>
+                    Don't have an account? <a onClick={() => { 
+                        setCurrentPage(<SignUp setCurrentPage={setCurrentPage} />) 
+                    }}>
+                        Create one
+                    </a>
                 </span>
                 <div className={styles.socials}>
                     <div className={styles.social}>
@@ -132,11 +141,27 @@ function SignIn({setCurrentPage}) {
                     </div>
                 </div>
                 <div className={styles.separatorOr}>Or</div>
-                <TextField name="email" placeholder="Email" type="email" style={{ marginBottom: "24px" }} />
-                <PasswordField name="password" placeholder="Password" />
+                <TextField
+                    required
+                    name="email"
+                    placeholder="Email"
+                    type="email"
+                    style={{ marginBottom: "24px" }}
+                />
+                <PasswordField
+                    required
+                    name="password"
+                    placeholder="Password"
+                />
                 <div className={styles.buttons}>
                     <span className={styles.formText}>
-                        <a  onClick={()=>{setCurrentPage(<Recovery setCurrentPage={setCurrentPage} />)}}>Forgot Password?</a>
+                        <a
+                            onClick={() => {
+                                setCurrentPage(<Recovery setCurrentPage={setCurrentPage} />)
+                            }}
+                        >
+                            Forgot Password?
+                        </a>
                     </span>
                     <button type='submit' className={styles.submit}>
                         Sign In
@@ -147,22 +172,88 @@ function SignIn({setCurrentPage}) {
     )
 }
 
-function SignUp({setCurrentPage}) {
-    const [password, setPassword] = useState()
+function SignUp({ setCurrentPage }) {
+    const [passwordCheck, setPasswordCheck] = useState([false,false,false,false])
+    const [gender, setGender] = useState()
 
-    function register(e){
+    function checkPassword(e) {
+        setPasswordCheck([
+            e.target.value?.length >= 12,
+
+            e.target.value?.split("")
+            .filter(letter => (
+                isNaN(letter * 1)
+                &&
+                letter.toLowerCase() != letter.toUpperCase()
+                &&
+                letter == letter.toUpperCase()
+            ))
+            .length > 0,
+
+            e.target.value?.split("")
+            .filter(letter => !isNaN(letter * 1))
+            .length > 0,
+
+            e.target.value?.split("")
+            .filter(letter => (
+                isNaN(letter * 1)
+                &&
+                letter.toLowerCase() == letter.toUpperCase()
+            ))
+            .length > 0
+        ])        
+    }
+
+    function register(e) {
         e.preventDefault()
-        Register()
-        .then()
-        .catch(e => alert(e.message))
+        if (passwordCheck.filter(check => check).length==4) {
+            const body = {
+                first_name: e.target.first_name.value, //required
+                last_name: e.target.last_name.value, //required
+                gender: gender, //required
+                country_id: 1, // optional
+                email: e.target.email.value, //required
+                birthday: e.target.birthday.value, //required|moreThan 18 years old
+                password: e.target.password.value, // required
+                password_confirmation: e.target.password_confirmation.value, // required
+                agree_to_terms: e.target.agree_to_terms.checked
+            }
+            let troubles = []
+            Object.entries(body).forEach(([key,value]) => {
+                if (!value)
+                troubles.push(key)
+            });
+            if (body.password!=body.password_confirmation) {
+                troubles.push("password confirmation")
+            }
+            if (troubles.length==0) {
+                APIRequest(
+                    "/register",
+                    "POST",
+                    JSON.stringify(body)
+                )
+                .then(res => {
+                    setCookie("token", res.token)
+                })
+                .catch(e => {
+                    alert(e + (e.errors?.email ? "Current email is exist." : ""))
+                })
+            }
+            else {
+                alert("You should set these fields correctly: "+troubles)
+            }
+        }
+        else {
+            alert("Your password is not correct")
+        }
     }
 
     return (
         <motion.div
-            initial={{opacity:0}}
-            animate={{opacity:1}}
-            exit={{opacity:0}} 
-            transition={{ease:"easeInOut"}}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ ease: "easeInOut" }}
             className={styles.formArea}
         >
             <form className={styles.authForm} onSubmit={register}>
@@ -170,7 +261,11 @@ function SignUp({setCurrentPage}) {
                     Sign Up
                 </span>
                 <span className={styles.formText}>
-                    You already have an account? <a onClick={()=>{setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)}}>Sign In</a>
+                    You already have an account? <a onClick={() => {
+                        setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)
+                    }}>
+                        Sign In
+                    </a>
                 </span>
                 <div className={styles.socials}>
                     <div className={styles.social}>
@@ -204,73 +299,115 @@ function SignUp({setCurrentPage}) {
                 </div>
                 <div className={styles.separatorOr}>Or</div>
                 <div className={styles.fieldsInRow}>
-                    <TextField placeholder="First name" type="text" style={{ marginBottom: "24px" }} />
-                    <TextField placeholder="Last name" type="text" style={{ marginBottom: "24px" }} />
+                    <TextField
+                        required
+                        name="first_name"
+                        placeholder="First name" 
+                        type="text" 
+                        style={{ marginBottom: "24px" }} 
+                    />
+                    <TextField 
+                        required
+                        name="last_name"
+                        placeholder="Last name" 
+                        type="text" 
+                        style={{ marginBottom: "24px" }} 
+                    />
                 </div>
-                <TextField placeholder="Email" type="email" style={{ marginBottom: "24px" }} />
-                <TextField
-                    placeholder="Date of birth"
-                    type="text"
-                    style={{ marginBottom: "24px" }}
-                    onFocus={(e) => { e.target.type = "date" }}
+                <TextField 
+                    required
+                    name="email"
+                    placeholder="Email" 
+                    type="email" 
+                    style={{ marginBottom: "24px" }} 
                 />
-                <PasswordField placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+                <div className={styles.fieldsInRow}>
+                    <TextField
+                        required
+                        name="birthday"
+                        placeholder="Date of birth"
+                        type="text"
+                        max={
+                            (new Date().getFullYear()-18) + "-" +
+                            (((new Date().getMonth()+1) < 10) ? 
+                                "0"+(new Date().getMonth()+1) 
+                                : 
+                                (new Date().getMonth()+1)
+                            ) + "-" +
+                            ((new Date().getDate()) < 10 ?
+                                "0"+(new Date().getDate())
+                                :
+                                (new Date().getDate())
+                            )
+                        }
+                        style={{ marginBottom: "24px" }}
+                        onFocus={(e) => { e.target.type = "date" }}
+                    />
+                    <div className={styles.genderPicker} style={{ marginBottom: "24px" }}>
+                        <span 
+                            className={gender=="M" && styles.selectedGender}
+                            onClick={() => setGender("M")}
+                        >
+                            M
+                        </span>
+                        <span 
+                            className={gender=="F" && styles.selectedGender}
+                            onClick={() => setGender("F")}
+                        >
+                            F
+                        </span>
+                    </div>
+                </div>
+                <PasswordField 
+                    required
+                    name="password"
+                    placeholder="Password" 
+                    style={{ marginBottom: "24px" }}
+                    onChange={checkPassword} 
+                />
+                <PasswordField 
+                    required
+                    name="password_confirmation"
+                    placeholder="Password Confirmation"
+                />
                 <div className={styles.passwordDescription}>
                     <span className={styles.passwordTitle}>
                         Your password must:
                     </span>
-                    <span className={`${styles.checkOption} ${password?.length >= 12 && styles.active}`}>
+                    <span 
+                        className={`
+                            ${styles.checkOption} 
+                            ${passwordCheck[0] && styles.active}
+                        `}
+                    >
                         Be at least 12 characters
                     </span>
                     <span
                         className={`
                             ${styles.checkOption} 
-                            ${password?.split("")
-                                .filter(letter => (
-                                    isNaN(letter * 1)
-                                    &&
-                                    letter.toLowerCase() != letter.toUpperCase()
-                                    &&
-                                    letter == letter.toUpperCase()
-                                ))
-                                .length > 0
-                                &&
-                                styles.active
-                            }
+                            ${passwordCheck[1] && styles.active}
                         `}
                     >
                         Include at least one uppercase letter
                     </span>
                     <span
                         className={`
-                                ${styles.checkOption} 
-                                ${password?.split("")
-                                .filter(letter => !isNaN(letter * 1))
-                                .length > 0
-                            &&
-                            styles.active}
-                            `}
+                            ${styles.checkOption} 
+                            ${passwordCheck[2] && styles.active}
+                        `}
                     >
                         Include at least one number
                     </span>
                     <span
                         className={`
-                                ${styles.checkOption} 
-                                ${password?.split("")
-                                .filter(letter => (
-                                    isNaN(letter * 1)
-                                    &&
-                                    letter.toLowerCase() == letter.toUpperCase()
-                                ))
-                                .length > 0
-                            &&
-                            styles.active}
-                            `}
+                            ${styles.checkOption} 
+                            ${passwordCheck[3] && styles.active}
+                        `}
                     >
                         Include at least one symbol
                     </span>
                     <label className={styles.checkTerms}>
-                        <input type={'checkbox'} />
+                        <input type={'checkbox'} name="agree_to_terms" />
                         <div className={styles.checkBox} />
                         <span htmlFor='termsCheck' className={styles.checkText}>
                             I confirm that I am over 18 years old and I agree with the <Link href="/login"><a>Terms and Conditions and Privacy Policy.</a></Link>
@@ -287,22 +424,24 @@ function SignUp({setCurrentPage}) {
     )
 }
 
-function Recovery({setCurrentPage}) {
+function Recovery({ setCurrentPage }) {
     const submitRef = useRef()
 
     return (
-        <div
-            className={styles.formArea} 
-            style={{ flexDirection: "column" }}
-        >
-            <motion.div 
-                initial={{opacity:0}}
-                animate={{opacity:1}}
-                exit={{opacity:0}} 
-                transition={{ease:"easeInOut"}}
+        <div className={styles.formArea} style={{ flexDirection: "column" }}>
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ ease: "easeInOut" }}
                 className={styles.goLogin}
             >
-                <a className={styles.loginLink} onClick={()=>{setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)}}>
+                <a 
+                    className={styles.loginLink} 
+                    onClick={() => { 
+                        setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />) 
+                    }}
+                >
                     <Image
                         src="/images/icons/left-arrow-downloaded.svg"
                         width={18}
@@ -313,19 +452,19 @@ function Recovery({setCurrentPage}) {
             </motion.div>
             <form className={styles.authForm}>
                 <motion.span
-                    initial={{opacity:0, translateY:-100}}
-                    animate={{opacity:1, translateY:0}}
-                    exit={{opacity:0,translateY:-100}} 
-                    transition={{ease:"easeInOut"}}
+                    initial={{ opacity: 0, translateY: -100 }}
+                    animate={{ opacity: 1, translateY: 0 }}
+                    exit={{ opacity: 0, translateY: -100 }}
+                    transition={{ ease: "easeInOut" }}
                     className={styles.formTitle}
                 >
                     Forgot your password?
                 </motion.span>
-                <motion.span                    
-                    initial={{opacity:0,translateY:-100}}
-                    animate={{opacity:1,translateY:0}}
-                    exit={{opacity:0,translateY:-100}} 
-                    transition={{ease:"easeInOut"}}
+                <motion.span
+                    initial={{ opacity: 0, translateY: -100 }}
+                    animate={{ opacity: 1, translateY: 0 }}
+                    exit={{ opacity: 0, translateY: -100 }}
+                    transition={{ ease: "easeInOut" }}
                     className={styles.formDescription}
                 >
                     Happens to all of us, but we’ll help you reset your password. Enter the email associated with your account, we’ll send you a link to reset password.
@@ -343,13 +482,18 @@ function Recovery({setCurrentPage}) {
                 />
                 <div className={styles.buttons}>
                     <motion.button
-                        initial={{background:"#7F3FFC", width:111, translateY:71}}
-                        animate={{background:"#4B445380", width:196, translateY:0}}
-                        exit={{background:"#7F3FFC", width:111, translateY:71}}
-                        transition={{ease:"easeInOut"}}
+                        initial={{ background: "#7F3FFC", width: 111, translateY: 71 }}
+                        animate={{ background: "#4B445380", width: 196, translateY: 0 }}
+                        exit={{ background: "#7F3FFC", width: 111, translateY: 71 }}
+                        transition={{ ease: "easeInOut" }}
                         type='submit'
                         className={styles.submit}
-                        style={{ marginLeft: 'auto', maxHeight:48, overflow:"hidden", whiteSpace:"nowrap" }}
+                        style={{ 
+                            marginLeft: 'auto', 
+                            maxHeight: 48, 
+                            overflow: "hidden",
+                            whiteSpace: "nowrap" 
+                        }}
                         disabled
                         ref={submitRef}
                     >
