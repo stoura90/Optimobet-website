@@ -4,32 +4,32 @@ import { useEffect, useRef, useState } from 'react'
 
 const demo = [
     {
-        id:1,
-        value:"English"
+        id: 1,
+        value: "English"
     },
     {
-        id:2,
-        value:"Russian"
+        id: 2,
+        value: "Russian"
     },
     {
-        id:3,
-        value:"Georgian"
+        id: 3,
+        value: "Georgian"
     },
     {
-        id:4,
-        value:"German"
+        id: 4,
+        value: "German"
     },
     {
-        id:5,
-        value:"French"
+        id: 5,
+        value: "French"
     },
     {
-        id:6,
-        value:"Spanish"
+        id: 6,
+        value: "Spanish"
     },
     {
-        id:7,
-        value:"Italian"
+        id: 7,
+        value: "Italian"
     },
 ]
 
@@ -44,24 +44,24 @@ export default function Dropdown({ items = [...demo], description }) {
     }
 
     const closeIfNotDropdown = (e) => {
-        if ((e.target!=dropdownRef.current) && (!dropdownRef.current.contains(e.target)))
+        if ((e.target != dropdownRef.current) && (!dropdownRef.current.contains(e.target)))
             setOpen(false)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         if (window)
             window.addEventListener('click', closeIfNotDropdown)
         return () => {
             window.removeEventListener('click', closeIfNotDropdown)
         }
-    },[])
+    }, [])
 
     return (
         <div className={styles.container} ref={dropdownRef}>
-            <div 
-                className={styles.header} 
-                onClick={()=>setOpen(!open)}                
-                style={open ? {borderRadius:"30px 30px 0px 0px"} : {borderRadius:"30px"}}
+            <div
+                className={styles.header}
+                onClick={() => setOpen(!open)}
+                style={open ? { borderRadius: "30px 30px 0px 0px" } : { borderRadius: "30px" }}
             >
                 <div className={styles.icon}>
                     <Image
@@ -82,15 +82,16 @@ export default function Dropdown({ items = [...demo], description }) {
                 </div>
                 <div className={styles.tick} />
             </div>
-            <div 
+            <div
                 className={styles.itemsContainer}
-                style={open ? {height:"auto", border:"1px solid #4B445333", borderTop:"none"} : {height:"0px"}}
+                style={open ? { height: "auto", border: "1px solid #4B445333", borderTop: "none" } : { height: "0px" }}
             >
                 <div className={styles.itemsWrap}>
                     {items.map(item => (
-                        <div 
+                        <div
+                            key={item.id}
                             className={styles.item}
-                            onClick={()=>selectItem(item)}
+                            onClick={() => selectItem(item)}
                         >
                             <div className={styles.icon}>
                                 <Image

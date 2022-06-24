@@ -7,6 +7,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
+import APIRequest from '../../functions/requests/APIRequest';
+import Link from 'next/link';
 
 const filters = [
     {
@@ -172,9 +174,10 @@ const casinos = [
 
 const slides = [1, 2, 3, 4, 5]
 
-export default function CasinosPage() {
+export default function CasinosPage({ casinos, filters }) {
     const [sidebarShown, setSidebarShown] = useState(true);
-    const [filter, setFilter] = useState('All');
+    const [sort, setSort] = useState('All');
+    const [filteredItems, setFilteredItems] = useState(casinos);
 
     const controlVariants = {
         left: {
@@ -219,6 +222,42 @@ export default function CasinosPage() {
         }
     }
 
+    function handleFilterByCategory(item, filterName) {
+        switch (filterName) {
+            case 'Games':
+                setFilteredItems(casinos.filter(casino => casino.games.find(game => game.id === item.id)));
+                break;
+            case 'Website Language':
+                setFilteredItems(casinos.filter(casino => casino.single_website_language.id == item.id));
+                break;
+            case 'Support Language':
+                setFilteredItems(casinos.filter(casino => casino.single_support_language.id == item.id));
+                break;
+            case 'Payment Methods':
+                setFilteredItems(casinos.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
+                break;
+        }
+    }
+
+    function handleSort(filter) {
+        setSort(filter);
+        let newFilteredItems = [...filteredItems];
+        switch (filter) {
+            case 'All':
+                setFilteredItems(casinos);
+                break;
+            case 'New':
+                setFilteredItems(newFilteredItems.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+                break;
+            case 'Popular':
+                setFilteredItems(newFilteredItems.sort((a, b) => b.rating - a.rating));
+                break;
+            case 'Promotions':
+                setFilteredItems(newFilteredItems.sort((a, b) => b.reputation - a.reputation));
+                break;
+        }
+    }
+
     return (
         <div className={styles.container}>
             <div>
@@ -259,6 +298,7 @@ export default function CasinosPage() {
                                     title={filter.name}
                                     items={filter.items}
                                     initialOpen={index === 0}
+                                    onChange={(item) => handleFilterByCategory(item, filter.name)}
                                     collapsible
                                 />
                             ))
@@ -299,26 +339,26 @@ export default function CasinosPage() {
                         </div>
                         <div className={styles.filterControls}>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'All' && styles.active}`}
-                                onClick={() => setFilter('All')}
+                                className={`${styles.filterControlsItem} ${sort === 'All' && styles.active}`}
+                                onClick={() => handleSort('All')}
                             >
                                 All
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
-                                onClick={() => setFilter('New')}
+                                className={`${styles.filterControlsItem} ${sort === 'New' && styles.active}`}
+                                onClick={() => handleSort('New')}
                             >
                                 New
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
-                                onClick={() => setFilter('Popular')}
+                                className={`${styles.filterControlsItem} ${sort === 'Popular' && styles.active}`}
+                                onClick={() => handleSort('Popular')}
                             >
                                 Popular
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
-                                onClick={() => setFilter('Promotions')}
+                                className={`${styles.filterControlsItem} ${sort === 'Promotions' && styles.active}`}
+                                onClick={() => handleSort('Promotions')}
                             >
                                 Promotions
                             </div>
@@ -326,7 +366,7 @@ export default function CasinosPage() {
                     </div>
                     <div className={styles.casinos}>
                         {
-                            casinos.map(casino => (
+                            filteredItems.map(casino => (
                                 <Casino {...casino} key={casino.name} />
                             ))
                         }
@@ -337,33 +377,45 @@ export default function CasinosPage() {
     )
 }
 
-function Casino({ name, rating, tags, games }) {
+function Casino({
+    claim_bonus_url,
+    features,
+    games,
+    positives,
+    rating,
+    single_support_language,
+    single_website_language,
+    url,
+    shared_content,
+    id
+}) {
     return (
         <div className={styles.casino}>
-            <div className={styles.casinoImage}>
-                <Image
-                    src="/images/casino.png"
-                    layout='fill'
-                    objectFit='cover'
-                />
-            </div>
+            <Link href={`/casinos/${id}`}>
+                <a className={styles.casinoImage}>
+                    <Image
+                        src="/images/casino.png"
+                        layout='fill'
+                        objectFit='cover'
+                    />
+                </a>
+            </Link>
             <div className={styles.casinoInfo}>
                 <div className={styles.casinoColumn}>
-
                     <div className={styles.casinoName}>
-                        <span className={styles.casinoNameText}>{name}</span>
+                        <span className={styles.casinoNameText}>{shared_content.name}</span>
                         <div className={styles.casinoRating}>
                             <Stars points={rating} />
                         </div>
                     </div>
                     <div className={styles.casinoTags}>
                         {
-                            tags.map(tag => (
+                            features.map(tag => (
                                 <div className={styles.casinoTag} key={tag}>
                                     <Image
                                         src="/images/icons/circle-check.svg"
-                                        height={12}
-                                        width={12}
+                                        height={24}
+                                        width={24}
                                     />
                                     {tag}
                                 </div>
@@ -375,17 +427,20 @@ function Casino({ name, rating, tags, games }) {
                     </span>
                     <div className={styles.casinoGames}>
                         {
-                            games.map(game => (
-                                <div className={styles.casinoGame} key={game} >
+                            games.slice(0, 5).map(game => (
+                                <div className={styles.casinoGame} key={game.id} >
                                     <Image
-                                        src="/images/game.png"
+                                        src={`/images/${game.slug}`}
                                         layout='fill'
                                         objectFit='cover'
-                                        alt={game}
+                                        alt={game.name}
                                     />
                                 </div>
                             ))
                         }
+                        <div className={styles.casinoGame} >
+                            +{games.length - 5}
+                        </div>
                     </div>
                 </div>
                 <div className={`${styles.casinoColumn} ${styles.right}`}>
@@ -393,33 +448,25 @@ function Casino({ name, rating, tags, games }) {
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
-                                {
-                                    [1, 2, 3].map(item => (
-                                        <div className={styles.language} key={item}>
-                                            <Image
-                                                src="/images/icons/flag-en.svg"
-                                                height={20}
-                                                width={27}
-                                            />
-                                        </div>
-                                    ))
-                                }
+                                <div className={styles.language}>
+                                    <Image
+                                        src={`/images/icons/${single_website_language.code}`}
+                                        alt={single_website_language.name}
+                                        height={20}
+                                        width={27}
+                                    />
+                                </div>
                             </div>
                         </div>
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Live chat</span>
                             <div className={styles.languageContent}>
-                                {
-                                    [1, 2, 3].map(item => (
-                                        <div className={styles.language} key={item}>
-                                            <Image
-                                                src="/images/icons/flag-en.svg"
-                                                height={20}
-                                                width={27}
-                                            />
-                                        </div>
-                                    ))
-                                }
+                                <Image
+                                    src={`/images/icons/${single_support_language.code}`}
+                                    alt={single_support_language.name}
+                                    height={20}
+                                    width={27}
+                                />
                             </div>
                         </div>
                     </div>
@@ -427,14 +474,76 @@ function Casino({ name, rating, tags, games }) {
                         <div className={styles.casinoButton}>
                             T&C Apply
                         </div>
-                        <div className={`${styles.casinoButton} ${styles.highlighted}`}>
+                        {claim_bonus_url !== "" && <a
+                            href={claim_bonus_url}
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            className={`${styles.casinoButton} ${styles.highlighted}`}
+                        >
                             Get Bonus
-                        </div>
+                        </a>}
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     )
+}
+
+export async function getStaticProps() {
+    const casinos = await APIRequest('/casinos', 'GET')
+    const languages = casinos.data
+        .map(casino => [casino.single_website_language, casino.single_support_language])
+        .flat()
+        .reduce((acc, language) => {
+            if (acc.find(_language => _language.id === language.id)) {
+                return acc
+            }
+            return [...acc, language]
+        }, [])
+    const games = casinos.data
+        .map(casino => casino.games)
+        .flat()
+        .reduce((acc, game) => {
+            if (acc.find(_game => _game.id === game.id)) {
+                return acc
+            }
+            return [...acc, game]
+        }, [])
+    const payments = casinos.data
+        .map(casino => casino.payment_methods)
+        .flat()
+        .reduce((acc, payment) => {
+            if (acc.find(_payment => _payment.id === payment.id)) {
+                return acc
+            }
+            return [...acc, payment]
+        }, [])
+
+
+    return {
+        props: {
+            casinos: casinos.data,
+            filters: [
+                {
+                    name: 'Games',
+                    items: games
+                },
+                {
+                    name: 'Website Language',
+                    items: languages
+                },
+                {
+                    name: 'Support Language',
+                    items: languages
+                },
+                {
+                    name: 'Payment Methods',
+                    items: payments
+                }
+            ]
+        },
+        revalidate: 10,
+    }
 }
 
 CasinosPage.withHeader = true;
