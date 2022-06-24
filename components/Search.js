@@ -1,13 +1,21 @@
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from '../styles/components/Search.module.css'
 import Dropdown from './Dropdown'
 import { motion, AnimatePresence } from 'framer-motion'
 import Stars from '../components/Stars'
+import Link from 'next/link'
 
 export default function Search({ setBorder }) {
     const [open, setOpen] = useState(false)
     const [filter, setFilter] = useState('All')
+    const [searchValue, setSearchValue] = useState()
+    const searchRef = useRef()
+
+    const onRedirect = () => {
+        searchRef.current.value = ""
+        searchValue(null)
+    }
 
     const apply = () => {
         setOpen(false)
@@ -18,6 +26,7 @@ export default function Search({ setBorder }) {
     }
 
     const searchText = (e) => {
+        setSearchValue(e.target.value)
         if (e.target.value.length>0) 
             setOpen(true)
         else
@@ -36,6 +45,7 @@ export default function Search({ setBorder }) {
                 type="text"
                 placeholder="Search"
                 onChange={searchText}
+                ref={searchRef}
             />
             <div className={styles.icon}>
                 <Image
@@ -194,9 +204,11 @@ export default function Search({ setBorder }) {
                                 </div>
                             </div>
                         </div>
-                        <div className={styles.seeAllResults}>
-                            See All Results
-                        </div>
+                        <Link href={`/searchresults?text=${searchValue}`}>
+                            <a className={styles.seeAllResults} onClick={onRedirect}>
+                                See All Results
+                            </a>
+                        </Link>
                     </motion.div>
                 }
             </AnimatePresence>
