@@ -11,6 +11,7 @@
     justify-content: center;
     background-color: rgb(88, 83, 83);
     overflow: hidden;
+    min-height: 400px;
 }
 
 .slot.big .slotInfo {

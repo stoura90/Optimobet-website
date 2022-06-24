@@ -9,6 +9,7 @@
     z-index: 999;
     border-bottom: 1px solid transparent;
     transition: .2s;
+    justify-content: space-between;
 }
 
 .logo {
@@ -63,6 +64,6 @@
     letter-spacing: 0px;
 }
 
-.bordered{
+.bordered {
     border-bottom: 1px solid #4B445333;
 }
