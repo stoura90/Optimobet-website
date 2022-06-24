@@ -6,6 +6,7 @@ import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import { useRouter } from 'next/router'
+import Slot from '../../components/Slot'
 
 const filters = [
     {
@@ -125,6 +126,72 @@ const filters = [
 
 ]
 
+const _slots = [
+    {
+        id: 1,
+        name: 'Slot 1',
+        provider: 'ELK Studio',
+        type: 'Achievement',
+        rating: 4.5,
+    },
+    {
+        id: 2,
+        name: 'Slot 2',
+        provider: 'Netend',
+        type: 'Megaways',
+        rating: 4.5,
+    },
+    {
+        id: 3,
+        name: 'Slot 3',
+        provider: 'YGGDRASIL',
+        type: 'Bonus Buy',
+        rating: 4.5,
+    },
+    {
+        id: 4,
+        name: 'Slot 4',
+        provider: 'EGT',
+        type: 'Sticky Features',
+        rating: 4.5,
+    },
+    {
+        id: 5,
+        name: 'Slot 5',
+        provider: 'PRAGMATICPLAY',
+        type: 'Jackpot',
+        rating: 4.5,
+    },
+    {
+        id: 6,
+        name: 'Slot 6',
+        provider: 'Booming Games',
+        type: 'Achievement',
+        rating: 4.5,
+    },
+    {
+        id: 7,
+        name: 'Slot 7',
+        provider: 'IRON DOG',
+        type: 'Megaways',
+        rating: 4.5,
+    },
+    {
+        id: 8,
+        name: 'Slot 8',
+        provider: 'BETSOFT',
+        type: 'Bonus Buy',
+        rating: 4.5,
+    },
+    {
+        id: 9,
+        name: 'Slot 9',
+        provider: '2by2gaming',
+        type: 'Sticky Features',
+        rating: 4.5,
+    }
+]
+
 const casinos = [
     {
         name: 'IVI Casino',
@@ -221,6 +288,32 @@ export default function SearchResults() {
         controls: {
             marginTop: "62px"
         }
+    }
+
+    function renderSlots(sidebarShown) {
+        // breaks the layout when first slot is big
+        let column = 1;
+        let row = 1;
+        const maxColumns = sidebarShown ? 3 : 4;
+        return _slots.map((item, index) => {
+            const slot = <Slot
+                {...item}
+                key={`slot_${item.id}`}
+                // big={index === 0}
+                style={{
+                    gridColumnStart: column,
+                    gridColumnEnd: column + 1,
+                    gridRowStart: row,
+                    gridRowEnd: row + 1,
+                }}
+            />
+            // if (index === 0) {
+            //     column = 3;
+            //     return slot;
+            // }
+            column < maxColumns ? column++ : (column = 1, row++)
+            return slot
+        })
     }
 
     return (
@@ -376,6 +469,107 @@ export default function SearchResults() {
                                             <Casino {...casino} key={casino.name} />
                                         ))
                                     }
+                                </motion.div>
+                            </motion.div>
+                        }
+                        {(selectedCat == 2 || selectedCat == 0) &&
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            >
+                                <div style={{ position: "relative" }}>
+                                    <AnimatePresence initial={false}>
+                                        {selectedCat == 0 &&
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                className={styles.categoryHeaderResults}
+                                                style={{ position: "absolute" }}
+                                            >
+                                                <span className={styles.secondName}>
+                                                    Second name
+                                                </span>
+                                                <span className={styles.mainName}>
+                                                    Main name
+                                                </span>
+                                            </motion.div>
+                                        }
+                                    </AnimatePresence>
+                                    <AnimatePresence>
+                                        {selectedCat != 0 &&
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                className={styles.controls}
+                                                style={{ position: "absolute", width: "100%" }}
+                                            >
+                                                <div
+                                                    className={styles.sidebarControls}
+                                                    onClick={() => setSidebarShown(!sidebarShown)}
+                                                >
+                                                    <motion.div
+                                                        variants={controlVariants}
+                                                        animate={sidebarShown ? 'left' : 'right'}
+                                                        className={styles.sidebarControlsSlide}
+                                                    />
+                                                    <div className={styles.sidebarControlsItem}>
+                                                        <ReactSVG
+                                                            src='/images/icons/layout-sidebar.svg'
+                                                            className={sidebarShown ? styles.light : styles.dark}
+                                                            height={24}
+                                                            width={24}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.sidebarControlsItem}>
+                                                        <ReactSVG
+                                                            src='/images/icons/layout-sidebar-left-collapse.svg'
+                                                            className={sidebarShown ? styles.dark : styles.light}
+                                                            height={24}
+                                                            width={24}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className={styles.filterControls}>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'All' && styles.active}`}
+                                                        onClick={() => setFilter('All')}
+                                                    >
+                                                        All
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
+                                                        onClick={() => setFilter('New')}
+                                                    >
+                                                        New
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
+                                                        onClick={() => setFilter('Popular')}
+                                                    >
+                                                        Popular
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
+                                                        onClick={() => setFilter('Promotions')}
+                                                    >
+                                                        Promotions
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        }
+                                    </AnimatePresence>
+                                </div>
+                                <motion.div
+                                    variants={resultCasinosVariants}
+                                    initial={"title"}
+                                    animate={selectedCat == 0 ? "title" : "controls"}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className={styles.slots}
+                                >
+                                    {renderSlots(sidebarShown)}
                                 </motion.div>
                             </motion.div>
                         }

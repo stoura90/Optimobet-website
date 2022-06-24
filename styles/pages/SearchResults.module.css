@@ -403,3 +403,9 @@
     color: #4B4453;
     text-transform: capitalize;
 }
+.slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    width: 100%;
+}
