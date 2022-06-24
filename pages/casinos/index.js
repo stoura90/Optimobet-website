@@ -476,6 +476,7 @@ function Casino({
                         </div>
                         {claim_bonus_url !== "" && <a
                             href={claim_bonus_url}
+                            target='_blank'
                             className={`${styles.casinoButton} ${styles.highlighted}`}
                         >
                             Get Bonus

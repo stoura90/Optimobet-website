@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import styles from '../../styles/pages/CasinoPage.module.css'
-
+import React from 'react';
 import Stars from '../../components/Stars'
 import InfoBlock from '../../components/casino/InfoBlock'
 import BonusBlock from '../../components/casino/BonusBlock'
+import APIRequest from '../../functions/requests/APIRequest';
+import parse from 'html-react-parser';
 
 export default function CasinoPage({ casino }) {
-    
+
     return (
         <div className={styles.container}>
             <div className={styles.sideCol}>
@@ -15,6 +17,7 @@ export default function CasinoPage({ casino }) {
                         <div className={styles.casinoHeaderLogo}>
                             <Image
                                 src="/placeholder.png"
+                                alt={casino.shared_content.name}
                                 objectFit='contain'
                                 layout='fill'
                             />
@@ -22,26 +25,29 @@ export default function CasinoPage({ casino }) {
                     </div>
                     <div className={styles.casinoContentCard}>
                         <span className={styles.casinoCompany}>
-                            JOCSOLUTIONS LIMITED
+                            {casino.shared_content.owner}
                         </span>
                         <span className={styles.casinoName}>
-                            IVI Casino
+                            {casino.shared_content.name}
                         </span>
                         <div className={styles.stars}>
-                            <Stars points={4.1} />
+                            <Stars points={casino.rating} />
                         </div>
                         <div className={styles.bonuses}>
-                            <span>
-                                Smaller online casino
-                            </span>
-                            <span>
-                                100% BONUS ON SPORT
-                            </span>
+                            {casino.features.map(tag => (
+                                <span key={`feature_${tag}`}>
+                                    {tag}
+                                </span>
+                            ))}
                         </div>
                         <div className={styles.buttonBonus}>
-                            <button className={styles.getBonus}>
+                            <a
+                                href={casino.website}
+                                target='_blank'
+                                className={styles.getBonus}
+                            >
                                 Visit website
-                            </button>
+                            </a>
                             <span className={styles.bonusApply}>
                                 T{'&'}C Apply
                             </span>
@@ -52,65 +58,63 @@ export default function CasinoPage({ casino }) {
                     Submit a complaint
                 </div>
                 <div className={styles.advantages}>
-                    <span>
-                        Casino receives gamblers from numerous countries
-                    </span>
-                    <span>
-                        Support in chat is available 24/7
-                    </span>
+                    {casino.positives.map(tag => (
+                        <span key={`pos_${tag}`}>
+                            {tag}
+                        </span>
+                    ))}
                 </div>
                 <div className={styles.disadvantages}>
-                    <span>
-                        Low monthly withdrawal limit
-                    </span>
-                    <span>
-                        Not all payment methods are available for every currency
-                    </span>
+                    {casino.negatives.map(tag => (
+                        <span key={`neg_${tag}`}>
+                            {tag}
+                        </span>
+                    ))}
                 </div>
             </div>
             <div className={styles.mainCol}>
                 <div className={styles.infoBlocksWrap}>
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/current-location.svg"
                         infoTitle="IP Address From"
                         infoText="Georgia"
                         dataImages={["/placeholder.png"]}
                     />
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/users.svg"
                         infoTitle="Support From"
                         infoText="United Kingdom"
-                        dataImages={["/placeholder.png","/placeholder.png"]}
+                        dataImages={["/placeholder.png", "/placeholder.png"]}
                     />
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/language.svg"
                         infoTitle="Website Language"
-                        infoText="United Kingdom"
-                        dataImages={["/placeholder.png","/placeholder.png","/placeholder.png"]}
+                        infoText={casino.single_website_language.name}
+                        dataImages={["/placeholder.png"]}
                     />
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/messages.svg"
                         infoTitle="Live Chat"
-                        infoText="Georgia"
-                        dataImages={["/placeholder.png","/placeholder.png"]}
+                        infoText={casino.single_support_language.name}
+                        dataImages={["/placeholder.png", "/placeholder.png"]}
                     />
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/user.svg"
                         infoTitle="Residents From"
                         infoText="Georgia"
                         dataImages={["/images/icons/circle-check.svg"]}
                     />
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/shield.svg"
                         infoTitle="VPN"
                         infoText="United Kingdom"
                         dataImages={["/images/icons/circle-x.svg"]}
                     />
-                    <InfoBlock 
+                    <InfoBlock
                         iconSrc="/images/icons/casino/license.svg"
                         infoTitle="Licensing Authorities"
-                        infoText="Government of Curacao"
-                        dataText="2018"
+                        infoText={casino.shared_content.licensing_autorithy}
+                        dataText={casino.shared_content.estabilished}
                     />
                 </div>
                 <div className={styles.casinoText}>
@@ -119,7 +123,7 @@ export default function CasinoPage({ casino }) {
                             About casino
                         </span>
                         <span>
-                            Parimatch offers 22 legal sport betting, cybersport and entertainment. As for covered countries, football coverage is decent, with match odds from 34 countries around the world, except international competitions. English game moves to the Premier-League Rayman - 7th level Even bookmaker’s office Parimatch is well known to the players, who are not particularly keen on counting sporting events, this kind of casino brand is not popular. But the advantages of this casino make you believe that the visiting will increase. Casino Parimatch offers excellent games, multilingual interface and qualified support team, all the most convenient payment methods and etc.
+                            {parse(casino.description)}
                         </span>
                     </div>
                     <div className={styles.casinoTextBlock}>
@@ -127,7 +131,7 @@ export default function CasinoPage({ casino }) {
                             Verdict
                         </span>
                         <span>
-                            We have thoroughly checked Casino Parimatch and assessed a good reputation. It’s a great casino, yet there are some things to be paid attention to. In our review we looked at the casino players’ complaints, estimated revenue, license, the authenticity of the games, quality of client support, fairness of the condition, limits on withdrawals, winnings and other factors. Read the full review below and find out more about this casino. According to our research and estimates, casino Parimatch is a middle-sized online casino in terms of revenue. Income of the casino is an important factor. Large casinos shouldn't have problems paying out big wins, as such occurrences are more likely to happen big winnings in small casinos. We have found 1 complaint directly to this casino. Because of this complaint we gave this casino 576 dark points. You can find more information about these complaints and dark points below. Casino Parimatch - is a good casino. We regarded this rating because it manages many things. But there are some facts which deprive us to estimate it as a good or perfect reputation. Despite this, you can expect this casino to be a good place to play.
+                            {casino.verdict}
                         </span>
                     </div>
                 </div>
@@ -138,7 +142,7 @@ export default function CasinoPage({ casino }) {
                 </div>
                 <div className={styles.paymentTableBlock}>
                     <span className={styles.paymentTableHeader}>
-                        IVI casino Payment Methods
+                        {casino.shared_content.name} Payment Methods
                     </span>
                     <table className={styles.paymentTable}>
                         <thead>
@@ -158,27 +162,31 @@ export default function CasinoPage({ casino }) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div className={styles.payment}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={48}
-                                            height={32}
-                                        /> 
-                                        Payment method
-                                    </div>
-                                </td>
-                                <td>
-                                    Deposit Limit And Fees
-                                </td>
-                                <td>
-                                    Withdrawal Limit and Fees
-                                </td>
-                                <td>
-                                    Withdrawal Time
-                                </td>
-                            </tr>
+                            {
+                                casino.payment_methods.map(method => (
+                                    <tr key={method.id}>
+                                        <td>
+                                            <div className={styles.payment}>
+                                                <Image
+                                                    src="/placeholder.png"
+                                                    width={48}
+                                                    height={32}
+                                                />
+                                                {method.name}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {method.deposit_limit_and_fees ?? '-'}
+                                        </td>
+                                        <td>
+                                            {method.withdrawal_limit_and_fees ?? '-'}
+                                        </td>
+                                        <td>
+                                            {method.withdrawal_time ?? '-'}
+                                        </td>
+                                    </tr>
+                                ))
+                            }
                             <tr>
                                 <td>
                                     Payment method
@@ -198,7 +206,7 @@ export default function CasinoPage({ casino }) {
                 </div>
                 <div className={styles.providers}>
                     <span className={styles.providersHeader}>
-                        IVI casino Game Providers
+                        {casino.shared_content.name} Game Providers
                     </span>
                     <div className={styles.providerCard}>
                         <div className={styles.provider}>
@@ -206,7 +214,7 @@ export default function CasinoPage({ casino }) {
                                 src="/placeholder.png"
                                 width={48}
                                 height={32}
-                            /> 
+                            />
                         </div>
                         <div className={styles.providerInfo}>
                             <span className={styles.providerName}>
@@ -223,7 +231,7 @@ export default function CasinoPage({ casino }) {
                                 src="/placeholder.png"
                                 width={48}
                                 height={32}
-                            /> 
+                            />
                         </div>
                         <div className={styles.providerInfo}>
                             <span className={styles.providerName}>
@@ -240,7 +248,7 @@ export default function CasinoPage({ casino }) {
                                 src="/placeholder.png"
                                 width={48}
                                 height={32}
-                            /> 
+                            />
                         </div>
                         <div className={styles.providerInfo}>
                             <span className={styles.providerName}>
@@ -257,7 +265,7 @@ export default function CasinoPage({ casino }) {
                                 src="/placeholder.png"
                                 width={48}
                                 height={32}
-                            /> 
+                            />
                         </div>
                         <div className={styles.providerInfo}>
                             <span className={styles.providerName}>
@@ -274,7 +282,7 @@ export default function CasinoPage({ casino }) {
                                 src="/placeholder.png"
                                 width={48}
                                 height={32}
-                            /> 
+                            />
                         </div>
                         <div className={styles.providerInfo}>
                             <span className={styles.providerName}>
@@ -291,7 +299,7 @@ export default function CasinoPage({ casino }) {
                                 src="/placeholder.png"
                                 width={48}
                                 height={32}
-                            /> 
+                            />
                         </div>
                         <div className={styles.providerInfo}>
                             <span className={styles.providerName}>
@@ -311,18 +319,20 @@ export default function CasinoPage({ casino }) {
 CasinoPage.withHeader = true;
 
 export async function getStaticProps({ params }) {
-    const { casino } = params
+    const { id } = params
+    const casino = await APIRequest(`/casinos/${id}`)
 
     return {
         props: {
-            casino 
+            casino: casino
         },
-        revalidate: 60,
+        revalidate: 10,
     }
 }
 
 export async function getStaticPaths() {
-    const paths = new Array(10).fill(0).map((_, i) => ({ params: { casino: i.toString() } }))
+    const casinos = await APIRequest('/casinos', 'GET')
+    const paths = casinos.data.map(casino => ({ params: { id: casino.id.toString() } }))
 
     return { paths, fallback: 'blocking' }
 }
