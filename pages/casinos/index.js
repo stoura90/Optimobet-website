@@ -474,14 +474,14 @@ function Casino({
                         <div className={styles.casinoButton}>
                             T&C Apply
                         </div>
-                        {claim_bonus_url !== "" && <a
+                        <a
                             href={claim_bonus_url}
                             target='_blank'
                             rel='noopener noreferrer'
                             className={`${styles.casinoButton} ${styles.highlighted}`}
                         >
                             Get Bonus
-                        </a>}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -525,6 +525,23 @@ export async function getStaticProps() {
             casinos: casinos.data,
             filters: [
                 {
+                    name: 'Popular filters',
+                    items: [
+                        {
+                            id: 1,
+                            name: 'No Deposit Bonus',
+                        },
+                        {
+                            id: 2,
+                            name: 'Deposit Bonus',
+                        },
+                        {
+                            id: 3,
+                            name: 'Mobile Devices Supported'
+                        }
+                    ],
+                },
+                {
                     name: 'Games',
                     items: games
                 },
@@ -547,3 +564,4 @@ export async function getStaticProps() {
 }
 
 CasinosPage.withHeader = true;
+CasinosPage.withFooter = true;

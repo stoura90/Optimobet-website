@@ -1,18 +1,20 @@
-.search{
+.search {
     margin-right: 44px;
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: 350px;
 }
 
-.search .icon{
+.search .icon {
     position: absolute;
     right: 24px;
     width: 24px;
     height: 24px;
 }
 
-.search input{
+.search input {
     border: none;
     border-radius: 24px;
     padding: 15px 24px;
@@ -24,14 +26,14 @@
     outline: none;
     display: flex;
     width: 100%;
-    max-width: 405px;
+    max-width: 505px;
 }
 
 .search::placeholder {
     color: #4B445380;
 }
 
-.searchResults{
+.searchResults {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #4B445333;
     border-top: none;
@@ -48,13 +50,13 @@
     max-height: 70vh;
 }
 
-.searchCategories{
+.searchCategories {
     display: flex;
     align-items: center;
     margin-bottom: 24px;
 }
 
-.searchFilter{
+.searchFilter {
     padding: 12px 24px;
     border-radius: 30px;
     font: normal normal 500 15px/17px Samsung Sans;
@@ -68,14 +70,14 @@
     transition: all .3s ease-in-out;
 }
 
-.searchFilter.active{
+.searchFilter.active {
     background: #7F3FFC 0% 0% no-repeat padding-box;
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #F2F2F2;
 }
 
-.resultList{
+.resultList {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -83,7 +85,7 @@
     padding-bottom: 24px;
 }
 
-.resultCategory{
+.resultCategory {
     display: flex;
     align-items: center;
     gap: 12px;
@@ -93,14 +95,14 @@
     margin-top: 24px;
 }
 
-.categoryTitle{
+.categoryTitle {
     font: normal normal 500 16px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;
     text-transform: uppercase;
 }
 
-.categoryCount{
+.categoryCount {
     font: normal normal normal 12px/14px Samsung Sans;
     letter-spacing: 0px;
     color: #7F3FFC;
@@ -109,19 +111,19 @@
     padding: 6px 9px;
 }
 
-.resultContent{
+.resultContent {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-.resultInfo{
+.resultInfo {
     display: flex;
     gap: 12px;
     align-items: center;
 }
 
-.resultLogo{
+.resultLogo {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -132,26 +134,26 @@
     border-radius: 8px;
 }
 
-.resultData{
+.resultData {
     display: flex;
     flex-direction: column;
     gap: 3px;
 }
 
-.resultName{
+.resultName {
     font: normal normal 500 16px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
     text-transform: uppercase;
 }
 
-.stars{
+.stars {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.seeAllResults{
+.seeAllResults {
     display: flex;
     justify-content: center;
     align-items: center;

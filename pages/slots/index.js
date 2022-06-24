@@ -223,18 +223,18 @@ export default function SlotsPage() {
             const slot = <Slot
                 {...item}
                 key={`slot_${item.id}`}
-                // big={index === 0}
+                big={index === 0}
                 style={{
                     gridColumnStart: column,
-                    gridColumnEnd: column + 1,
+                    gridColumnEnd: index === 0 ? 3 : (column + 1),
                     gridRowStart: row,
                     gridRowEnd: row + 1,
                 }}
             />
-            // if (index === 0) {
-            //     column = 3;
-            //     return slot;
-            // }
+            if (index === 0) {
+                column = 3;
+                return slot;
+            }
             column < maxColumns ? column++ : (column = 1, row++)
             return slot
         })
@@ -361,3 +361,4 @@ export default function SlotsPage() {
 }
 
 SlotsPage.withHeader = true;
+SlotsPage.withFooter = true;
