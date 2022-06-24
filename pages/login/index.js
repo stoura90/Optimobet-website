@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Language from '../../components/Language'
 import { useCookies } from 'react-cookie'
 import APIRequest from '../../functions/requests/APIRequest'
+import { useRouter } from 'next/router'
 
 export default function Login() {
     const { width, height } = useWindowSize()
@@ -71,6 +72,7 @@ export default function Login() {
 
 function SignIn({ setCurrentPage }) {
     const [cookie, setCookie] = useCookies("token")
+    const router = useRouter()
 
     function login(e) {
         e.preventDefault()
@@ -85,6 +87,7 @@ function SignIn({ setCurrentPage }) {
         )
         .then(res => {
             setCookie("token", res.token)
+            router.push('/')
         })
         .catch(e => {
             alert(e)
@@ -234,6 +237,7 @@ function SignUp({ setCurrentPage }) {
                 )
                 .then(res => {
                     setCookie("token", res.token)
+                    router.push('/')
                 })
                 .catch(e => {
                     alert(e + (e.errors?.email ? "Current email is exist." : ""))
