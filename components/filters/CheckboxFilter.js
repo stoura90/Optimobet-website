@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../../styles/components/CheckboxFilter.module.css'
 import { motion } from 'framer-motion'
 
-export default function CheckboxFilter({ items, title, collapsible = false, initialOpen = true }) {
+export default function CheckboxFilter({ items, title, collapsible = false, initialOpen = true, onChange }) {
     const [active, setActive] = useState()
     const [isOpen, setIsOpen] = useState(initialOpen)
 
@@ -31,6 +31,11 @@ export default function CheckboxFilter({ items, title, collapsible = false, init
         closed: {
             rotate: -90,
         }
+    }
+
+    function handleChange(item) {
+        setActive(item.id)
+        onChange && onChange(item)
     }
 
     return (
@@ -62,7 +67,7 @@ export default function CheckboxFilter({ items, title, collapsible = false, init
                     <div
                         key={`type_${item.id}`}
                         className={`${styles.type} ${active === item.id && styles.active}`}
-                        onClick={() => item.id !== active && setActive(item.id)}
+                        onClick={() => item.id !== active && handleChange(item)}
                     >
                         <div className={styles.typeName}>{item.name}</div>
                         <div className={styles.typeCheckbox} />
