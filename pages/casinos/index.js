@@ -477,6 +477,7 @@ function Casino({
                         {claim_bonus_url !== "" && <a
                             href={claim_bonus_url}
                             target='_blank'
+                            rel='noopener noreferrer'
                             className={`${styles.casinoButton} ${styles.highlighted}`}
                         >
                             Get Bonus

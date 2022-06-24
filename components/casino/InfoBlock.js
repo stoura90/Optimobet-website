@@ -23,13 +23,14 @@ export default function infoBlock({ iconSrc, infoTitle, infoText, dataText, data
             </div>
             <div className={styles.infoData}>
                 {dataText}
-                {dataImages && dataImages.length>0 && dataImages.map(img => (
+                {dataImages && dataImages.length > 0 && dataImages.map((img, index) => (
                     <Image
+                        key={`img_${index}`}
                         src={img}
                         width={27}
                         height={20}
                     />
-                ))}                
+                ))}
             </div>
         </div>
     )

@@ -44,6 +44,7 @@ export default function CasinoPage({ casino }) {
                             <a
                                 href={casino.website}
                                 target='_blank'
+                                rel='noopener noreferrer'
                                 className={styles.getBonus}
                             >
                                 Visit website
