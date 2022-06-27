@@ -225,25 +225,25 @@ export default function CasinosPage({ casinos, filters }) {
     function handleFilterByCategory(item, filterName) {
         switch (filterName) {
             case 'Games':
-                setFilteredItems(bookmakers.filter(casino => casino.games.find(game => game.id === item.id)));
+                setFilteredItems(casinos.filter(casino => casino.games.find(game => game.id === item.id)));
                 break;
             case 'Website Language':
-                setFilteredItems(bookmakers.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
+                setFilteredItems(casinos.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
                 break;
             case 'Support Language':
-                setFilteredItems(bookmakers.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
+                setFilteredItems(casinos.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
                 break;
             case 'Payment Methods':
-                setFilteredItems(bookmakers.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
+                setFilteredItems(casinos.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
             case 'Countries':
-                setFilteredItems(bookmakers.filter(casino => casino.pivot?.country_id === item.id));
+                setFilteredItems(casinos.filter(casino => casino.pivot?.country_id === item.id));
                 break;
             case 'Providers':
-                setFilteredItems(bookmakers.filter(casino => casino.providers?.id === item.id));
+                setFilteredItems(casinos.filter(casino => casino.providers?.id === item.id));
                 break;
             default:
-                setFilteredItems(bookmakers);
+                setFilteredItems(casinos);
                 break;
         }
     }
@@ -253,7 +253,7 @@ export default function CasinosPage({ casinos, filters }) {
         let newFilteredItems = [...filteredItems];
         switch (filter) {
             case 'All':
-                setFilteredItems(filteredItems);
+                setFilteredItems(casinos);
                 break;
             case "BestInCountry":
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
