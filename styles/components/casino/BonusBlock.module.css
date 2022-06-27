@@ -1,8 +1,9 @@
-.bonusBlock{
+.bonusBlock {
     display: flex;
     width: 100%;
 }
-.bonusData{
+
+.bonusData {
     border: 1px solid #7F3FFC;
     border-radius: 16px 0px 0px 16px;
     width: 80%;
@@ -11,17 +12,19 @@
     gap: 24px;
     flex-direction: column;
 }
-.getBonusArea{
+
+.getBonusArea {
     background: #7F3FFC 0% 0% no-repeat padding-box;
     border-radius: 0px 16px 16px 0px;
     padding: 40px;
     display: flex;
     justify-content: center;
-    align-items: center;    
+    align-items: center;
     min-width: 200px;
     width: 24%;
 }
-.getBonusButton{
+
+.getBonusButton {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 24px;
     font: normal normal 500 15px/17px Samsung Sans;
@@ -32,27 +35,38 @@
     padding: 15px 40px;
     cursor: pointer;
 }
-.bonusTitle{
+
+.bonusTitle {
     font: normal normal bold 16px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.bonusOptions{
+
+.bonusOptions {
     display: flex;
+    flex-direction: row;
     gap: 24px;
-    flex-wrap: wrap;
     justify-content: space-between;
 }
-.option{
+
+.optionsColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.option {
     display: flex;
     flex-direction: column;
 }
-.optionTitle{
+
+.optionTitle {
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
 }
-.optionData{
+
+.optionData {
     font: normal normal 500 15px/24px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;

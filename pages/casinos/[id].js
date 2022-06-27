@@ -90,14 +90,14 @@ export default function CasinoPage({ casino }) {
                     <InfoBlock
                         iconSrc="/images/icons/casino/language.svg"
                         infoTitle="Website Language"
-                        infoText={casino.single_website_language.name}
-                        dataImages={["/placeholder.png"]}
+                        infoText={casino.website_language[0].name}
+                        dataImages={casino.website_language.map(lang => '/placeholder.png').slice(0, 2)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/messages.svg"
                         infoTitle="Live Chat"
-                        infoText={casino.single_support_language.name}
-                        dataImages={["/placeholder.png", "/placeholder.png"]}
+                        infoText={casino.support_language[0].name}
+                        dataImages={casino.support_language.map(lang => '/placeholder.png').slice(0, 2)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/user.svg"
@@ -137,9 +137,9 @@ export default function CasinoPage({ casino }) {
                     </div>
                 </div>
                 <div className={styles.bonusesBlocks}>
-                    <BonusBlock />
-                    <BonusBlock />
-                    <BonusBlock />
+                    {casino.bonuses.map(bonus => (
+                        <BonusBlock key={bonus.id} {...bonus} />
+                    ))}
                 </div>
                 <div className={styles.paymentTableBlock}>
                     <span className={styles.paymentTableHeader}>
@@ -209,108 +209,9 @@ export default function CasinoPage({ casino }) {
                     <span className={styles.providersHeader}>
                         {casino.shared_content.name} Game Providers
                     </span>
-                    <div className={styles.providerCard}>
-                        <div className={styles.provider}>
-                            <Image
-                                src="/placeholder.png"
-                                width={48}
-                                height={32}
-                            />
-                        </div>
-                        <div className={styles.providerInfo}>
-                            <span className={styles.providerName}>
-                                Name
-                            </span>
-                            <span className={styles.providerCount}>
-                                28 slots
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.providerCard}>
-                        <div className={styles.provider}>
-                            <Image
-                                src="/placeholder.png"
-                                width={48}
-                                height={32}
-                            />
-                        </div>
-                        <div className={styles.providerInfo}>
-                            <span className={styles.providerName}>
-                                Name
-                            </span>
-                            <span className={styles.providerCount}>
-                                28 slots
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.providerCard}>
-                        <div className={styles.provider}>
-                            <Image
-                                src="/placeholder.png"
-                                width={48}
-                                height={32}
-                            />
-                        </div>
-                        <div className={styles.providerInfo}>
-                            <span className={styles.providerName}>
-                                Name
-                            </span>
-                            <span className={styles.providerCount}>
-                                28 slots
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.providerCard}>
-                        <div className={styles.provider}>
-                            <Image
-                                src="/placeholder.png"
-                                width={48}
-                                height={32}
-                            />
-                        </div>
-                        <div className={styles.providerInfo}>
-                            <span className={styles.providerName}>
-                                Name
-                            </span>
-                            <span className={styles.providerCount}>
-                                28 slots
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.providerCard}>
-                        <div className={styles.provider}>
-                            <Image
-                                src="/placeholder.png"
-                                width={48}
-                                height={32}
-                            />
-                        </div>
-                        <div className={styles.providerInfo}>
-                            <span className={styles.providerName}>
-                                Name
-                            </span>
-                            <span className={styles.providerCount}>
-                                28 slots
-                            </span>
-                        </div>
-                    </div>
-                    <div className={styles.providerCard}>
-                        <div className={styles.provider}>
-                            <Image
-                                src="/placeholder.png"
-                                width={48}
-                                height={32}
-                            />
-                        </div>
-                        <div className={styles.providerInfo}>
-                            <span className={styles.providerName}>
-                                Name
-                            </span>
-                            <span className={styles.providerCount}>
-                                28 slots
-                            </span>
-                        </div>
-                    </div>
+                    {casino.providers.map(provider => (
+                        <ProviderCard key={provider.id} {...provider} />
+                    ))}
                 </div>
             </div>
         </div>
@@ -318,6 +219,25 @@ export default function CasinoPage({ casino }) {
 }
 
 CasinoPage.withHeader = true;
+
+function ProviderCard({ name, image }) {
+    return <div className={styles.providerCard}>
+        <div className={styles.provider}>
+            <Image
+                src="/placeholder.png"
+                width={48}
+                height={32} />
+        </div>
+        <div className={styles.providerInfo}>
+            <span className={styles.providerName}>
+                {name}
+            </span>
+            {/* <span className={styles.providerCount}>
+                28 slots
+            </span> */}
+        </div>
+    </div>;
+}
 
 export async function getStaticProps({ params }) {
     const { id } = params

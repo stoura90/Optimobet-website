@@ -1,20 +1,23 @@
-.container{
+.container {
     width: 80%;
     margin: auto;
     display: flex;
     gap: 30px;
 }
-.sideCol{
+
+.sideCol {
     width: 24%;
     min-width: 300px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.casinoCard{
+
+.casinoCard {
     width: 100%;
 }
-.casinoHeaderCard{
+
+.casinoHeaderCard {
     background: #00C69C 0% 0% no-repeat padding-box;
     border-radius: 16px 16px 0px 0px;
     display: flex;
@@ -22,7 +25,8 @@
     justify-content: center;
     height: 200px;
 }
-.casinoHeaderLogo{
+
+.casinoHeaderLogo {
     position: relative;
     margin: 20px;
     width: 100%;
@@ -31,37 +35,43 @@
     justify-content: center;
     align-items: center;
 }
-.casinoContentCard{    
-    border: 1px solid #4B445333;    
+
+.casinoContentCard {
+    border: 1px solid #4B445333;
     border-radius: 0px 0px 16px 16px;
     padding: 24px;
     display: flex;
     flex-direction: column;
 }
-.casinoCompany{
+
+.casinoCompany {
     font: normal normal 500 18px/20px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;
     text-transform: uppercase;
     margin-bottom: 6px;
 }
-.casinoName{
+
+.casinoName {
     font: normal normal bold 28px/30px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.stars{
+
+.stars {
     display: flex;
     margin: 16px 0px;
     gap: 6px;
     align-items: center;
 }
-.bonuses{
+
+.bonuses {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
-.bonuses span{
+
+.bonuses span {
     font: normal normal normal 15px/22px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
@@ -69,7 +79,8 @@
     gap: 8px;
     align-items: center;
 }
-.bonuses span:before{
+
+.bonuses span:before {
     background-image: url(/images/icons/circle-check.svg);
     background-size: 14px;
     display: inline-block;
@@ -78,12 +89,14 @@
     content: "";
     flex-shrink: 0;
 }
+
 .buttonBonus {
     display: flex;
     align-items: center;
     gap: 24px;
     margin-top: 32px;
 }
+
 .getBonus {
     background: #7F3FFC 0% 0% no-repeat padding-box;
     border-radius: 24px;
@@ -94,12 +107,14 @@
     font: normal normal 500 15px/17px Samsung Sans;
     cursor: pointer;
 }
+
 .bonusApply {
     font: normal normal 500 15px/24px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;
 }
-.complaint{
+
+.complaint {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -111,7 +126,8 @@
     color: #FF8457;
     cursor: pointer;
 }
-.advantages{
+
+.advantages {
     background: #00C69C1A 0% 0% no-repeat padding-box;
     border-radius: 16px;
     padding: 24px;
@@ -119,7 +135,8 @@
     flex-direction: column;
     gap: 16px;
 }
-.advantages span{
+
+.advantages span {
     font: normal normal normal 15px/22px Samsung Sans;
     letter-spacing: 0px;
     color: #00C69C;
@@ -127,7 +144,8 @@
     gap: 8px;
     align-items: center;
 }
-.advantages span:before{
+
+.advantages span:before {
     background-image: url(/images/icons/like-downloaded.svg);
     background-size: 24px;
     display: inline-block;
@@ -136,7 +154,8 @@
     content: "";
     flex-shrink: 0;
 }
-.disadvantages{
+
+.disadvantages {
     background: #EA00001A 0% 0% no-repeat padding-box;
     border-radius: 16px;
     padding: 24px;
@@ -144,7 +163,8 @@
     flex-direction: column;
     gap: 16px;
 }
-.disadvantages span{
+
+.disadvantages span {
     font: normal normal normal 15px/22px Samsung Sans;
     letter-spacing: 0px;
     color: #EA0000;
@@ -152,7 +172,8 @@
     gap: 8px;
     align-items: center;
 }
-.disadvantages span:before{
+
+.disadvantages span:before {
     background-image: url(/images/icons/like-downloaded.svg);
     background-size: 24px;
     display: inline-block;
@@ -160,24 +181,29 @@
     height: 24px;
     content: "";
     flex-shrink: 0;
+    transform: rotateZ(180deg) rotateY(180deg);
 }
-.mainCol{
+
+.mainCol {
     width: 76%;
     display: flex;
     flex-direction: column;
     gap: 60px;
 }
-.infoBlocksWrap{
+
+.infoBlocksWrap {
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
 }
-.casinoText{
+
+.casinoText {
     gap: 60px;
     display: flex;
     flex-direction: column;
 }
-.casinoTextBlock{
+
+.casinoTextBlock {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -185,87 +211,104 @@
     letter-spacing: 0px;
     color: #4B4453CC;
 }
-.blockTitle{
+
+.blockTitle {
     font: normal normal bold 28px/30px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.bonusesBlocks{
+
+.bonusesBlocks {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.paymentTableBlock{
+
+.paymentTableBlock {
     display: flex;
     flex-direction: column;
     gap: 46px;
 }
-.paymentTableHeader{
+
+.paymentTableHeader {
     font: normal normal bold 28px/45px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.paymentTable{
+
+.paymentTable {
     text-align: left;
     border-collapse: collapse;
 }
+
 .paymentTable th {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.paymentTable thead tr th{
+
+.paymentTable thead tr th {
     padding-bottom: 8px;
 }
-.paymentTable tbody td{
+
+.paymentTable tbody td {
     padding-top: 24px;
     padding-bottom: 24px;
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
-    color: #4B4453;    
+    color: #4B4453;
 }
-.payment{
+
+.payment {
     display: flex;
     align-items: center;
     gap: 12px;
 }
-.paymentTable tbody tr:not(:last-child){
+
+.paymentTable tbody tr:not(:last-child) {
     border-bottom: 2px solid #4B44531A;
 }
-.providers{
+
+.providers {
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
     margin-bottom: 142px;
 }
-.providersHeader{
+
+.providersHeader {
     font: normal normal bold 28px/30px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
     width: 100%;
     margin-bottom: -14px;
 }
-.providerCard{
+
+.providerCard {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
-.providerInfo{
+
+.providerInfo {
     display: flex;
     flex-direction: column;
     gap: 4px;
 }
-.providerName{
+
+.providerName {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.providerCount{
+
+.providerCount {
     font: normal normal normal 12px/14px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
 }
-.provider{
+
+.provider {
     display: flex;
     justify-content: center;
     align-items: center;
