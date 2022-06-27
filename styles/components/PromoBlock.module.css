@@ -113,7 +113,7 @@
 }
 
 .characters {
-	width: calc(40% + 20px);
+	width: calc(40% + 40px);
 	position: absolute;
 	height: 120%;
 	right: 0;

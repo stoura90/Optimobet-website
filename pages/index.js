@@ -148,10 +148,10 @@ export default function Home() {
 				<div className={styles.promoBlocks}>
 					<div className={styles.BlocksHeader}>
 						<span className={styles.promoBlocksSubTitle}>
-							subtitle
+							Bet and win
 						</span>
 						<span className={styles.promoBlocksTitle}>
-							title
+							Betting sites
 						</span>
 					</div>
 					<div className={styles.promoBlocksContent}>
@@ -193,10 +193,10 @@ export default function Home() {
 				<div className={styles.sitesLine}>
 					<div className={styles.BlocksHeader}>
 						<span className={styles.promoBlocksSubTitle}>
-							subtitle
+							second name
 						</span>
 						<span className={styles.promoBlocksTitle}>
-							title
+							online casinos
 						</span>
 					</div>
 					<SiteCard rep={56} />
@@ -214,10 +214,10 @@ export default function Home() {
 				<div className={styles.promoBlocks}>
 					<div className={styles.BlocksHeader}>
 						<span className={styles.promoBlocksSubTitle}>
-							subtitle
+							second name
 						</span>
 						<span className={styles.promoBlocksTitle}>
-							title
+							exclusive bonus
 						</span>
 					</div>
 					<div className={styles.promoBlocksContent}>
@@ -237,10 +237,10 @@ export default function Home() {
 					<div className={styles.headerBlockWrap}>
 						<div className={styles.BlocksHeader}>
 							<span className={styles.promoBlocksSubTitle}>
-								subtitle
+								second name
 							</span>
 							<span className={styles.promoBlocksTitle}>
-								title
+								free slots
 							</span>
 						</div>
 					</div>
@@ -271,10 +271,10 @@ export default function Home() {
 					<div className={styles.headerBlockWrap}>
 						<div className={styles.BlocksHeader}>
 							<span className={styles.promoBlocksSubTitle}>
-								subtitle
+								second name
 							</span>
 							<span className={styles.promoBlocksTitle}>
-								title
+								how to start gambling
 							</span>
 						</div>
 					</div>
@@ -306,13 +306,13 @@ export default function Home() {
 								Registration
 							</li>
 							<span>
-								Have you found the best site for gambling? Go on our link to get directly on the registration page. You can register within a few minutes. Everything you need to do is to provide some private information and contacts. Don’t forget to sign to get welcome bonus
+								Have you found the best site for gambling? Go on our link to get directly on the registration page. You can register within a few minutes. Everything you need to do is to provide some private information and contacts. Don’t forget to sign to get welcome bonus.
 							</span>
 							<li>
 								Make a bet
 							</li>
 							<span>
-								After depositing funds on your account, it’s time to make a bet. Can you imagine you chances on Blackjack? Want to support your favourite basketball team? Want to try your luck on betting on CS:GO? No matter what you want to bet on this sites, there is everything for everyone
+								After depositing funds on your account, it’s time to make a bet. Can you imagine you chances on Blackjack? Want to support your favourite basketball team? Want to try your luck on betting on CS:GO? No matter what you want to bet on this sites, there is everything for everyone.
 							</span>
 						</ol>
 						<div className={styles.gamblingPicture}>
@@ -329,10 +329,10 @@ export default function Home() {
 					<div className={styles.headerBlockWrap}>
 						<div className={styles.BlocksHeader}>
 							<span className={styles.promoBlocksSubTitle}>
-								subtitle
+								second name
 							</span>
 							<span className={styles.promoBlocksTitle}>
-								title
+								frequently asked quetions
 							</span>
 						</div>
 					</div>
@@ -375,7 +375,7 @@ export default function Home() {
 									How to get bonuses and rewards?
 								</span>
 								<span className={styles.questionAnswer}>
-									This varies from site to site. Some of the bonuses and rewards are given out automatically, that’s why you don’t need to do anything. Sometimes you need to enter the code for adding funds to your account or send email to the support service. Sometimes you have to meet certain requirements and bonus will be accruals after you complete them
+									This varies from site to site. Some of the bonuses and rewards are given out automatically, that’s why you don’t need to do anything. Sometimes you need to enter the code for adding funds to your account or send email to the support service. Sometimes you have to meet certain requirements and bonus will be accruals after you complete them.
 								</span>
 							</div>
 						</div>
@@ -520,26 +520,26 @@ export default function Home() {
 						<b>Optimobet</b> - this site is comparing online gambling. We were run in november 2020 to be the source of contact advice and recommendations about providers of online gambling.
 					</span>
 					<span>
-						At the time Optimobet.com can be new in the gambling sphere, team, behind him , is not like that. We have the big experience in the industry of online gambling.
+						At the time Optimobet.com can be new in the gambling sphere, team, behind him , is not like that. We have the big experience in the industry of online gambling. Our time works hard to provide with necessary information to our users to compare the providers.
 					</span>
 					<span>
-						Our time works hard to provide with necessary information to our users to compare the providers Optimobet.com is full of objective reviews of hundreds of leading bookmaker pages, casinos and etc. And secrets which open the most difficult moments of the games in sites of online gamblings. We assure that our detailed reviews helps our users to get substantiated decision while choosing the favourite place in online gambling.
+						Optimobet.com is full of objective reviews of hundreds of leading bookmaker pages, casinos and etc. And secrets which open the most difficult moments of the games in sites of online gamblings. We assure that our detailed reviews helps our users to get substantiated decision while choosing the favourite place in online gambling.
 					</span>
 					<span>
-						The most important is that we are sure that our decision of recommending you the best licensed sites means that you can count on a safe and fair environment from the moment of registration. Regardless you are betting on sport or gambling online blackjack Our commitment to responsible gaming does not finish here. Visit our page in the responsible game to get the additional information how to avoid potential traps during the betting safety on online gambling.
+						The most important is that we are sure that our decision of recommending you the best licensed sites means that you can count on a safe and fair environment from the moment of registration. Regardless you are betting on sport or gambling online blackjack.
 					</span>
 					<span>
-						So the links of or organisations that offer you all of their efforts against the gambling addiction. And give recommendations to them who worry about their gambling habits
+						Our commitment to responsible gaming does not finish here. Visit our page in the responsible game to get the additional information how to avoid potential traps during the betting safety on online gambling. So the links of or organisations that offer you all of their efforts against the gambling addiction. And give recommendations to them who worry about their gambling habits.
 					</span>
 				</div>
 
 				<div className={styles.aboutSite}>
 					<div className={styles.BlocksHeader}>
 						<span className={styles.promoBlocksSubTitle}>
-							subtitle
+							second name
 						</span>
 						<span className={styles.promoBlocksTitle}>
-							title
+							How to opt the best site for gambling
 						</span>
 					</div>
 					<div className={styles.aboutSiteContent}>
@@ -559,7 +559,7 @@ export default function Home() {
 								Options for betting
 							</span>
 							<span>
-								Important to bet on your favourite kinds of sports and play favourite games in an online casino on your favourite site, that you choose. Meanwhile some sites represent universal stores due to all your demands in online gambling , others can be specialized at certain markets such as online betting on cybersport or bingo. Some brands are positioning themselves as the sites of online slots. You have to be sure that you have the access to the major functions, like betting during the gambling or live games in casino with dealers
+								Important to bet on your favourite kinds of sports and play favourite games in an online casino on your favourite site, that you choose. Meanwhile some sites represent universal stores due to all your demands in online gambling, others can be specialized at certain markets such as online betting on cybersport or bingo. Some brands are positioning themselves as the sites of online slots. You have to be sure that you have the access to the major functions, like betting during the gambling or live games in casino with dealers
 							</span>
 						</div>
 						<div className={styles.aboutSiteInfo}>
