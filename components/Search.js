@@ -5,17 +5,20 @@ import Dropdown from './Dropdown'
 import { motion, AnimatePresence } from 'framer-motion'
 import Stars from '../components/Stars'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Search({ setBorder }) {
     const [open, setOpen] = useState(false)
     const [filter, setFilter] = useState('All')
     const [searchValue, setSearchValue] = useState()
     const searchRef = useRef()
+    const router = useRouter()
 
-    const onRedirect = () => {
+    useEffect(()=>{
         searchRef.current.value = ""
-        searchValue(null)
-    }
+        setSearchValue(null)
+        setOpen(false)
+    },[router.asPath])
 
     const apply = () => {
         setOpen(false)
@@ -205,7 +208,7 @@ export default function Search({ setBorder }) {
                             </div>
                         </div>
                         <Link href={`/searchresults?text=${searchValue}`}>
-                            <a className={styles.seeAllResults} onClick={onRedirect}>
+                            <a className={styles.seeAllResults}>
                                 See All Results
                             </a>
                         </Link>
