@@ -2,11 +2,28 @@ import styles from '/styles/components/PromoBlock.module.css'
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Image from 'next/image'
+import { useState, useEffect } from 'react';
 
-export default function PromoBlock() {
+export default function PromoBlock({bgColor, charactersImage, charactersWidth}) {
+	const [buttonBg, setButtonBg] = useState("")
+
+	useEffect(()=>{
+		switch (bgColor) {
+			case "#4B4453":
+				setButtonBg("#F2F2F233")
+				break;		
+			default:
+				setButtonBg("")
+				break;
+		}
+	},[bgColor])
+
 	return (
 		<div className={styles.promoBlock}>
-			<div className={styles.promoBackground} />
+			<div 
+				className={styles.promoBackground} 
+				style={{background: bgColor || ""}} 
+			/>
 			<div className={styles.promoContent}>
 				<div className={styles.promoContentInfo}>
 					<div className={styles.promoTitle}>
@@ -52,7 +69,10 @@ export default function PromoBlock() {
 					</div>
 				</div>
 				<div className={styles.promoBonusButton}>
-					<button className={styles.promoGetBonus}>
+					<button 
+						className={styles.promoGetBonus}
+						style={{backgroundColor: buttonBg}}
+					>
 						Get Bonus
 					</button>
 					<a className={styles.promoBonusApply}>
@@ -60,12 +80,15 @@ export default function PromoBlock() {
 					</a>
 				</div>
 			</div>
-			<div className={styles.characters}>
-				<Image
-					src="/placeholder.png"
-					objectFit='cover'
+			<div 
+				className={styles.characters}
+				style={{width: charactersWidth || ""}}
+			>
+				{charactersImage && <Image
+					src={charactersImage}
+					objectFit='contain'
 					layout='fill'
-				/>
+				/>}
 			</div>
 		</div>
 	)

@@ -76,6 +76,10 @@
 	align-items: flex-end;
 }
 
+.promoInSites{
+	width: 66%;
+}
+
 .moreButtonArea {
 	margin-top: 10px;
 	width: 100%;
@@ -135,7 +139,7 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	background: url(/images/egypt.jpg);
+	background: url(/images/main/LandscapeBackground.png);
 	padding-top: 40px;
 	position: relative;
 }
@@ -161,7 +165,7 @@
 	margin-top: 16px;
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: stretch;
 	gap: 24px;
 }
 
@@ -210,10 +214,15 @@
 }
 .gamblingPicture{
 	position: relative;
-	width: 25%;
+	width: 30%;
 	margin-bottom: -80px;
 }
-
+.gamblingPicture:first-child img {
+	object-position: right bottom;
+}
+.gamblingPicture:last-child img {
+	object-position: left bottom;
+}
 .faqBlock{
 	display: flex;
 	flex-direction: column;
@@ -224,7 +233,7 @@
 .faqBlockContent{
 	margin-top: 16px;
 	display: flex;
-	align-items: flex-end;
+	align-items: stretch;
 	justify-content: space-between;
 }
 .faqQuestions{
@@ -251,9 +260,10 @@
 }
 .faqPicture{
 	display: flex;
-	width: 45%;
-	height: 100%;
-	margin-right: 2%;
+	width: 50%;
+}
+.faqPicture img{
+	object-position: left bottom;
 }
 
 .countries{
@@ -270,6 +280,7 @@
 	display: flex;
 	gap: 30px;
 	flex-wrap: wrap;
+	width: 75%;
 }
 .country{
 	display: flex;
@@ -290,7 +301,7 @@
     align-items: center;
 }
 .countryName::before {
-    background-image: url("/images/icons/ок.png");
+    background-image: url("/images/icons/circle-check-white.svg");
     background-size: 18px;
     display: inline-block;
     width: 18px;
