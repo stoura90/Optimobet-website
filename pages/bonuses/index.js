@@ -438,3 +438,4 @@ function Casino({ name, rating, tags, games }) {
 }
 
 BonusesPage.withHeader = true;
+BonusesPage.withFooter = true;
