@@ -12,66 +12,68 @@ export default function CasinoPage({ casino }) {
     return (
         <div className={styles.container}>
             <div className={styles.sideCol}>
-                <div className={styles.casinoCard}>
-                    <div className={styles.casinoHeaderCard}>
-                        <div className={styles.casinoHeaderLogo}>
-                            <Image
-                                src="/placeholder.png"
-                                alt={casino.shared_content.name}
-                                objectFit='contain'
-                                layout='fill'
-                            />
+                <div className={styles.sticky}>
+                    <div className={styles.casinoCard}>
+                        <div className={styles.casinoHeaderCard}>
+                            <div className={styles.casinoHeaderLogo}>
+                                <Image
+                                    src="/placeholder.png"
+                                    alt={casino.shared_content.name}
+                                    objectFit='contain'
+                                    layout='fill'
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className={styles.casinoContentCard}>
-                        <span className={styles.casinoCompany}>
-                            {casino.shared_content.owner}
-                        </span>
-                        <span className={styles.casinoName}>
-                            {casino.shared_content.name}
-                        </span>
-                        <div className={styles.stars}>
-                            <Stars points={casino.rating} />
-                        </div>
-                        <div className={styles.bonuses}>
-                            {casino.features.map(tag => (
-                                <span key={`feature_${tag}`}>
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-                        <div className={styles.buttonBonus}>
-                            <a
-                                href={casino.website}
-                                target='_blank'
-                                rel='noopener noreferrer'
-                                className={styles.getBonus}
-                            >
-                                Visit website
-                            </a>
-                            <span className={styles.bonusApply}>
-                                T{'&'}C Apply
+                        <div className={styles.casinoContentCard}>
+                            <span className={styles.casinoCompany}>
+                                {casino.shared_content.owner}
                             </span>
+                            <span className={styles.casinoName}>
+                                {casino.shared_content.name}
+                            </span>
+                            <div className={styles.stars}>
+                                <Stars points={casino.rating} />
+                            </div>
+                            <div className={styles.bonuses}>
+                                {casino.features.map(tag => (
+                                    <span key={`feature_${tag}`}>
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                            <div className={styles.buttonBonus}>
+                                <a
+                                    href={casino.website}
+                                    target='_blank'
+                                    rel='noopener noreferrer'
+                                    className={styles.getBonus}
+                                >
+                                    Visit website
+                                </a>
+                                <span className={styles.bonusApply}>
+                                    T{'&'}C Apply
+                                </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className={styles.complaint}>
-                    Submit a complaint
-                </div>
-                <div className={styles.advantages}>
-                    {casino.positives.map(tag => (
-                        <span key={`pos_${tag}`}>
-                            {tag}
-                        </span>
-                    ))}
-                </div>
-                <div className={styles.disadvantages}>
-                    {casino.negatives.map(tag => (
-                        <span key={`neg_${tag}`}>
-                            {tag}
-                        </span>
-                    ))}
-                </div>
+                    <div className={styles.complaint}>
+                        Submit a complaint
+                    </div>
+                    <div className={styles.advantages}>
+                        {casino.positives.map(tag => (
+                            <span key={`pos_${tag}`}>
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                    <div className={styles.disadvantages}>
+                        {casino.negatives.map(tag => (
+                            <span key={`neg_${tag}`}>
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                </div>                
             </div>
             <div className={styles.mainCol}>
                 <div className={styles.infoBlocksWrap}>
@@ -219,6 +221,7 @@ export default function CasinoPage({ casino }) {
 }
 
 CasinoPage.withHeader = true;
+CasinoPage.withFooter = true;
 
 function ProviderCard({ name, image }) {
     return <div className={styles.providerCard}>

@@ -11,6 +11,15 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 100px;
+}
+
+.sticky{    
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky;
+    top: 82px;
 }
 
 .casinoCard {
@@ -147,10 +156,10 @@
 
 .advantages span:before {
     background-image: url(/images/icons/like-downloaded.svg);
-    background-size: 24px;
+    background-size: 20px;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     content: "";
     flex-shrink: 0;
 }
@@ -175,10 +184,10 @@
 
 .disadvantages span:before {
     background-image: url(/images/icons/like-downloaded.svg);
-    background-size: 24px;
+    background-size: 20px;
     display: inline-block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     content: "";
     flex-shrink: 0;
     transform: rotateZ(180deg) rotateY(180deg);
@@ -273,7 +282,7 @@
     display: flex;
     gap: 30px;
     flex-wrap: wrap;
-    margin-bottom: 142px;
+    margin-bottom: 100px;
 }
 
 .providersHeader {
