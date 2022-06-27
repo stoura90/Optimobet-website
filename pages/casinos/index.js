@@ -225,19 +225,25 @@ export default function CasinosPage({ casinos, filters }) {
     function handleFilterByCategory(item, filterName) {
         switch (filterName) {
             case 'Games':
-                setFilteredItems(casinos.filter(casino => casino.games.find(game => game.id === item.id)));
+                setFilteredItems(bookmakers.filter(casino => casino.games.find(game => game.id === item.id)));
                 break;
             case 'Website Language':
-                setFilteredItems(casinos.filter(casino => casino.single_website_language.id == item.id));
+                setFilteredItems(bookmakers.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
                 break;
             case 'Support Language':
-                setFilteredItems(casinos.filter(casino => casino.single_support_language.id == item.id));
+                setFilteredItems(bookmakers.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
                 break;
             case 'Payment Methods':
-                setFilteredItems(casinos.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
+                setFilteredItems(bookmakers.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
             case 'Countries':
-                setFilteredItems(casinos.filter(casino => casino.pivot.country_id === item.id));
+                setFilteredItems(bookmakers.filter(casino => casino.pivot?.country_id === item.id));
+                break;
+            case 'Providers':
+                setFilteredItems(bookmakers.filter(casino => casino.providers?.id === item.id));
+                break;
+            default:
+                setFilteredItems(bookmakers);
                 break;
         }
     }
@@ -511,6 +517,7 @@ export async function getStaticProps() {
     const games = await APIRequest('/games', 'GET')
     const payments = await APIRequest('/payment-methods', 'GET')
     const countries = await APIRequest('/countries', 'GET')
+    const providers = await APIRequest('/providers', 'GET')
 
     return {
         props: {
@@ -552,6 +559,10 @@ export async function getStaticProps() {
                 {
                     name: 'Countries',
                     items: countries
+                },
+                {
+                    name: 'Providers',
+                    items: providers
                 }
             ]
         },

@@ -236,6 +236,12 @@ export default function BookmakersPage({ bookmakers, filters }) {
             case 'Countries':
                 setFilteredItems(bookmakers.filter(casino => casino.pivot?.country_id === item.id));
                 break;
+            case 'Providers':
+                setFilteredItems(bookmakers.filter(casino => casino.providers?.id === item.id));
+                break;
+            default:
+                setFilteredItems(bookmakers);
+                break;
         }
     }
 
@@ -484,6 +490,7 @@ export async function getStaticProps() {
     const languages = await APIRequest('/languages', 'GET')
     const games = await APIRequest('/games', 'GET')
     const countries = await APIRequest('/countries', 'GET')
+    const providers = await APIRequest('/providers', 'GET')
 
     return {
         props: {
@@ -521,6 +528,10 @@ export async function getStaticProps() {
                 {
                     name: 'Countries',
                     items: countries,
+                },
+                {
+                    name: 'Providers',
+                    items: providers,
                 }
             ]
         },
