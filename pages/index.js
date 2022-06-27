@@ -382,74 +382,114 @@ export default function Home() {
 					<div className={styles.countriesContent}>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								Netherlands
 							</span>
 							<span className={styles.countryCount}>
-								21
+								399
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								Cyprus
 							</span>
 							<span className={styles.countryCount}>
-								21
+								608
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								Italy
 							</span>
 							<span className={styles.countryCount}>
-								21
+								100
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								France
 							</span>
 							<span className={styles.countryCount}>
-								21
+								187
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								Portugal
 							</span>
 							<span className={styles.countryCount}>
-								21
+								528
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								Spain
 							</span>
 							<span className={styles.countryCount}>
-								21
+								81
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								United States
 							</span>
 							<span className={styles.countryCount}>
-								21
+								87
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								Belgium
 							</span>
 							<span className={styles.countryCount}>
-								21
+								446
 							</span>
 						</div>
 						<div className={styles.country}>
 							<span className={styles.countryName}>
-								Georgia
+								United Kingdom
 							</span>
 							<span className={styles.countryCount}>
-								21
+								288
+							</span>
+						</div>
+						<div className={styles.country}>
+							<span className={styles.countryName}>
+								Canada
+							</span>
+							<span className={styles.countryCount}>
+								803
+							</span>
+						</div>
+						<div className={styles.country}>
+							<span className={styles.countryName}>
+								Germany
+							</span>
+							<span className={styles.countryCount}>
+								822
+							</span>
+						</div>
+						<div className={styles.country}>
+							<span className={styles.countryName}>
+								Ukraine
+							</span>
+							<span className={styles.countryCount}>
+								599
+							</span>
+						</div>
+						<div className={styles.country}>
+							<span className={styles.countryName}>
+								Russian Federation
+							</span>
+							<span className={styles.countryCount}>
+								486
+							</span>
+						</div>
+						<div className={styles.country}>
+							<span className={styles.countryName}>
+								Greece
+							</span>
+							<span className={styles.countryCount}>
+								616
 							</span>
 						</div>
 					</div>
