@@ -250,7 +250,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
         let newFilteredItems = [...filteredItems];
         switch (filter) {
             case 'All':
-                setFilteredItems(bookmakers);
+                setFilteredItems(filteredItems);
                 break;
             case "BestInCountry":
                 newFilteredItems.sort((a, b) => b.rating - a.rating);

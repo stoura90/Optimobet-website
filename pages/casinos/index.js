@@ -253,7 +253,7 @@ export default function CasinosPage({ casinos, filters }) {
         let newFilteredItems = [...filteredItems];
         switch (filter) {
             case 'All':
-                setFilteredItems(casinos);
+                setFilteredItems(filteredItems);
                 break;
             case "BestInCountry":
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
