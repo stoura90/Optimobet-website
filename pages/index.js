@@ -373,10 +373,10 @@ export default function Home() {
 				<div className={styles.countries}>
 					<div className={styles.BlocksHeader}>
 						<span className={styles.promoBlocksSubTitle}>
-							subtitle
+							OVERALL 982 CASINOS
 						</span>
 						<span className={styles.promoBlocksTitle}>
-							title
+							We have casinos in these countries
 						</span>
 					</div>
 					<div className={styles.countriesContent}>

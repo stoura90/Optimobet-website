@@ -280,6 +280,7 @@
 	display: flex;
 	gap: 30px;
 	flex-wrap: wrap;
+	width: 75%;
 }
 .country{
 	display: flex;
@@ -300,7 +301,7 @@
     align-items: center;
 }
 .countryName::before {
-    background-image: url("/images/icons/ок.png");
+    background-image: url("/images/icons/circle-check-white.svg");
     background-size: 18px;
     display: inline-block;
     width: 18px;
