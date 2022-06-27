@@ -1,21 +1,23 @@
 import styles from '/styles/components/CategoryBlock.module.css'
 import Image from 'next/image'
 
-export default function CategoryBlock() {
+export default function CategoryBlock({name, info, image, bgColor = ""}) {
     return (
         <div className={styles.categoryBlock}>
-            <Image
-                src="/placeholder.png"
-                objectFit='cover'
-                width={180}
-                height={180}
-            />
+            <div className={styles.ImgWithRound} style={{background: bgColor}}>
+                <Image
+                    src={image}
+                    objectFit='contain'
+                    width={140}
+                    height={140}
+                />
+            </div>
             <div className={styles.categoryInfo}>
                 <span className={styles.categoryTitle}>
-                    CATEGORY
+                    {name}
                 </span>
                 <span className={styles.categoryDescription}>
-                    234 items
+                    {info}
                 </span>
             </div>
         </div>

@@ -119,10 +119,30 @@ export default function Home() {
 				</div>
 
 				<div className={styles.categoryBlocks}>
-					<CategoryBlock />
-					<CategoryBlock />
-					<CategoryBlock />
-					<CategoryBlock />
+					<CategoryBlock 
+						name="Betting"
+						info="2341 Bookmakers"
+						image="/images/icons/cat-1.png"
+						bgColor="#7F3FFC4D"
+					/>
+					<CategoryBlock  
+						name="Casino"
+						info="527 Online casino"
+						image="/images/icons/cat-2.png"
+						bgColor="#FFC4484D"
+					/>
+					<CategoryBlock  
+						name="Gambling"
+						info="5121 Free slots"
+						image="/images/icons/cat-3.png"
+						bgColor="#FF84574D"
+					/>
+					<CategoryBlock  
+						name="Bonus"
+						info="286 Bonuses"
+						image="/images/icons/cat-4.png"
+						bgColor="#00C69C4D"
+					/>
 				</div>
 
 				<div className={styles.promoBlocks}>
