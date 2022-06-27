@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import Image from 'next/image';
 
 // children = [<SwiperSlide>content</SwiperSlide>,...] 
 export default function SliderWithControls({children = []}) {
@@ -31,8 +32,20 @@ export default function SliderWithControls({children = []}) {
             className={styles.sliderWrap}
         >
             {children}
-            <div ref={navigationPrevRef} className={styles.slideNavPrev}>{"<"}</div>
-            <div ref={navigationNextRef} className={styles.slideNavNext}>{">"}</div>
+            <div ref={navigationPrevRef} className={styles.slideNavPrev}>
+				<Image
+					src="/images/icons/sliderLeft.svg"
+					width={50}
+					height={50}
+				/>
+            </div>
+            <div ref={navigationNextRef} className={styles.slideNavNext}>
+				<Image
+					src="/images/icons/sliderRight.svg"
+					width={50}
+					height={50}
+				/>
+            </div>
         </Swiper>
     )
 }
