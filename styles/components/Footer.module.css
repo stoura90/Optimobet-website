@@ -17,11 +17,13 @@
     letter-spacing: 0px;
     color: #4B4453;
     text-transform: uppercase;
+    min-height: 18px;
 }
 .cols{    
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: 30px;
     width: calc(100% + 30px);
     margin-right: -30px;
@@ -53,7 +55,7 @@
     height: 80%;
 }
 .footerImgContent{    
-    width: 30%;
+    width: 100%;
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
@@ -62,5 +64,25 @@
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
+    /* width: 50%; */
+}
+.footBottom{
     width: 50%;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+.copyWithSocial{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+.socials{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.socials *{
+    flex-shrink: 0;
 }

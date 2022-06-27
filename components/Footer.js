@@ -17,12 +17,17 @@ export default function Footer() {
                     </Link>                    
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Bonuses 
                         </a>
                     </Link>                   
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Bookmakers
+                        </a>
+                    </Link>                   
+                    <Link href={'#'}>
+                        <a>
+                            Free Slots
                         </a>
                     </Link>
                 </div>
@@ -36,32 +41,17 @@ export default function Footer() {
                     </Link>                    
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Bonuses 
                         </a>
                     </Link>                   
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
-                        </a>
-                    </Link>
-                </div>
-                <div className={styles.column}>
-                    <span className={styles.colTitle}>
-                        
-                    </span>
-                    <Link href={'#'}>
-                        <a>
-                            Online Casions 
-                        </a>
-                    </Link>                    
-                    <Link href={'#'}>
-                        <a>
-                            Online Casions 
+                            Bookmakers
                         </a>
                     </Link>                   
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Free Slots
                         </a>
                     </Link>
                 </div>
@@ -76,12 +66,42 @@ export default function Footer() {
                     </Link>                    
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Bonuses 
                         </a>
                     </Link>                   
                     <Link href={'#'}>
                         <a>
+                            Bookmakers
+                        </a>
+                    </Link>                   
+                    <Link href={'#'}>
+                        <a>
+                            Free Slots
+                        </a>
+                    </Link>
+                </div>
+                <div className={styles.column}>
+                    <span className={styles.colTitle}>
+                        
+                    </span>
+                    <Link href={'#'}>
+                        <a>
                             Online Casions 
+                        </a>
+                    </Link>                    
+                    <Link href={'#'}>
+                        <a>
+                            Bonuses 
+                        </a>
+                    </Link>                   
+                    <Link href={'#'}>
+                        <a>
+                            Bookmakers
+                        </a>
+                    </Link>                   
+                    <Link href={'#'}>
+                        <a>
+                            Free Slots
                         </a>
                     </Link>
                 </div>
@@ -89,7 +109,7 @@ export default function Footer() {
             <div className={styles.cols}>
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
-                        Popular links
+                        Play
                     </span>
                     <Link href={'#'}>
                         <a>
@@ -98,52 +118,52 @@ export default function Footer() {
                     </Link>                    
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Bonuses 
                         </a>
                     </Link>                   
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Bookmakers
+                        </a>
+                    </Link>                   
+                    <Link href={'#'}>
+                        <a>
+                            Free Slots
                         </a>
                     </Link>
                 </div>
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
-                        Popular links
+                        Our company
                     </span>
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Who we are
                         </a>
                     </Link>                    
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Contact support
                         </a>
                     </Link>                   
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Subscribe
                         </a>
                     </Link>
                 </div>
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
-                        Popular links
+                        READ BEFORE PLAY
                     </span>
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
+                            Terms and conditions
                         </a>
                     </Link>                    
                     <Link href={'#'}>
                         <a>
-                            Online Casions 
-                        </a>
-                    </Link>                   
-                    <Link href={'#'}>
-                        <a>
-                            Online Casions 
+                            Privacy policy
                         </a>
                     </Link>
                 </div>
@@ -162,25 +182,58 @@ export default function Footer() {
                     objectPosition="right bottom"
                 />
             </div>
-            <div className={styles.footerImgContent}>
-                <Image
-                    src="/images/footer/gambleaware.svg"
-                    height={40}
-                    width={300}
-                />
-                <Image
-                    src="/images/footer/18.svg"
-                    height={40}
-                    width={40}
-                />
-                <Image
-                    src="/images/footer/gamcare.svg"
-                    height={40}
-                    width={40}
-                />
-            </div>
-            <div className={styles.copyright}>
-                Optimobet.com © 2022 QUALERIO HOLDINGS LTD. All rights reserved
+            <div className={styles.footBottom}>
+                <div className={styles.footerImgContent}>
+                    <Image
+                        src="/images/footer/gambleaware.svg"
+                        height={40}
+                        width={300}
+                    />
+                    <Image
+                        src="/images/footer/18.svg"
+                        height={40}
+                        width={40}
+                    />
+                    <Image
+                        src="/images/footer/gamcare.svg"
+                        height={40}
+                        width={40}
+                    />
+                </div>
+                <div className={styles.copyWithSocial}>
+                    <div className={styles.copyright}>
+                        Optimobet.com © 2022 QUALERIO HOLDINGS LTD. All rights reserved
+                    </div>
+                    <div className={styles.socials}>
+                        <Link href={"#"}>
+                            <a>
+                                <Image
+                                    src="/images/icons/socials/facebook.svg"
+                                    width={24}
+                                    height={24}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"#"}>
+                            <a>
+                                <Image
+                                    src="/images/icons/socials/Twitter.svg"
+                                    width={24}
+                                    height={24}
+                                />
+                            </a>
+                        </Link>
+                        <Link href={"#"}>
+                            <a>
+                                <Image
+                                    src="/images/icons/socials/instagram.svg"
+                                    width={24}
+                                    height={24}
+                                />
+                            </a>
+                        </Link>                        
+                    </div>
+                </div>
             </div>
         </footer>
     )
