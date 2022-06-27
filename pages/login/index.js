@@ -116,28 +116,28 @@ function SignIn({ setCurrentPage }) {
                 <div className={styles.socials}>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/Apple.svg"
                             width={24}
                             height={24}
                         />
                     </div>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/facebook.svg"
                             width={24}
                             height={24}
                         />
                     </div>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/Google.svg"
                             width={24}
                             height={24}
                         />
                     </div>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/Twitter.svg"
                             width={24}
                             height={24}
                         />
@@ -274,28 +274,28 @@ function SignUp({ setCurrentPage }) {
                 <div className={styles.socials}>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/Apple.svg"
                             width={24}
                             height={24}
                         />
                     </div>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/facebook.svg"
                             width={24}
                             height={24}
                         />
                     </div>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/Google.svg"
                             width={24}
                             height={24}
                         />
                     </div>
                     <div className={styles.social}>
                         <Image
-                            src="/placeholder.png"
+                            src="/images/icons/socials/Twitter.svg"
                             width={24}
                             height={24}
                         />
@@ -478,10 +478,14 @@ function Recovery({ setCurrentPage }) {
                     placeholder="Email"
                     type="email"
                     onChange={(e) => {
-                        if (e.target.validity.valid)
+                        if (e.target.validity.valid) {
                             submitRef.current.disabled = false
-                        else
+                            submitRef.current.style.backgroundColor = '#7F3FFC'
+                        }                            
+                        else {
                             submitRef.current.disabled = true
+                            submitRef.current.style.backgroundColor = '#4B445380'
+                        }                            
                     }}
                 />
                 <div className={styles.buttons}>
