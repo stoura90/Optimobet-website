@@ -20,6 +20,7 @@
 	gap: 21px;
 	width: 60%;
 	height: 100%;
+	min-height: 350px;
 	justify-content: space-between;
 }
 
@@ -112,7 +113,7 @@
 }
 
 .characters {
-	width: 40%;
+	width: calc(40% + 20px);
 	position: absolute;
 	height: 120%;
 	right: 0;

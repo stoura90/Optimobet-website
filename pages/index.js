@@ -84,7 +84,7 @@ export default function Home() {
 	const [ offsetSlots, setOffsetSlots ] = useState()
 
 	useEffect(()=>{
-		const chunkSize = Math.trunc(width*0.8/(250+19))
+		const chunkSize = Math.trunc(width*0.8/(300+19))
 		let offset = []
 		for (let i = 0; i < _slots.length; i += chunkSize) {
 			offset.push(_slots.slice(i, i + chunkSize))
@@ -135,8 +135,14 @@ export default function Home() {
 						</span>
 					</div>
 					<div className={styles.promoBlocksContent}>
-						<PromoBlock />
-						<PromoBlock />
+						<PromoBlock 
+							charactersImage="/images/main/7880-1.png"
+							bgColor="#7F3FFC"
+						/>
+						<PromoBlock
+							charactersImage="/images/main/7880-2.png"
+							bgColor="#4B4453"
+						/>
 					</div>
 				</div>
 
@@ -144,7 +150,13 @@ export default function Home() {
 					<SiteCard rep={1} />
 					<SiteCard rep={56} />
 					<SiteCard rep={78} />
-					<PromoBlock />
+					<div className={styles.promoInSites}>
+						<PromoBlock
+							charactersImage="/images/main/7880-3.png"
+							bgColor="transparent linear-gradient(251deg, #FFC448 0%, #FF8457 100%) 0% 0% no-repeat padding-box"
+							charactersWidth="60%"
+						/>
+					</div>
 					<SiteCard rep={99} />
 					<SiteCard rep={56} />
 					<SiteCard rep={78} />
@@ -189,8 +201,15 @@ export default function Home() {
 						</span>
 					</div>
 					<div className={styles.promoBlocksContent}>
-						<PromoBlock />
-						<PromoBlock />
+						<PromoBlock
+							charactersImage="/images/main/7880-4.png"
+							bgColor="#4B4453"
+							charactersWidth="55%"
+						/>
+						<PromoBlock
+							charactersImage="/images/main/7880-5.png"
+							bgColor="#00C69C" 
+						/>
 					</div>
 				</div>
 
@@ -212,7 +231,7 @@ export default function Home() {
 									{item.map(slot => (
 										<div 
 											style={{
-												width:"calc((100% - "+30*(Math.trunc(width*0.8/(250+19)) - 1)+"px)/"+Math.trunc(width*0.8/(250+19))+")", 
+												width:"calc((100% - "+30*(Math.trunc(width*0.8/(300+19)) - 1)+"px)/"+Math.trunc(width*0.8/(300+19))+")", 
 												flex:"initial"
 											}}
 											key={`slot_${slot.id}`}

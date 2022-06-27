@@ -76,6 +76,10 @@
 	align-items: flex-end;
 }
 
+.promoInSites{
+	width: 66%;
+}
+
 .moreButtonArea {
 	margin-top: 10px;
 	width: 100%;
