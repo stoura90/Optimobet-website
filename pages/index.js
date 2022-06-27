@@ -261,10 +261,9 @@ export default function Home() {
 					<div className={styles.gamblingContent}>
 						<div className={styles.gamblingPicture}>
 							<Image
-								src="/placeholder.png"
-								objectFit='cover'
-								height={750}
-								width={400}
+								src="/images/main/Camel.png"
+								objectFit='contain'
+								layout='fill'
 							/>
 						</div>
 						<ol className={styles.rulesList}>
@@ -298,10 +297,9 @@ export default function Home() {
 						</ol>
 						<div className={styles.gamblingPicture}>
 							<Image
-								src="/placeholder.png"
-								objectFit='cover'
-								height={750}
-								width={400}
+								src="/images/main/taylor.png"
+								objectFit='contain'
+								layout='fill'
 							/>
 						</div>
 					</div>
@@ -363,8 +361,8 @@ export default function Home() {
 						</div>
 						<div className={styles.faqPicture}>
 							<Image
-								src="/placeholder.png"
-								objectFit='cover'
+								src="/images/main/Characters.png"
+								objectFit='contain'
 								height={600}
 								width={1000}
 							/>
