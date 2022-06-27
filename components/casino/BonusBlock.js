@@ -1,5 +1,6 @@
 import styles from "../../styles/components/casino/BonusBlock.module.css"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function BonusBlock({
     maximum_bet,
@@ -8,7 +9,8 @@ export default function BonusBlock({
     wagering_requirements,
     value_per_spin,
     maximum_cashout,
-    bonus_expiration
+    bonus_expiration,
+    url
 }) {
 
     return (
@@ -75,9 +77,11 @@ export default function BonusBlock({
                 </div>
             </div>
             <div className={styles.getBonusArea}>
+                {/* <Link href={url} passHref> */}
                 <button className={styles.getBonusButton}>
                     Get Bonus
                 </button>
+                {/* </Link> */}
             </div>
         </div>
     )
