@@ -236,6 +236,9 @@ export default function CasinosPage({ casinos, filters }) {
             case 'Payment Methods':
                 setFilteredItems(casinos.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
+            case 'Countries':
+                setFilteredItems(casinos.filter(casino => casino.pivot.country_id === item.id));
+                break;
         }
     }
 
@@ -246,14 +249,21 @@ export default function CasinosPage({ casinos, filters }) {
             case 'All':
                 setFilteredItems(casinos);
                 break;
-            case 'New':
-                setFilteredItems(newFilteredItems.sort((a, b) => new Date(b.created_at) - new Date(a.created_at)));
+            case "BestInCountry":
+                newFilteredItems.sort((a, b) => b.rating - a.rating);
+                setFilteredItems(newFilteredItems);
                 break;
-            case 'Popular':
-                setFilteredItems(newFilteredItems.sort((a, b) => b.rating - a.rating));
+            case "BestInWorld":
+                newFilteredItems.sort((a, b) => b.rating - a.rating);
+                setFilteredItems(newFilteredItems);
                 break;
-            case 'Promotions':
-                setFilteredItems(newFilteredItems.sort((a, b) => b.reputation - a.reputation));
+            case "Recent":
+                newFilteredItems.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                setFilteredItems(newFilteredItems);
+                break;
+            case 'Recommended':
+                newFilteredItems.sort((a, b) => b.reputation - a.reputation);
+                setFilteredItems(newFilteredItems);
                 break;
         }
     }
@@ -345,22 +355,28 @@ export default function CasinosPage({ casinos, filters }) {
                                 All
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${sort === 'New' && styles.active}`}
-                                onClick={() => handleSort('New')}
+                                className={`${styles.filterControlsItem} ${sort === 'BestInCountry' && styles.active}`}
+                                onClick={() => handleSort('BestInCountry')}
                             >
-                                New
+                                Best in your country
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${sort === 'Popular' && styles.active}`}
-                                onClick={() => handleSort('Popular')}
+                                className={`${styles.filterControlsItem} ${sort === 'Recent' && styles.active}`}
+                                onClick={() => handleSort('Recent')}
                             >
-                                Popular
+                                Recently added
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${sort === 'Promotions' && styles.active}`}
-                                onClick={() => handleSort('Promotions')}
+                                className={`${styles.filterControlsItem} ${sort === 'Recommended' && styles.active}`}
+                                onClick={() => handleSort('Recommended')}
                             >
-                                Promotions
+                                Highly recommended
+                            </div>
+                            <div
+                                className={`${styles.filterControlsItem} ${sort === 'BestInWorld' && styles.active}`}
+                                onClick={() => handleSort('BestInWorld')}
+                            >
+                                Best of the world
                             </div>
                         </div>
                     </div>
@@ -438,9 +454,9 @@ function Casino({
                                 </div>
                             ))
                         }
-                        <div className={styles.casinoGame} >
+                        {games.length > 5 && <div className={styles.casinoGame} >
                             +{games.length - 5}
-                        </div>
+                        </div>}
                     </div>
                 </div>
                 <div className={`${styles.casinoColumn} ${styles.right}`}>
@@ -491,34 +507,10 @@ function Casino({
 
 export async function getStaticProps() {
     const casinos = await APIRequest('/casinos', 'GET')
-    const languages = casinos.data
-        .map(casino => [casino.single_website_language, casino.single_support_language])
-        .flat()
-        .reduce((acc, language) => {
-            if (acc.find(_language => _language.id === language.id)) {
-                return acc
-            }
-            return [...acc, language]
-        }, [])
-    const games = casinos.data
-        .map(casino => casino.games)
-        .flat()
-        .reduce((acc, game) => {
-            if (acc.find(_game => _game.id === game.id)) {
-                return acc
-            }
-            return [...acc, game]
-        }, [])
-    const payments = casinos.data
-        .map(casino => casino.payment_methods)
-        .flat()
-        .reduce((acc, payment) => {
-            if (acc.find(_payment => _payment.id === payment.id)) {
-                return acc
-            }
-            return [...acc, payment]
-        }, [])
-
+    const languages = await APIRequest('/languages', 'GET')
+    const games = await APIRequest('/games', 'GET')
+    const payments = await APIRequest('/payment-methods', 'GET')
+    const countries = await APIRequest('/countries', 'GET')
 
     return {
         props: {
@@ -556,6 +548,10 @@ export async function getStaticProps() {
                 {
                     name: 'Payment Methods',
                     items: payments
+                },
+                {
+                    name: 'Countries',
+                    items: countries
                 }
             ]
         },
