@@ -567,6 +567,7 @@ export default function SearchResults() {
                                     initial={"title"}
                                     animate={selectedCat == 0 ? "title" : "controls"}
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    style={!sidebarShown ? {gridTemplateColumns: "repeat(4, 1fr)"} : {}}
                                     className={styles.slots}
                                 >
                                     {renderSlots(sidebarShown)}
