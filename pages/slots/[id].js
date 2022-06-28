@@ -76,7 +76,6 @@ const _slots = [
 ]
 
 export default function SlotPage({ slot, providers, slotsForSlider }) {
-    console.log(slot)
     const { width, height } = useWindowSize()
 	const [ offsetSlots, setOffsetSlots ] = useState()
 
