@@ -237,10 +237,10 @@ export default function CasinosPage({ casinos, filters }) {
                 setFilteredItems(casinos.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
             case 'Countries':
-                setFilteredItems(casinos.filter(casino => casino.pivot?.country_id === item.id));
+                setFilteredItems(casinos.filter(casino => casino.countries.find(country => country.id === item.id)));
                 break;
             case 'Providers':
-                setFilteredItems(casinos.filter(casino => casino.providers?.id === item.id));
+                setFilteredItems(casinos.filter(casino => casino.providers.find(provider => provider.id === item.id)));
                 break;
             default:
                 setFilteredItems(casinos);

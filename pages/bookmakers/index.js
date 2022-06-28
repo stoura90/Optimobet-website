@@ -234,10 +234,10 @@ export default function BookmakersPage({ bookmakers, filters }) {
                 setFilteredItems(bookmakers.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
             case 'Countries':
-                setFilteredItems(bookmakers.filter(casino => casino.pivot?.country_id === item.id));
+                setFilteredItems(bookmakers.filter(casino => casino.countries?.find(country => country.id === item.id)));
                 break;
             case 'Providers':
-                setFilteredItems(bookmakers.filter(casino => casino.providers?.id === item.id));
+                setFilteredItems(bookmakers.filter(casino => casino.providers?.find(provider => provider.id === item.id)));
                 break;
             default:
                 setFilteredItems(bookmakers);

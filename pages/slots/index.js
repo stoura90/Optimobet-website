@@ -253,7 +253,7 @@ export default function SlotsPage() {
                     className={styles.filters}
                 >
                     <CountFilter items={filter1} />
-                    <CheckboxFilter items={filter2} />
+                    <CheckboxFilter items={filter2} title=" " />
                 </motion.div>}
             </AnimatePresence>
             <motion.div
