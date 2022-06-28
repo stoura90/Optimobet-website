@@ -193,15 +193,19 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 {slot.return_to_player && slot.return_to_player != "0" ? slot.return_to_player + "%" : "-"}
                             </span>
                         </div>
-                        <button className={styles.slotButton}>
-                            PLAY WITH REAL MONEY
-                        </button>
+                        {slot.real_game_url ?
+                            <Link href={slot.real_game_url}>
+                                <button className={styles.slotButton}>
+                                    PLAY WITH REAL MONEY
+                                </button>
+                            </Link>
+                            :
+                            <button className={styles.slotButton}>
+                                PLAY WITH REAL MONEY
+                            </button>
+                        }
                     </div>
                     <div className={styles.slotDemoView}>
-                        {/* <Image
-                            src="/placeholder.png"
-                            layout='fill'
-                        /> */}
                         {parse(slot.game_script)}
                     </div>
                 </div>
@@ -230,44 +234,46 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                     </div>
                 </div>
             </div>
-            <div className={styles.slotsSlider}>
-                <div className={styles.slotsSliderHeader}>
-                    <div className={styles.slotsSliderTitle}>
-                        <span className={styles.secondText}>
-                            ELK STUDIO
-                        </span>
-                        <span className={styles.mainText}>
-                            Similar Slots
-                        </span>
-                    </div>
-                    <Link href={"/slots"}>
-                        <div className={styles.seeMore}>
-                            See More
+            {slot.provider_id &&
+                <div className={styles.slotsSlider}>
+                    <div className={styles.slotsSliderHeader}>
+                        <div className={styles.slotsSliderTitle}>
+                            <span className={styles.secondText}>
+                                {providers.filter(prov => prov.id == slot.provider_id)[0]?.name || ""}
+                            </span>
+                            <span className={styles.mainText}>
+                                Similar Slots
+                            </span>
                         </div>
-                    </Link>
+                        <Link href={"/slots"}>
+                            <div className={styles.seeMore}>
+                                See More
+                            </div>
+                        </Link>
+                    </div>
+                    {offsetSlots && offsetSlots.length > 0 &&
+                        <SliderWithControls>
+                            {offsetSlots.map((item, index) => (
+                                <SwiperSlide className={styles.slotSlide} key={index}>
+                                    {item.map(slot => (
+                                        <div
+                                            style={{
+                                                width: "calc((100% - " + 30 * (Math.trunc(width * 0.8 / (300 + 19)) - 1) + "px)/" + Math.trunc(width * 0.8 / (300 + 19)) + ")",
+                                                flex: "initial"
+                                            }}
+                                            key={`slot_${slot.id}`}
+                                        >
+                                            <Slot
+                                                {...slot}
+                                            />
+                                        </div>
+                                    ))}
+                                </SwiperSlide>
+                            ))}
+                        </SliderWithControls>
+                    }
                 </div>
-                {offsetSlots && offsetSlots.length > 0 &&
-                    <SliderWithControls>
-                        {offsetSlots.map((item, index) => (
-                            <SwiperSlide className={styles.slotSlide} key={index}>
-                                {item.map(slot => (
-                                    <div
-                                        style={{
-                                            width: "calc((100% - " + 30 * (Math.trunc(width * 0.8 / (300 + 19)) - 1) + "px)/" + Math.trunc(width * 0.8 / (300 + 19)) + ")",
-                                            flex: "initial"
-                                        }}
-                                        key={`slot_${slot.id}`}
-                                    >
-                                        <Slot
-                                            {...slot}
-                                        />
-                                    </div>
-                                ))}
-                            </SwiperSlide>
-                        ))}
-                    </SliderWithControls>
-                }
-            </div>
+            }
         </div>
     )
 }
@@ -277,18 +283,9 @@ SlotPage.withFooter = true;
 
 export async function getStaticProps({ params }) {
     const { id } = params
-    const slots = await APIRequest('/slots?no_paginate=1', 'GET')
-    const slot = await APIRequest(`/slots/${id}`, 'GET')
-    const providers = await APIRequest('/providers', 'GET')
-    const slotsForSlider =
-        slots
-            .filter(item => item.provider_id == slot.provider_id)
-            .map(item => (
-                {
-                    ...item,
-                    provider: providers.filter(p => p.id == item.provider_id)[0]?.name ?? null
-                }
-            ))
+    const slot = await APIRequest(`/nolimit/slots/${id}`, 'GET')
+    const providers = await APIRequest('/nolimit/providers', 'GET')
+    const slotsForSlider = await APIRequest(`/nolimit/slots?no_paginate=1&provider_id=${slot.provider_id}`, 'GET')
 
     return {
         props: {
