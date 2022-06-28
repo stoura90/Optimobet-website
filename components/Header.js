@@ -224,8 +224,10 @@ function UserMenu({ user, setBorder }) {
                     }
                 </AnimatePresence>
             </div>
-            {editModal && <EditModal user={user} onClose={() => setEditModal(false)} />}
-            {passwordModal && <PasswordModal onClose={() => setPasswordModal(false)} />}
+            <AnimatePresence initial={false}>
+                {editModal && <EditModal user={user} onClose={() => setEditModal(false)} />}
+                {passwordModal && <PasswordModal onClose={() => setPasswordModal(false)} />}
+            </AnimatePresence>
         </>
     )
 }
@@ -259,7 +261,12 @@ function EditModal({ user, onClose }) {
             .catch(err => alert(err))
     }
 
-    return <div className={styles.modal}>
+    return <motion.div
+        animate={{ opacity: [0, 1] }}
+        exit={{ opacity: [1, 0] }}
+        transition={{ duration: 0.3 }}
+        className={styles.modal}
+    >
         <div className={styles.modalBody}>
             <div
                 onClick={onClose}
@@ -291,7 +298,7 @@ function EditModal({ user, onClose }) {
                 <input type='submit' value='Save Information' />
             </form>
         </div>
-    </div>
+    </motion.div>
 }
 
 function PasswordModal({ onClose }) {
@@ -344,7 +351,12 @@ function PasswordModal({ onClose }) {
             .catch(err => alert(err))
     }
 
-    return <div className={styles.modal}>
+    return <motion.div
+        animate={{ opacity: [0, 1] }}
+        exit={{ opacity: [1, 0] }}
+        transition={{ duration: 0.3 }}
+        className={styles.modal}
+    >
         <div className={styles.modalBody}>
             <div
                 onClick={onClose}
@@ -415,5 +427,5 @@ function PasswordModal({ onClose }) {
                 </div>
             </form>
         </div>
-    </div>
+    </motion.div>
 }
