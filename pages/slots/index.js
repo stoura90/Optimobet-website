@@ -158,7 +158,6 @@ const _slots = [
 ]
 
 export default function SlotsPage({ slots, providers }) {
-    console.log(slots)
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
     const [availableProviders, setAvailableProviders] = useState(providers.filter(prov => prov.count>0))
