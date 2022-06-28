@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from '../../styles/pages/Slots.module.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
@@ -158,12 +158,14 @@ const _slots = [
 ]
 
 export default function SlotsPage({ slots, providers }) {
-    const [sidebarShown, setSidebarShown] = useState(true);
-    const [filter, setFilter] = useState('All');
+    const [sidebarShown, setSidebarShown] = useState(true)
+    const [filter, setFilter] = useState('All')
     const [availableProviders, setAvailableProviders] = useState(providers.filter(prov => prov.count>0))
-    const { height, width } = useWindowSize();
+    const { height, width } = useWindowSize()
     const [slotsFiltered, setSlotsFiltered] = useState(slots)
-    const [providerFilter, setProviderFilter] = useState(availableProviders[0]);
+    const [providerFilter, setProviderFilter] = useState(availableProviders[0])
+    const loadMoreRef = useRef(null)
+    const [page, setPage] = useState(1)
 
     const controlVariants = {
         left: {
@@ -227,14 +229,15 @@ export default function SlotsPage({ slots, providers }) {
                 break;
         }
         setSlotsFiltered(slotsF)
+        setPage(1)
     },[providerFilter, filter])
 
-    function renderSlots(sidebarShown) {
+    function renderSlots(sidebarShown, pageC) {
         // breaks the layout when first slot is big
         let column = 1;
         let row = 1;
         const maxColumns = sidebarShown ? 3 : 4;
-        return slotsFiltered.map((item, index) => {
+        return slotsFiltered.slice(0, pageC*30).map((item, index) => {
             const slot = <Slot
                 {...item}
                 key={`slot_${item.id}`}
@@ -254,6 +257,18 @@ export default function SlotsPage({ slots, providers }) {
             return slot
         })
     }
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    setPage(++page)
+                }
+            }
+        )
+        observer.observe(loadMoreRef.current);
+        return () => observer.disconnect();
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -368,9 +383,8 @@ export default function SlotsPage({ slots, providers }) {
                     style={sidebarShown ? {gridTemplateColumns: 'repeat(3, 1fr)'} : {gridTemplateColumns: 'repeat(4, 1fr)'}}
                     className={styles.slots}
                 >
-                    {
-                        renderSlots(sidebarShown)
-                    }
+                    {renderSlots(sidebarShown, page)}
+                    <div ref={loadMoreRef} />
                 </div>
             </motion.div>
         </div>
