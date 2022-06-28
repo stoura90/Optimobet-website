@@ -9,6 +9,7 @@ import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest';
 import Link from 'next/link';
+import useUserInfo from '../../hooks/useUserInfo';
 
 const filters = [
     {
@@ -181,6 +182,7 @@ export default function CasinosPage({ casinos, filters }) {
     const [filteredItems, setFilteredItems] = useState(casinos);
     const [page, setPage] = useState(1);
     const loadMoreRef = useRef(null);
+    const user = useUserInfo();
 
     const controlVariants = {
         left: {
@@ -259,6 +261,7 @@ export default function CasinosPage({ casinos, filters }) {
                 setFilteredItems(casinosRef.current);
                 break;
             case "BestInCountry":
+                newFilteredItems = filteredItems.filter(casino => casino.countries.find(country => country.id === user.country_id));
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
                 setFilteredItems(newFilteredItems);
                 break;

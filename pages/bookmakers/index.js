@@ -6,6 +6,7 @@ import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest';
+import useUserInfo from '../../hooks/useUserInfo';
 
 const filters = [
     {
@@ -178,6 +179,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
     const [page, setPage] = useState(1);
     const [filteredItems, setFilteredItems] = useState(bookmakers);
     const loadMoreRef = useRef(null);
+    const user = useUserInfo()
 
     const controlVariants = {
         left: {
@@ -256,6 +258,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
                 setFilteredItems(bookmakersRef.current);
                 break;
             case "BestInCountry":
+                newFilteredItems = filteredItems.filter(casino => casino.countries.find(country => country.id === user.country_id));
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
                 setFilteredItems(newFilteredItems);
                 break;
