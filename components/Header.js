@@ -134,7 +134,7 @@ function UserMenu({ user, setBorder }) {
                                 <span className={styles.userName}>
                                     {user.first_name} {user.last_name}
                                 </span>
-                                <Link href={'/favorite-games'}>
+                                {/* <Link href={'/favorite-games'}>
                                     <a className={styles.userMenuItem}>
                                         <div>
                                             <Image
@@ -151,7 +151,7 @@ function UserMenu({ user, setBorder }) {
                                             {user.favoriteGamesCount ?? 0}
                                         </span>
                                     </a>
-                                </Link>
+                                </Link> */}
                                 <Link href={'/my-complaints'}>
                                     <a className={styles.userMenuItem}>
                                         <div>
