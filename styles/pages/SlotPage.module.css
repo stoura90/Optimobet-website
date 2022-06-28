@@ -99,6 +99,18 @@
     letter-spacing: 0px;
     color: #4B4453CC;
 }
+.slotDescription * {
+    margin: 0;    
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453CC;
+}
+.ourScoreText * {
+    margin: 0;    
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453CC;
+}
 .ourScore{
     background: #F2F2F2 0% 0% no-repeat padding-box;
     border-radius: 16px;

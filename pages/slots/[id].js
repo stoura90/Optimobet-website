@@ -5,6 +5,9 @@ import Slot from '../../components/Slot'
 import { useState, useEffect } from 'react'
 import { SwiperSlide } from 'swiper/react';
 import SliderWithControls from '../../components/SliderWithControls'
+import APIRequest from '../../functions/requests/APIRequest'
+import parse from 'html-react-parser'
+import Link from 'next/link'
 
 const _slots = [
     {
@@ -72,17 +75,20 @@ const _slots = [
     }
 ]
 
-export default function SlotPage() {
+export default function SlotPage({ slot, providers, slotsForSlider }) {
+    console.log(slot)
     const { width, height } = useWindowSize()
 	const [ offsetSlots, setOffsetSlots ] = useState()
 
 	useEffect(()=>{
-		const chunkSize = Math.trunc(width*0.8/(300+19))
-		let offset = []
-		for (let i = 0; i < _slots.length; i += chunkSize) {
-			offset.push(_slots.slice(i, i + chunkSize))
-		}
-		setOffsetSlots(offset)
+        if (slotsForSlider) {
+            const chunkSize = Math.trunc(width*0.8/(300+19))
+            let offset = []
+            for (let i = 0; i < slotsForSlider.length; i += chunkSize) {
+                offset.push(slotsForSlider.slice(i, i + chunkSize))
+            }
+            setOffsetSlots(offset)
+        }		
 	},[width])
 
     return (
@@ -121,7 +127,7 @@ export default function SlotPage() {
                                 Game provider
                             </span>
                             <span className={styles.dataInfoText}>
-                                ELK Studio
+                                {providers.filter(prov => prov.id == slot.provider_id)[0]?.name || "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -129,7 +135,7 @@ export default function SlotPage() {
                                 Popularity
                             </span>
                             <span className={styles.dataInfoText}>
-                                3.0
+                                {slot.popularity || "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -137,7 +143,7 @@ export default function SlotPage() {
                                 Reels
                             </span>
                             <span className={styles.dataInfoText}>
-                                5
+                                {slot.reels || "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -145,7 +151,7 @@ export default function SlotPage() {
                                 Paylines
                             </span>
                             <span className={styles.dataInfoText}>
-                                178
+                                {slot.paylines || "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -153,7 +159,7 @@ export default function SlotPage() {
                                 Bonus round
                             </span>
                             <span className={styles.dataInfoText}>
-                                Yes
+                                {slot.bonus_round && slot.bonus_round!="0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -161,7 +167,7 @@ export default function SlotPage() {
                                 Free spins
                             </span>
                             <span className={styles.dataInfoText}>
-                                5
+                                {slot.free_spins && slot.free_spins!="0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -169,7 +175,7 @@ export default function SlotPage() {
                                 Progressive jackpot
                             </span>
                             <span className={styles.dataInfoText}>
-                                -
+                                {slot.progresive_jackpot && slot.progresive_jackpot!="0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -177,7 +183,7 @@ export default function SlotPage() {
                                 Gamble feature
                             </span>
                             <span className={styles.dataInfoText}>
-                                -
+                                {slot.gamble_feature && slot.gamble_feature!="0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -185,7 +191,7 @@ export default function SlotPage() {
                                 Return to player
                             </span>
                             <span className={styles.dataInfoText}>
-                                96.3%
+                                {slot.return_to_player && slot.return_to_player!="0" ? slot.return_to_player+"%" : "-"}
                             </span>
                         </div>
                         <button className={styles.slotButton}>
@@ -193,10 +199,11 @@ export default function SlotPage() {
                         </button>
                     </div>
                     <div className={styles.slotDemoView}>
-                        <Image
+                        {/* <Image
                             src="/placeholder.png"
                             layout='fill'
-                        />
+                        /> */}
+                        {parse(slot.game_script)}
                     </div>
                 </div>
             </div>
@@ -206,8 +213,8 @@ export default function SlotPage() {
                     <div />
                 </div>
                 <div className={styles.aboutSlot}>
-                    <span>
-                        Взломайте химический набор, наденьте пару защитных очков и приготовьтесь экспериментировать с древним искусством алхимии с этим игровым автоматом от Euro Games Technology. Знали ли вы, что древние алхимики стремились превратить все, что они могли получить в руки, в золото? Что ж, вы можете изучить Секреты алхимии и, возможно, получить в свои руки свою долю золота с этим игровым автоматом с 5 барабанами и 25 линиями выплат. С помощью болгарских разработчиков программного обеспечения Euro Games Technology в качестве катализатора этого реактивного игрового автомата вы можете быть уверены, вы получите достойный результат от качественного развлечения от Secrets of Alchemy.
+                    <span className={styles.slotDescription}>
+                        {parse(slot.description)}
                     </span>
                     <div className={styles.ourScore}>
                         <div className={styles.ourScoreHeader}>
@@ -215,11 +222,11 @@ export default function SlotPage() {
                                 Our Score
                             </span>
                             <span className={styles.scorePoints}>
-                                7.2
+                                {slot.score}
                             </span>
                         </div>
                         <span className={styles.ourScoreText}>
-                            Интересная и несложная игра. Тем не менее, в графике нет ничего особенного, особенно по сравнению с другими игровыми автоматами, доступными в настоящее время.
+                            {parse(slot.verdict)}
                         </span>
                     </div>
                 </div>
@@ -234,9 +241,11 @@ export default function SlotPage() {
                             Similar Slots
                         </span>
                     </div>
-                    <div className={styles.seeMore}>
-                        See More
-                    </div>
+                    <Link href={"/slots"}>
+                        <div className={styles.seeMore}>
+                            See More
+                        </div>
+                    </Link>
                 </div>
                 {offsetSlots && offsetSlots.length>0 &&
 					<SliderWithControls>
@@ -266,3 +275,35 @@ export default function SlotPage() {
 
 SlotPage.withHeader = true;
 SlotPage.withFooter = true;
+
+export async function getStaticProps({ params }) {
+    const { id } = params
+    const slots = await APIRequest('/slots?no_paginate=1', 'GET')
+    const slot = await APIRequest(`/slots/${id}`, 'GET')
+    const providers = await APIRequest('/providers', 'GET')
+    const slotsForSlider = 
+    slots
+    .filter(item => item.provider_id == slot.provider_id)
+    .map(item => (
+        {
+            ...item,
+            provider:providers.filter(p => p.id==item.provider_id)[0]?.name ?? null
+        }
+    ))
+
+    return {
+        props: {
+            slot,
+            providers,
+            slotsForSlider
+        },
+        revalidate: 10,
+    }
+}
+
+export async function getStaticPaths() {
+    const slots = await APIRequest('/slots?no_paginate=1', 'GET')
+    const paths = slots.map(slot => ({ params: { id: slot.id.toString() } }))
+
+    return { paths, fallback: 'blocking' }
+}

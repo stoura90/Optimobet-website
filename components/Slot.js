@@ -48,7 +48,7 @@ export default function Slot({ name, provider, score, big, id, style }) {
             </motion.div>
             <AnimatePresence>
                 {hover && !big &&
-                    <Link href={`/slot?id=${id}`}>
+                    <Link href={`/slots/${id}`}>
                         <motion.div
                             className={styles.slotButtonCenter}
                             initial={{ opacity: 0 }}
@@ -66,7 +66,7 @@ export default function Slot({ name, provider, score, big, id, style }) {
             </div>
             {
                 big &&
-                <Link href={`/slot?id=${id}`}>
+                <Link href={`/slots/${id}`}>
                     <div className={styles.slotButton}>
                         Play Now
                     </div>
