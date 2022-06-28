@@ -99,10 +99,12 @@ function UserMenu({ user, setBorder }) {
     const [isOpen, setIsOpen] = useState(false);
     const [editModal, setEditModal] = useState(false);
     const [passwordModal, setPasswordModal] = useState(false);
+    const [cookie, setCookie, removeCookie] = useCookies(['token']);
     const router = useRouter();
 
     function handleLogout() {
         localStorage.removeItem('user');
+        removeCookie('token');
         router.reload()
     }
 

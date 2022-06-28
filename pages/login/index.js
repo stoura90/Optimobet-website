@@ -178,6 +178,7 @@ function SignIn({ setCurrentPage }) {
 
 function SignUp({ setCurrentPage }) {
     const [cookie, setCookie] = useCookies("token")
+    const router = useRouter()
     const [passwordCheck, setPasswordCheck] = useState([false, false, false, false])
     const [gender, setGender] = useState()
 
@@ -484,11 +485,11 @@ function Recovery({ setCurrentPage }) {
                         if (e.target.validity.valid) {
                             submitRef.current.disabled = false
                             submitRef.current.style.backgroundColor = '#7F3FFC'
-                        }                            
+                        }
                         else {
                             submitRef.current.disabled = true
                             submitRef.current.style.backgroundColor = '#4B445380'
-                        }                            
+                        }
                     }}
                 />
                 <div className={styles.buttons}>
