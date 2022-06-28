@@ -66,9 +66,11 @@ export default function Slot({ name, provider, score, big, id, style }) {
             </div>
             {
                 big &&
-                <div className={styles.slotButton}>
-                    Play Now
-                </div>
+                <Link href={`/slot?id=${id}`}>
+                    <div className={styles.slotButton}>
+                        Play Now
+                    </div>
+                </Link>
             }
         </motion.div>
     )
