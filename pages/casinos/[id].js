@@ -244,7 +244,7 @@ function ProviderCard({ name, image }) {
 
 export async function getStaticProps({ params }) {
     const { id } = params
-    const casino = await APIRequest(`/casinos/${id}`)
+    const casino = await APIRequest(`/nolimit/casinos/${id}`)
 
     return {
         props: {

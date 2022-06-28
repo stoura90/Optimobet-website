@@ -18,6 +18,7 @@ export default async function APIRequest(
     if (result.status === 200) {
         return data;
     } else {
+        console.log(`\nBelow error ocured on ${path} API route`)
         throw new Error(data.message || data.error);
     }
 }
