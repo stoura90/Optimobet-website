@@ -157,10 +157,14 @@ const _slots = [
     }
 ]
 
-export default function SlotsPage({ slots }) {
+export default function SlotsPage({ slots, providers }) {
+    console.log(slots)
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
+    const [availableProviders, setAvailableProviders] = useState(providers.filter(prov => prov.count>0))
     const { height, width } = useWindowSize();
+    const [slotsFiltered, setSlotsFiltered] = useState(slots)
+    const [providerFilter, setProviderFilter] = useState(availableProviders[0]);
 
     const controlVariants = {
         left: {
@@ -205,21 +209,19 @@ export default function SlotsPage({ slots }) {
         }
     }
 
-    const slotsVariants = {
-        wide: {
-            gridTemplateColumns: 'repeat(4, 1fr)',
-        },
-        narrow: {
-            gridTemplateColumns: 'repeat(3, 1fr)',
-        }
-    }
+    useEffect(()=>{
+        if (providerFilter.id!=0)
+        setSlotsFiltered(slots.filter(slot => slot.provider_id == providerFilter.id))
+        else
+        setSlotsFiltered(slots)
+    },[providerFilter])
 
     function renderSlots(sidebarShown) {
         // breaks the layout when first slot is big
         let column = 1;
         let row = 1;
         const maxColumns = sidebarShown ? 3 : 4;
-        return slots.map((item, index) => {
+        return slotsFiltered.map((item, index) => {
             const slot = <Slot
                 {...item}
                 key={`slot_${item.id}`}
@@ -252,8 +254,14 @@ export default function SlotsPage({ slots }) {
                     exit="hidden"
                     className={styles.filters}
                 >
-                    <CountFilter items={filter1} />
-                    <CheckboxFilter items={filter2} />
+                    <div className={styles.filtersBlocks}>
+                        <CountFilter 
+                            items={availableProviders} 
+                            onChange={setProviderFilter} 
+                            initialActive={0}
+                        />
+                        {/* <CheckboxFilter items={filter2} /> */}
+                    </div>                    
                 </motion.div>}
             </AnimatePresence>
             <motion.div
@@ -343,36 +351,47 @@ export default function SlotsPage({ slots }) {
                         </div>
                     </div>
                 </div>
-                <motion.div
-                    variants={slotsVariants}
-                    animate={sidebarShown ? 'narrow' : 'wide'}
+                <div
+                    style={sidebarShown ? {gridTemplateColumns: 'repeat(3, 1fr)'} : {gridTemplateColumns: 'repeat(4, 1fr)'}}
                     className={styles.slots}
-                    layout
                 >
-                    <LayoutGroup>
-                        {
-                            renderSlots(sidebarShown)
-                        }
-                    </LayoutGroup>
-                </motion.div>
+                    {
+                        renderSlots(sidebarShown)
+                    }
+                </div>
             </motion.div>
         </div>
     )
 }
 
 export async function getStaticProps() {
-    const slots = await APIRequest('/slots', 'GET')
+    const slots = await APIRequest('/slots?no_paginate=1', 'GET')
     const providers = await APIRequest('/providers', 'GET')
-    let slotsWithProvider = slots.data.map(slot => (
+    let slotsWithProvider = slots.filter(slot => slot).map(slot => (
         {
             ...slot,
-            provider:providers.filter(p => p.id==slot.provider_id)[0]?.name
+            provider:providers.filter(p => p.id==slot.provider_id)[0]?.name ?? null
         }
     ))
 
     return {
         props: {
-            slots: slotsWithProvider,            
+            slots: slotsWithProvider,  
+            providers: [
+                {
+                    id:0, 
+                    name: "All", 
+                    count: slotsWithProvider.length
+                },
+                ...providers.map(provider => (
+                    {
+                        ...provider,
+                        count: slotsWithProvider
+                            .filter(slot => slot.provider_id==provider.id)
+                            .length
+                    }
+                ))
+            ]          
         },
         revalidate: 10,
     }

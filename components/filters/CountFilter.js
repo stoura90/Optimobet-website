@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import styles from '../../styles/components/CountFilter.module.css'
 import { motion } from 'framer-motion'
 
-export default function CountFilter({ items, title, collapsible = false, initialOpen = true }) {
-    const [active, setActive] = useState()
+export default function CountFilter({ items, title, collapsible = false, initialOpen = true, onChange, initialActive }) {
+    const [active, setActive] = useState(initialActive)
     const [isOpen, setIsOpen] = useState(initialOpen)
 
     const contentVariants = {
@@ -31,6 +31,11 @@ export default function CountFilter({ items, title, collapsible = false, initial
         closed: {
             rotate: -90,
         }
+    }
+
+    function handleChange(item) {
+        setActive(item.id)
+        onChange && onChange(item)
     }
 
     return (
@@ -62,7 +67,7 @@ export default function CountFilter({ items, title, collapsible = false, initial
                     <div
                         key={`provider_${item.id}`}
                         className={`${styles.provider} ${active === item.id && styles.active}`}
-                        onClick={() => item.id !== active && setActive(item.id)}
+                        onClick={() => item.id !== active && handleChange(item)}
                     >
                         <div className={styles.providerName}>{item.name}</div>
                         <div className={styles.providerCount}>{item.count}</div>
