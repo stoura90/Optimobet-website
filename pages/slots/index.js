@@ -209,11 +209,25 @@ export default function SlotsPage({ slots, providers }) {
     }
 
     useEffect(()=>{
-        if (providerFilter.id!=0)
-        setSlotsFiltered(slots.filter(slot => slot.provider_id == providerFilter.id))
-        else
-        setSlotsFiltered(slots)
-    },[providerFilter])
+        let slotsF = [...slots]
+        if (providerFilter.id!=0) {
+            slotsF = slotsF.filter(slot => slot.provider_id == providerFilter.id)
+        }        
+        switch (filter) {
+            case "New":
+                slotsF = slotsF.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+                break;
+            case "Popular":
+                slotsF = slotsF.sort((a,b) => b.popularity - a.popularity)
+                break;
+            case "Promotions":
+                slotsF = slotsF.sort((a,b) => b.featured - a.featured)
+                break;
+            default:
+                break;
+        }
+        setSlotsFiltered(slotsF)
+    },[providerFilter, filter])
 
     function renderSlots(sidebarShown) {
         // breaks the layout when first slot is big
