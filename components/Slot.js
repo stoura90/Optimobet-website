@@ -4,7 +4,7 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
 import { useState } from 'react'
 import Link from 'next/link'
 
-export default function Slot({ name, provider, rating, big, id, style }) {
+export default function Slot({ name, provider, score, big, id, style }) {
     const [hover, setHover] = useState(false)
 
     const variants = {
@@ -62,7 +62,7 @@ export default function Slot({ name, provider, rating, big, id, style }) {
                 }
             </AnimatePresence>
             <div className={styles.slotRating}>
-                {rating}
+                {score}
             </div>
             {
                 big &&

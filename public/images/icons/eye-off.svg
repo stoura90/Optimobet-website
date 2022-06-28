@@ -1,0 +1,6 @@
+<svg id="eye-off" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path id="Path_793" data-name="Path 793" d="M0,0H24V24H0Z" fill="none"/>
+  <line id="Line_48" data-name="Line 48" x2="18" y2="18" transform="translate(3 3)" fill="none" stroke="rgba(75,68,83,0.5)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <path id="Path_794" data-name="Path 794" d="M10.584,10.587a2,2,0,1,0,2.828,2.83" fill="none" stroke="rgba(75,68,83,0.5)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <path id="Path_795" data-name="Path 795" d="M9.363,5.365A9.466,9.466,0,0,1,12,5q6,0,10,7a19.028,19.028,0,0,1-2.5,3.488m-2.14,1.861A9.38,9.38,0,0,1,12,19Q6,19,2,12A15.693,15.693,0,0,1,6.632,6.659" fill="none" stroke="rgba(75,68,83,0.5)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+</svg>
