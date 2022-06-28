@@ -151,3 +151,166 @@
     color: #1A1C21;
     opacity: 1;
 }
+
+/* Modal */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: brightness(0.5);
+    z-index: 999;
+}
+
+.modalBody {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background-color: #FFFFFF;
+    width: 50%;
+    min-width: 1000px;
+    max-width: 50%;
+    border-radius: 16px;
+}
+
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid #4B4453;
+    border-top: none;
+    border-right: none;
+    border-bottom-left-radius: 16px;
+    z-index: 999999;
+}
+
+.modalImage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    background-color: #ccc;
+    border-radius: 16px 0 0 16px;
+    overflow: hidden;
+}
+
+.modalImageOverlay {
+    position: absolute;
+}
+
+.modalForm {
+    padding: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 99999;
+    width: 65%;
+}
+
+.modalFormTitle {
+    text-align: left;
+    font: normal normal bold 34px/44px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    opacity: 1;
+}
+
+.modalFormSubtitle {
+    text-align: left;
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    opacity: 1;
+}
+
+.modalFormRow {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.modalForm input[type="text"],
+.modalForm input[type="password"],
+.modalForm input[type="date"] {
+    padding: 8px 24px;
+    border: 1px solid #1A1C2133;
+    border-radius: 24px;
+    height: 48px;
+    outline: none;
+    width: 100%;
+}
+
+.modalForm input[type="submit"] {
+    display: flex;
+    padding: 15px 32px;
+    width: fit-content;
+    border: none;
+    outline: none;
+    border-radius: 24px;
+    background-color: #7F3FFC;
+    text-align: right;
+    font: normal normal medium 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #F2F2F2;
+    opacity: 1;
+    align-self: flex-end;
+}
+
+.passwordDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.passwordTitle {
+    font: normal normal 500 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+
+.checkOption {
+    font: normal normal normal 15px/17px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+    gap: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.checkOption::before {
+    content: "";
+    border: 1px solid #4B445333;
+    border-radius: 100px;
+    width: 18px;
+    height: 18px;
+}
+
+.checkOption.active {
+    color: #00C69C;
+}
+
+.checkOption.active::before {
+    background-image: url(/images/icons/circle-check.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 2px solid #00C69C;
+    width: 16px;
+    height: 16px;
+}
+
+.checkText {
+    font: normal normal normal 15px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+}

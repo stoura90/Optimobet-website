@@ -33,13 +33,14 @@ const demo = [
     },
 ]
 
-export default function Dropdown({ items = [...demo], description }) {
+export default function Dropdown({ items = [...demo], description, onChange, defaultSelected }) {
     const [current, setCurrent] = useState(items[0])
     const [open, setOpen] = useState(false)
     const dropdownRef = useRef()
 
     const selectItem = (item) => {
         setCurrent(item)
+        onChange && onChange(item)
         setOpen(false)
     }
 
@@ -47,6 +48,10 @@ export default function Dropdown({ items = [...demo], description }) {
         if ((e.target != dropdownRef.current) && (!dropdownRef.current.contains(e.target)))
             setOpen(false)
     }
+
+    useEffect(() => {
+        defaultSelected && setCurrent(items.find(item => item.id === defaultSelected))
+    }, [items])
 
     useEffect(() => {
         if (window)
