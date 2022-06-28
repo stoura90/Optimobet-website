@@ -254,7 +254,6 @@ export default function SlotsPage({ slots, providers }) {
                     exit="hidden"
                     className={styles.filters}
                 >
-<<<<<<< HEAD
                     <div className={styles.filtersBlocks}>
                         <CountFilter 
                             items={availableProviders} 
@@ -263,10 +262,6 @@ export default function SlotsPage({ slots, providers }) {
                         />
                         {/* <CheckboxFilter items={filter2} /> */}
                     </div>                    
-=======
-                    <CountFilter items={filter1} />
-                    <CheckboxFilter items={filter2} title=" " />
->>>>>>> f75590ce9ba78692c53ba0648d05000ae6f92f6b
                 </motion.div>}
             </AnimatePresence>
             <motion.div
