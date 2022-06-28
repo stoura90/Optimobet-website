@@ -77,18 +77,18 @@ const _slots = [
 
 export default function SlotPage({ slot, providers, slotsForSlider }) {
     const { width, height } = useWindowSize()
-	const [ offsetSlots, setOffsetSlots ] = useState()
+    const [offsetSlots, setOffsetSlots] = useState()
 
-	useEffect(()=>{
+    useEffect(() => {
         if (slotsForSlider) {
-            const chunkSize = Math.trunc(width*0.8/(300+19))
+            const chunkSize = Math.trunc(width * 0.8 / (300 + 19))
             let offset = []
             for (let i = 0; i < slotsForSlider.length; i += chunkSize) {
                 offset.push(slotsForSlider.slice(i, i + chunkSize))
             }
             setOffsetSlots(offset)
-        }		
-	},[width])
+        }
+    }, [width])
 
     return (
         <div className={styles.container}>
@@ -158,7 +158,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 Bonus round
                             </span>
                             <span className={styles.dataInfoText}>
-                                {slot.bonus_round && slot.bonus_round!="0" ? "Yes" : "-"}
+                                {slot.bonus_round && slot.bonus_round != "0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -166,7 +166,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 Free spins
                             </span>
                             <span className={styles.dataInfoText}>
-                                {slot.free_spins && slot.free_spins!="0" ? "Yes" : "-"}
+                                {slot.free_spins && slot.free_spins != "0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -174,7 +174,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 Progressive jackpot
                             </span>
                             <span className={styles.dataInfoText}>
-                                {slot.progresive_jackpot && slot.progresive_jackpot!="0" ? "Yes" : "-"}
+                                {slot.progresive_jackpot && slot.progresive_jackpot != "0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -182,7 +182,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 Gamble feature
                             </span>
                             <span className={styles.dataInfoText}>
-                                {slot.gamble_feature && slot.gamble_feature!="0" ? "Yes" : "-"}
+                                {slot.gamble_feature && slot.gamble_feature != "0" ? "Yes" : "-"}
                             </span>
                         </div>
                         <div className={styles.slotDataInfo}>
@@ -190,7 +190,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 Return to player
                             </span>
                             <span className={styles.dataInfoText}>
-                                {slot.return_to_player && slot.return_to_player!="0" ? slot.return_to_player+"%" : "-"}
+                                {slot.return_to_player && slot.return_to_player != "0" ? slot.return_to_player + "%" : "-"}
                             </span>
                         </div>
                         <button className={styles.slotButton}>
@@ -246,27 +246,27 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                         </div>
                     </Link>
                 </div>
-                {offsetSlots && offsetSlots.length>0 &&
-					<SliderWithControls>
-						{offsetSlots.map((item, index) => (
-							<SwiperSlide className={styles.slotSlide} key={index}>
-								{item.map(slot => (
-									<div 
-										style={{
-											width:"calc((100% - "+30*(Math.trunc(width*0.8/(300+19)) - 1)+"px)/"+Math.trunc(width*0.8/(300+19))+")", 
-											flex:"initial"
-										}}
-										key={`slot_${slot.id}`}
-									>
-										<Slot
-            							    {...slot}
-            							/>
-									</div>
-								))}
-							</SwiperSlide>
-						))}
-					</SliderWithControls>
-				}
+                {offsetSlots && offsetSlots.length > 0 &&
+                    <SliderWithControls>
+                        {offsetSlots.map((item, index) => (
+                            <SwiperSlide className={styles.slotSlide} key={index}>
+                                {item.map(slot => (
+                                    <div
+                                        style={{
+                                            width: "calc((100% - " + 30 * (Math.trunc(width * 0.8 / (300 + 19)) - 1) + "px)/" + Math.trunc(width * 0.8 / (300 + 19)) + ")",
+                                            flex: "initial"
+                                        }}
+                                        key={`slot_${slot.id}`}
+                                    >
+                                        <Slot
+                                            {...slot}
+                                        />
+                                    </div>
+                                ))}
+                            </SwiperSlide>
+                        ))}
+                    </SliderWithControls>
+                }
             </div>
         </div>
     )
@@ -280,15 +280,15 @@ export async function getStaticProps({ params }) {
     const slots = await APIRequest('/slots?no_paginate=1', 'GET')
     const slot = await APIRequest(`/slots/${id}`, 'GET')
     const providers = await APIRequest('/providers', 'GET')
-    const slotsForSlider = 
-    slots
-    .filter(item => item.provider_id == slot.provider_id)
-    .map(item => (
-        {
-            ...item,
-            provider:providers.filter(p => p.id==item.provider_id)[0]?.name ?? null
-        }
-    ))
+    const slotsForSlider =
+        slots
+            .filter(item => item.provider_id == slot.provider_id)
+            .map(item => (
+                {
+                    ...item,
+                    provider: providers.filter(p => p.id == item.provider_id)[0]?.name ?? null
+                }
+            ))
 
     return {
         props: {
@@ -301,7 +301,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const slots = await APIRequest('/slots?no_paginate=1', 'GET')
+    const slots = await APIRequest('/nolimit/slots?no_paginate=1', 'GET')
     const paths = slots.map(slot => ({ params: { id: slot.id.toString() } }))
 
     return { paths, fallback: 'blocking' }

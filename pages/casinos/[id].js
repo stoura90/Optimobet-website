@@ -255,7 +255,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const casinos = await APIRequest('/casinos?no_paginate=1', 'GET')
+    const casinos = await APIRequest('/nolimit/casinos?no_paginate=1', 'GET')
     const paths = casinos.map(casino => ({ params: { id: casino.id.toString() } }))
 
     return { paths, fallback: 'blocking' }
