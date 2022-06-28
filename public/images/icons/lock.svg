@@ -1,0 +1,6 @@
+<svg id="lock" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path id="Path_21320" data-name="Path 21320" d="M0,0H24V24H0Z" fill="none"/>
+  <rect id="Rectangle_3336" data-name="Rectangle 3336" width="14" height="10" rx="2" transform="translate(5 11)" fill="none" stroke="rgba(75,68,83,0.7)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <circle id="Ellipse_740" data-name="Ellipse 740" cx="1" cy="1" r="1" transform="translate(11 15)" fill="none" stroke="rgba(75,68,83,0.7)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <path id="Path_21321" data-name="Path 21321" d="M8,11V7a4,4,0,0,1,8,0v4" fill="none" stroke="rgba(75,68,83,0.7)" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+</svg>

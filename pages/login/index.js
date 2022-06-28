@@ -85,13 +85,14 @@ function SignIn({ setCurrentPage }) {
             "POST",
             JSON.stringify(body)
         )
-        .then(res => {
-            setCookie("token", res.token)
-            router.push('/')
-        })
-        .catch(e => {
-            alert(e)
-        })
+            .then(res => {
+                setCookie("token", res.token)
+                localStorage.setItem("user", JSON.stringify(res))
+                router.push('/')
+            })
+            .catch(e => {
+                alert(e)
+            })
     }
 
     return (
@@ -107,8 +108,8 @@ function SignIn({ setCurrentPage }) {
                     Sign In
                 </span>
                 <span className={styles.formText}>
-                    Don't have an account? <a onClick={() => { 
-                        setCurrentPage(<SignUp setCurrentPage={setCurrentPage} />) 
+                    Don't have an account? <a onClick={() => {
+                        setCurrentPage(<SignUp setCurrentPage={setCurrentPage} />)
                     }}>
                         Create one
                     </a>
@@ -176,7 +177,8 @@ function SignIn({ setCurrentPage }) {
 }
 
 function SignUp({ setCurrentPage }) {
-    const [passwordCheck, setPasswordCheck] = useState([false,false,false,false])
+    const [cookie, setCookie] = useCookies("token")
+    const [passwordCheck, setPasswordCheck] = useState([false, false, false, false])
     const [gender, setGender] = useState()
 
     function checkPassword(e) {
@@ -184,32 +186,32 @@ function SignUp({ setCurrentPage }) {
             e.target.value?.length >= 12,
 
             e.target.value?.split("")
-            .filter(letter => (
-                isNaN(letter * 1)
-                &&
-                letter.toLowerCase() != letter.toUpperCase()
-                &&
-                letter == letter.toUpperCase()
-            ))
-            .length > 0,
+                .filter(letter => (
+                    isNaN(letter * 1)
+                    &&
+                    letter.toLowerCase() != letter.toUpperCase()
+                    &&
+                    letter == letter.toUpperCase()
+                ))
+                .length > 0,
 
             e.target.value?.split("")
-            .filter(letter => !isNaN(letter * 1))
-            .length > 0,
+                .filter(letter => !isNaN(letter * 1))
+                .length > 0,
 
             e.target.value?.split("")
-            .filter(letter => (
-                isNaN(letter * 1)
-                &&
-                letter.toLowerCase() == letter.toUpperCase()
-            ))
-            .length > 0
-        ])        
+                .filter(letter => (
+                    isNaN(letter * 1)
+                    &&
+                    letter.toLowerCase() == letter.toUpperCase()
+                ))
+                .length > 0
+        ])
     }
 
     function register(e) {
         e.preventDefault()
-        if (passwordCheck.filter(check => check).length==4) {
+        if (passwordCheck.filter(check => check).length == 4) {
             const body = {
                 first_name: e.target.first_name.value, //required
                 last_name: e.target.last_name.value, //required
@@ -222,29 +224,30 @@ function SignUp({ setCurrentPage }) {
                 agree_to_terms: e.target.agree_to_terms.checked
             }
             let troubles = []
-            Object.entries(body).forEach(([key,value]) => {
+            Object.entries(body).forEach(([key, value]) => {
                 if (!value)
-                troubles.push(key)
+                    troubles.push(key)
             });
-            if (body.password!=body.password_confirmation) {
+            if (body.password != body.password_confirmation) {
                 troubles.push("password confirmation")
             }
-            if (troubles.length==0) {
+            if (troubles.length == 0) {
                 APIRequest(
                     "/register",
                     "POST",
                     JSON.stringify(body)
                 )
-                .then(res => {
-                    setCookie("token", res.token)
-                    router.push('/')
-                })
-                .catch(e => {
-                    alert(e + (e.errors?.email ? "Current email is exist." : ""))
-                })
+                    .then(res => {
+                        setCookie("token", res.token)
+                        localStorage.setItem("user", JSON.stringify(res))
+                        router.push('/')
+                    })
+                    .catch(e => {
+                        alert(e + (e.errors?.email ? "Current email is exist." : ""))
+                    })
             }
             else {
-                alert("You should set these fields correctly: "+troubles)
+                alert("You should set these fields correctly: " + troubles)
             }
         }
         else {
@@ -306,24 +309,24 @@ function SignUp({ setCurrentPage }) {
                     <TextField
                         required
                         name="first_name"
-                        placeholder="First name" 
-                        type="text" 
-                        style={{ marginBottom: "24px" }} 
+                        placeholder="First name"
+                        type="text"
+                        style={{ marginBottom: "24px" }}
                     />
-                    <TextField 
+                    <TextField
                         required
                         name="last_name"
-                        placeholder="Last name" 
-                        type="text" 
-                        style={{ marginBottom: "24px" }} 
+                        placeholder="Last name"
+                        type="text"
+                        style={{ marginBottom: "24px" }}
                     />
                 </div>
-                <TextField 
+                <TextField
                     required
                     name="email"
-                    placeholder="Email" 
-                    type="email" 
-                    style={{ marginBottom: "24px" }} 
+                    placeholder="Email"
+                    type="email"
+                    style={{ marginBottom: "24px" }}
                 />
                 <div className={styles.fieldsInRow}>
                     <TextField
@@ -332,14 +335,14 @@ function SignUp({ setCurrentPage }) {
                         placeholder="Date of birth"
                         type="text"
                         max={
-                            (new Date().getFullYear()-18) + "-" +
-                            (((new Date().getMonth()+1) < 10) ? 
-                                "0"+(new Date().getMonth()+1) 
-                                : 
-                                (new Date().getMonth()+1)
+                            (new Date().getFullYear() - 18) + "-" +
+                            (((new Date().getMonth() + 1) < 10) ?
+                                "0" + (new Date().getMonth() + 1)
+                                :
+                                (new Date().getMonth() + 1)
                             ) + "-" +
                             ((new Date().getDate()) < 10 ?
-                                "0"+(new Date().getDate())
+                                "0" + (new Date().getDate())
                                 :
                                 (new Date().getDate())
                             )
@@ -348,28 +351,28 @@ function SignUp({ setCurrentPage }) {
                         onFocus={(e) => { e.target.type = "date" }}
                     />
                     <div className={styles.genderPicker} style={{ marginBottom: "24px" }}>
-                        <span 
-                            className={gender=="M" && styles.selectedGender}
+                        <span
+                            className={gender == "M" && styles.selectedGender}
                             onClick={() => setGender("M")}
                         >
                             M
                         </span>
-                        <span 
-                            className={gender=="F" && styles.selectedGender}
+                        <span
+                            className={gender == "F" && styles.selectedGender}
                             onClick={() => setGender("F")}
                         >
                             F
                         </span>
                     </div>
                 </div>
-                <PasswordField 
+                <PasswordField
                     required
                     name="password"
-                    placeholder="Password" 
+                    placeholder="Password"
                     style={{ marginBottom: "24px" }}
-                    onChange={checkPassword} 
+                    onChange={checkPassword}
                 />
-                <PasswordField 
+                <PasswordField
                     required
                     name="password_confirmation"
                     placeholder="Password Confirmation"
@@ -378,7 +381,7 @@ function SignUp({ setCurrentPage }) {
                     <span className={styles.passwordTitle}>
                         Your password must:
                     </span>
-                    <span 
+                    <span
                         className={`
                             ${styles.checkOption} 
                             ${passwordCheck[0] && styles.active}
@@ -440,10 +443,10 @@ function Recovery({ setCurrentPage }) {
                 transition={{ ease: "easeInOut" }}
                 className={styles.goLogin}
             >
-                <a 
-                    className={styles.loginLink} 
-                    onClick={() => { 
-                        setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />) 
+                <a
+                    className={styles.loginLink}
+                    onClick={() => {
+                        setCurrentPage(<SignIn setCurrentPage={setCurrentPage} />)
                     }}
                 >
                     <Image
@@ -496,11 +499,11 @@ function Recovery({ setCurrentPage }) {
                         transition={{ ease: "easeInOut" }}
                         type='submit'
                         className={styles.submit}
-                        style={{ 
-                            marginLeft: 'auto', 
-                            maxHeight: 48, 
+                        style={{
+                            marginLeft: 'auto',
+                            maxHeight: 48,
                             overflow: "hidden",
-                            whiteSpace: "nowrap" 
+                            whiteSpace: "nowrap"
                         }}
                         disabled
                         ref={submitRef}
