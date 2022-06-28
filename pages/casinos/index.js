@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { SwiperSlide } from 'swiper/react';
 import SliderWithControls from '../../components/SliderWithControls';
 import styles from '../../styles/pages/Casinos.module.css'
@@ -175,9 +175,12 @@ const casinos = [
 const slides = [1, 2, 3, 4, 5]
 
 export default function CasinosPage({ casinos, filters }) {
+    const casinosRef = useRef(casinos);
     const [sidebarShown, setSidebarShown] = useState(true);
     const [sort, setSort] = useState('All');
     const [filteredItems, setFilteredItems] = useState(casinos);
+    const [page, setPage] = useState(1);
+    const loadMoreRef = useRef(null);
 
     const controlVariants = {
         left: {
@@ -225,25 +228,25 @@ export default function CasinosPage({ casinos, filters }) {
     function handleFilterByCategory(item, filterName) {
         switch (filterName) {
             case 'Games':
-                setFilteredItems(casinos.filter(casino => casino.games.find(game => game.id === item.id)));
+                setFilteredItems(casinosRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
                 break;
             case 'Website Language':
-                setFilteredItems(casinos.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
+                setFilteredItems(casinosRef.current.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
                 break;
             case 'Support Language':
-                setFilteredItems(casinos.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
+                setFilteredItems(casinosRef.current.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
                 break;
             case 'Payment Methods':
-                setFilteredItems(casinos.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
+                setFilteredItems(casinosRef.current.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
             case 'Countries':
-                setFilteredItems(casinos.filter(casino => casino.countries.find(country => country.id === item.id)));
+                setFilteredItems(casinosRef.current.filter(casino => casino.countries.find(country => country.id === item.id)));
                 break;
             case 'Providers':
-                setFilteredItems(casinos.filter(casino => casino.providers.find(provider => provider.id === item.id)));
+                setFilteredItems(casinosRef.current.filter(casino => casino.providers.find(provider => provider.id === item.id)));
                 break;
             default:
-                setFilteredItems(casinos);
+                setFilteredItems(casinosRef.current);
                 break;
         }
     }
@@ -253,7 +256,7 @@ export default function CasinosPage({ casinos, filters }) {
         let newFilteredItems = [...filteredItems];
         switch (filter) {
             case 'All':
-                setFilteredItems(casinos);
+                setFilteredItems(casinosRef.current);
                 break;
             case "BestInCountry":
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
@@ -273,6 +276,27 @@ export default function CasinosPage({ casinos, filters }) {
                 break;
         }
     }
+
+    function loadMore() {
+        APIRequest(`/casinos?page=${page + 1}`, 'GET')
+            .then(res => {
+                setPage(page++);
+                casinosRef.current = [...casinosRef.current, ...res.data]
+                setFilteredItems(casinosRef.current);
+            })
+    }
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            }
+        )
+        observer.observe(loadMoreRef.current);
+        return () => observer.disconnect();
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -392,6 +416,7 @@ export default function CasinosPage({ casinos, filters }) {
                                 <Casino {...casino} key={casino.name} />
                             ))
                         }
+                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
                     </div>
                 </motion.div>
             </div>

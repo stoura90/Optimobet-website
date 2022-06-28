@@ -73,7 +73,7 @@ export default function CasinoPage({ casino }) {
                             </span>
                         ))}
                     </div>
-                </div>                
+                </div>
             </div>
             <div className={styles.mainCol}>
                 <div className={styles.infoBlocksWrap}>
@@ -255,7 +255,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const casinos = await APIRequest('/casinos', 'GET')
+    const casinos = await APIRequest('/casinos?no_paginate=1', 'GET')
     const paths = casinos.data.map(casino => ({ params: { id: casino.id.toString() } }))
 
     return { paths, fallback: 'blocking' }

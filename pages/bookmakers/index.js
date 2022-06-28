@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../styles/pages/Bookmakers.module.css'
 import { AnimatePresence, motion } from 'framer-motion';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
@@ -172,9 +172,12 @@ const casinos = [
 const slides = [1, 2, 3, 4, 5]
 
 export default function BookmakersPage({ bookmakers, filters }) {
+    const bookmakersRef = useRef(bookmakers);
     const [sidebarShown, setSidebarShown] = useState(true);
     const [sort, setSort] = useState('All');
+    const [page, setPage] = useState(1);
     const [filteredItems, setFilteredItems] = useState(bookmakers);
+    const loadMoreRef = useRef(null);
 
     const controlVariants = {
         left: {
@@ -222,25 +225,25 @@ export default function BookmakersPage({ bookmakers, filters }) {
     function handleFilterByCategory(item, filterName) {
         switch (filterName) {
             case 'Games':
-                setFilteredItems(bookmakers.filter(casino => casino.games.find(game => game.id === item.id)));
+                setFilteredItems(bookmakersRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
                 break;
             case 'Website Language':
-                setFilteredItems(bookmakers.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
+                setFilteredItems(bookmakersRef.current.filter(casino => casino.website_language.find(lang => lang.id === item.id)));
                 break;
             case 'Support Language':
-                setFilteredItems(bookmakers.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
+                setFilteredItems(bookmakersRef.current.filter(casino => casino.support_language.find(lang => lang.id === item.id)));
                 break;
             case 'Payment Methods':
-                setFilteredItems(bookmakers.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
+                setFilteredItems(bookmakersRef.current.filter(casino => casino.payment_methods.find(payment => payment.id === item.id)));
                 break;
             case 'Countries':
-                setFilteredItems(bookmakers.filter(casino => casino.countries?.find(country => country.id === item.id)));
+                setFilteredItems(bookmakersRef.current.filter(casino => casino.countries?.find(country => country.id === item.id)));
                 break;
             case 'Providers':
-                setFilteredItems(bookmakers.filter(casino => casino.providers?.find(provider => provider.id === item.id)));
+                setFilteredItems(bookmakersRef.current.filter(casino => casino.providers?.find(provider => provider.id === item.id)));
                 break;
             default:
-                setFilteredItems(bookmakers);
+                setFilteredItems(bookmakersRef.current);
                 break;
         }
     }
@@ -250,7 +253,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
         let newFilteredItems = [...filteredItems];
         switch (filter) {
             case 'All':
-                setFilteredItems(bookmakers);
+                setFilteredItems(bookmakersRef.current);
                 break;
             case "BestInCountry":
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
@@ -270,6 +273,27 @@ export default function BookmakersPage({ bookmakers, filters }) {
                 break;
         }
     }
+
+    function loadMore() {
+        APIRequest(`/bookmakers?page=${page + 1}`, 'GET')
+            .then(res => {
+                setPage(page++);
+                bookmakersRef.current = [...bookmakersRef.current, ...res.data]
+                setFilteredItems(bookmakersRef.current);
+            })
+    }
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            }
+        )
+        observer.observe(loadMoreRef.current);
+        return () => observer.disconnect();
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -368,6 +392,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
                                 <Casino {...bookmaker} key={bookmaker.id} />
                             ))
                         }
+                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
                     </div>
                 </motion.div>
             </div>
