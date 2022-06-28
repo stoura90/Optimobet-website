@@ -193,15 +193,19 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                 {slot.return_to_player && slot.return_to_player!="0" ? slot.return_to_player+"%" : "-"}
                             </span>
                         </div>
-                        <button className={styles.slotButton}>
-                            PLAY WITH REAL MONEY
-                        </button>
+                        {slot.real_game_url ? 
+                            <Link href={slot.real_game_url}>
+                                <button className={styles.slotButton}>
+                                    PLAY WITH REAL MONEY
+                                </button>
+                            </Link>
+                            :
+                            <button className={styles.slotButton}>
+                                PLAY WITH REAL MONEY
+                            </button>
+                        }
                     </div>
                     <div className={styles.slotDemoView}>
-                        {/* <Image
-                            src="/placeholder.png"
-                            layout='fill'
-                        /> */}
                         {parse(slot.game_script)}
                     </div>
                 </div>
