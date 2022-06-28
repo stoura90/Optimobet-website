@@ -11,6 +11,7 @@ import CountFilter from '../../components/filters/CountFilter';
 import Slot from '../../components/Slot';
 import { ReactSVG } from 'react-svg';
 import useWindowSize from '../../hooks/useWindowSize';
+import APIRequest from '../../functions/requests/APIRequest';
 
 const filter1 = [
     {
@@ -156,10 +157,9 @@ const _slots = [
     }
 ]
 
-export default function SlotsPage() {
+export default function SlotsPage({ slots }) {
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
-    const [slots, setSlots] = useState(_slots);
     const { height, width } = useWindowSize();
 
     const controlVariants = {
@@ -198,7 +198,7 @@ export default function SlotsPage() {
         },
         narrow: {
             marginLeft: 'calc(25% + 30px)',
-            width: '75%',
+            width: 'calc(75% - 30px)',
             transition: {
                 duration: 0.5,
             }
@@ -358,6 +358,24 @@ export default function SlotsPage() {
             </motion.div>
         </div>
     )
+}
+
+export async function getStaticProps() {
+    const slots = await APIRequest('/slots', 'GET')
+    const providers = await APIRequest('/providers', 'GET')
+    let slotsWithProvider = slots.data.map(slot => (
+        {
+            ...slot,
+            provider:providers.filter(p => p.id==slot.provider_id)[0]?.name
+        }
+    ))
+
+    return {
+        props: {
+            slots: slotsWithProvider,            
+        },
+        revalidate: 10,
+    }
 }
 
 SlotsPage.withHeader = true;

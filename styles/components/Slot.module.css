@@ -40,6 +40,13 @@
     flex-direction: column;
     gap: 14px;
     align-items: center;
+    color: #F2F2F2;
+}
+
+
+
+.slot.big .slotInfo {
+    align-items: flex-start;
 }
 
 .slotName {
@@ -64,6 +71,9 @@
     padding: 11px 24px;
     border-radius: 24px;
     background-color: #FFC448;
+    font: normal normal 500 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
 }
 
 .slotButton {
