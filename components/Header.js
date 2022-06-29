@@ -272,7 +272,12 @@ function EditModal({ user, onClose }) {
                 onClick={onClose}
                 className={styles.close}
             >
-                ✕
+                <Image
+                    src={'/images/icons/close.svg'}
+                    alt="close"
+                    width={24}
+                    height={24}
+                />
             </div>
             <div className={styles.modalImage}>
                 <Image
@@ -362,7 +367,12 @@ function PasswordModal({ onClose }) {
                 onClick={onClose}
                 className={styles.close}
             >
-                ✕
+                <Image
+                    src={'/images/icons/close.svg'}
+                    alt="close"
+                    width={24}
+                    height={24}
+                />
             </div>
             <div className={styles.modalImage}>
                 <Image
