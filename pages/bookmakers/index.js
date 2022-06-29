@@ -227,7 +227,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
     }
 
     function handleFilterByCategory(item, filterName) {
-        if (item === null) setFilteredItems(casinosRef.current);
+        if (item === null) setFilteredItems(bookmakersRef.current);
         switch (filterName) {
             case 'Games':
                 setFilteredItems(bookmakersRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
