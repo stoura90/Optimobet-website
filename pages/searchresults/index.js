@@ -567,7 +567,7 @@ export default function SearchResults() {
                                     initial={"title"}
                                     animate={selectedCat == 0 ? "title" : "controls"}
                                     transition={{ duration: 0.3, ease: "easeInOut" }}
-                                    style={!sidebarShown ? {gridTemplateColumns: "repeat(4, 1fr)"} : {}}
+                                    style={!sidebarShown ? { gridTemplateColumns: "repeat(4, 1fr)" } : {}}
                                     className={styles.slots}
                                 >
                                     {renderSlots(sidebarShown)}
@@ -731,3 +731,4 @@ function Casino({ name, rating, tags, games }) {
 }
 
 SearchResults.withHeader = true;
+SearchResults.withFooter = true;
