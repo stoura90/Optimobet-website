@@ -122,6 +122,7 @@ export default function Search({ setBorder }) {
                                     </div>
                                     {results.casinos.slice(0, 4).map(res =>
                                         <SearchResult
+                                            href={`/casinos/${res.id}`}
                                             name={res.name}
                                             rating={res.casino.rating}
                                         />
@@ -140,6 +141,7 @@ export default function Search({ setBorder }) {
                                     </div>
                                     {results.bookmakers.slice(0, 4).map(res =>
                                         <SearchResult
+                                            href={res.casino.url || res.casino.website}
                                             name={res.name}
                                             rating={res.casino.rating}
                                         />
@@ -158,8 +160,10 @@ export default function Search({ setBorder }) {
                                     </div>
                                     {results.slots.map(res =>
                                         <SearchResult
+                                            href={`/slots/${res.id}`}
                                             name={res.name}
-                                            rating={res.rating} />
+                                            rating={res.rating}
+                                        />
                                     )}
                                 </>
                             }
@@ -176,24 +180,28 @@ export default function Search({ setBorder }) {
     )
 }
 
-function SearchResult({ name, rating }) {
-    return <div className={styles.resultContent}>
-        <div className={styles.resultInfo}>
-            <div className={styles.resultLogo}>
-                <Image
-                    src="/placeholder.png"
-                    width={80}
-                    height={20}
-                />
-            </div>
-            <div className={styles.resultData}>
-                <span className={styles.resultName}>
-                    {name}
-                </span>
-                <div className={styles.stars}>
-                    <Stars points={rating} />
+function SearchResult({ name, rating, href = "/" }) {
+    return (
+        <Link href={href ?? '#'}>
+            <a className={styles.resultContent}>
+                <div className={styles.resultInfo}>
+                    <div className={styles.resultLogo}>
+                        <Image
+                            src="/placeholder.png"
+                            width={80}
+                            height={20}
+                        />
+                    </div>
+                    <div className={styles.resultData}>
+                        <span className={styles.resultName}>
+                            {name}
+                        </span>
+                        <div className={styles.stars}>
+                            <Stars points={rating} />
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </a>
+        </Link>
+    )
 }
