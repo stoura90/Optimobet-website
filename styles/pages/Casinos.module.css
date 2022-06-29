@@ -278,6 +278,16 @@
 
 .language {
     background-color: #ccc;
+    min-width: 27px;
+    min-height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    font: normal normal normal 12px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    opacity: 1;
 }
 
 .casinoButtons {

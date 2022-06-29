@@ -441,8 +441,8 @@ function Casino({
     games,
     positives,
     rating,
-    single_support_language,
-    single_website_language,
+    support_language,
+    website_language,
     url,
     shared_content,
     id
@@ -506,25 +506,42 @@ function Casino({
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
-                                <div className={styles.language}>
-                                    <Image
-                                        src={`/images/icons/${single_website_language.code}`}
-                                        alt={single_website_language.name}
-                                        height={20}
-                                        width={27}
-                                    />
-                                </div>
+                                {
+                                    website_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {website_language.length > 2 && <div className={styles.language}>
+                                    +{website_language.length - 2}
+                                </div>}
                             </div>
                         </div>
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Live chat</span>
                             <div className={styles.languageContent}>
-                                <Image
-                                    src={`/images/icons/${single_support_language.code}`}
-                                    alt={single_support_language.name}
-                                    height={20}
-                                    width={27}
-                                />
+                                {
+                                    support_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {support_language.length > 2 && <div className={styles.language}>
+                                    +{support_language.length - 2}
+                                </div>}
+
                             </div>
                         </div>
                     </div>

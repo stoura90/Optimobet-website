@@ -480,25 +480,42 @@ function Casino({
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
-                                <div className={styles.language}>
-                                    <Image
-                                        src={`/images/icons/${website_language[0]?.code}`}
-                                        alt={website_language[0]?.name}
-                                        height={20}
-                                        width={27}
-                                    />
-                                </div>
+                                {
+                                    website_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {website_language.length > 2 && <div className={styles.language}>
+                                    +{website_language.length - 2}
+                                </div>}
                             </div>
                         </div>
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Live chat</span>
                             <div className={styles.languageContent}>
-                                <Image
-                                    src={`/images/icons/${support_language[0]?.code}`}
-                                    alt={support_language[0]?.name}
-                                    height={20}
-                                    width={27}
-                                />
+                                {
+                                    support_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {support_language.length > 2 && <div className={styles.language}>
+                                    +{support_language.length - 2}
+                                </div>}
+
                             </div>
                         </div>
                     </div>
