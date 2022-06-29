@@ -1,0 +1,163 @@
+/* Casino */
+
+.casino {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid #4B445333;
+    overflow: hidden;
+}
+
+.casinoImage {
+    position: relative;
+    width: 20%;
+    height: 100%;
+    background-color: #ccc;
+}
+
+.casinoInfo {
+    display: flex;
+    flex-direction: row;
+    padding: 32px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.casinoColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 27px;
+}
+
+.subtitle {
+    text-align: left;
+    font: normal normal normal 13px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453B3;
+}
+
+.casinoColumn.right {
+    align-items: flex-end;
+}
+
+.casinoName {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.casinoNameText {
+    font: normal normal bold 24px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+
+.casinoRating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 3px;
+}
+
+.casinoTags {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.casinoTag {
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    align-items: center;
+    font: normal normal normal 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+
+.casinoGames {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.casinoGame {
+    position: relative;
+    display: flex;
+    height: 36px;
+    width: 36px;
+    background-color: #ccc;
+    border-radius: 100px;
+    overflow: hidden;
+}
+
+.casinoLanguages {
+    display: flex;
+    flex-direction: row;
+    gap: 41px;
+}
+
+.languageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.languageTitle {
+    text-align: left;
+    font: normal normal 500 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+}
+
+.languageContent {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.language {
+    background-color: #ccc;
+}
+
+.casinoButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.casinoButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 40px;
+    border-radius: 24px;
+    text-align: left;
+    font: normal normal 500 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B445380;
+    cursor: pointer;
+}
+
+.casinoButton.highlighted {
+    background-color: #7F3FFC;
+    color: white;
+}
+
+.tcButton{
+    font: normal normal 500 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B445380;
+}
+
+.titleText{
+    font: normal normal 500 16px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    text-transform: uppercase;
+}
