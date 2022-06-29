@@ -10,7 +10,6 @@ import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest'
 import Link from 'next/link'
 import { BeatLoader } from 'react-spinners'
-import TermsModal from '../../components/TermsModal';
 import BonusCard from '../../components/BonusCard';
 
 const slides = [1, 2, 3, 4, 5]

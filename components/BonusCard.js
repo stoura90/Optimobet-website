@@ -4,8 +4,9 @@ import { AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import Stars from './Stars'
+import TermsModal from './TermsModal'
 
-export default function BonusCard({ name, title, bonusable, games = [] }) {
+export default function BonusCard({ name, title, terms_and_condition, bonusable, games = [] }) {
     const [modal, setModal] = useState(false)
 
     return (
@@ -102,18 +103,20 @@ export default function BonusCard({ name, title, bonusable, games = [] }) {
                     <div className={styles.casinoButtons}>
                         <div 
                             className={styles.tcButton}
-                            style={{position:"relative"}}
                             onClick={() => {
                                 setModal(!modal)
                             }}
                         >
-                            <AnimatePresence>
-                                {modal && 
-                                    <TermsModal
-                                        rules={"sdadasasddasddasdsadsasdasdasad"} 
-                                    />
-                                }                                
-                            </AnimatePresence>
+                            {terms_and_condition && 
+                                <AnimatePresence>
+                                    {modal && 
+                                        <TermsModal
+                                            setModalState={setModal}
+                                            rules={terms_and_condition}
+                                        />
+                                    }                                
+                                </AnimatePresence>
+                            }                            
                             T&C Apply
                         </div>
                         {(bonusable?.url || bonusable?.bonus_url || bonusable?.claim_bonus_url) ? 
