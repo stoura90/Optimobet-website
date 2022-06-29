@@ -6,11 +6,18 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Stars from '../components/Stars'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import debounce from '../functions/debounce'
+import APIRequest from '../functions/requests/APIRequest'
 
 export default function Search({ setBorder }) {
     const [open, setOpen] = useState(false)
     const [filter, setFilter] = useState('All')
     const [searchValue, setSearchValue] = useState()
+    const [results, setResults] = useState({
+        casinos: [],
+        bookmakers: [],
+        slots: [],
+    })
     const searchRef = useRef()
     const router = useRouter()
 
@@ -23,29 +30,36 @@ export default function Search({ setBorder }) {
     const searchText = (e) => {
         setSearchValue(e.target.value)
         if (e.target.value.length > 0)
-            setOpen(true)
+            APIRequest(`/search?q=${e.target.value}`, 'GET')
+                .then(data => {
+                    setResults(data)
+                    setOpen(true)
+                    setBorder(true)
+                })
+                .catch(err => {
+                    console.log(err)
+                    setResults(null)
+                    setOpen(false)
+                    setBorder(false)
+                })
         else
             setOpen(false)
+        setBorder(false)
     }
 
     function handleClear() {
         setSearchValue(null)
         searchRef.current.value = ""
         setOpen(false)
+        setBorder(false)
     }
-
-    useEffect(() => {
-        if (setBorder) {
-            setBorder(open)
-        }
-    }, [open])
 
     return (
         <div className={styles.search}>
             <input
                 type="text"
                 placeholder="Search"
-                onChange={searchText}
+                onChange={debounce(searchText, 1000)}
                 ref={searchRef}
             />
             <div className={styles.icon}>
@@ -79,142 +93,78 @@ export default function Search({ setBorder }) {
                             >
                                 All
                             </div>
-                            <div className={`${styles.searchFilter} ${filter === 'Online Casinos' && styles.active}`}
-                                onClick={() => setFilter('Online Casinos')}
+                            <div className={`${styles.searchFilter} ${filter === 'Casinos' && styles.active}`}
+                                onClick={() => setFilter('Casinos')}
                             >
                                 Online Casinos
                             </div>
-                            <div className={`${styles.searchFilter} ${filter === 'Free slots' && styles.active}`}
-                                onClick={() => setFilter('Free slots')}
+                            <div className={`${styles.searchFilter} ${filter === 'Bookmakers' && styles.active}`}
+                                onClick={() => setFilter('Bookmakers')}
+                            >
+                                Bookmakers
+                            </div>
+                            <div className={`${styles.searchFilter} ${filter === 'Slots' && styles.active}`}
+                                onClick={() => setFilter('Slots')}
                             >
                                 Free slots
                             </div>
                         </div>
                         <div className={styles.resultList}>
-                            <div className={styles.resultCategory}>
-                                <span className={styles.categoryTitle}>
-                                    ONLINE CASINO
-                                </span>
-                                <span className={styles.categoryCount}>
-                                    245
-                                </span>
-                            </div>
-                            <div className={styles.resultContent}>
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultLogo}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={80}
-                                            height={20}
-                                        />
-                                    </div>
-                                    <div className={styles.resultData}>
-                                        <span className={styles.resultName}>
-                                            Result name
+                            {
+                                (results.casinos?.length > 0) && (filter === 'All' || filter === 'Casinos') && <>
+                                    <div className={styles.resultCategory}>
+                                        <span className={styles.categoryTitle}>
+                                            Casinos
                                         </span>
-                                        <div className={styles.stars}>
-                                            <Stars points={4.4} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultLogo}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={80}
-                                            height={20}
-                                        />
-                                    </div>
-                                    <div className={styles.resultData}>
-                                        <span className={styles.resultName}>
-                                            Result name
+                                        <span className={styles.categoryCount}>
+                                            {results.casinos.length}
                                         </span>
-                                        <div className={styles.stars}>
-                                            <Stars points={4.4} />
-                                        </div>
                                     </div>
-                                </div>
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultLogo}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={80}
-                                            height={20}
+                                    {results.casinos.slice(0, 4).map(res =>
+                                        <SearchResult
+                                            name={res.name}
+                                            rating={res.casino.rating}
                                         />
-                                    </div>
-                                    <div className={styles.resultData}>
-                                        <span className={styles.resultName}>
-                                            Result name
+                                    )}
+                                </>
+                            }
+                            {
+                                (results.bookmakers?.length > 0) && (filter === 'All' || filter === 'Bookmakers') > 0 && <>
+                                    <div className={styles.resultCategory}>
+                                        <span className={styles.categoryTitle}>
+                                            Bookmakers
                                         </span>
-                                        <div className={styles.stars}>
-                                            <Stars points={4.4} />
-                                        </div>
+                                        <span className={styles.categoryCount}>
+                                            {results.bookmakers.length}
+                                        </span>
                                     </div>
-                                </div>
-                            </div>
-                            <div className={styles.resultCategory}>
-                                <span className={styles.categoryTitle}>
-                                    Slots
-                                </span>
-                                <span className={styles.categoryCount}>
-                                    245
-                                </span>
-                            </div>
-                            <div className={styles.resultContent}>
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultLogo}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={80}
-                                            height={20}
+                                    {results.bookmakers.slice(0, 4).map(res =>
+                                        <SearchResult
+                                            name={res.name}
+                                            rating={res.casino.rating}
                                         />
-                                    </div>
-                                    <div className={styles.resultData}>
-                                        <span className={styles.resultName}>
-                                            Result name
+                                    )}
+                                </>
+                            }
+                            {
+                                (results.slots?.length > 0) && (filter === 'All' || filter === 'Slots') > 0 && <>
+                                    <div className={styles.resultCategory}>
+                                        <span className={styles.categoryTitle}>
+                                            Slots
                                         </span>
-                                        <div className={styles.stars}>
-                                            <Stars points={4.4} />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultLogo}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={80}
-                                            height={20}
-                                        />
-                                    </div>
-                                    <div className={styles.resultData}>
-                                        <span className={styles.resultName}>
-                                            Result name
+                                        <span className={styles.categoryCount}>
+                                            {results.slots.slice(0, 4).length}
                                         </span>
-                                        <div className={styles.stars}>
-                                            <Stars points={4.4} />
-                                        </div>
                                     </div>
-                                </div>
-                                <div className={styles.resultInfo}>
-                                    <div className={styles.resultLogo}>
-                                        <Image
-                                            src="/placeholder.png"
-                                            width={80}
-                                            height={20}
-                                        />
-                                    </div>
-                                    <div className={styles.resultData}>
-                                        <span className={styles.resultName}>
-                                            Result name
-                                        </span>
-                                        <div className={styles.stars}>
-                                            <Stars points={4.4} />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    {results.slots.map(res =>
+                                        <SearchResult
+                                            name={res.name}
+                                            rating={res.rating} />
+                                    )}
+                                </>
+                            }
                         </div>
-                        <Link href={`/searchresults?text=${searchValue}`}>
+                        <Link href={{ pathname: `/searchresults`, query: { text: searchValue } }}>
                             <a className={styles.seeAllResults}>
                                 See All Results
                             </a>
@@ -222,6 +172,28 @@ export default function Search({ setBorder }) {
                     </motion.div>
                 }
             </AnimatePresence>
-        </div>
+        </div >
     )
+}
+
+function SearchResult({ name, rating }) {
+    return <div className={styles.resultContent}>
+        <div className={styles.resultInfo}>
+            <div className={styles.resultLogo}>
+                <Image
+                    src="/placeholder.png"
+                    width={80}
+                    height={20}
+                />
+            </div>
+            <div className={styles.resultData}>
+                <span className={styles.resultName}>
+                    {name}
+                </span>
+                <div className={styles.stars}>
+                    <Stars points={rating} />
+                </div>
+            </div>
+        </div>
+    </div>
 }
