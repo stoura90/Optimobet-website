@@ -304,7 +304,7 @@ export default function CasinosPage({ casinos, filters }) {
     return (
         <div className={styles.container}>
             <div>
-                <SliderWithControls>
+                <SliderWithControls loop>
                     {
                         slides.map(slide => (
                             <SwiperSlide

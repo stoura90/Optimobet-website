@@ -222,7 +222,7 @@ export default function BonusesPage() {
     return (
         <div className={styles.container}>
             <div>
-                <SliderWithControls>
+                <SliderWithControls loop>
                     {
                         slides.map(slide => (
                             <SwiperSlide
