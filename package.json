@@ -17,6 +17,7 @@
     "react-cookie": "^4.1.1",
     "react-dom": "18.1.0",
     "react-svg": "^15.0.2",
+    "sharp": "^0.30.7",
     "swiper": "^8.2.2"
   },
   "devDependencies": {
