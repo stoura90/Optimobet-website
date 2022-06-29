@@ -11,6 +11,7 @@ import Dropdown from './Dropdown'
 import APIRequest from '../functions/requests/APIRequest'
 import { useCookies } from 'react-cookie'
 import PasswordField from './PasswordField'
+import TextField from './TextField'
 
 const links = [
     {
@@ -290,12 +291,13 @@ function EditModal({ user, onClose }) {
             <form className={styles.modalForm} onSubmit={handleSubmit}>
                 <span className={styles.modalFormTitle}> Edit Information </span>
                 <div className={styles.modalFormRow}>
-                    <input type="text" name='first_name' defaultValue={user.first_name} />
-                    <input type="text" name='last_name' defaultValue={user.last_name} />
+                    <TextField label="First name" type="text" name='first_name' defaultValue={user.first_name} />
+                    <TextField label="Last Name" type="text" name='last_name' defaultValue={user.last_name} />
                 </div>
-                <input type="text" name='email' defaultValue={user.email} />
-                <input type="date" name='birthday' defaultValue={user.birthday} />
+                <TextField label="E-mail" type="text" name='email' defaultValue={user.email} />
+                <TextField label="Date of birth " type="date" name='birthday' defaultValue={user.birthday} />
                 <Dropdown
+                    description="Country"
                     defaultSelected={user.country_id}
                     items={countries?.map(country => ({ id: country.id, value: country.name }))}
                     onChange={(item) => country_id.current = item.id}
