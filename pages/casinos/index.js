@@ -228,6 +228,7 @@ export default function CasinosPage({ casinos, filters }) {
     }
 
     function handleFilterByCategory(item, filterName) {
+        if (item === null) setFilteredItems(casinosRef.current);
         switch (filterName) {
             case 'Games':
                 setFilteredItems(casinosRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
