@@ -542,25 +542,21 @@ export async function getStaticProps() {
                     ],
                 },
                 {
-                    name: 'Website Language',
-                    items: languages,
-                },
-                {
-                    name: 'Support Language',
-                    items: languages,
+                    name: 'Countries',
+                    items: countries
                 },
                 {
                     name: 'Games',
-                    items: games,
+                    items: games
                 },
                 {
-                    name: 'Countries',
-                    items: countries,
+                    name: 'Website Language',
+                    items: languages
                 },
                 {
-                    name: 'Providers',
-                    items: providers,
-                }
+                    name: 'Support Language',
+                    items: languages
+                },
             ]
         },
         revalidate: 10,

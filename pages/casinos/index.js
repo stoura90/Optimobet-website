@@ -540,12 +540,12 @@ function Casino({
 }
 
 export async function getStaticProps() {
-    const casinos = await APIRequest('/casinos', 'GET')
-    const languages = await APIRequest('/languages', 'GET')
-    const games = await APIRequest('/games', 'GET')
-    const payments = await APIRequest('/payment-methods', 'GET')
-    const countries = await APIRequest('/countries', 'GET')
-    const providers = await APIRequest('/providers', 'GET')
+    const casinos = await APIRequest('/nolimit/casinos', 'GET')
+    const languages = await APIRequest('/nolimit/languages', 'GET')
+    const games = await APIRequest('/nolimit/games', 'GET')
+    const payments = await APIRequest('/nolimit/payment-methods', 'GET')
+    const countries = await APIRequest('/nolimit/countries', 'GET')
+    const providers = await APIRequest('/nolimit/providers', 'GET')
 
     return {
         props: {
@@ -569,8 +569,20 @@ export async function getStaticProps() {
                     ],
                 },
                 {
+                    name: 'Countries',
+                    items: countries
+                },
+                {
                     name: 'Games',
                     items: games
+                },
+                {
+                    name: 'Providers',
+                    items: providers
+                },
+                {
+                    name: 'Payment Methods',
+                    items: payments
                 },
                 {
                     name: 'Website Language',
@@ -580,18 +592,6 @@ export async function getStaticProps() {
                     name: 'Support Language',
                     items: languages
                 },
-                {
-                    name: 'Payment Methods',
-                    items: payments
-                },
-                {
-                    name: 'Countries',
-                    items: countries
-                },
-                {
-                    name: 'Providers',
-                    items: providers
-                }
             ]
         },
         revalidate: 10,
