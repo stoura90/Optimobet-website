@@ -9,6 +9,7 @@ import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest'
 import Link from 'next/link'
+import { BeatLoader } from 'react-spinners'
 
 const slides = [1, 2, 3, 4, 5]
 
@@ -19,6 +20,7 @@ export default function BonusesPage({ bonuses, filters }) {
     const [filteredItems, setFilteredItems] = useState(bonuses);
     const [page, setPage] = useState(1);
     const loadMoreRef = useRef(null);
+    const [loading, setLoading] = useState(false);
 
     const controlVariants = {
         left: {
@@ -79,6 +81,7 @@ export default function BonusesPage({ bonuses, filters }) {
     },[filter])
 
     function loadMore() {
+        setLoading(true);
         APIRequest(`/bonuses?page=${page + 1}`, 'GET')
             .then(res => {
                 setPage(page++);
@@ -95,6 +98,7 @@ export default function BonusesPage({ bonuses, filters }) {
                 }
                 setFilteredItems([...bonusesRef.current, ...newDataF]);
                 bonusesRef.current = [...bonusesRef.current, ...res.data]
+                setLoading(false);
             })
     }
 
@@ -223,7 +227,9 @@ export default function BonusesPage({ bonuses, filters }) {
                                 <Bonus {...bonus} key={`bonus_${bonus.id}_${index}`} />
                             ))
                         }
-                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
+                        {filteredItems.length > 5 && <div className={styles.loader} ref={loadMoreRef} >
+                            <BeatLoader loading={loading} color='#7F3FFC' />
+                        </div>}
                     </div>
                 </motion.div>
             </div>
