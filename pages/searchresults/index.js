@@ -387,7 +387,7 @@ export default function SearchResults() {
                                                     Second name
                                                 </span>
                                                 <span className={styles.mainName}>
-                                                    Main name
+                                                    Online casinos
                                                 </span>
                                             </motion.div>
                                         }
@@ -492,7 +492,7 @@ export default function SearchResults() {
                                                     Second name
                                                 </span>
                                                 <span className={styles.mainName}>
-                                                    Main name
+                                                    Slots
                                                 </span>
                                             </motion.div>
                                         }
