@@ -184,12 +184,12 @@
 
 .casinoName {
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .casinoNameText {
-    font: normal normal bold 24px/34px Samsung Sans;
+    font: normal normal bold 24px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
@@ -212,6 +212,9 @@
     flex-direction: row;
     gap: 9px;
     align-items: center;
+    font: normal normal normal 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
 }
 
 .casinoGames {
@@ -262,17 +265,18 @@
 .casinoButtons {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    align-items: center;
+    gap: 20px;
 }
 
 .casinoButton {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px 45px;
+    padding: 15px 40px;
     border-radius: 24px;
     text-align: left;
-    font: normal normal 500 15px/24px Samsung Sans;
+    font: normal normal 500 15px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;
     cursor: pointer;
@@ -281,4 +285,17 @@
 .casinoButton.highlighted {
     background-color: #7F3FFC;
     color: white;
+}
+
+.tcButton{
+    font: normal normal 500 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B445380;
+}
+
+.titleText{
+    font: normal normal 500 16px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    text-transform: uppercase;
 }
