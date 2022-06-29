@@ -113,7 +113,7 @@ export default function BonusesPage({ bonuses, filters }) {
     return (
         <div className={styles.container}>
             <div>
-                <SliderWithControls>
+                <SliderWithControls loop>
                     {
                         slides.map(slide => (
                             <SwiperSlide
@@ -143,6 +143,14 @@ export default function BonusesPage({ bonuses, filters }) {
                         exit="hidden"
                         className={styles.filters}
                     >
+                        <span className={styles.filtersTitle}>
+                            <Image
+                                src={'/images/icons/filter.svg'}
+                                height={20}
+                                width={20}
+                            />
+                            Filters
+                        </span>
                         {
                             filters?.map((filter, index) => (
                                 <CheckboxFilter

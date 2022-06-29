@@ -1,0 +1,9 @@
+<svg id="calendar" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <path id="Path_21332" data-name="Path 21332" d="M0,0H24V24H0Z" fill="none"/>
+  <rect id="Rectangle_3345" data-name="Rectangle 3345" width="16" height="16" rx="2" transform="translate(4 5)" fill="none" stroke="#4b4453" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line id="Line_78" data-name="Line 78" y2="4" transform="translate(16 3)" fill="none" stroke="#4b4453" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line id="Line_79" data-name="Line 79" y2="4" transform="translate(8 3)" fill="none" stroke="#4b4453" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line id="Line_80" data-name="Line 80" x2="16" transform="translate(4 11)" fill="none" stroke="#4b4453" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line id="Line_81" data-name="Line 81" x2="1" transform="translate(11 15)" fill="none" stroke="#4b4453" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+  <line id="Line_82" data-name="Line 82" y2="3" transform="translate(12 15)" fill="none" stroke="#4b4453" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+</svg>

@@ -33,6 +33,11 @@ export default function CheckboxFilter({ items, title, collapsible = false, init
         }
     }
 
+    function handleClear() {
+        setActive(null)
+        onChange(null)
+    }
+
     function handleChange(item) {
         setActive(item.id)
         onChange && onChange(item)
@@ -67,7 +72,7 @@ export default function CheckboxFilter({ items, title, collapsible = false, init
                     <div
                         key={`type_${item.id}`}
                         className={`${styles.type} ${active === item.id && styles.active}`}
-                        onClick={() => item.id !== active && handleChange(item)}
+                        onClick={() => item.id !== active ? handleChange(item) : handleClear()}
                     >
                         <div className={styles.typeName}>{item.name}</div>
                         <div className={styles.typeCheckbox} />

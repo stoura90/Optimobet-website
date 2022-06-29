@@ -24,6 +24,17 @@ export default function CountFilter({ items, title, collapsible = false, initial
         }
     }
 
+    const itemVariants2 = {
+        open: {
+            maxHeight: 500,
+            overflowY: 'scroll'
+        },
+        closed: {
+            maxHeight: 330,
+            overflowY: 'hidden'
+        }
+    }
+
     const chevronVariants = {
         open: {
             rotate: 90,
@@ -59,7 +70,7 @@ export default function CountFilter({ items, title, collapsible = false, initial
                 }
             </div>}
             <motion.div
-                variants={itemsVariants}
+                variants={title ? itemsVariants : itemVariants2}
                 animate={isOpen ? 'open' : 'closed'}
                 className={styles.items}
             >
@@ -74,6 +85,9 @@ export default function CountFilter({ items, title, collapsible = false, initial
                     </div>
                 ))}
             </motion.div>
+            <div className={styles.more} onClick={() => setIsOpen(!isOpen)}>
+                Show {!isOpen ? 'More' : 'Less'}
+            </div>
         </motion.div>
     )
 }

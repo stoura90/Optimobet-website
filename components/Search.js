@@ -14,33 +14,31 @@ export default function Search({ setBorder }) {
     const searchRef = useRef()
     const router = useRouter()
 
-    useEffect(()=>{
+    useEffect(() => {
         searchRef.current.value = ""
         setSearchValue(null)
         setOpen(false)
-    },[router.asPath])
-
-    const apply = () => {
-        setOpen(false)
-    }
-
-    const reset = () => {
-        setOpen(false)
-    }
+    }, [router.asPath])
 
     const searchText = (e) => {
         setSearchValue(e.target.value)
-        if (e.target.value.length>0) 
+        if (e.target.value.length > 0)
             setOpen(true)
         else
             setOpen(false)
     }
 
-    useEffect(()=>{
+    function handleClear() {
+        setSearchValue(null)
+        searchRef.current.value = ""
+        setOpen(false)
+    }
+
+    useEffect(() => {
         if (setBorder) {
             setBorder(open)
         }
-    },[open])
+    }, [open])
 
     return (
         <div className={styles.search}>
@@ -51,20 +49,29 @@ export default function Search({ setBorder }) {
                 ref={searchRef}
             />
             <div className={styles.icon}>
-                <Image
-                    src="/images/icons/search.svg"
-                    width={24}
-                    height={24}
-                />
+                {!open
+                    ? <Image
+                        src="/images/icons/search.svg"
+                        width={24}
+                        height={24}
+                    />
+                    :
+                    <Image
+                        src="/images/icons/close.svg"
+                        width={24}
+                        height={24}
+                        onClick={handleClear}
+                    />
+                }
             </div>
             <AnimatePresence>
                 {open &&
-                    <motion.div 
+                    <motion.div
                         className={styles.searchResults}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        transition={{duration:0.2}}
+                        transition={{ duration: 0.2 }}
                     >
                         <div className={styles.searchCategories}>
                             <div className={`${styles.searchFilter} ${filter === 'All' && styles.active}`}

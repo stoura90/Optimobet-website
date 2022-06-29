@@ -25,6 +25,20 @@
     background-color: #ffffff;
 }
 
+.filtersTitle {
+    text-align: left;
+    font: normal normal 500 16px/56px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    text-transform: uppercase;
+    opacity: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 9px;
+    align-items: center;
+    height: 42px;
+}
+
 .content {
     display: flex;
     flex-direction: column;
@@ -76,12 +90,12 @@
     z-index: 2;
 }
 
-.light > * {
+.light>* {
     width: 24px;
     height: 24px;
 }
 
-.dark > * {
+.dark>* {
     width: 24px;
     height: 24px;
 }
@@ -264,6 +278,16 @@
 
 .language {
     background-color: #ccc;
+    min-width: 27px;
+    min-height: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    font: normal normal normal 12px/26px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    opacity: 1;
 }
 
 .casinoButtons {
@@ -288,4 +312,9 @@
 .casinoButton.highlighted {
     background-color: #7F3FFC;
     color: white;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
 }

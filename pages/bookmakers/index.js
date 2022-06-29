@@ -7,6 +7,7 @@ import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest';
 import useUserInfo from '../../hooks/useUserInfo';
+import { BeatLoader } from 'react-spinners';
 
 const filters = [
     {
@@ -180,6 +181,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
     const [filteredItems, setFilteredItems] = useState(bookmakers);
     const loadMoreRef = useRef(null);
     const user = useUserInfo()
+    const [loading, setLoading] = useState(false);
 
     const controlVariants = {
         left: {
@@ -225,6 +227,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
     }
 
     function handleFilterByCategory(item, filterName) {
+        if (item === null) setFilteredItems(bookmakersRef.current);
         switch (filterName) {
             case 'Games':
                 setFilteredItems(bookmakersRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
@@ -278,9 +281,11 @@ export default function BookmakersPage({ bookmakers, filters }) {
     }
 
     function loadMore() {
+        setLoading(true);
         APIRequest(`/bookmakers?page=${page + 1}`, 'GET')
             .then(res => {
                 setPage(page++);
+                setLoading(false);
                 bookmakersRef.current = [...bookmakersRef.current, ...res.data]
                 setFilteredItems(bookmakersRef.current);
             })
@@ -310,6 +315,14 @@ export default function BookmakersPage({ bookmakers, filters }) {
                         exit="hidden"
                         className={styles.filters}
                     >
+                        <span className={styles.filtersTitle}>
+                            <Image
+                                src={'/images/icons/filter.svg'}
+                                height={20}
+                                width={20}
+                            />
+                            Filters
+                        </span>
                         {
                             filters.map((filter, index) => (
                                 <CheckboxFilter
@@ -395,7 +408,9 @@ export default function BookmakersPage({ bookmakers, filters }) {
                                 <Casino {...bookmaker} key={bookmaker.id} />
                             ))
                         }
-                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
+                        {filteredItems.length > 5 && <div className={styles.loader} ref={loadMoreRef} >
+                            <BeatLoader loading={loading} color='#7F3FFC' />
+                        </div>}
                     </div>
                 </motion.div>
             </div>
@@ -472,25 +487,42 @@ function Casino({
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
-                                <div className={styles.language}>
-                                    <Image
-                                        src={`/images/icons/${website_language[0]?.code}`}
-                                        alt={website_language[0]?.name}
-                                        height={20}
-                                        width={27}
-                                    />
-                                </div>
+                                {
+                                    website_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {website_language.length > 2 && <div className={styles.language}>
+                                    +{website_language.length - 2}
+                                </div>}
                             </div>
                         </div>
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Live chat</span>
                             <div className={styles.languageContent}>
-                                <Image
-                                    src={`/images/icons/${support_language[0]?.code}`}
-                                    alt={support_language[0]?.name}
-                                    height={20}
-                                    width={27}
-                                />
+                                {
+                                    support_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {support_language.length > 2 && <div className={styles.language}>
+                                    +{support_language.length - 2}
+                                </div>}
+
                             </div>
                         </div>
                     </div>
@@ -514,11 +546,11 @@ function Casino({
 }
 
 export async function getStaticProps() {
-    const bookmakers = await APIRequest('/bookmakers', 'GET')
-    const languages = await APIRequest('/languages', 'GET')
-    const games = await APIRequest('/games', 'GET')
-    const countries = await APIRequest('/countries', 'GET')
-    const providers = await APIRequest('/providers', 'GET')
+    const bookmakers = await APIRequest('/nolimit/bookmakers', 'GET')
+    const languages = await APIRequest('/nolimit/languages', 'GET')
+    const games = await APIRequest('/nolimit/games', 'GET')
+    const countries = await APIRequest('/nolimit/countries', 'GET')
+    const providers = await APIRequest('/nolimit/providers', 'GET')
 
     return {
         props: {
@@ -542,25 +574,21 @@ export async function getStaticProps() {
                     ],
                 },
                 {
-                    name: 'Website Language',
-                    items: languages,
-                },
-                {
-                    name: 'Support Language',
-                    items: languages,
+                    name: 'Countries',
+                    items: countries
                 },
                 {
                     name: 'Games',
-                    items: games,
+                    items: games
                 },
                 {
-                    name: 'Countries',
-                    items: countries,
+                    name: 'Website Language',
+                    items: languages
                 },
                 {
-                    name: 'Providers',
-                    items: providers,
-                }
+                    name: 'Support Language',
+                    items: languages
+                },
             ]
         },
         revalidate: 10,

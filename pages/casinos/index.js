@@ -10,6 +10,7 @@ import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest';
 import Link from 'next/link';
 import useUserInfo from '../../hooks/useUserInfo';
+import { BeatLoader } from 'react-spinners';
 
 const filters = [
     {
@@ -183,6 +184,7 @@ export default function CasinosPage({ casinos, filters }) {
     const [page, setPage] = useState(1);
     const loadMoreRef = useRef(null);
     const user = useUserInfo();
+    const [loading, setLoading] = useState(false);
 
     const controlVariants = {
         left: {
@@ -228,6 +230,7 @@ export default function CasinosPage({ casinos, filters }) {
     }
 
     function handleFilterByCategory(item, filterName) {
+        if (item === null) setFilteredItems(casinosRef.current);
         switch (filterName) {
             case 'Games':
                 setFilteredItems(casinosRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
@@ -281,9 +284,11 @@ export default function CasinosPage({ casinos, filters }) {
     }
 
     function loadMore() {
+        setLoading(true);
         APIRequest(`/casinos?page=${page + 1}`, 'GET')
             .then(res => {
                 setPage(page++);
+                setLoading(false);
                 casinosRef.current = [...casinosRef.current, ...res.data]
                 setFilteredItems(casinosRef.current);
             })
@@ -304,7 +309,7 @@ export default function CasinosPage({ casinos, filters }) {
     return (
         <div className={styles.container}>
             <div>
-                <SliderWithControls>
+                <SliderWithControls loop>
                     {
                         slides.map(slide => (
                             <SwiperSlide
@@ -334,6 +339,14 @@ export default function CasinosPage({ casinos, filters }) {
                         exit="hidden"
                         className={styles.filters}
                     >
+                        <span className={styles.filtersTitle}>
+                            <Image
+                                src={'/images/icons/filter.svg'}
+                                height={20}
+                                width={20}
+                            />
+                            Filters
+                        </span>
                         {
                             filters.map((filter, index) => (
                                 <CheckboxFilter
@@ -419,7 +432,9 @@ export default function CasinosPage({ casinos, filters }) {
                                 <Casino {...casino} key={casino.name} />
                             ))
                         }
-                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
+                        {filteredItems.length > 5 && <div className={styles.loader} ref={loadMoreRef} >
+                            <BeatLoader loading={loading} color='#7F3FFC' />
+                        </div>}
                     </div>
                 </motion.div>
             </div>
@@ -433,8 +448,8 @@ function Casino({
     games,
     positives,
     rating,
-    single_support_language,
-    single_website_language,
+    support_language,
+    website_language,
     url,
     shared_content,
     id
@@ -498,25 +513,42 @@ function Casino({
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
-                                <div className={styles.language}>
-                                    <Image
-                                        src={`/images/icons/${single_website_language.code}`}
-                                        alt={single_website_language.name}
-                                        height={20}
-                                        width={27}
-                                    />
-                                </div>
+                                {
+                                    website_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {website_language.length > 2 && <div className={styles.language}>
+                                    +{website_language.length - 2}
+                                </div>}
                             </div>
                         </div>
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Live chat</span>
                             <div className={styles.languageContent}>
-                                <Image
-                                    src={`/images/icons/${single_support_language.code}`}
-                                    alt={single_support_language.name}
-                                    height={20}
-                                    width={27}
-                                />
+                                {
+                                    support_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language}>
+                                            <Image
+                                                src={`/images/icons/${lang.code}`}
+                                                alt={lang.name}
+                                                height={20}
+                                                width={27}
+                                            />
+                                        </div>
+                                    ))
+                                }
+                                {support_language.length > 2 && <div className={styles.language}>
+                                    +{support_language.length - 2}
+                                </div>}
+
                             </div>
                         </div>
                     </div>
@@ -540,12 +572,12 @@ function Casino({
 }
 
 export async function getStaticProps() {
-    const casinos = await APIRequest('/casinos', 'GET')
-    const languages = await APIRequest('/languages', 'GET')
-    const games = await APIRequest('/games', 'GET')
-    const payments = await APIRequest('/payment-methods', 'GET')
-    const countries = await APIRequest('/countries', 'GET')
-    const providers = await APIRequest('/providers', 'GET')
+    const casinos = await APIRequest('/nolimit/casinos', 'GET')
+    const languages = await APIRequest('/nolimit/languages', 'GET')
+    const games = await APIRequest('/nolimit/games', 'GET')
+    const payments = await APIRequest('/nolimit/payment-methods', 'GET')
+    const countries = await APIRequest('/nolimit/countries', 'GET')
+    const providers = await APIRequest('/nolimit/providers', 'GET')
 
     return {
         props: {
@@ -569,8 +601,20 @@ export async function getStaticProps() {
                     ],
                 },
                 {
+                    name: 'Countries',
+                    items: countries
+                },
+                {
                     name: 'Games',
                     items: games
+                },
+                {
+                    name: 'Providers',
+                    items: providers
+                },
+                {
+                    name: 'Payment Methods',
+                    items: payments
                 },
                 {
                     name: 'Website Language',
@@ -580,18 +624,6 @@ export async function getStaticProps() {
                     name: 'Support Language',
                     items: languages
                 },
-                {
-                    name: 'Payment Methods',
-                    items: payments
-                },
-                {
-                    name: 'Countries',
-                    items: countries
-                },
-                {
-                    name: 'Providers',
-                    items: providers
-                }
             ]
         },
         revalidate: 10,
