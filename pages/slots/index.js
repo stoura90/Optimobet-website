@@ -13,154 +13,12 @@ import { ReactSVG } from 'react-svg';
 import useWindowSize from '../../hooks/useWindowSize';
 import APIRequest from '../../functions/requests/APIRequest';
 
-const filter1 = [
-    {
-        id: 1,
-        name: 'All',
-        count: 4567,
-    },
-    {
-        id: 2,
-        name: 'ELK Studio',
-        count: 45,
-    },
-    {
-        id: 3,
-        name: 'Netend',
-        count: 45,
-    },
-    {
-        id: 4,
-        name: 'YGGDRASIL',
-        count: 124,
-    },
-    {
-        id: 5,
-        name: 'EGT',
-        count: 277,
-    },
-    {
-        id: 6,
-        name: 'PRAGMATICPLAY',
-        count: 168,
-    },
-    {
-        id: 7,
-        name: 'Booming Games',
-        count: 79,
-    },
-    {
-        id: 8,
-        name: 'IRON DOG',
-        count: 245,
-    },
-    {
-        id: 9,
-        name: 'BETSOFT',
-        count: 120,
-    },
-    {
-        id: 10,
-        name: '2by2gaming',
-        count: 209,
-    }
-]
-
-const filter2 = [
-    {
-        id: 1,
-        name: 'Achievement'
-    },
-    {
-        id: 2,
-        name: 'Megaways'
-    },
-    {
-        id: 3,
-        name: 'Bonus Buy'
-    },
-    {
-        id: 4,
-        name: 'Sticky Features'
-    },
-    {
-        id: 5,
-        name: 'Jackpot'
-    }
-]
-
 const sliderTemp = [1, 2, 3, 4, 5]
-
-const _slots = [
-    {
-        id: 1,
-        name: 'Slot 1',
-        provider: 'ELK Studio',
-        type: 'Achievement',
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        name: 'Slot 2',
-        provider: 'Netend',
-        type: 'Megaways',
-        rating: 4.5,
-    },
-    {
-        id: 3,
-        name: 'Slot 3',
-        provider: 'YGGDRASIL',
-        type: 'Bonus Buy',
-        rating: 4.5,
-    },
-    {
-        id: 4,
-        name: 'Slot 4',
-        provider: 'EGT',
-        type: 'Sticky Features',
-        rating: 4.5,
-    },
-    {
-        id: 5,
-        name: 'Slot 5',
-        provider: 'PRAGMATICPLAY',
-        type: 'Jackpot',
-        rating: 4.5,
-    },
-    {
-        id: 6,
-        name: 'Slot 6',
-        provider: 'Booming Games',
-        type: 'Achievement',
-        rating: 4.5,
-    },
-    {
-        id: 7,
-        name: 'Slot 7',
-        provider: 'IRON DOG',
-        type: 'Megaways',
-        rating: 4.5,
-    },
-    {
-        id: 8,
-        name: 'Slot 8',
-        provider: 'BETSOFT',
-        type: 'Bonus Buy',
-        rating: 4.5,
-    },
-    {
-        id: 9,
-        name: 'Slot 9',
-        provider: '2by2gaming',
-        type: 'Sticky Features',
-        rating: 4.5,
-    }
-]
 
 export default function SlotsPage({ slots, providers }) {
     const [sidebarShown, setSidebarShown] = useState(true)
     const [filter, setFilter] = useState('All')
-    const [availableProviders, setAvailableProviders] = useState(providers.filter(prov => prov.count>0))
+    const [availableProviders, setAvailableProviders] = useState(providers.filter(prov => prov.count > 0))
     const { height, width } = useWindowSize()
     const [slotsFiltered, setSlotsFiltered] = useState(slots)
     const [providerFilter, setProviderFilter] = useState(availableProviders[0])
@@ -210,34 +68,34 @@ export default function SlotsPage({ slots, providers }) {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         let slotsF = [...slots]
-        if (providerFilter.id!=0) {
+        if (providerFilter.id != 0) {
             slotsF = slotsF.filter(slot => slot.provider_id == providerFilter.id)
-        }        
+        }
         switch (filter) {
             case "New":
-                slotsF = slotsF.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+                slotsF = slotsF.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                 break;
             case "Popular":
-                slotsF = slotsF.sort((a,b) => b.popularity - a.popularity)
+                slotsF = slotsF.sort((a, b) => b.popularity - a.popularity)
                 break;
             case "Promotions":
-                slotsF = slotsF.sort((a,b) => b.featured - a.featured)
+                slotsF = slotsF.sort((a, b) => b.featured - a.featured)
                 break;
             default:
                 break;
         }
         setSlotsFiltered(slotsF)
         setPage(1)
-    },[providerFilter, filter])
+    }, [providerFilter, filter])
 
     function renderSlots(sidebarShown, pageC) {
         // breaks the layout when first slot is big
         let column = 1;
         let row = 1;
         const maxColumns = sidebarShown ? 3 : 4;
-        return slotsFiltered.slice(0, pageC*30).map((item, index) => {
+        return slotsFiltered.slice(0, pageC * 30).map((item, index) => {
             const slot = <Slot
                 {...item}
                 key={`slot_${item.id}`}
@@ -283,13 +141,14 @@ export default function SlotsPage({ slots, providers }) {
                     className={styles.filters}
                 >
                     <div className={styles.filtersBlocks}>
-                        <CountFilter 
-                            items={availableProviders} 
-                            onChange={setProviderFilter} 
+                        <CountFilter
+                            items={availableProviders}
+                            onChange={setProviderFilter}
+                            initialOpen={false}
                             initialActive={0}
                         />
                         {/* <CheckboxFilter items={filter2} /> */}
-                    </div>                    
+                    </div>
                 </motion.div>}
             </AnimatePresence>
             <motion.div
@@ -380,7 +239,7 @@ export default function SlotsPage({ slots, providers }) {
                     </div>
                 </div>
                 <div
-                    style={sidebarShown ? {gridTemplateColumns: 'repeat(3, 1fr)'} : {gridTemplateColumns: 'repeat(4, 1fr)'}}
+                    style={sidebarShown ? { gridTemplateColumns: 'repeat(3, 1fr)' } : { gridTemplateColumns: 'repeat(4, 1fr)' }}
                     className={styles.slots}
                 >
                     {renderSlots(sidebarShown, page)}
@@ -397,28 +256,28 @@ export async function getStaticProps() {
     let slotsWithProvider = slots.filter(slot => slot).map(slot => (
         {
             ...slot,
-            provider:providers.filter(p => p.id==slot.provider_id)[0]?.name ?? null
+            provider: providers.filter(p => p.id == slot.provider_id)[0]?.name ?? null
         }
     ))
 
     return {
         props: {
-            slots: slotsWithProvider,  
+            slots: slotsWithProvider,
             providers: [
                 {
-                    id:0, 
-                    name: "All", 
+                    id: 0,
+                    name: "All",
                     count: slotsWithProvider.length
                 },
                 ...providers.map(provider => (
                     {
                         ...provider,
                         count: slotsWithProvider
-                            .filter(slot => slot.provider_id==provider.id)
+                            .filter(slot => slot.provider_id == provider.id)
                             .length
                     }
                 ))
-            ]          
+            ]
         },
         revalidate: 10,
     }
