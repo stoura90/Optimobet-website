@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import styles from "../../styles/components/casino/BonusBlock.module.css"
 import Image from "next/image"
 import Link from "next/link"
+import { AnimatePresence } from 'framer-motion'
+import TermsModal from '../TermsModal'
 
 export default function BonusBlock({
     maximum_bet,
@@ -10,8 +13,10 @@ export default function BonusBlock({
     value_per_spin,
     maximum_cashout,
     bonus_expiration,
-    url
+    url,
+    terms_and_condition
 }) {
+    const [modal, setModal] = useState(false)
 
     return (
         <div className={styles.bonusBlock}>
@@ -77,11 +82,30 @@ export default function BonusBlock({
                 </div>
             </div>
             <div className={styles.getBonusArea}>
-                {/* <Link href={url} passHref> */}
-                <button className={styles.getBonusButton}>
+                <button 
+                    className={styles.getBonusButton}
+                    style={{marginTop:"38px"}}
+                >
                     Get Bonus
                 </button>
-                {/* </Link> */}
+                <span 
+                    className={styles.tcButton}
+                    onClick={() => {
+                        setModal(!modal)
+                    }}
+                >
+                    {terms_and_condition && 
+                        <AnimatePresence>
+                            {modal && 
+                                <TermsModal
+                                    setModalState={setModal}
+                                    rules={terms_and_condition}
+                                />
+                            }                                
+                        </AnimatePresence>
+                    }
+                    T&C Apply
+                </span>
             </div>
         </div>
     )
