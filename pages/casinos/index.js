@@ -10,6 +10,7 @@ import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest';
 import Link from 'next/link';
 import useUserInfo from '../../hooks/useUserInfo';
+import { BeatLoader } from 'react-spinners';
 
 const filters = [
     {
@@ -183,6 +184,7 @@ export default function CasinosPage({ casinos, filters }) {
     const [page, setPage] = useState(1);
     const loadMoreRef = useRef(null);
     const user = useUserInfo();
+    const [loading, setLoading] = useState(false);
 
     const controlVariants = {
         left: {
@@ -282,9 +284,11 @@ export default function CasinosPage({ casinos, filters }) {
     }
 
     function loadMore() {
+        setLoading(true);
         APIRequest(`/casinos?page=${page + 1}`, 'GET')
             .then(res => {
                 setPage(page++);
+                setLoading(false);
                 casinosRef.current = [...casinosRef.current, ...res.data]
                 setFilteredItems(casinosRef.current);
             })
@@ -428,7 +432,9 @@ export default function CasinosPage({ casinos, filters }) {
                                 <Casino {...casino} key={casino.name} />
                             ))
                         }
-                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
+                        {filteredItems.length > 5 && <div className={styles.loader} ref={loadMoreRef} >
+                            <BeatLoader loading={loading} color='#7F3FFC' />
+                        </div>}
                     </div>
                 </motion.div>
             </div>

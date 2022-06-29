@@ -296,3 +296,8 @@
     background-color: #7F3FFC;
     color: white;
 }
+
+.loader {
+    display: flex;
+    justify-content: center;
+}

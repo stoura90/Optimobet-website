@@ -7,6 +7,7 @@ import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest';
 import useUserInfo from '../../hooks/useUserInfo';
+import { BeatLoader } from 'react-spinners';
 
 const filters = [
     {
@@ -180,6 +181,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
     const [filteredItems, setFilteredItems] = useState(bookmakers);
     const loadMoreRef = useRef(null);
     const user = useUserInfo()
+    const [loading, setLoading] = useState(false);
 
     const controlVariants = {
         left: {
@@ -279,9 +281,11 @@ export default function BookmakersPage({ bookmakers, filters }) {
     }
 
     function loadMore() {
+        setLoading(true);
         APIRequest(`/bookmakers?page=${page + 1}`, 'GET')
             .then(res => {
                 setPage(page++);
+                setLoading(false);
                 bookmakersRef.current = [...bookmakersRef.current, ...res.data]
                 setFilteredItems(bookmakersRef.current);
             })
@@ -404,7 +408,9 @@ export default function BookmakersPage({ bookmakers, filters }) {
                                 <Casino {...bookmaker} key={bookmaker.id} />
                             ))
                         }
-                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
+                        {filteredItems.length > 5 && <div className={styles.loader} ref={loadMoreRef} >
+                            <BeatLoader loading={loading} color='#7F3FFC' />
+                        </div>}
                     </div>
                 </motion.div>
             </div>
