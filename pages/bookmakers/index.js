@@ -489,7 +489,7 @@ function Casino({
                             <div className={styles.languageContent}>
                                 {
                                     website_language.slice(0, 2).map(lang => (
-                                        <div className={styles.language}>
+                                        <div className={styles.language} key={`${id}_website_${lang.id}`}>
                                             <Image
                                                 src={`/images/icons/${lang.code}`}
                                                 alt={lang.name}
@@ -509,7 +509,7 @@ function Casino({
                             <div className={styles.languageContent}>
                                 {
                                     support_language.slice(0, 2).map(lang => (
-                                        <div className={styles.language}>
+                                        <div className={styles.language} key={`${id}_support_${lang.id}`} >
                                             <Image
                                                 src={`/images/icons/${lang.code}`}
                                                 alt={lang.name}
