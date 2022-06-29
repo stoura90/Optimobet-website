@@ -334,6 +334,14 @@ export default function CasinosPage({ casinos, filters }) {
                         exit="hidden"
                         className={styles.filters}
                     >
+                        <span className={styles.filtersTitle}>
+                            <Image
+                                src={'/images/icons/filter.svg'}
+                                height={20}
+                                width={20}
+                            />
+                            Filters
+                        </span>
                         {
                             filters.map((filter, index) => (
                                 <CheckboxFilter

@@ -310,6 +310,14 @@ export default function BookmakersPage({ bookmakers, filters }) {
                         exit="hidden"
                         className={styles.filters}
                     >
+                        <span className={styles.filtersTitle}>
+                            <Image
+                                src={'/images/icons/filter.svg'}
+                                height={20}
+                                width={20}
+                            />
+                            Filters
+                        </span>
                         {
                             filters.map((filter, index) => (
                                 <CheckboxFilter
@@ -514,11 +522,11 @@ function Casino({
 }
 
 export async function getStaticProps() {
-    const bookmakers = await APIRequest('/bookmakers', 'GET')
-    const languages = await APIRequest('/languages', 'GET')
-    const games = await APIRequest('/games', 'GET')
-    const countries = await APIRequest('/countries', 'GET')
-    const providers = await APIRequest('/providers', 'GET')
+    const bookmakers = await APIRequest('/nolimit/bookmakers', 'GET')
+    const languages = await APIRequest('/nolimit/languages', 'GET')
+    const games = await APIRequest('/nolimit/games', 'GET')
+    const countries = await APIRequest('/nolimit/countries', 'GET')
+    const providers = await APIRequest('/nolimit/providers', 'GET')
 
     return {
         props: {
