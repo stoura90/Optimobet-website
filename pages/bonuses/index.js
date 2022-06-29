@@ -219,8 +219,8 @@ export default function BonusesPage({ bonuses, filters }) {
                     </div>
                     <div className={styles.casinos}>
                         {
-                            filteredItems.map(bonus => (
-                                <Bonus {...bonus} key={`bonus_${bonus.id}`} />
+                            filteredItems.map((bonus, index) => (
+                                <Bonus {...bonus} key={`bonus_${bonus.id}_${index}`} />
                             ))
                         }
                         {filteredItems.length > 5 && <div ref={loadMoreRef} />}
