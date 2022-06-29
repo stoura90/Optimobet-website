@@ -44,10 +44,15 @@
 }
 .termsContent::-webkit-scrollbar{
     width: 8px;
-    border-left: 4px solid #FFF;
     background: #4B445310;   
+    background-clip: padding-box;
+    border-left: 4px solid rgba(0, 0, 0, 0);
+}
+.termsContent::-webkit-scrollbar-button{
+    display: none;
 }
 .termsContent::-webkit-scrollbar-thumb{ 
-    border-left: 4px solid #FFF;
     background: #4B445333;
+    background-clip: padding-box;
+    border-left: 4px solid rgba(0, 0, 0, 0);
 }

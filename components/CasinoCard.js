@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import styles from '../styles/components/CasinoCard.module.css'
 import { AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import Stars from './Stars'
+import TermsModal from './TermsModal'
 
 export default function CasinoCard({
     claim_bonus_url,
@@ -14,8 +16,11 @@ export default function CasinoCard({
     website_language,
     url,
     shared_content,
-    id
+    id,
+    terms_and_conditions
 }) {
+    const [modal, setModal] = useState(false)
+
     return (
         <div className={styles.casino}>
             <Link href={`/casinos/${id}`}>
@@ -115,7 +120,22 @@ export default function CasinoCard({
                         </div>
                     </div>
                     <div className={styles.casinoButtons}>
-                        <div className={styles.casinoButton}>
+                        <div 
+                            className={styles.tcButton}
+                            onClick={() => {
+                                setModal(!modal)
+                            }}
+                        >
+                            {terms_and_conditions && 
+                                <AnimatePresence>
+                                    {modal && 
+                                        <TermsModal
+                                            setModalState={setModal}
+                                            rules={terms_and_conditions}
+                                        />
+                                    }                                
+                                </AnimatePresence>
+                            }  
                             T&C Apply
                         </div>
                         <a
