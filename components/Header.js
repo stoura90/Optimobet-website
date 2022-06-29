@@ -30,14 +30,14 @@ const links = [
         href: '/slots',
         name: 'Gambling'
     },
-    {
-        href: '/complaints',
-        name: 'Complaints'
-    },
-    {
-        href: '/blog',
-        name: 'Blog'
-    },
+    // {
+    //     href: '/complaints',
+    //     name: 'Complaints'
+    // },
+    // {
+    //     href: '/blog',
+    //     name: 'Blog'
+    // },
 ]
 
 export default function Header() {
