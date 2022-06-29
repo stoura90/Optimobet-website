@@ -251,8 +251,8 @@ export default function SlotsPage({ slots, providers }) {
 }
 
 export async function getStaticProps() {
-    const slots = await APIRequest('/slots?no_paginate=1', 'GET')
-    const providers = await APIRequest('/providers', 'GET')
+    const slots = await APIRequest('/nolimit/slots?no_paginate=1', 'GET')
+    const providers = await APIRequest('/nolimit/providers', 'GET')
     let slotsWithProvider = slots.filter(slot => slot).map(slot => (
         {
             ...slot,
