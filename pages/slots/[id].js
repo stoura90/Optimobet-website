@@ -217,7 +217,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                 </div>
                 <div className={styles.aboutSlot}>
                     <span className={styles.slotDescription}>
-                        {parse(slot.description)}
+                        {parse(slot.description ?? "-")}
                     </span>
                     <div className={styles.ourScore}>
                         <div className={styles.ourScoreHeader}>
@@ -229,7 +229,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                             </span>
                         </div>
                         <span className={styles.ourScoreText}>
-                            {parse(slot.verdict)}
+                            {parse(slot.verdict ?? "-")}
                         </span>
                     </div>
                 </div>
