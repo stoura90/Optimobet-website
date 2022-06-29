@@ -14,7 +14,7 @@
     margin-bottom: 100px;
 }
 
-.sticky{    
+.sticky {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -162,6 +162,7 @@
     height: 20px;
     content: "";
     flex-shrink: 0;
+    transform: rotateY(180deg);
 }
 
 .disadvantages {
@@ -190,7 +191,7 @@
     height: 20px;
     content: "";
     flex-shrink: 0;
-    transform: rotateZ(180deg) rotateY(180deg);
+    transform: rotateZ(180deg);
 }
 
 .mainCol {
