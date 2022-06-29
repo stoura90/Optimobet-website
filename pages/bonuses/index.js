@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { SwiperSlide } from 'swiper/react';
 import SliderWithControls from '../../components/SliderWithControls';
 import styles from '../../styles/pages/Bonuses.module.css'
@@ -7,174 +7,18 @@ import { AnimatePresence, motion } from 'framer-motion';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
-
-const filters = [
-    {
-        name: 'Popular filters',
-        items: [
-            {
-                id: 1,
-                name: 'No Deposit Bonus',
-            },
-            {
-                id: 2,
-                name: 'Deposit Bonus',
-            },
-            {
-                id: 3,
-                name: 'Mobile Devices Supported'
-            }
-        ],
-    },
-    {
-        name: 'Countries',
-        items: [
-            {
-                id: 1,
-                name: "Georgia"
-            },
-            {
-                id: 2,
-                name: "US"
-            },
-            {
-                id: 3,
-                name: "Canada"
-            },
-            {
-                id: 4,
-                name: "UK"
-            }
-        ]
-    },
-    {
-        name: 'Games',
-        items: [
-            {
-                id: 1,
-                name: 'Slots'
-            },
-            {
-                id: 2,
-                name: 'Live Casino'
-            },
-            {
-                id: 3,
-                name: 'Table Games'
-            },
-            {
-                id: 4,
-                name: 'Poker'
-            }
-        ]
-    },
-    {
-        name: 'Providers',
-        items: [
-            {
-                id: 1,
-                name: 'IVI Casino'
-            },
-            {
-                id: 2,
-                name: 'IG Casino'
-            },
-            {
-                id: 3,
-                name: 'VIP Casino'
-            },
-            {
-                id: 4,
-                name: 'V Casino'
-            }
-        ]
-    },
-    {
-        name: 'Payment',
-        items: [
-            {
-                id: 1,
-                name: 'Online'
-            },
-            {
-                id: 2,
-                name: 'Cash'
-            },
-            {
-                id: 3,
-                name: 'Both'
-            }
-        ]
-    },
-    {
-        name: 'Website Language',
-        items: [
-            {
-                id: 1,
-                name: 'Georgian',
-            },
-            {
-                id: 2,
-                name: 'English',
-            },
-            {
-                id: 3,
-                name: 'Russian',
-            }
-        ]
-    },
-    {
-        name: 'Support Language',
-        items: [
-            {
-                id: 1,
-                name: 'Georgian',
-            },
-            {
-                id: 2,
-                name: 'English',
-            },
-            {
-                id: 3,
-                name: 'Russian',
-            }
-        ]
-    }
-
-]
-
-const casinos = [
-    {
-        name: 'IVI Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    },
-    {
-        name: 'IG Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    },
-    {
-        name: 'VIP Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    },
-    {
-        name: 'V Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    }
-]
+import APIRequest from '../../functions/requests/APIRequest'
+import Link from 'next/link'
 
 const slides = [1, 2, 3, 4, 5]
 
-export default function BonusesPage() {
+export default function BonusesPage({ bonuses, filters }) {
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
+    const bonusesRef = useRef(bonuses);
+    const [filteredItems, setFilteredItems] = useState(bonuses);
+    const [page, setPage] = useState(1);
+    const loadMoreRef = useRef(null);
 
     const controlVariants = {
         left: {
@@ -219,6 +63,53 @@ export default function BonusesPage() {
         }
     }
 
+    useEffect(()=>{
+        let filteredItemsN = [...bonusesRef.current]
+        switch (filter) {
+            case "Best for you":
+                filteredItemsN = filteredItemsN.sort((a,b) => (b.best_for_you - a.best_for_you))
+                break;
+            case "Recently added":
+                filteredItemsN = filteredItemsN.sort((a,b) => (new Date(b.created_at) - new Date(a.created_at)))
+                break;
+            default:
+                break;
+        }
+        setFilteredItems(filteredItemsN)
+    },[filter])
+
+    function loadMore() {
+        APIRequest(`/bonuses?page=${page + 1}`, 'GET')
+            .then(res => {
+                setPage(page++);
+                let newDataF = [...res.data]
+                switch (filter) {
+                    case "Best for you":
+                        newDataF = newDataF.sort((a,b) => (b.best_for_you - a.best_for_you))
+                        break;
+                    case "Recently added":
+                        newDataF = newDataF.sort((a,b) => (new Date(b.created_at) - new Date(a.created_at)))
+                        break;
+                    default:
+                        break;
+                }
+                setFilteredItems([...bonusesRef.current, ...newDataF]);
+                bonusesRef.current = [...bonusesRef.current, ...res.data]
+            })
+    }
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) {
+                    loadMore();
+                }
+            }
+        )
+        observer.observe(loadMoreRef.current);
+        return () => observer.disconnect();
+    }, [])
+
     return (
         <div className={styles.container}>
             <div>
@@ -261,7 +152,7 @@ export default function BonusesPage() {
                             Filters
                         </span>
                         {
-                            filters.map((filter, index) => (
+                            filters?.map((filter, index) => (
                                 <CheckboxFilter
                                     key={filter.name}
                                     title={filter.name}
@@ -313,31 +204,26 @@ export default function BonusesPage() {
                                 All
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
-                                onClick={() => setFilter('New')}
+                                className={`${styles.filterControlsItem} ${filter === 'Best for you' && styles.active}`}
+                                onClick={() => setFilter('Best for you')}
                             >
-                                New
+                                Best for you
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
-                                onClick={() => setFilter('Popular')}
+                                className={`${styles.filterControlsItem} ${filter === 'Recently added' && styles.active}`}
+                                onClick={() => setFilter('Recently added')}
                             >
-                                Popular
-                            </div>
-                            <div
-                                className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
-                                onClick={() => setFilter('Promotions')}
-                            >
-                                Promotions
+                                Recently added
                             </div>
                         </div>
                     </div>
                     <div className={styles.casinos}>
                         {
-                            casinos.map(casino => (
-                                <Casino {...casino} key={casino.name} />
+                            filteredItems.map(bonus => (
+                                <Bonus {...bonus} key={`bonus_${bonus.id}`} />
                             ))
                         }
+                        {filteredItems.length > 5 && <div ref={loadMoreRef} />}
                     </div>
                 </motion.div>
             </div>
@@ -345,7 +231,7 @@ export default function BonusesPage() {
     )
 }
 
-function Casino({ name, rating, tags, games }) {
+function Bonus({ name, title, bonusable, games = [] }) {
     return (
         <div className={styles.casino}>
             <div className={styles.casinoImage}>
@@ -357,21 +243,27 @@ function Casino({ name, rating, tags, games }) {
             </div>
             <div className={styles.casinoInfo}>
                 <div className={styles.casinoColumn}>
-
                     <div className={styles.casinoName}>
-                        <span className={styles.casinoNameText}>{name}</span>
-                        <div className={styles.casinoRating}>
-                            <Stars points={rating} />
-                        </div>
+                        <span className={styles.casinoNameText}>
+                            {bonusable?.shared_content?.name || ""}
+                        </span>
+                        {bonusable?.rating && 
+                            <div className={styles.casinoRating}>
+                                <Stars points={bonusable.rating} />
+                            </div>
+                        }
+                        <span className={styles.titleText}>
+                            {title || name || ""}
+                        </span>
                     </div>
                     <div className={styles.casinoTags}>
                         {
-                            tags.map(tag => (
+                            bonusable?.features?.map(tag => (
                                 <div className={styles.casinoTag} key={tag}>
                                     <Image
                                         src="/images/icons/circle-check.svg"
-                                        height={12}
-                                        width={12}
+                                        height={18}
+                                        width={18}
                                     />
                                     {tag}
                                 </div>
@@ -432,17 +324,38 @@ function Casino({ name, rating, tags, games }) {
                         </div>
                     </div>
                     <div className={styles.casinoButtons}>
-                        <div className={styles.casinoButton}>
+                        <div className={styles.tcButton}>
                             T&C Apply
                         </div>
-                        <div className={`${styles.casinoButton} ${styles.highlighted}`}>
-                            Get Bonus
-                        </div>
+                        {(bonusable?.url || bonusable?.bonus_url || bonusable?.claim_bonus_url) ? 
+                            <Link href={bonusable?.url || bonusable?.bonus_url || bonusable?.claim_bonus_url}>
+                                <a target="_blank">
+                                    <div className={`${styles.casinoButton} ${styles.highlighted}`}>
+                                        Get Bonus
+                                    </div>
+                                </a>
+                            </Link>
+                            :
+                            <div className={`${styles.casinoButton} ${styles.highlighted}`}>
+                                Get Bonus
+                            </div>
+                        }                        
                     </div>
                 </div>
             </div>
         </div>
     )
+}
+
+export async function getStaticProps() {
+    const bonuses = await APIRequest('/bonuses', 'GET')
+
+    return {
+        props: {
+            bonuses: bonuses.data       
+        },
+        revalidate: 10,
+    }
 }
 
 BonusesPage.withHeader = true;
