@@ -7,6 +7,8 @@ import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
 import { useRouter } from 'next/router'
 import Slot from '../../components/Slot'
+import CasinoCard from '../../components/CasinoCard'
+import APIRequest from '../../functions/requests/APIRequest';
 
 const filters = [
     {
@@ -192,38 +194,51 @@ const _slots = [
     }
 ]
 
-const casinos = [
-    {
-        name: 'IVI Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    },
-    {
-        name: 'IG Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    },
-    {
-        name: 'VIP Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    },
-    {
-        name: 'V Casino',
-        rating: 4.5,
-        tags: ['Popular', 'Deposit Bonus', 'Mobile Devices Supported'],
-        games: ['Slots', 'Live Casino', 'Table Games', 'Poker']
-    }
-]
-
 export default function SearchResults() {
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
     const router = useRouter()
     const [selectedCat, setSelectedCat] = useState(0)
+    const [categoriesOnSearch, setCategoriesOnSearch] = useState()
+    const [casinos, setCasinos] = useState([])
+    const [bookmakers, setBookmakers] = useState([])
+
+    useEffect(()=>{
+        if (router.query.text)
+            APIRequest(`/search?q=${router.query.text}`, 'GET')
+            .then(data => {
+                setCategoriesOnSearch(
+                    [
+                        {
+                            name: "All",
+                            count: Object.entries(data).reduce(
+                                (previousValue, currentValue) => (
+                                    (typeof previousValue != "number" ? 
+                                        previousValue[1] ? previousValue[1].length : 0
+                                        : 
+                                        previousValue
+                                    ) 
+                                    + 
+                                    (currentValue[1] ? currentValue[1].length : 0)
+                                )
+                            )
+                        }
+                        ,
+                        ...Object.entries(data).map(([key,value]) => (
+                            {
+                                name:key,
+                                count:value.length
+                            }
+                        ))
+                    ]
+                )
+                setCasinos(data.casinos)
+                setBookmakers(data.bookmakers)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    },[router.query])
 
     const selectCategoryForFilters = (category) => {
         setSelectedCat(category)
@@ -339,6 +354,7 @@ export default function SearchResults() {
                             </div>
                             <CategoryFilter
                                 currentCategory={selectedCat}
+                                categories={categoriesOnSearch}
                                 selectCategory={selectCategoryForFilters}
                             />
                             <motion.div
@@ -367,7 +383,7 @@ export default function SearchResults() {
                     className={styles.content}
                 >
                     <AnimatePresence initial={false}>
-                        {(selectedCat == 1 || selectedCat == 0) &&
+                        {categoriesOnSearch && casinos && casinos.length>0 && (categoriesOnSearch[selectedCat].name == "casinos" || selectedCat == 0) &&
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -466,13 +482,132 @@ export default function SearchResults() {
                                 >
                                     {
                                         casinos.map(casino => (
-                                            <Casino {...casino} key={casino.name} />
+                                            <CasinoCard 
+                                                {...casino.casino} 
+                                                shared_content={{...casino}} 
+                                                games={[]}
+                                                website_language={[]}
+                                                support_language={[]}
+                                                key={casino.name} 
+                                            />
                                         ))
                                     }
                                 </motion.div>
                             </motion.div>
                         }
-                        {(selectedCat == 2 || selectedCat == 0) &&
+                        {categoriesOnSearch && bookmakers && bookmakers.length>0 && (categoriesOnSearch[selectedCat].name == "bookmakers" || selectedCat == 0) &&
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                            >
+                                <div style={{ position: "relative" }}>
+                                    <AnimatePresence initial={false}>
+                                        {selectedCat == 0 &&
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                className={styles.categoryHeaderResults}
+                                                style={{ position: "absolute" }}
+                                            >
+                                                <span className={styles.secondName}>
+                                                    Second name
+                                                </span>
+                                                <span className={styles.mainName}>
+                                                    Bookmakers
+                                                </span>
+                                            </motion.div>
+                                        }
+                                    </AnimatePresence>
+                                    <AnimatePresence>
+                                        {selectedCat != 0 &&
+                                            <motion.div
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                exit={{ opacity: 0 }}
+                                                className={styles.controls}
+                                                style={{ position: "absolute", width: "100%" }}
+                                            >
+                                                <div
+                                                    className={styles.sidebarControls}
+                                                    onClick={() => setSidebarShown(!sidebarShown)}
+                                                >
+                                                    <motion.div
+                                                        variants={controlVariants}
+                                                        animate={sidebarShown ? 'left' : 'right'}
+                                                        className={styles.sidebarControlsSlide}
+                                                    />
+                                                    <div className={styles.sidebarControlsItem}>
+                                                        <ReactSVG
+                                                            src='/images/icons/layout-sidebar.svg'
+                                                            className={sidebarShown ? styles.light : styles.dark}
+                                                            height={24}
+                                                            width={24}
+                                                        />
+                                                    </div>
+                                                    <div className={styles.sidebarControlsItem}>
+                                                        <ReactSVG
+                                                            src='/images/icons/layout-sidebar-left-collapse.svg'
+                                                            className={sidebarShown ? styles.dark : styles.light}
+                                                            height={24}
+                                                            width={24}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className={styles.filterControls}>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'All' && styles.active}`}
+                                                        onClick={() => setFilter('All')}
+                                                    >
+                                                        All
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
+                                                        onClick={() => setFilter('New')}
+                                                    >
+                                                        New
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
+                                                        onClick={() => setFilter('Popular')}
+                                                    >
+                                                        Popular
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
+                                                        onClick={() => setFilter('Promotions')}
+                                                    >
+                                                        Promotions
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        }
+                                    </AnimatePresence>
+                                </div>
+                                <motion.div
+                                    variants={resultCasinosVariants}
+                                    initial={"title"}
+                                    animate={selectedCat == 0 ? "title" : "controls"}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className={styles.casinos}
+                                >
+                                    {
+                                        bookmakers.map(casino => (
+                                            <CasinoCard 
+                                                {...casino.casino} 
+                                                shared_content={{...casino}} 
+                                                games={[]}
+                                                website_language={[]}
+                                                support_language={[]}
+                                                key={casino.name} 
+                                            />
+                                        ))
+                                    }
+                                </motion.div>
+                            </motion.div>
+                        }
+                        {categoriesOnSearch && (categoriesOnSearch[selectedCat].name == "slots" || selectedCat == 0) &&
                             <motion.div
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
@@ -582,20 +717,7 @@ export default function SearchResults() {
 }
 
 function CategoryFilter({
-    categories = [
-        {
-            name: "All",
-            count: 15
-        },
-        {
-            name: "Online Casino",
-            count: 15
-        },
-        {
-            name: "Free Slots",
-            count: 15
-        },
-    ],
+    categories = [],
     selectCategory,
     currentCategory = 0
 }) {
@@ -616,6 +738,7 @@ function CategoryFilter({
                         className={`${styles.category} ${index == selectedCat && styles.activeCategory}`}
                         key={index}
                         onClick={() => setSelectedCat(index)}
+                        style={cat.count>0 ? {} : {display:"none"}}
                     >
                         <span>
                             {cat.name}
@@ -625,106 +748,6 @@ function CategoryFilter({
                         </span>
                     </div>
                 ))}
-            </div>
-        </div>
-    )
-}
-
-function Casino({ name, rating, tags, games }) {
-    return (
-        <div className={styles.casino}>
-            <div className={styles.casinoImage}>
-                <Image
-                    src="/images/casino.png"
-                    layout='fill'
-                    objectFit='cover'
-                />
-            </div>
-            <div className={styles.casinoInfo}>
-                <div className={styles.casinoColumn}>
-
-                    <div className={styles.casinoName}>
-                        <span className={styles.casinoNameText}>{name}</span>
-                        <div className={styles.casinoRating}>
-                            <Stars points={rating} />
-                        </div>
-                    </div>
-                    <div className={styles.casinoTags}>
-                        {
-                            tags.map(tag => (
-                                <div className={styles.casinoTag} key={tag}>
-                                    <Image
-                                        src="/images/icons/circle-check.svg"
-                                        height={12}
-                                        width={12}
-                                    />
-                                    {tag}
-                                </div>
-                            ))
-                        }
-                    </div>
-                    <span className={styles.subtitle}>
-                        Available games
-                    </span>
-                    <div className={styles.casinoGames}>
-                        {
-                            games.map(game => (
-                                <div className={styles.casinoGame} key={game} >
-                                    <Image
-                                        src="/images/game.png"
-                                        layout='fill'
-                                        objectFit='cover'
-                                        alt={game}
-                                    />
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-                <div className={`${styles.casinoColumn} ${styles.right}`}>
-                    <div className={styles.casinoLanguages}>
-                        <div className={styles.languageContainer}>
-                            <span className={styles.languageTitle}>Website</span>
-                            <div className={styles.languageContent}>
-                                {
-                                    [1, 2, 3].map(item => (
-                                        <div className={styles.language} key={item}>
-                                            <Image
-                                                src="/images/icons/flag-en.svg"
-                                                height={20}
-                                                width={27}
-                                            />
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                        <div className={styles.languageContainer}>
-                            <span className={styles.languageTitle}>Live chat</span>
-                            <div className={styles.languageContent}>
-                                {
-                                    [1, 2, 3].map(item => (
-                                        <div className={styles.language} key={item}>
-                                            <Image
-                                                src="/images/icons/flag-en.svg"
-                                                height={20}
-                                                width={27}
-                                            />
-                                        </div>
-                                    ))
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div className={styles.casinoButtons}>
-                        <div className={styles.casinoButton}>
-                            T&C Apply
-                        </div>
-                        <div className={`${styles.casinoButton} ${styles.highlighted}`}>
-                            Get Bonus
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     )
