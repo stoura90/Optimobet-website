@@ -56,9 +56,9 @@ export default function CasinoPage({ casino }) {
                             </div>
                         </div>
                     </div>
-                    <div className={styles.complaint}>
+                    {/* <div className={styles.complaint}>
                         Submit a complaint
-                    </div>
+                    </div> */}
                     <div className={styles.advantages}>
                         {casino.positives.map(tag => (
                             <span key={`pos_${tag}`}>
@@ -93,13 +93,13 @@ export default function CasinoPage({ casino }) {
                         iconSrc="/images/icons/casino/language.svg"
                         infoTitle="Website Language"
                         infoText={casino.website_language[0].name}
-                        dataImages={casino.website_language.map(lang => '/placeholder.png').slice(0, 2)}
+                        dataImages={casino.website_language.map(lang => '/placeholder.png').slice(0, 3)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/messages.svg"
                         infoTitle="Live Chat"
                         infoText={casino.support_language[0].name}
-                        dataImages={casino.support_language.map(lang => '/placeholder.png').slice(0, 2)}
+                        dataImages={casino.support_language.map(lang => '/placeholder.png').slice(0, 3)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/user.svg"
