@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../styles/pages/SearchResults.module.css'
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import CheckboxFilter from '../../components/filters/CheckboxFilter';
 import Stars from '../../components/Stars';
 import { ReactSVG } from 'react-svg';
@@ -128,85 +128,26 @@ const filters = [
 
 ]
 
-const _slots = [
-    {
-        id: 1,
-        name: 'Slot 1',
-        provider: 'ELK Studio',
-        type: 'Achievement',
-        rating: 4.5,
-    },
-    {
-        id: 2,
-        name: 'Slot 2',
-        provider: 'Netend',
-        type: 'Megaways',
-        rating: 4.5,
-    },
-    {
-        id: 3,
-        name: 'Slot 3',
-        provider: 'YGGDRASIL',
-        type: 'Bonus Buy',
-        rating: 4.5,
-    },
-    {
-        id: 4,
-        name: 'Slot 4',
-        provider: 'EGT',
-        type: 'Sticky Features',
-        rating: 4.5,
-    },
-    {
-        id: 5,
-        name: 'Slot 5',
-        provider: 'PRAGMATICPLAY',
-        type: 'Jackpot',
-        rating: 4.5,
-    },
-    {
-        id: 6,
-        name: 'Slot 6',
-        provider: 'Booming Games',
-        type: 'Achievement',
-        rating: 4.5,
-    },
-    {
-        id: 7,
-        name: 'Slot 7',
-        provider: 'IRON DOG',
-        type: 'Megaways',
-        rating: 4.5,
-    },
-    {
-        id: 8,
-        name: 'Slot 8',
-        provider: 'BETSOFT',
-        type: 'Bonus Buy',
-        rating: 4.5,
-    },
-    {
-        id: 9,
-        name: 'Slot 9',
-        provider: '2by2gaming',
-        type: 'Sticky Features',
-        rating: 4.5,
-    }
-]
-
-export default function SearchResults() {
+export default function SearchResults({ providers }) {
     const [sidebarShown, setSidebarShown] = useState(true);
-    const [filter, setFilter] = useState('All');
+    const [filterCasino, setFilterCasino] = useState('All');
+    const [filterBookmakers, setFilterBookmakers] = useState('All');
+    const [filterSlots, setFilterSlots] = useState('All');
     const router = useRouter()
     const [selectedCat, setSelectedCat] = useState(0)
     const [categoriesOnSearch, setCategoriesOnSearch] = useState()
+    const casinosRef = useRef()
+    const bookmakersRef = useRef()
+    const slotsRef = useRef()
     const [casinos, setCasinos] = useState([])
     const [bookmakers, setBookmakers] = useState([])
+    const [slots, setSlots] = useState([])
 
     useEffect(()=>{
         if (router.query.text)
             APIRequest(`/search?q=${router.query.text}`, 'GET')
             .then(data => {
+                console.log(data)
                 setCategoriesOnSearch(
                     [
                         {
@@ -232,13 +173,53 @@ export default function SearchResults() {
                         ))
                     ]
                 )
+                casinosRef.current = data.casinos
                 setCasinos(data.casinos)
+                bookmakersRef.current = data.bookmakers
                 setBookmakers(data.bookmakers)
+                slotsRef.current = data.slots.map(slot => (
+                    {
+                        ...slot,
+                        provider: providers.filter(p => p.id == slot.provider_id)[0]?.name ?? null
+                    }
+                ))
+                console.log("All",slotsRef.current)
+                setSlots(slotsRef.current)
             })
             .catch(err => {
                 console.error(err)
             })
     },[router.query])
+
+    function doFilterCasinos() {
+        let casinosSorted = casinosRef.current
+
+    }
+
+    function doFilterBookmakers() {
+        let bookmakersSorted = bookmakersRef.current
+
+    }
+
+    useEffect(()=>{
+        if (slotsRef.current) {
+            let slotsSorted = [...slotsRef.current]
+            switch (filterSlots) {
+                case 'New':
+                    slotsSorted.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+                    break;
+                case 'Popular':
+                    slotsSorted.sort((a,b) => b.popularity - a.popularity)
+                    break;
+                case 'Promotions':
+                    slotsSorted.sort((a,b) => b.promotions - a.promotions)
+                    break;
+                default:
+                    break;
+            }
+            setSlots(slotsSorted)
+        }        
+    },[filterSlots])
 
     const selectCategoryForFilters = (category) => {
         setSelectedCat(category)
@@ -310,7 +291,7 @@ export default function SearchResults() {
         let column = 1;
         let row = 1;
         const maxColumns = sidebarShown ? 3 : 4;
-        return _slots.map((item, index) => {
+        return slots.map((item, index) => {
             const slot = <Slot
                 {...item}
                 key={`slot_${item.id}`}
@@ -383,6 +364,7 @@ export default function SearchResults() {
                     className={styles.content}
                 >
                     <AnimatePresence initial={false}>
+                        <LayoutGroup>                        
                         {categoriesOnSearch && casinos && casinos.length>0 && (categoriesOnSearch[selectedCat].name == "casinos" || selectedCat == 0) &&
                             <motion.div
                                 initial={{ opacity: 0 }}
@@ -445,26 +427,26 @@ export default function SearchResults() {
                                                 </div>
                                                 <div className={styles.filterControls}>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'All' && styles.active}`}
-                                                        onClick={() => setFilter('All')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'All' && styles.active}`}
+                                                        onClick={() => setFilterCasino('All')}
                                                     >
                                                         All
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
-                                                        onClick={() => setFilter('New')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'New' && styles.active}`}
+                                                        onClick={() => setFilterCasino('New')}
                                                     >
                                                         New
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
-                                                        onClick={() => setFilter('Popular')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Popular' && styles.active}`}
+                                                        onClick={() => setFilterCasino('Popular')}
                                                     >
                                                         Popular
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
-                                                        onClick={() => setFilter('Promotions')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Promotions' && styles.active}`}
+                                                        onClick={() => setFilterCasino('Promotions')}
                                                     >
                                                         Promotions
                                                     </div>
@@ -488,7 +470,7 @@ export default function SearchResults() {
                                                 games={[]}
                                                 website_language={[]}
                                                 support_language={[]}
-                                                key={casino.name} 
+                                                key={`${casino.name}-${casino.id}`} 
                                             />
                                         ))
                                     }
@@ -557,26 +539,26 @@ export default function SearchResults() {
                                                 </div>
                                                 <div className={styles.filterControls}>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'All' && styles.active}`}
-                                                        onClick={() => setFilter('All')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'All' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('All')}
                                                     >
                                                         All
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
-                                                        onClick={() => setFilter('New')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'New' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('New')}
                                                     >
                                                         New
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
-                                                        onClick={() => setFilter('Popular')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Popular' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('Popular')}
                                                     >
                                                         Popular
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
-                                                        onClick={() => setFilter('Promotions')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Promotions' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('Promotions')}
                                                     >
                                                         Promotions
                                                     </div>
@@ -600,7 +582,7 @@ export default function SearchResults() {
                                                 games={[]}
                                                 website_language={[]}
                                                 support_language={[]}
-                                                key={casino.name} 
+                                                key={`${casino.name}-${casino.id}`} 
                                             />
                                         ))
                                     }
@@ -669,26 +651,26 @@ export default function SearchResults() {
                                                 </div>
                                                 <div className={styles.filterControls}>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'All' && styles.active}`}
-                                                        onClick={() => setFilter('All')}
+                                                        className={`${styles.filterControlsItem} ${filterSlots === 'All' && styles.active}`}
+                                                        onClick={() => setFilterSlots('All')}
                                                     >
                                                         All
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'New' && styles.active}`}
-                                                        onClick={() => setFilter('New')}
+                                                        className={`${styles.filterControlsItem} ${filterSlots === 'New' && styles.active}`}
+                                                        onClick={() => setFilterSlots('New')}
                                                     >
                                                         New
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'Popular' && styles.active}`}
-                                                        onClick={() => setFilter('Popular')}
+                                                        className={`${styles.filterControlsItem} ${filterSlots === 'Popular' && styles.active}`}
+                                                        onClick={() => setFilterSlots('Popular')}
                                                     >
                                                         Popular
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filter === 'Promotions' && styles.active}`}
-                                                        onClick={() => setFilter('Promotions')}
+                                                        className={`${styles.filterControlsItem} ${filterSlots === 'Promotions' && styles.active}`}
+                                                        onClick={() => setFilterSlots('Promotions')}
                                                     >
                                                         Promotions
                                                     </div>
@@ -705,10 +687,11 @@ export default function SearchResults() {
                                     style={!sidebarShown ? { gridTemplateColumns: "repeat(4, 1fr)" } : {}}
                                     className={styles.slots}
                                 >
-                                    {renderSlots(sidebarShown)}
+                                    {slots && renderSlots(sidebarShown)}
                                 </motion.div>
                             </motion.div>
                         }
+                        </LayoutGroup>
                     </AnimatePresence>
                 </motion.div>
             </div>
@@ -751,6 +734,17 @@ function CategoryFilter({
             </div>
         </div>
     )
+}
+
+export async function getStaticProps() {
+    const providers = await APIRequest('/nolimit/providers', 'GET')
+
+    return {
+        props: {
+            providers
+        },
+        revalidate: 10,
+    }
 }
 
 SearchResults.withHeader = true;

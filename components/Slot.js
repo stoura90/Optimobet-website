@@ -61,9 +61,9 @@ export default function Slot({ name, provider, score, big, id, style }) {
                     </Link>
                 }
             </AnimatePresence>
-            <div className={styles.slotRating}>
+            {score && <div className={styles.slotRating}>
                 {score}
-            </div>
+            </div>}
             {
                 big &&
                 <Link href={`/slots/${id}`}>
