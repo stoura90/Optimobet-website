@@ -30,7 +30,7 @@
 .content {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 100px;
     width: 80%;
     margin-left: calc(20% + 30px);
     position: relative;
@@ -410,4 +410,15 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
     width: 100%;
+}
+.showMore{
+    margin-top: 40px;
+    border: 1px solid #4B445333;
+    border-radius: 24px;
+    font: normal normal 500 15px/18px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    padding: 15px 40px;
+    width: fit-content;
+    cursor: pointer;
 }
