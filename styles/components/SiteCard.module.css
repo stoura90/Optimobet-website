@@ -114,6 +114,10 @@
 }
 
 .cardContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
     padding: 24px 24px 32px 24px;
 }
 
@@ -183,11 +187,21 @@
 }
 
 .gamesCircles>div {
+    position: relative;
+    overflow: hidden;
     width: 50px;
     height: 50px;
     border-radius: 100px;
     background: #4B44531A 0% 0% no-repeat padding-box;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    font: normal normal 500 15px/24px Samsung Sans;
+    letter-spacing: 0px;
+    color: #4B4453;
+    opacity: 1;
 }
 
 .buttonBonus {

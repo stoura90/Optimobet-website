@@ -4,7 +4,16 @@ import 'react-circular-progressbar/dist/styles.css';
 import Image from 'next/image'
 import { useState, useEffect } from 'react';
 
-export default function PromoBlock({ bgColor, charactersImage, charactersWidth }) {
+export default function PromoBlock({
+    bgColor,
+    charactersImage,
+    charactersWidth,
+    name,
+    features,
+    bonus_url,
+    country,
+    rating
+}) {
     const [buttonBg, setButtonBg] = useState("")
 
     useEffect(() => {
@@ -29,8 +38,8 @@ export default function PromoBlock({ bgColor, charactersImage, charactersWidth }
                     <div className={styles.promoTitle}>
                         <div className={styles.promoReputation}>
                             <CircularProgressbar
-                                value={75}
-                                text={`75%`}
+                                value={rating}
+                                text={`${rating}%`}
                                 styles={{
                                     root: {},
                                     path: {
@@ -49,7 +58,7 @@ export default function PromoBlock({ bgColor, charactersImage, charactersWidth }
                         </div>
                         <div className={styles.promoSiteInfo}>
                             <span className={styles.promoCountry}>
-                                Georgia
+                                {country?.name}
                             </span>
                             <Image
                                 src="/placeholder.png"
@@ -61,20 +70,27 @@ export default function PromoBlock({ bgColor, charactersImage, charactersWidth }
                     </div>
                     <div className={styles.promoBonusInfo}>
                         <span className={styles.promoBonus}>
-                            Welcome package up to 200 EUR + 100 free spins
+                            {name}
                         </span>
-                        <span className={styles.promoCheckInfo}>
-                            Enormous casino, popular in Ukraine
-                        </span>
+                        {
+                            features?.map(feature => (
+                                <span className={styles.promoCheckInfo}>
+                                    {feature}
+                                </span>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className={styles.promoBonusButton}>
-                    <button
+                    <a
+                        href={bonus_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className={styles.promoGetBonus}
                         style={{ backgroundColor: buttonBg }}
                     >
                         Get Bonus
-                    </button>
+                    </a>
                     <a className={styles.promoBonusApply}>
                         View more
                     </a>

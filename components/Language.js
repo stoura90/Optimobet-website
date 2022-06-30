@@ -47,11 +47,14 @@ export default function Language({ setBorder }) {
             >
                 <span>EN</span>
                 <span className={styles.separator} />
-                <Image
-                    src="/placeholder.png"
-                    width={27}
-                    height={20}
-                />
+                <div className={styles.userCountry}>
+                    <Image
+                        src="/images/placeholder.png"
+                        width={27}
+                        height={20}
+                        alt={countries?.find(country => country.id === user.country_id)?.name}
+                    />
+                </div>
             </div>
             <AnimatePresence>
                 {open &&

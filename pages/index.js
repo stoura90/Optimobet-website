@@ -12,6 +12,8 @@ import { useEffect, useState } from 'react';
 
 import useWindowSize from '../hooks/useWindowSize'
 import Slot from '../components/Slot'
+import APIRequest from '../functions/requests/APIRequest';
+import Link from 'next/link';
 
 const _slots = [
     {
@@ -79,15 +81,15 @@ const _slots = [
     }
 ]
 
-export default function Home() {
+export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus }) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
 
     useEffect(() => {
         const chunkSize = Math.trunc(width * 0.8 / (300 + 19))
         let offset = []
-        for (let i = 0; i < _slots.length; i += chunkSize) {
-            offset.push(_slots.slice(i, i + chunkSize))
+        for (let i = 0; i < freeSlots.length; i += chunkSize) {
+            offset.push(freeSlots.slice(i, i + chunkSize))
         }
         setOffsetSlots(offset)
     }, [width])
@@ -103,16 +105,9 @@ export default function Home() {
             <main className={styles.main}>
                 <div className={styles.mainSlider}>
                     <SliderWithControls loop>
-                        {[1, 2, 3].map(item => (
-                            <SwiperSlide key={item} className={styles.sliderBlock}>
-                                <div>
-                                    <Image
-                                        className={styles.sliderPicture}
-                                        src="/placeholder.png"
-                                        layout='fill'
-                                        objectFit='cover'
-                                    />
-                                </div>
+                        {newCasinos.map(casino => (
+                            <SwiperSlide key={casino.id} className={styles.sliderBlock}>
+                                <NewCasino {...casino} />
                             </SwiperSlide>
                         ))}
                     </SliderWithControls>
@@ -186,11 +181,11 @@ export default function Home() {
                     <SiteCard rep={78} />
                     <SiteCard rep={99} />
                     <div className={styles.moreButtonArea}>
-                        <a
-                            className={styles.moreButton}
-                        >
-                            See More
-                        </a>
+                        <Link href="/bookmakers">
+                            <a className={styles.moreButton}>
+                                See More
+                            </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -203,15 +198,21 @@ export default function Home() {
                             online casinos
                         </span>
                     </div>
-                    <SiteCard rep={56} />
-                    <SiteCard rep={78} />
-                    <SiteCard rep={99} />
+                    {
+                        newCasinos.slice(0, 3).map(casino => (
+                            <SiteCard
+                                key={casino.id}
+                                {...casino}
+                                rep={casino.reputation}
+                            />
+                        ))
+                    }
                     <div className={styles.moreButtonArea} style={{ marginTop: "24px" }}>
-                        <a
-                            className={styles.moreButton}
-                        >
-                            See More
-                        </a>
+                        <Link href="/casinos">
+                            <a className={styles.moreButton}>
+                                See More
+                            </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -226,11 +227,13 @@ export default function Home() {
                     </div>
                     <div className={styles.promoBlocksContent}>
                         <PromoBlock
+                            {...exclusiveBonus[0]}
                             charactersImage="/images/main/7880-4.png"
                             bgColor="#4B4453"
                             charactersWidth="55%"
                         />
                         <PromoBlock
+                            {...exclusiveBonus[1]}
                             charactersImage="/images/main/7880-5.png"
                             bgColor="#00C69C"
                         />
@@ -617,6 +620,69 @@ export default function Home() {
             </main>
         </div>
     )
+}
+
+function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text }) {
+    return (
+        <div className={styles.casino}>
+            <div className={styles.casinoBg}>
+                <Image
+                    src="/placeholder.png"
+                    layout='fill'
+                    objectFit='cover'
+                />
+            </div>
+            <div className={styles.casinoInfo}>
+                <div className={styles.bonusInfo}>
+
+                    <span className={styles.bonusText}>
+                        {claim_bonus_text}
+                    </span>
+                    {features.map(feature => (
+                        <span
+                            key={feature}
+                            className={styles.feature}
+                        >
+                            {feature}
+                        </span>
+                    ))}
+                </div>
+                <div className={styles.casinoButtons}>
+                    <a
+                        href={bonus_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.bonusButton}
+                    >
+                        Get Bonus
+                    </a>
+                    <Link href={`/casinos/${id}`}>
+                        <a className={styles.detailsButton}>
+                            Details
+                        </a>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export async function getStaticProps() {
+    const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
+    const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
+    const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
+    // const betting = await APIRequest('/nolimit/home-components?type=betting');
+
+
+    return {
+        props: {
+            newCasinos,
+            exclusiveBonus,
+            freeSlots,
+            // betting
+        },
+        revalidate: 10,
+    }
 }
 
 Home.withHeader = true;

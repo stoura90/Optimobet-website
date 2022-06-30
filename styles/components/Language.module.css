@@ -1,8 +1,9 @@
-.container{
+.container {
     position: relative;
     display: flex;
     margin-right: 24px;
 }
+
 .language {
     background: #FFFFFF80;
     width: max-content;
@@ -21,12 +22,18 @@
     gap: 8px;
     transition: .2s;
 }
-.separator{
+
+.userCountry {
+    background-color: #ccc;
+}
+
+.separator {
     background: #4B445333;
     height: 18px;
     width: 1px;
 }
-.languageSelector{
+
+.languageSelector {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border: 1px solid #4B445333;
     border-top: none;
@@ -41,18 +48,21 @@
     flex-direction: column;
     gap: 20px;
 }
-.languageHeader{
+
+.languageHeader {
     font: normal normal 500 22px/28px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.applyOrReset{
+
+.applyOrReset {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
 }
-.buttonApply{
+
+.buttonApply {
     background: #7F3FFC 0% 0% no-repeat padding-box;
     border-radius: 24px;
     padding: 15px 32px;
@@ -61,7 +71,8 @@
     letter-spacing: 0px;
     color: #F2F2F2;
 }
-.buttonReset{
+
+.buttonReset {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;

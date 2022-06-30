@@ -71,7 +71,15 @@ const reputations = [
     [100, "perfectRep"],
 ]
 
-export default function SiteCard({ rep = 100 }) {
+export default function SiteCard({
+    rep = 100,
+    shared_content,
+    claim_bonus_url,
+    claim_bonus_text,
+    features,
+    games,
+    rating,
+}) {
     const [reputation, setReputation] = useState(
         reputations.filter(([percent, value]) => (
             rep <= percent
@@ -79,11 +87,10 @@ export default function SiteCard({ rep = 100 }) {
     )
     let reputationN
     switch (
-        reputations.filter(([percent, value]) => (
-            rep <= percent
-        ))[0][1]
-    ) 
-    {
+    reputations.filter(([percent, value]) => (
+        rep <= percent
+    ))[0][1]
+    ) {
         case "badRep":
             reputationN = "bad"
             break;
@@ -128,39 +135,54 @@ export default function SiteCard({ rep = 100 }) {
             <div className={styles.cardContent}>
                 <div className={styles.contentTitle}>
                     <span>
-                        IVI Casino
+                        {shared_content?.name}
                     </span>
                     <div className={styles.starsBlock}>
-                        <Stars points={4.5} />
+                        <Stars points={rating} />
                     </div>
                 </div>
                 <div className={styles.contentData}>
                     <span className={styles.bonus}>
-                        100% BONUS ON SPORT
+                        {claim_bonus_text}
                     </span>
-                    <span className={styles.checkInfo}>
-                        Smaller online casino
-                    </span>
-                    <span className={styles.checkInfo}>
-                        Popular slots with progressive jackpots
-                    </span>
+                    {features?.map(feature => (
+                        <span className={styles.checkInfo}>
+                            {feature}
+                        </span>
+                    ))
+                    }
                 </div>
                 <div className={styles.contentGames}>
                     <span className={styles.gamesTitle}>
                         Available Games
                     </span>
                     <div className={styles.gamesCircles}>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
+                        {
+                            games?.slice(0, 6).map(game => (
+                                <div>
+                                    <Image
+                                        src={'/images/placeholder.png'}
+                                        layout="fill"
+                                        objectFit='cover'
+                                        alt={game.name}
+                                    />
+                                </div>
+                            ))
+                        }
+                        {games?.length > 6 && <div>
+                            +{games?.length - 6}
+                        </div>}
                     </div>
                 </div>
                 <div className={styles.buttonBonus}>
-                    <button className={styles.getBonus}>
+                    <a
+                        href={claim_bonus_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.getBonus}
+                    >
                         Get Bonus
-                    </button>
+                    </a>
                     <span className={styles.bonusApply}>
                         T{'&'}C Apply
                     </span>

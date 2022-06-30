@@ -162,7 +162,7 @@ export default function Search({ setBorder }) {
                                         <SearchResult
                                             href={`/slots/${res.id}`}
                                             name={res.name}
-                                            rating={res.rating}
+                                            rating={res.score}
                                         />
                                     )}
                                 </>
