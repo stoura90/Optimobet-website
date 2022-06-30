@@ -79,6 +79,7 @@ export default function SiteCard({
     features,
     games,
     rating,
+    image_source
 }) {
     const [reputation, setReputation] = useState(
         reputations.filter(([percent, value]) => (
@@ -114,7 +115,7 @@ export default function SiteCard({
         >
             <div className={styles.cardHeader}>
                 <Image
-                    src="/placeholder.png"
+                    src={`${process.env.IMAGE_URL}${image_source}`}
                     objectFit='cover'
                     width={100}
                     height={50}
@@ -161,9 +162,9 @@ export default function SiteCard({
                             games?.slice(0, 6).map(game => (
                                 <div key={`game_${game.id}`}>
                                     <Image
-                                        src={'/images/placeholder.png'}
+                                        src={`${process.env.IMAGE_URL}/${game.image_source}`}
                                         layout="fill"
-                                        objectFit='cover'
+                                        objectFit='contain'
                                         alt={game.name}
                                     />
                                 </div>

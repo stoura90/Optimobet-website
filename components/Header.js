@@ -66,7 +66,7 @@ export default function Header() {
             <Search setBorder={setBordered} />
             <Language setBorder={setBordered} />
             {
-                !user
+                !user?.first_name
                     ? <Link href="/login">
                         <a className={styles.login}>
                             Sign In
@@ -121,7 +121,7 @@ function UserMenu({ user, setBorder }) {
                     onClick={toggleOpen}
                     className={styles.userAvatar}
                 >
-                    {user?.first_name.slice(0, 1).toUpperCase()}{user?.last_name.slice(0, 1).toUpperCase()}
+                    {user.first_name?.slice(0, 1).toUpperCase()}{user.last_name?.slice(0, 1).toUpperCase()}
                 </div>
                 <AnimatePresence initial={false}>
                     {

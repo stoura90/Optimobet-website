@@ -4,7 +4,7 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
 import { useState } from 'react'
 import Link from 'next/link'
 
-export default function Slot({ name, provider, score, big, id, style }) {
+export default function Slot({ name, provider, score, big, id, style, image_source }) {
     const [hover, setHover] = useState(false)
 
     const variants = {
@@ -31,7 +31,7 @@ export default function Slot({ name, provider, score, big, id, style }) {
         >
             <div className={styles.pictureArea}>
                 <Image
-                    src={'/images/egypt.jpg'}
+                    src={`${process.env.IMAGE_URL}/${image_source}`}
                     alt={name}
                     layout={'fill'}
                     objectFit={'cover'}
@@ -57,7 +57,7 @@ export default function Slot({ name, provider, score, big, id, style }) {
                             transition={{ duration: 0.2, ease: "easeInOut" }}
                         >
                             Play Now
-                        </motion.div>                     
+                        </motion.div>
                     </Link>
                 }
             </AnimatePresence>

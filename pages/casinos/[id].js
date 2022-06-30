@@ -17,9 +17,9 @@ export default function CasinoPage({ casino }) {
                         <div className={styles.casinoHeaderCard}>
                             <div className={styles.casinoHeaderLogo}>
                                 <Image
-                                    src="/placeholder.png"
+                                    src={`${process.env.IMAGE_URL}/${casino.image_source}`}
                                     alt={casino.shared_content.name}
-                                    objectFit='contain'
+                                    objectFit='cover'
                                     layout='fill'
                                 />
                             </div>
@@ -92,13 +92,13 @@ export default function CasinoPage({ casino }) {
                     <InfoBlock
                         iconSrc="/images/icons/casino/language.svg"
                         infoTitle="Website Language"
-                        infoText={casino.website_language[0].name}
+                        infoText={casino.website_language[0]?.name}
                         dataImages={casino.website_language.map(lang => '/placeholder.png').slice(0, 3)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/messages.svg"
                         infoTitle="Live Chat"
-                        infoText={casino.support_language[0].name}
+                        infoText={casino.support_language[0]?.name}
                         dataImages={casino.support_language.map(lang => '/placeholder.png').slice(0, 3)}
                     />
                     <InfoBlock
@@ -223,11 +223,11 @@ export default function CasinoPage({ casino }) {
 CasinoPage.withHeader = true;
 CasinoPage.withFooter = true;
 
-function ProviderCard({ name, image }) {
+function ProviderCard({ name, image_source }) {
     return <div className={styles.providerCard}>
         <div className={styles.provider}>
             <Image
-                src="/placeholder.png"
+                src={`${process.env.IMAGE_URL}/${image_source}`}
                 width={48}
                 height={32} />
         </div>

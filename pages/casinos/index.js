@@ -150,19 +150,21 @@ export default function CasinosPage({ casinos, filters }) {
             <div>
                 <SliderWithControls loop>
                     {
-                        slides.map(slide => (
+                        casinos.slice(0, 10).map(slide => (
                             <SwiperSlide
                                 key={`slide_${slide}`}
                                 className={styles.sliderBlock}
                             >
-                                <div>
-                                    <Image
-                                        className={styles.sliderPicture}
-                                        src="/placeholder.png"
-                                        layout='fill'
-                                        objectFit='cover'
-                                    />
-                                </div>
+                                <Link href={`/casinos/${slide.id}`}>
+                                    <a>
+                                        <Image
+                                            className={styles.sliderPicture}
+                                            src={`${process.env.IMAGE_URL}/${slide.image_source}`}
+                                            layout='fill'
+                                            objectFit='cover'
+                                        />
+                                    </a>
+                                </Link>
                             </SwiperSlide>
                         ))
                     }

@@ -19,7 +19,7 @@ export default function CasinoCard({
     shared_content,
     id,
     terms_and_conditions,
-    image
+    image_source,
 }) {
     const [modal, setModal] = useState(false)
 
@@ -28,7 +28,7 @@ export default function CasinoCard({
             <Link href={`/casinos/${id}`}>
                 <a className={styles.casinoImage}>
                     <Image
-                        src={`${process.env.API_URL}/${image}`}
+                        src={`${process.env.IMAGE_URL}/${image_source}`}
                         layout='fill'
                         objectFit='cover'
                     />
@@ -64,9 +64,9 @@ export default function CasinoCard({
                             games.slice(0, 5).map(game => (
                                 <div className={styles.casinoGame} key={game.id} >
                                     <Image
-                                        src={`/images/${game.slug}`}
+                                        src={`${process.env.IMAGE_URL}/${game.image_source}`}
                                         layout='fill'
-                                        objectFit='cover'
+                                        objectFit='contain'
                                         alt={game.name}
                                     />
                                 </div>
@@ -86,7 +86,7 @@ export default function CasinoCard({
                                     website_language.slice(0, 2).map(lang => (
                                         <div className={styles.language} key={`${id}_website_${lang.id}`} >
                                             <Image
-                                                src={`/images/icons/${lang.code}`}
+                                                src={`${process.env.IMAGE_URL}/${lang.flag_source}`}
                                                 alt={lang.name}
                                                 height={20}
                                                 width={27}
@@ -106,7 +106,7 @@ export default function CasinoCard({
                                     support_language.slice(0, 2).map(lang => (
                                         <div className={styles.language} key={`${id}_support_${lang.id}`} >
                                             <Image
-                                                src={`/images/icons/${lang.code}`}
+                                                src={`${process.env.IMAGE_URL}/${lang.flag_source}`}
                                                 alt={lang.name}
                                                 height={20}
                                                 width={27}

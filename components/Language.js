@@ -49,9 +49,10 @@ export default function Language({ setBorder }) {
                 <span className={styles.separator} />
                 <div className={styles.userCountry}>
                     <Image
-                        src="/images/placeholder.png"
+                        src={`${process.env.IMAGE_URL}/${countries?.find(country => country.id === user?.country_id)?.flag_source}`}
                         width={27}
                         height={20}
+                        objectFit="contain"
                         alt={countries?.find(country => country.id === user?.country_id)?.name}
                     />
                 </div>
@@ -72,7 +73,7 @@ export default function Language({ setBorder }) {
                         <Dropdown
                             defaultSelected={user?.country_id}
                             onChange={(item) => country_id.current = item.id}
-                            items={countries.map(country => ({ id: country.id, value: country.name }))}
+                            items={countries.map(country => ({ id: country.id, value: country.name, icon: country.flag_source }))}
                             description={"Your Country"}
                         />
                         <div className={styles.applyOrReset}>

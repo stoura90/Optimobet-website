@@ -66,20 +66,20 @@ export default function BonusesPage({ bonuses, filters }) {
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         let filteredItemsN = [...bonusesRef.current]
         switch (filter) {
             case "Best for you":
-                filteredItemsN = filteredItemsN.sort((a,b) => (b.best_for_you - a.best_for_you))
+                filteredItemsN = filteredItemsN.sort((a, b) => (b.best_for_you - a.best_for_you))
                 break;
             case "Recently added":
-                filteredItemsN = filteredItemsN.sort((a,b) => (new Date(b.created_at) - new Date(a.created_at)))
+                filteredItemsN = filteredItemsN.sort((a, b) => (new Date(b.created_at) - new Date(a.created_at)))
                 break;
             default:
                 break;
         }
         setFilteredItems(filteredItemsN)
-    },[filter])
+    }, [filter])
 
     function loadMore() {
         setLoading(true);
@@ -89,10 +89,10 @@ export default function BonusesPage({ bonuses, filters }) {
                 let newDataF = [...res.data]
                 switch (filter) {
                     case "Best for you":
-                        newDataF = newDataF.sort((a,b) => (b.best_for_you - a.best_for_you))
+                        newDataF = newDataF.sort((a, b) => (b.best_for_you - a.best_for_you))
                         break;
                     case "Recently added":
-                        newDataF = newDataF.sort((a,b) => (new Date(b.created_at) - new Date(a.created_at)))
+                        newDataF = newDataF.sort((a, b) => (new Date(b.created_at) - new Date(a.created_at)))
                         break;
                     default:
                         break;
@@ -120,7 +120,7 @@ export default function BonusesPage({ bonuses, filters }) {
             <div>
                 <SliderWithControls loop>
                     {
-                        slides.map(slide => (
+                        bonuses.slice(0, 10).map(slide => (
                             <SwiperSlide
                                 key={`slide_${slide}`}
                                 className={styles.sliderBlock}
@@ -128,7 +128,7 @@ export default function BonusesPage({ bonuses, filters }) {
                                 <div>
                                     <Image
                                         className={styles.sliderPicture}
-                                        src="/placeholder.png"
+                                        src={`${process.env.IMAGE_URL}/${slide.bonusable.image_source}`}
                                         layout='fill'
                                         objectFit='cover'
                                     />
@@ -243,7 +243,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            bonuses: bonuses.data       
+            bonuses: bonuses.data
         },
         revalidate: 10,
     }

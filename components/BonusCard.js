@@ -13,7 +13,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
         <div className={styles.casino}>
             <div className={styles.casinoImage}>
                 <Image
-                    src="/images/casino.png"
+                    src={`${process.env.IMAGE_URL}/${bonusable.image_source}`}
                     layout='fill'
                     objectFit='cover'
                 />
@@ -24,7 +24,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                         <span className={styles.casinoNameText}>
                             {bonusable?.shared_content?.name || ""}
                         </span>
-                        {bonusable?.rating && 
+                        {bonusable?.rating &&
                             <div className={styles.casinoRating}>
                                 <Stars points={bonusable.rating} />
                             </div>
@@ -55,7 +55,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                             games.map(game => (
                                 <div className={styles.casinoGame} key={game} >
                                     <Image
-                                        src="/images/game.png"
+                                        src={`${process.env.IMAGE_URL}/${game.image_source}`}
                                         layout='fill'
                                         objectFit='cover'
                                         alt={game}
@@ -67,7 +67,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                 </div>
                 <div className={`${styles.casinoColumn} ${styles.right}`}>
                     <div className={styles.casinoLanguages}>
-                        <div className={styles.languageContainer}>
+                        {/* <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
                                 {
@@ -98,31 +98,31 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                                     ))
                                 }
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className={styles.casinoButtons}>
-                        <div 
+                        <div
                             className={styles.tcButton}
                             onClick={() => {
                                 setModal(!modal)
                             }}
                         >
-                            {terms_and_condition && 
+                            {terms_and_condition &&
                                 <AnimatePresence>
-                                    {modal && 
+                                    {modal &&
                                         <TermsModal
                                             setModalState={setModal}
                                             rules={terms_and_condition}
                                         />
-                                    }                                
+                                    }
                                 </AnimatePresence>
-                            }                            
+                            }
                             T&C Apply
                         </div>
-                        {(bonusable?.claim_bonus_url || bonusable?.bonus_url || bonusable?.url) ? 
+                        {(bonusable?.claim_bonus_url || bonusable?.bonus_url || bonusable?.url) ?
                             <Link href={bonusable?.claim_bonus_url || bonusable?.bonus_url || bonusable?.url}>
-                                <a 
-                                    target="_blank" 
+                                <a
+                                    target="_blank"
                                     rel='noopener noreferrer'
                                     className={`${styles.casinoButton} ${styles.highlighted}`}
                                 >
@@ -133,7 +133,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                             <div className={`${styles.casinoButton} ${styles.highlighted}`}>
                                 Get Bonus
                             </div>
-                        }                        
+                        }
                     </div>
                 </div>
             </div>

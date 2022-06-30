@@ -10,9 +10,12 @@ export default function PromoBlock({
     charactersWidth,
     name,
     features,
+    claim_bonus_text,
     bonus_url,
     country,
-    rating
+    rating,
+    image_source,
+    shared_content
 }) {
     const [buttonBg, setButtonBg] = useState("")
 
@@ -61,7 +64,7 @@ export default function PromoBlock({
                                 {country?.name}
                             </span>
                             <Image
-                                src="/placeholder.png"
+                                src={`${process.env.IMAGE_URL}/${image_source}`}
                                 objectFit='cover'
                                 width={80}
                                 height={32}
@@ -70,7 +73,7 @@ export default function PromoBlock({
                     </div>
                     <div className={styles.promoBonusInfo}>
                         <span className={styles.promoBonus}>
-                            {name}
+                            {shared_content?.name || claim_bonus_text}
                         </span>
                         {
                             features?.map(feature => (

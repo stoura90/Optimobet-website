@@ -167,13 +167,14 @@ export default function SlotsPage({ slots, providers }) {
                             bulletActiveClass: styles.bulletActive,
                             horizontalClass: styles.pagination,
                         }}
+                        loop
                     >
                         {
-                            sliderTemp.map(item => (
+                            slots.slice(0, 10).map(item => (
                                 <SwiperSlide key={`slide_${item}`}>
                                     <div className={styles.slide} >
                                         <Image
-                                            src="/images/slots/slide.png"
+                                            src={`${process.env.IMAGE_URL}/${item.image_source}`}
                                             alt="slide"
                                             layout="fill"
                                             objectFit='cover'

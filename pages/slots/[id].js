@@ -94,7 +94,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
         <div className={styles.container}>
             <div className={styles.slotBlock}>
                 <div className={styles.slotButtons}>
-                    <div className={styles.rateSlot}>
+                    {/* <div className={styles.rateSlot}>
                         Rate Slot
                     </div>
                     <div className={styles.buttonForSlot}>
@@ -117,10 +117,17 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                             width={16}
                             height={16}
                         />
-                    </div>
+                    </div> */}
                 </div>
                 <div className={styles.slotDemoBlock}>
                     <div className={styles.slotData}>
+                        <div className={styles.slotImage}>
+                            <Image
+                                src={`${process.env.IMAGE_URL}/${slot.image_source}`}
+                                layout="fill"
+                                objectFit='cover'
+                            />
+                        </div>
                         <div className={styles.slotDataInfo}>
                             <span className={styles.dataInfoTitle}>
                                 Game provider
@@ -265,7 +272,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                         >
                                             <Slot
                                                 {...slot}
-                                                provider={providers.filter(prov => prov.id==slot.provider_id)[0]?.name}
+                                                provider={providers.filter(prov => prov.id == slot.provider_id)[0]?.name}
                                             />
                                         </div>
                                     ))}

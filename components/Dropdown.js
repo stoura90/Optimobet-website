@@ -70,7 +70,7 @@ export default function Dropdown({ items = [...demo], description, onChange, def
             >
                 <div className={styles.icon}>
                     <Image
-                        src="/placeholder.png"
+                        src={`${process.env.IMAGE_URL}/${current.icon}`}
                         width={27}
                         height={20}
                     />
@@ -100,9 +100,10 @@ export default function Dropdown({ items = [...demo], description, onChange, def
                         >
                             <div className={styles.icon}>
                                 <Image
-                                    src="/placeholder.png"
+                                    src={`${process.env.IMAGE_URL}/${item.icon}`}
                                     width={27}
                                     height={20}
+                                    objectFit="contain"
                                 />
                             </div>
                             <span className={styles.itemText}>

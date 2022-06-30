@@ -1,19 +1,26 @@
-.container{
+.container {}
 
-}
-.slotBlock{
+.slotBlock {
     background: #F2F2F2 0% 0% no-repeat padding-box;
     display: flex;
     padding: 32px 10% 80px;
     flex-direction: column;
     gap: 24px;
 }
-.slotButtons{
+
+.slotButtons {
     display: flex;
     margin-left: auto;
     gap: 16px;
 }
-.rateSlot{
+
+.slotImage {
+    position: relative;
+    height: 200px;
+    width: 100%;
+}
+
+.rateSlot {
     background: #FFFFFF 0% 0% no-repeat padding-box;
     border-radius: 100px;
     padding: 12px 32px;
@@ -22,7 +29,8 @@
     color: #4B4453;
     cursor: pointer;
 }
-.buttonForSlot{
+
+.buttonForSlot {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -31,18 +39,21 @@
     background: #FFFFFF 0% 0% no-repeat padding-box;
     cursor: pointer;
 }
-.slotDemoBlock{
+
+.slotDemoBlock {
     display: flex;
     width: 100%;
     gap: 30px;
 }
-.slotData{
+
+.slotData {
     min-width: 250px;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.slotDataInfo{
+
+.slotDataInfo {
     padding-bottom: 20px;
     border-bottom: 1px solid #4B445333;
     display: flex;
@@ -50,17 +61,20 @@
     align-items: center;
     gap: 10px;
 }
-.dataInfoTitle{
+
+.dataInfoTitle {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.dataInfoText{
+
+.dataInfoText {
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.slotButton{
+
+.slotButton {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #F2F2F2;
@@ -73,25 +87,30 @@
     border: none;
     cursor: pointer;
 }
-.slotDemoView{
+
+.slotDemoView {
     position: relative;
     display: flex;
     width: 100%;
 }
-.slotPage{
+
+.slotPage {
     padding: 60px 10% 60px;
 }
-.emptyBlocks{
+
+.emptyBlocks {
     display: flex;
     gap: 30px;
 }
-.emptyBlocks > *{
+
+.emptyBlocks>* {
     flex: 1 1;
     background: #F2F2F2 0% 0% no-repeat padding-box;
     border-radius: 16px;
     height: 145px;
 }
-.aboutSlot{
+
+.aboutSlot {
     display: flex;
     gap: 30px;
     margin-top: 60px;
@@ -99,19 +118,22 @@
     letter-spacing: 0px;
     color: #4B4453CC;
 }
+
 .slotDescription * {
-    margin: 0;    
+    margin: 0;
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453CC;
 }
+
 .ourScoreText * {
-    margin: 0;    
+    margin: 0;
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453CC;
 }
-.ourScore{
+
+.ourScore {
     background: #F2F2F2 0% 0% no-repeat padding-box;
     border-radius: 16px;
     padding: 32px 24px;
@@ -122,19 +144,22 @@
     display: flex;
     flex-direction: column;
 }
-.ourScoreHeader{
+
+.ourScoreHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
     margin-bottom: 8px;
 }
-.scoreHeaderText{
+
+.scoreHeaderText {
     font: normal normal bold 20px/24px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.scorePoints{
+
+.scorePoints {
     background: #FFC448 0% 0% no-repeat padding-box;
     border-radius: 24px;
     font: normal normal 500 15px/18px Samsung Sans;
@@ -142,53 +167,62 @@
     color: #4B4453;
     padding: 11px 24px;
 }
-.ourScoreText{
+
+.ourScoreText {
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453CC;
     width: 100%;
 }
-.slotsSlider{
+
+.slotsSlider {
     display: block;
     width: 100%;
     margin-bottom: 100px;
 }
+
 .slotSlide {
-	width: 80% !important;
-	display: flex;
-	gap: 30px;
+    width: 80% !important;
+    display: flex;
+    gap: 30px;
 }
+
 .slotSlide>div {
-	flex: 1 1;
-	height: 500px;
-	display: flex;
-	align-items: flex-end;
-	position: relative;
+    flex: 1 1;
+    height: 500px;
+    display: flex;
+    align-items: flex-end;
+    position: relative;
 }
-.slotsSliderHeader{
+
+.slotsSliderHeader {
     margin: 0px 10% 16px;
     display: flex;
     justify-content: space-between;
     gap: 30px;
     align-items: center;
 }
-.slotsSliderTitle{
+
+.slotsSliderTitle {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
-.secondText{
+
+.secondText {
     font: normal normal 500 18px/20px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;
     text-transform: uppercase;
 }
-.mainText{
+
+.mainText {
     font: normal normal bold 28px/30px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
 }
-.seeMore{
+
+.seeMore {
     font: normal normal 500 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;

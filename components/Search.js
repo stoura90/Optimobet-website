@@ -126,6 +126,7 @@ export default function Search({ setBorder }) {
                                             href={`/casinos/${res.id}`}
                                             name={res.name}
                                             rating={res.casino.rating}
+                                            image_source={res.casino.image_source}
                                         />
                                     )}
                                 </>
@@ -146,6 +147,7 @@ export default function Search({ setBorder }) {
                                             href={res.casino.url || res.casino.website}
                                             name={res.name}
                                             rating={res.casino.rating}
+                                            image_source={res.casino.image_source}
                                         />
                                     )}
                                 </>
@@ -166,6 +168,7 @@ export default function Search({ setBorder }) {
                                             href={`/slots/${res.id}`}
                                             name={res.name}
                                             rating={res.score}
+                                            image_source={res.image_source}
                                         />
                                     )}
                                 </>
@@ -183,16 +186,16 @@ export default function Search({ setBorder }) {
     )
 }
 
-function SearchResult({ name, rating, href = "/" }) {
+function SearchResult({ name, rating, href = "/", image_source }) {
     return (
         <Link href={href ?? '#'}>
             <a className={styles.resultContent}>
                 <div className={styles.resultInfo}>
                     <div className={styles.resultLogo}>
                         <Image
-                            src="/placeholder.png"
-                            width={80}
-                            height={20}
+                            src={`${process.env.IMAGE_URL}/${image_source}`}
+                            layout="fill"
+                            objectFit='cover'
                         />
                     </div>
                     <div className={styles.resultData}>

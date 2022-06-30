@@ -81,7 +81,7 @@ const _slots = [
     }
 ]
 
-export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus }) {
+export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, casinosCount, bookmakersCount, bonusesCount, slotsCount }) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
 
@@ -116,28 +116,28 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus })
                 <div className={styles.categoryBlocks}>
                     <CategoryBlock
                         name="Betting"
-                        info="2341 Bookmakers"
+                        info={`${bookmakersCount} Bookmakers`}
                         image="/images/icons/cat-1.png"
                         bgColor="#7F3FFC4D"
                         href='/bookmakers'
                     />
                     <CategoryBlock
                         name="Casino"
-                        info="527 Online casino"
+                        info={`${casinosCount} Online casinos`}
                         image="/images/icons/cat-2.png"
                         bgColor="#FFC4484D"
                         href='/casinos'
                     />
                     <CategoryBlock
                         name="Gambling"
-                        info="5121 Free slots"
+                        info={`${slotsCount} Free slots`}
                         image="/images/icons/cat-3.png"
                         bgColor="#FF84574D"
                         href='/slots'
                     />
                     <CategoryBlock
                         name="Bonus"
-                        info="286 Bonuses"
+                        info={`${bonusesCount} Bonuses`}
                         image="/images/icons/cat-4.png"
                         bgColor="#00C69C4D"
                         href='/bonuses'
@@ -157,29 +157,47 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus })
                         <PromoBlock
                             charactersImage="/images/main/7880-1.png"
                             bgColor="#7F3FFC"
+                            {...betting[0]}
+                            rating={betting[0].reputation}
+
                         />
                         <PromoBlock
                             charactersImage="/images/main/7880-2.png"
                             bgColor="#4B4453"
+                            {...betting[1]}
+                            rating={betting[1].reputation}
                         />
                     </div>
                 </div>
 
                 <div className={styles.sitesGallery}>
-                    <SiteCard rep={1} />
-                    <SiteCard rep={56} />
-                    <SiteCard rep={78} />
+                    {
+                        betting.slice(0, 3).map(casino => (
+                            <SiteCard
+                                {...casino}
+                                key={casino.id}
+                                rep={casino.reputation}
+                            />
+                        ))
+                    }
                     <div className={styles.promoInSites}>
                         <PromoBlock
                             charactersImage="/images/main/7880-3.png"
                             bgColor="transparent linear-gradient(251deg, #FFC448 0%, #FF8457 100%) 0% 0% no-repeat padding-box"
                             charactersWidth="60%"
+                            {...betting[3]}
+                            rating={betting[3].reputation}
                         />
                     </div>
-                    <SiteCard rep={99} />
-                    <SiteCard rep={56} />
-                    <SiteCard rep={78} />
-                    <SiteCard rep={99} />
+                    {
+                        betting.slice(4, 8).map(casino => (
+                            <SiteCard
+                                {...casino}
+                                key={casino.id}
+                                rep={casino.reputation}
+                            />
+                        ))
+                    }
                     <div className={styles.moreButtonArea}>
                         <Link href="/bookmakers">
                             <a className={styles.moreButton}>
@@ -226,17 +244,16 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus })
                         </span>
                     </div>
                     <div className={styles.promoBlocksContent}>
-                        <PromoBlock
-                            {...exclusiveBonus[0]}
-                            charactersImage="/images/main/7880-4.png"
-                            bgColor="#4B4453"
-                            charactersWidth="55%"
-                        />
-                        <PromoBlock
-                            {...exclusiveBonus[1]}
-                            charactersImage="/images/main/7880-5.png"
-                            bgColor="#00C69C"
-                        />
+                        {
+                            exclusiveBonus.slice(0, 2).map(bonus => (
+                                <PromoBlock
+                                    {...bonus}
+                                    charactersImage="/images/main/7880-4.png"
+                                    bgColor="#4B4453"
+                                    charactersWidth="55%"
+                                />
+                            ))
+                        }
                     </div>
                 </div>
 
@@ -622,21 +639,21 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus })
     )
 }
 
-function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text }) {
+function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text, image_source }) {
     return (
         <div className={styles.casino}>
             <div className={styles.casinoBg}>
                 <Image
-                    src="/placeholder.png"
+                    src={`${process.env.IMAGE_URL}/${image_source}`}
                     layout='fill'
-                    objectFit='cover'
+                    objectFit='contain'
                 />
             </div>
             <div className={styles.casinoInfo}>
                 <div className={styles.bonusInfo}>
 
                     <span className={styles.bonusText}>
-                        {claim_bonus_text}
+                        {claim_bonus_text || shared_content?.name}
                     </span>
                     {features.map(feature => (
                         <span
@@ -671,15 +688,22 @@ export async function getStaticProps() {
     const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
     const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
     const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
-    // const betting = await APIRequest('/nolimit/home-components?type=betting');
-
+    const betting = await APIRequest('/nolimit/home-components?type=betting');
+    const casinos = await APIRequest('/nolimit/casinos');
+    const bonuses = await APIRequest('/nolimit/bonuses');
+    const slots = await APIRequest('/nolimit/slots');
+    const bookmakers = await APIRequest('/nolimit/bookmakers');
 
     return {
         props: {
             newCasinos,
             exclusiveBonus,
             freeSlots,
-            // betting
+            betting,
+            casinosCount: casinos.total,
+            bonusesCount: bonuses.total,
+            slotsCount: slots.total,
+            bookmakersCount: bookmakers.total,
         },
         revalidate: 10,
     }
