@@ -192,15 +192,19 @@ export default function SearchResults({ providers }) {
             })
     },[router.query])
 
-    function doFilterCasinos() {
-        let casinosSorted = casinosRef.current
+    useEffect(()=>{
+        if (casinosRef.current) {
+            let casinosSorted = [...casinosRef.current]
+            setCasinos(casinosShowMore ? casinosSorted : casinosSorted.slice(0,6))
+        }        
+    },[filterCasino, casinosShowMore])
 
-    }
-
-    function doFilterBookmakers() {
-        let bookmakersSorted = bookmakersRef.current
-
-    }
+    useEffect(()=>{
+        if (bookmakersRef.current) {
+            let bookmakersSorted = [...bookmakersRef.current]
+            setBookmakers(bookmakersShowMore ? bookmakersSorted : bookmakersSorted.slice(0,6))
+        }        
+    },[filterBookmakers, bookmakersShowMore])
 
     useEffect(()=>{
         if (slotsRef.current) {
@@ -218,7 +222,7 @@ export default function SearchResults({ providers }) {
                 default:
                     break;
             }
-            setSlots(slotsShowMore ? slotsSorted : slotsSorted.slice(0,3))
+            setSlots(slotsShowMore ? slotsSorted : slotsSorted.slice(0,6))
         }        
     },[filterSlots, slotsShowMore])
 
@@ -374,7 +378,7 @@ export default function SearchResults({ providers }) {
                             >
                                 <div style={{ position: "relative" }}>
                                     <AnimatePresence initial={false}>
-                                        {selectedCat == 0 &&
+                                        {selectedCat == 0 && casinos.length>0 &&
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -493,7 +497,7 @@ export default function SearchResults({ providers }) {
                             >
                                 <div style={{ position: "relative" }}>
                                     <AnimatePresence initial={false}>
-                                        {selectedCat == 0 &&
+                                        {selectedCat == 0 && bookmakers.length>0 &&
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -612,7 +616,7 @@ export default function SearchResults({ providers }) {
                             >
                                 <div style={{ position: "relative" }}>
                                     <AnimatePresence initial={false}>
-                                        {selectedCat == 0 &&
+                                        {selectedCat == 0 && slots.length>0 &&
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
