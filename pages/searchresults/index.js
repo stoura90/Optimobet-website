@@ -141,13 +141,15 @@ export default function SearchResults({ providers }) {
     const slotsRef = useRef()
     const [casinos, setCasinos] = useState([])
     const [bookmakers, setBookmakers] = useState([])
-    const [slots, setSlots] = useState([])
+    const [slots, setSlots] = useState([])    
+    const [casinosShowMore, setCasinosShowMore] = useState(false)
+    const [bookmakersShowMore, setBookmakersShowMore] = useState(false)
+    const [slotsShowMore, setSlotsShowMore] = useState(false)
 
     useEffect(()=>{
         if (router.query.text)
             APIRequest(`/search?q=${router.query.text}`, 'GET')
             .then(data => {
-                console.log(data)
                 setCategoriesOnSearch(
                     [
                         {
@@ -174,32 +176,35 @@ export default function SearchResults({ providers }) {
                     ]
                 )
                 casinosRef.current = data.casinos
-                setCasinos(data.casinos)
+                setCasinos(data.casinos.slice(0,6))
                 bookmakersRef.current = data.bookmakers
-                setBookmakers(data.bookmakers)
+                setBookmakers(data.bookmakers.slice(0,6))
                 slotsRef.current = data.slots.map(slot => (
                     {
                         ...slot,
                         provider: providers.filter(p => p.id == slot.provider_id)[0]?.name ?? null
                     }
                 ))
-                console.log("All",slotsRef.current)
-                setSlots(slotsRef.current)
+                setSlots(slotsRef.current.slice(0,6))
             })
             .catch(err => {
                 console.error(err)
             })
     },[router.query])
 
-    function doFilterCasinos() {
-        let casinosSorted = casinosRef.current
+    useEffect(()=>{
+        if (casinosRef.current) {
+            let casinosSorted = [...casinosRef.current]
+            setCasinos(casinosShowMore ? casinosSorted : casinosSorted.slice(0,6))
+        }        
+    },[filterCasino, casinosShowMore])
 
-    }
-
-    function doFilterBookmakers() {
-        let bookmakersSorted = bookmakersRef.current
-
-    }
+    useEffect(()=>{
+        if (bookmakersRef.current) {
+            let bookmakersSorted = [...bookmakersRef.current]
+            setBookmakers(bookmakersShowMore ? bookmakersSorted : bookmakersSorted.slice(0,6))
+        }        
+    },[filterBookmakers, bookmakersShowMore])
 
     useEffect(()=>{
         if (slotsRef.current) {
@@ -217,9 +222,9 @@ export default function SearchResults({ providers }) {
                 default:
                     break;
             }
-            setSlots(slotsSorted)
+            setSlots(slotsShowMore ? slotsSorted : slotsSorted.slice(0,6))
         }        
-    },[filterSlots])
+    },[filterSlots, slotsShowMore])
 
     const selectCategoryForFilters = (category) => {
         setSelectedCat(category)
@@ -373,7 +378,7 @@ export default function SearchResults({ providers }) {
                             >
                                 <div style={{ position: "relative" }}>
                                     <AnimatePresence initial={false}>
-                                        {selectedCat == 0 &&
+                                        {selectedCat == 0 && casinos.length>0 &&
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -475,6 +480,13 @@ export default function SearchResults({ providers }) {
                                         ))
                                     }
                                 </motion.div>
+                                <div 
+                                    className={styles.showMore}
+                                    style={(casinos.length==casinosRef.current.length || casinosShowMore) ? {display:"none"} : {}}
+                                    onClick={()=>setCasinosShowMore(true)}
+                                >
+                                    Show more
+                                </div>
                             </motion.div>
                         }
                         {categoriesOnSearch && bookmakers && bookmakers.length>0 && (categoriesOnSearch[selectedCat].name == "bookmakers" || selectedCat == 0) &&
@@ -485,7 +497,7 @@ export default function SearchResults({ providers }) {
                             >
                                 <div style={{ position: "relative" }}>
                                     <AnimatePresence initial={false}>
-                                        {selectedCat == 0 &&
+                                        {selectedCat == 0 && bookmakers.length>0 &&
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -587,6 +599,13 @@ export default function SearchResults({ providers }) {
                                         ))
                                     }
                                 </motion.div>
+                                <div 
+                                    className={styles.showMore}
+                                    style={(bookmakers.length==bookmakersRef.current.length || bookmakersShowMore) ? {display:"none"} : {}}
+                                    onClick={()=>setBookmakersShowMore(true)}
+                                >
+                                    Show more
+                                </div>
                             </motion.div>
                         }
                         {categoriesOnSearch && (categoriesOnSearch[selectedCat].name == "slots" || selectedCat == 0) &&
@@ -597,7 +616,7 @@ export default function SearchResults({ providers }) {
                             >
                                 <div style={{ position: "relative" }}>
                                     <AnimatePresence initial={false}>
-                                        {selectedCat == 0 &&
+                                        {selectedCat == 0 && slots.length>0 &&
                                             <motion.div
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -689,6 +708,13 @@ export default function SearchResults({ providers }) {
                                 >
                                     {slots && renderSlots(sidebarShown)}
                                 </motion.div>
+                                <div 
+                                    className={styles.showMore}
+                                    style={(slots.length==slotsRef.current.length || slotsShowMore) ? {display:"none"} : {}}
+                                    onClick={()=>setSlotsShowMore(true)}
+                                >
+                                    Show more
+                                </div>
                             </motion.div>
                         }
                         </LayoutGroup>
