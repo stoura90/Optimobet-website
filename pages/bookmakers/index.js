@@ -100,7 +100,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
                 setFilteredItems(bookmakersRef.current);
                 break;
             case "BestInCountry":
-                user.country_id && (newFilteredItems = filteredItems.filter(casino => casino.countries.find(country => country.id === user.country_id)));
+                user?.country_id && (newFilteredItems = filteredItems.filter(casino => casino.countries.find(country => country.id === user.country_id)));
                 newFilteredItems.sort((a, b) => b.rating - a.rating);
                 setFilteredItems(newFilteredItems);
                 break;
