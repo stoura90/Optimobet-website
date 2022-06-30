@@ -155,10 +155,10 @@ export default function Search({ setBorder }) {
                                             Slots
                                         </span>
                                         <span className={styles.categoryCount}>
-                                            {results.slots.slice(0, 4).length}
+                                            {results.slots.length}
                                         </span>
                                     </div>
-                                    {results.slots.map(res =>
+                                    {results.slots.slice(0, 4).map(res =>
                                         <SearchResult
                                             href={`/slots/${res.id}`}
                                             name={res.name}
