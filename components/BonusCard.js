@@ -119,12 +119,14 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                             }                            
                             T&C Apply
                         </div>
-                        {(bonusable?.url || bonusable?.bonus_url || bonusable?.claim_bonus_url) ? 
-                            <Link href={bonusable?.url || bonusable?.bonus_url || bonusable?.claim_bonus_url}>
-                                <a target="_blank">
-                                    <div className={`${styles.casinoButton} ${styles.highlighted}`}>
-                                        Get Bonus
-                                    </div>
+                        {(bonusable?.claim_bonus_url || bonusable?.bonus_url || bonusable?.url) ? 
+                            <Link href={bonusable?.claim_bonus_url || bonusable?.bonus_url || bonusable?.url}>
+                                <a 
+                                    target="_blank" 
+                                    rel='noopener noreferrer'
+                                    className={`${styles.casinoButton} ${styles.highlighted}`}
+                                >
+                                    Get Bonus
                                 </a>
                             </Link>
                             :

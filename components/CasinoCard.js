@@ -8,6 +8,7 @@ import TermsModal from './TermsModal'
 
 export default function CasinoCard({
     claim_bonus_url,
+    bonus_url,
     features,
     games,
     positives,
@@ -138,14 +139,21 @@ export default function CasinoCard({
                             }  
                             T&C Apply
                         </div>
-                        <a
-                            href={claim_bonus_url}
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className={`${styles.casinoButton} ${styles.highlighted}`}
-                        >
-                            Get Bonus
-                        </a>
+                        {(claim_bonus_url || bonus_url || url) ? 
+                            <Link href={claim_bonus_url || bonus_url || url}>
+                                <a 
+                                    target="_blank"
+                                    rel='noopener noreferrer'
+                                    className={`${styles.casinoButton} ${styles.highlighted}`}
+                                >
+                                    Get Bonus
+                                </a>
+                            </Link>
+                            :
+                            <div className={`${styles.casinoButton} ${styles.highlighted}`}>
+                                Get Bonus
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
