@@ -121,7 +121,7 @@ function UserMenu({ user, setBorder }) {
                     onClick={toggleOpen}
                     className={styles.userAvatar}
                 >
-                    {user.first_name.slice(0, 1).toUpperCase()}{user.last_name.slice(0, 1).toUpperCase()}
+                    {user?.first_name.slice(0, 1).toUpperCase()}{user?.last_name.slice(0, 1).toUpperCase()}
                 </div>
                 <AnimatePresence initial={false}>
                     {
