@@ -18,7 +18,8 @@ export default function CasinoCard({
     url,
     shared_content,
     id,
-    terms_and_conditions
+    terms_and_conditions,
+    image
 }) {
     const [modal, setModal] = useState(false)
 
@@ -27,7 +28,7 @@ export default function CasinoCard({
             <Link href={`/casinos/${id}`}>
                 <a className={styles.casinoImage}>
                     <Image
-                        src="/images/casino.png"
+                        src={`${process.env.API_URL}/${image}`}
                         layout='fill'
                         objectFit='cover'
                     />
@@ -121,27 +122,27 @@ export default function CasinoCard({
                         </div>
                     </div>
                     <div className={styles.casinoButtons}>
-                        <div 
+                        <div
                             className={styles.tcButton}
                             onClick={() => {
                                 setModal(!modal)
                             }}
                         >
-                            {terms_and_conditions && 
+                            {terms_and_conditions &&
                                 <AnimatePresence>
-                                    {modal && 
+                                    {modal &&
                                         <TermsModal
                                             setModalState={setModal}
                                             rules={terms_and_conditions}
                                         />
-                                    }                                
+                                    }
                                 </AnimatePresence>
-                            }  
+                            }
                             T&C Apply
                         </div>
-                        {(claim_bonus_url || bonus_url || url) ? 
+                        {(claim_bonus_url || bonus_url || url) ?
                             <Link href={claim_bonus_url || bonus_url || url}>
-                                <a 
+                                <a
                                     target="_blank"
                                     rel='noopener noreferrer'
                                     className={`${styles.casinoButton} ${styles.highlighted}`}

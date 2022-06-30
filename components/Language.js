@@ -52,7 +52,7 @@ export default function Language({ setBorder }) {
                         src="/images/placeholder.png"
                         width={27}
                         height={20}
-                        alt={countries?.find(country => country.id === user.country_id)?.name}
+                        alt={countries?.find(country => country.id === user?.country_id)?.name}
                     />
                 </div>
             </div>

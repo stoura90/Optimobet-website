@@ -146,7 +146,7 @@ export default function SiteCard({
                         {claim_bonus_text}
                     </span>
                     {features?.map(feature => (
-                        <span className={styles.checkInfo}>
+                        <span key={feature} className={styles.checkInfo}>
                             {feature}
                         </span>
                     ))
@@ -159,7 +159,7 @@ export default function SiteCard({
                     <div className={styles.gamesCircles}>
                         {
                             games?.slice(0, 6).map(game => (
-                                <div>
+                                <div key={`game_${game.id}`}>
                                     <Image
                                         src={'/images/placeholder.png'}
                                         layout="fill"

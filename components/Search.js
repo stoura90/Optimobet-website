@@ -122,6 +122,7 @@ export default function Search({ setBorder }) {
                                     </div>
                                     {results.casinos.slice(0, 4).map(res =>
                                         <SearchResult
+                                            key={res.id}
                                             href={`/casinos/${res.id}`}
                                             name={res.name}
                                             rating={res.casino.rating}
@@ -141,6 +142,7 @@ export default function Search({ setBorder }) {
                                     </div>
                                     {results.bookmakers.slice(0, 4).map(res =>
                                         <SearchResult
+                                            key={res.id}
                                             href={res.casino.url || res.casino.website}
                                             name={res.name}
                                             rating={res.casino.rating}
@@ -160,6 +162,7 @@ export default function Search({ setBorder }) {
                                     </div>
                                     {results.slots.slice(0, 4).map(res =>
                                         <SearchResult
+                                            key={res.id}
                                             href={`/slots/${res.id}`}
                                             name={res.name}
                                             rating={res.score}

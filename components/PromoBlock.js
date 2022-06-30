@@ -74,7 +74,7 @@ export default function PromoBlock({
                         </span>
                         {
                             features?.map(feature => (
-                                <span className={styles.promoCheckInfo}>
+                                <span key={feature} className={styles.promoCheckInfo}>
                                     {feature}
                                 </span>
                             ))
