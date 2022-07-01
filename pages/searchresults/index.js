@@ -379,7 +379,7 @@ export default function SearchResults({ providers }) {
                                 categories={categoriesOnSearch}
                                 selectCategory={selectCategoryForFilters}
                             />
-                            <motion.div
+                            {/* <motion.div
                                 initial={'closed'}
                                 variants={filterVariants}
                                 animate={selectedCat > 0 ? 'open' : 'closed'}
@@ -395,7 +395,7 @@ export default function SearchResults({ providers }) {
                                         collapsible
                                     />
                                 ))}
-                            </motion.div>
+                            </motion.div> */}
                         </div>
                     </motion.div>}
                 </AnimatePresence>
