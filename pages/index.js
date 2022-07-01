@@ -82,7 +82,17 @@ const _slots = [
     }
 ]
 
-export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, casinosCount, bookmakersCount, bonusesCount, slotsCount }) {
+export default function Home({
+    newCasinos,
+    freeSlots,
+    betting,
+    exclusiveBonus,
+    casinosCount,
+    bookmakersCount,
+    bonusesCount,
+    slotsCount,
+    countries
+}) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
 
@@ -419,125 +429,25 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, c
                 <div className={styles.countries}>
                     <div className={styles.BlocksHeader}>
                         <span className={styles.promoBlocksSubTitle}>
-                            OVERALL 982 CASINOS
+                            OVERALL {casinosCount} CASINOS
                         </span>
                         <span className={styles.promoBlocksTitle}>
                             We have casinos in these countries
                         </span>
                     </div>
                     <div className={styles.countriesContent}>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Netherlands
-                            </span>
-                            <span className={styles.countryCount}>
-                                399
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Cyprus
-                            </span>
-                            <span className={styles.countryCount}>
-                                608
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Italy
-                            </span>
-                            <span className={styles.countryCount}>
-                                100
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                France
-                            </span>
-                            <span className={styles.countryCount}>
-                                187
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Portugal
-                            </span>
-                            <span className={styles.countryCount}>
-                                528
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Spain
-                            </span>
-                            <span className={styles.countryCount}>
-                                81
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                United States
-                            </span>
-                            <span className={styles.countryCount}>
-                                87
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Belgium
-                            </span>
-                            <span className={styles.countryCount}>
-                                446
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                United Kingdom
-                            </span>
-                            <span className={styles.countryCount}>
-                                288
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Canada
-                            </span>
-                            <span className={styles.countryCount}>
-                                803
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Germany
-                            </span>
-                            <span className={styles.countryCount}>
-                                822
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Ukraine
-                            </span>
-                            <span className={styles.countryCount}>
-                                599
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Russian Federation
-                            </span>
-                            <span className={styles.countryCount}>
-                                486
-                            </span>
-                        </div>
-                        <div className={styles.country}>
-                            <span className={styles.countryName}>
-                                Greece
-                            </span>
-                            <span className={styles.countryCount}>
-                                616
-                            </span>
-                        </div>
+                        {
+                            countries.slice(0, 11).map(country => (
+                                <div className={styles.country}>
+                                    <span className={styles.countryName}>
+                                        {country.name}
+                                    </span>
+                                    <span className={styles.countryCount}>
+                                        {country.casinos_has_many_count}
+                                    </span>
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
 
@@ -696,6 +606,7 @@ export async function getStaticProps() {
     const bonuses = await APIRequest('/nolimit/bonuses');
     const slots = await APIRequest('/nolimit/slots');
     const bookmakers = await APIRequest('/nolimit/bookmakers');
+    const countries = await APIRequest('/nolimit/countries');
 
     return {
         props: {
@@ -707,6 +618,7 @@ export async function getStaticProps() {
             bonusesCount: bonuses.total,
             slotsCount: slots.total,
             bookmakersCount: bookmakers.total,
+            countries: countries,
         },
         revalidate: 10,
     }
