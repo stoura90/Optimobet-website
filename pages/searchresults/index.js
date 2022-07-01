@@ -1,14 +1,15 @@
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react'
 import styles from '../../styles/pages/SearchResults.module.css'
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
-import CheckboxFilter from '../../components/filters/CheckboxFilter';
-import Stars from '../../components/Stars';
-import { ReactSVG } from 'react-svg';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
+import CheckboxFilter from '../../components/filters/CheckboxFilter'
+import Stars from '../../components/Stars'
+import { ReactSVG } from 'react-svg'
 import { useRouter } from 'next/router'
 import Slot from '../../components/Slot'
 import CasinoCard from '../../components/CasinoCard'
-import APIRequest from '../../functions/requests/APIRequest';
+import APIRequest from '../../functions/requests/APIRequest'
+import useUserInfo from '../../hooks/useUserInfo'
 
 const filters = [
     {
@@ -145,6 +146,7 @@ export default function SearchResults({ providers }) {
     const [casinosShowMore, setCasinosShowMore] = useState(false)
     const [bookmakersShowMore, setBookmakersShowMore] = useState(false)
     const [slotsShowMore, setSlotsShowMore] = useState(false)
+    const user = useUserInfo()
 
     useEffect(()=>{
         if (router.query.text)
@@ -195,6 +197,23 @@ export default function SearchResults({ providers }) {
     useEffect(()=>{
         if (casinosRef.current) {
             let casinosSorted = [...casinosRef.current]
+            switch (filterCasino) {
+                case "Best in your country":
+                    user?.country_id && (casinosSorted = casinosSorted.filter(casino => casino.countries.find(country => country.id === user.country_id)))
+                    casinosSorted.sort((a, b) => b.rating - a.rating);
+                    break;
+                case "Recently added":
+                    casinosSorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    break;
+                case "Highly recommended":
+                    casinosSorted.sort((a, b) => b.reputation - a.reputation);
+                    break;
+                case "Best of the world":
+                    casinosSorted.sort((a, b) => b.rating - a.rating);
+                    break;
+                default:
+                    break;
+            }
             setCasinos(casinosShowMore ? casinosSorted : casinosSorted.slice(0,6))
         }        
     },[filterCasino, casinosShowMore])
@@ -202,6 +221,23 @@ export default function SearchResults({ providers }) {
     useEffect(()=>{
         if (bookmakersRef.current) {
             let bookmakersSorted = [...bookmakersRef.current]
+            switch (filterBookmakers) {
+                case "Best in your country":
+                    user?.country_id && (bookmakersSorted = bookmakersSorted.filter(casino => casino.countries.find(country => country.id === user.country_id)))
+                    bookmakersSorted.sort((a, b) => b.rating - a.rating);
+                    break;
+                case "Recently added":
+                    bookmakersSorted.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    break;
+                case "Highly recommended":
+                    bookmakersSorted.sort((a, b) => b.reputation - a.reputation);
+                    break;
+                case "Best of the world":
+                    bookmakersSorted.sort((a, b) => b.rating - a.rating);
+                    break;
+                default:
+                    break;
+            }
             setBookmakers(bookmakersShowMore ? bookmakersSorted : bookmakersSorted.slice(0,6))
         }        
     },[filterBookmakers, bookmakersShowMore])
@@ -438,22 +474,28 @@ export default function SearchResults({ providers }) {
                                                         All
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filterCasino === 'New' && styles.active}`}
-                                                        onClick={() => setFilterCasino('New')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Best in your country' && styles.active}`}
+                                                        onClick={() => setFilterCasino('Best in your country')}
                                                     >
-                                                        New
+                                                        Best in your country
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Popular' && styles.active}`}
-                                                        onClick={() => setFilterCasino('Popular')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Recently added' && styles.active}`}
+                                                        onClick={() => setFilterCasino('Recently added')}
                                                     >
-                                                        Popular
+                                                        Recently added
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Promotions' && styles.active}`}
-                                                        onClick={() => setFilterCasino('Promotions')}
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Highly recommended' && styles.active}`}
+                                                        onClick={() => setFilterCasino('Highly recommended')}
                                                     >
-                                                        Promotions
+                                                        Highly recommended
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filterCasino === 'Best of the world' && styles.active}`}
+                                                        onClick={() => setFilterCasino('Best of the world')}
+                                                    >
+                                                        Best of the world
                                                     </div>
                                                 </div>
                                             </motion.div>
@@ -557,22 +599,28 @@ export default function SearchResults({ providers }) {
                                                         All
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'New' && styles.active}`}
-                                                        onClick={() => setFilterBookmakers('New')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Best in your country' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('Best in your country')}
                                                     >
-                                                        New
+                                                        Best in your country
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Popular' && styles.active}`}
-                                                        onClick={() => setFilterBookmakers('Popular')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Recently added' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('Recently added')}
                                                     >
-                                                        Popular
+                                                        Recently added
                                                     </div>
                                                     <div
-                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Promotions' && styles.active}`}
-                                                        onClick={() => setFilterBookmakers('Promotions')}
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Highly recommended' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('Highly recommended')}
                                                     >
-                                                        Promotions
+                                                        Highly recommended
+                                                    </div>
+                                                    <div
+                                                        className={`${styles.filterControlsItem} ${filterBookmakers === 'Best of the world' && styles.active}`}
+                                                        onClick={() => setFilterBookmakers('Best of the world')}
+                                                    >
+                                                        Best of the world
                                                     </div>
                                                 </div>
                                             </motion.div>
