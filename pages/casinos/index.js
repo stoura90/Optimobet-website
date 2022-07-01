@@ -152,7 +152,7 @@ export default function CasinosPage({ casinos, filters }) {
                     {
                         casinos.slice(0, 10).map(slide => (
                             <SwiperSlide
-                                key={`slide_${slide}`}
+                                key={`slide_${slide.id}`}
                                 className={styles.sliderBlock}
                             >
                                 <Link href={`/casinos/${slide.id}`}>

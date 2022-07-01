@@ -122,7 +122,7 @@ export default function BonusesPage({ bonuses, filters }) {
                     {
                         bonuses.slice(0, 10).map(slide => (
                             <SwiperSlide
-                                key={`slide_${slide}`}
+                                key={`slide_${slide.id}`}
                                 className={styles.sliderBlock}
                             >
                                 <div>
