@@ -10,22 +10,22 @@ export default function Footer() {
                     <span className={styles.colTitle}>
                         Popular links
                     </span>
-                    <Link href={'#'}>
+                    <Link href={'/casinos'}>
                         <a>
                             Online Casions 
                         </a>
                     </Link>                    
-                    <Link href={'#'}>
+                    <Link href={'/bonuses'}>
                         <a>
                             Bonuses 
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/slots'}>
                         <a>
                             Free Slots
                         </a>
@@ -34,47 +34,22 @@ export default function Footer() {
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
                     </span>
-                    <Link href={'#'}>
+                    <Link href={'/casinos'}>
                         <a>
                             Online Casions 
                         </a>
                     </Link>                    
-                    <Link href={'#'}>
+                    <Link href={'/bonuses'}>
                         <a>
                             Bonuses 
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
-                        <a>
-                            Free Slots
-                        </a>
-                    </Link>
-                </div>
-                <div className={styles.column}>
-                    <span className={styles.colTitle}>
-                        
-                    </span>
-                    <Link href={'#'}>
-                        <a>
-                            Online Casions 
-                        </a>
-                    </Link>                    
-                    <Link href={'#'}>
-                        <a>
-                            Bonuses 
-                        </a>
-                    </Link>                   
-                    <Link href={'#'}>
-                        <a>
-                            Bookmakers
-                        </a>
-                    </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/slots'}>
                         <a>
                             Free Slots
                         </a>
@@ -84,22 +59,47 @@ export default function Footer() {
                     <span className={styles.colTitle}>
                         
                     </span>
-                    <Link href={'#'}>
+                    <Link href={'/casinos'}>
                         <a>
                             Online Casions 
                         </a>
                     </Link>                    
-                    <Link href={'#'}>
+                    <Link href={'/bonuses'}>
                         <a>
                             Bonuses 
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/slots'}>
+                        <a>
+                            Free Slots
+                        </a>
+                    </Link>
+                </div>
+                <div className={styles.column}>
+                    <span className={styles.colTitle}>
+                        
+                    </span>
+                    <Link href={'/casinos'}>
+                        <a>
+                            Online Casions 
+                        </a>
+                    </Link>                    
+                    <Link href={'/bonuses'}>
+                        <a>
+                            Bonuses 
+                        </a>
+                    </Link>                   
+                    <Link href={'/bookmakers'}>
+                        <a>
+                            Bookmakers
+                        </a>
+                    </Link>                   
+                    <Link href={'/slots'}>
                         <a>
                             Free Slots
                         </a>
@@ -111,22 +111,22 @@ export default function Footer() {
                     <span className={styles.colTitle}>
                         Play
                     </span>
-                    <Link href={'#'}>
+                    <Link href={'/casinos'}>
                         <a>
                             Online Casions 
                         </a>
                     </Link>                    
-                    <Link href={'#'}>
+                    <Link href={'/bonuses'}>
                         <a>
                             Bonuses 
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
                     </Link>                   
-                    <Link href={'#'}>
+                    <Link href={'/slots'}>
                         <a>
                             Free Slots
                         </a>
