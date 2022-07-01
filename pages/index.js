@@ -91,7 +91,8 @@ export default function Home({
     bookmakersCount,
     bonusesCount,
     slotsCount,
-    countries
+    countries,
+    providers
 }) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
@@ -294,6 +295,7 @@ export default function Home({
                                         >
                                             <Slot
                                                 {...slot}
+                                                provider={providers.filter(prov => prov.id==slot.provider_id)[0].name || ""}
                                             />
                                         </div>
                                     ))}
@@ -607,6 +609,7 @@ export async function getStaticProps() {
     const slots = await APIRequest('/nolimit/slots');
     const bookmakers = await APIRequest('/nolimit/bookmakers');
     const countries = await APIRequest('/nolimit/countries');
+    const providers = await APIRequest('/nolimit/providers');
 
     return {
         props: {
@@ -619,6 +622,7 @@ export async function getStaticProps() {
             slotsCount: slots.total,
             bookmakersCount: bookmakers.total,
             countries: countries,
+            providers
         },
         revalidate: 10,
     }
