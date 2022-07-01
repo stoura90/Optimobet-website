@@ -161,7 +161,7 @@ export default function CasinosPage({ casinos, filters }) {
                                             className={styles.sliderPicture}
                                             src={`${process.env.IMAGE_URL}/${slide.image_source}`}
                                             layout='fill'
-                                            objectFit='cover'
+                                            objectFit='contain'
                                         />
                                     </a>
                                 </Link>

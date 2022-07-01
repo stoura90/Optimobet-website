@@ -130,7 +130,7 @@ export default function BonusesPage({ bonuses, filters }) {
                                         className={styles.sliderPicture}
                                         src={`${process.env.IMAGE_URL}/${slide.bonusable.image_source}`}
                                         layout='fill'
-                                        objectFit='cover'
+                                        objectFit='contain'
                                     />
                                 </div>
                             </SwiperSlide>
