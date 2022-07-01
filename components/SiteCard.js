@@ -4,6 +4,8 @@ import 'react-circular-progressbar/dist/styles.css'
 import Stars from '../components/Stars'
 import Image from 'next/image'
 import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import TermsModal from './TermsModal'
 
 const percentStyles = {
     "badRep": {
@@ -79,7 +81,8 @@ export default function SiteCard({
     features,
     games,
     rating,
-    image_source
+    image_source,
+    terms_and_conditions
 }) {
     const [reputation, setReputation] = useState(
         reputations.filter(([percent, value]) => (
@@ -108,6 +111,7 @@ export default function SiteCard({
             break;
     }
     const [reputationName, setReputationName] = useState(reputationN)
+    const [modal, setModal] = useState(false)
 
     return (
         <div
@@ -184,7 +188,22 @@ export default function SiteCard({
                     >
                         Get Bonus
                     </a>
-                    <span className={styles.bonusApply}>
+                    <span 
+                        className={styles.bonusApply}
+                        onClick={() => {
+                            setModal(!modal)
+                        }}
+                    >
+                        {terms_and_conditions && 
+                            <AnimatePresence>
+                                {modal && 
+                                    <TermsModal
+                                        setModalState={setModal}
+                                        rules={terms_and_conditions}
+                                    />
+                                }                                
+                            </AnimatePresence>
+                        }
                         T{'&'}C Apply
                     </span>
                 </div>

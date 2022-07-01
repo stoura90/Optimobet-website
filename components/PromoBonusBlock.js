@@ -3,6 +3,7 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import Image from 'next/image'
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function PromoBonusBlock({
     bgColor,
@@ -91,9 +92,11 @@ export default function PromoBonusBlock({
                     >
                         Get Bonus
                     </a>
-                    <a className={styles.promoBonusApply}>
-                        View more
-                    </a>
+                    <Link href={"/bonuses"}>
+                        <a className={styles.promoBonusApply}>
+                            View more
+                        </a>
+                    </Link>
                 </div>
             </div>
             <div

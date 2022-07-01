@@ -226,4 +226,6 @@
     font: normal normal medium 15px/24px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;
+    position: relative;
+    cursor: pointer;
 }
