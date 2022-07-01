@@ -372,6 +372,11 @@ export default function SearchResults({ providers }) {
                     >
                         <div className={styles.sticky}>
                             <div className={styles.filterHeader}>
+                                <Image
+                                    src={'/images/icons/filter.svg'}
+                                    height={20}
+                                    width={20}
+                                />
                                 FILTER
                             </div>
                             <CategoryFilter
