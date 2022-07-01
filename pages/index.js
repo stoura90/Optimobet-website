@@ -686,10 +686,11 @@ function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text, 
 }
 
 export async function getStaticProps() {
-    const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
-    const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
-    const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
-    const betting = await APIRequest('/nolimit/home-components?type=betting');
+    // uncomment when it works
+    // const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
+    // const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
+    // const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
+    // const betting = await APIRequest('/nolimit/home-components?type=betting');
     const casinos = await APIRequest('/nolimit/casinos');
     const bonuses = await APIRequest('/nolimit/bonuses');
     const slots = await APIRequest('/nolimit/slots');
