@@ -122,7 +122,7 @@ export default function BonusesPage({ bonuses, filters }) {
                     {
                         bonuses.slice(0, 10).map(slide => (
                             <SwiperSlide
-                                key={`slide_${slide}`}
+                                key={`slide_${slide.id}`}
                                 className={styles.sliderBlock}
                             >
                                 <div>
@@ -130,7 +130,7 @@ export default function BonusesPage({ bonuses, filters }) {
                                         className={styles.sliderPicture}
                                         src={`${process.env.IMAGE_URL}/${slide.bonusable.image_source}`}
                                         layout='fill'
-                                        objectFit='cover'
+                                        objectFit='contain'
                                     />
                                 </div>
                             </SwiperSlide>

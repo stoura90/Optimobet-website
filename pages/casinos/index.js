@@ -152,7 +152,7 @@ export default function CasinosPage({ casinos, filters }) {
                     {
                         casinos.slice(0, 10).map(slide => (
                             <SwiperSlide
-                                key={`slide_${slide}`}
+                                key={`slide_${slide.id}`}
                                 className={styles.sliderBlock}
                             >
                                 <Link href={`/casinos/${slide.id}`}>
@@ -161,7 +161,7 @@ export default function CasinosPage({ casinos, filters }) {
                                             className={styles.sliderPicture}
                                             src={`${process.env.IMAGE_URL}/${slide.image_source}`}
                                             layout='fill'
-                                            objectFit='cover'
+                                            objectFit='contain'
                                         />
                                     </a>
                                 </Link>

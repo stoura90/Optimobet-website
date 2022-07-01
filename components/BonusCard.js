@@ -15,7 +15,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                 <Image
                     src={`${process.env.IMAGE_URL}/${bonusable.image_source}`}
                     layout='fill'
-                    objectFit='cover'
+                    objectFit='contain'
                 />
             </div>
             <div className={styles.casinoInfo}>

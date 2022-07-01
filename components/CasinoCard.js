@@ -30,7 +30,7 @@ export default function CasinoCard({
                     <Image
                         src={`${process.env.IMAGE_URL}/${image_source}`}
                         layout='fill'
-                        objectFit='cover'
+                        objectFit='contain'
                     />
                 </a>
             </Link>

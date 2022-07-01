@@ -12,7 +12,7 @@ export default function PromoBlock({
     features,
     claim_bonus_text,
     bonus_url,
-    country,
+    countries,
     rating,
     image_source,
     shared_content
@@ -61,7 +61,7 @@ export default function PromoBlock({
                         </div>
                         <div className={styles.promoSiteInfo}>
                             <span className={styles.promoCountry}>
-                                {country?.name}
+                                {countries[0]?.name}
                             </span>
                             <Image
                                 src={`${process.env.IMAGE_URL}/${image_source}`}
