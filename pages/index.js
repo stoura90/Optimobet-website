@@ -14,6 +14,7 @@ import useWindowSize from '../hooks/useWindowSize'
 import Slot from '../components/Slot'
 import APIRequest from '../functions/requests/APIRequest';
 import Link from 'next/link';
+import PromoBonusBlock from '../components/PromoBonusBlock';
 
 const _slots = [
     {
@@ -246,7 +247,7 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, c
                     <div className={styles.promoBlocksContent}>
                         {
                             exclusiveBonus.slice(0, 2).map(bonus => (
-                                <PromoBlock
+                                <PromoBonusBlock
                                     {...bonus}
                                     charactersImage="/images/main/7880-4.png"
                                     bgColor="#4B4453"
@@ -696,10 +697,10 @@ export async function getStaticProps() {
 
     return {
         props: {
-            newCasinos,
-            exclusiveBonus,
-            freeSlots,
-            betting,
+            newCasinos: casinos.data,
+            exclusiveBonus: bonuses.data,
+            freeSlots: slots.data,
+            betting: bookmakers.data,
             casinosCount: casinos.total,
             bonusesCount: bonuses.total,
             slotsCount: slots.total,
