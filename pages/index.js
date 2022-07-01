@@ -14,6 +14,7 @@ import useWindowSize from '../hooks/useWindowSize'
 import Slot from '../components/Slot'
 import APIRequest from '../functions/requests/APIRequest';
 import Link from 'next/link';
+import PromoBonusBlock from '../components/PromoBonusBlock';
 
 const _slots = [
     {
@@ -246,7 +247,8 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, c
                     <div className={styles.promoBlocksContent}>
                         {
                             exclusiveBonus.slice(0, 2).map(bonus => (
-                                <PromoBlock
+                                <PromoBonusBlock
+                                    key={bonus.id}
                                     {...bonus}
                                     charactersImage="/images/main/7880-4.png"
                                     bgColor="#4B4453"
@@ -685,10 +687,11 @@ function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text, 
 }
 
 export async function getStaticProps() {
-    const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
-    const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
-    const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
-    const betting = await APIRequest('/nolimit/home-components?type=betting');
+    // uncomment when it works
+    // const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
+    // const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
+    // const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
+    // const betting = await APIRequest('/nolimit/home-components?type=betting');
     const casinos = await APIRequest('/nolimit/casinos');
     const bonuses = await APIRequest('/nolimit/bonuses');
     const slots = await APIRequest('/nolimit/slots');
@@ -696,10 +699,10 @@ export async function getStaticProps() {
 
     return {
         props: {
-            newCasinos,
-            exclusiveBonus,
-            freeSlots,
-            betting,
+            newCasinos: casinos.data,
+            exclusiveBonus: bonuses.data,
+            freeSlots: slots.data,
+            betting: bookmakers.data,
             casinosCount: casinos.total,
             bonusesCount: bonuses.total,
             slotsCount: slots.total,

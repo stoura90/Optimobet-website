@@ -10,6 +10,7 @@ export default function infoBlock({ iconSrc, infoTitle, infoText, dataText, data
                     <Image
                         src={iconSrc}
                         layout='fill'
+                        objectFit="contain"
                     />
                 </div>
                 <div className={styles.infoText}>
@@ -29,6 +30,7 @@ export default function infoBlock({ iconSrc, infoTitle, infoText, dataText, data
                         src={img}
                         width={27}
                         height={20}
+                        objectFit="contain"
                     />
                 ))}
             </div>

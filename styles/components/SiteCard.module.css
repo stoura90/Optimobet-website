@@ -119,6 +119,7 @@
     justify-content: space-between;
     height: 100%;
     padding: 24px 24px 32px 24px;
+    min-height: 357px;
 }
 
 .contentTitle {

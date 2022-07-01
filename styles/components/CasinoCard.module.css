@@ -12,7 +12,7 @@
 .casinoImage {
     position: relative;
     width: 20%;
-    background-color: #ccc;
+    /* background-color: #ccc; */
     overflow: hidden;
     border-radius: 16px 0px 0px 16px;
 }
@@ -125,7 +125,7 @@
 }
 
 .language {
-    background-color: #ccc;
+    /* background-color: #ccc; */
     min-width: 27px;
     min-height: 27px;
     display: flex;
@@ -163,7 +163,7 @@
     color: white;
 }
 
-.tcButton{
+.tcButton {
     font: normal normal 500 15px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B445380;

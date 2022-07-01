@@ -80,26 +80,26 @@ export default function CasinoPage({ casino }) {
                     <InfoBlock
                         iconSrc="/images/icons/casino/current-location.svg"
                         infoTitle="IP Address From"
-                        infoText="Georgia"
-                        dataImages={["/placeholder.png"]}
+                        infoText={casino.countries[0]?.name}
+                        dataImages={[`${process.env.IMAGE_URL}/${casino.countries[0].flag_source}`]}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/users.svg"
                         infoTitle="Support From"
-                        infoText="United Kingdom"
-                        dataImages={["/placeholder.png", "/placeholder.png"]}
+                        infoText={casino.support_language[0]?.name}
+                        dataImages={casino.support_language.map(lang => `${process.env.IMAGE_URL}/${lang.flag_source}`).slice(0, 3)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/language.svg"
                         infoTitle="Website Language"
                         infoText={casino.website_language[0]?.name}
-                        dataImages={casino.website_language.map(lang => '/placeholder.png').slice(0, 3)}
+                        dataImages={casino.website_language.map(lang => `${process.env.IMAGE_URL}/${lang.flag_source}`).slice(0, 3)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/messages.svg"
                         infoTitle="Live Chat"
-                        infoText={casino.support_language[0]?.name}
-                        dataImages={casino.support_language.map(lang => '/placeholder.png').slice(0, 3)}
+                        infoText={casino.live_language[0]?.name}
+                        dataImages={casino.live_language.map(lang => `${process.env.IMAGE_URL}/${lang.flag_source}`).slice(0, 3)}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/user.svg"
@@ -110,8 +110,8 @@ export default function CasinoPage({ casino }) {
                     <InfoBlock
                         iconSrc="/images/icons/casino/shield.svg"
                         infoTitle="VPN"
-                        infoText="United Kingdom"
-                        dataImages={["/images/icons/circle-x.svg"]}
+                        infoText={casino.countries.find(c => c.isPinned == 0)?.name}
+                        dataImages={[`${process.env.IMAGE_URL}/${casino.countries.find(c => c.isPinned == 0)?.flag_source}`]}
                     />
                     <InfoBlock
                         iconSrc="/images/icons/casino/license.svg"
@@ -171,9 +171,10 @@ export default function CasinoPage({ casino }) {
                                         <td>
                                             <div className={styles.payment}>
                                                 <Image
-                                                    src="/placeholder.png"
+                                                    src={`${process.env.IMAGE_URL}/${method.image_source}`}
                                                     width={48}
                                                     height={32}
+                                                    objectFit='scale-down'
                                                 />
                                                 {method.name}
                                             </div>
@@ -229,7 +230,9 @@ function ProviderCard({ name, image_source }) {
             <Image
                 src={`${process.env.IMAGE_URL}/${image_source}`}
                 width={48}
-                height={32} />
+                height={32}
+                objectFit="contain"
+            />
         </div>
         <div className={styles.providerInfo}>
             <span className={styles.providerName}>
