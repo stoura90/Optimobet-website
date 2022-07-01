@@ -2,10 +2,24 @@ import styles from '../styles/components/TermsModal.module.css'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import parse from 'html-react-parser'
+import useWindowSize from '../hooks/useWindowSize'
+import { useEffect, useRef, useState } from 'react'
 
 export default function TermsModal({ rules, setModalState }) {
+    const { width } = useWindowSize()
+    const blockRef = useRef()
+    const [leftOffset, setLeftOffset] = useState({})
+
+    useEffect(()=>{
+        if (blockRef.current.getBoundingClientRect().left<0) {
+            setLeftOffset({width:750+blockRef.current.getBoundingClientRect().left})
+        }
+    },[width])
+
     return (
         <motion.div 
+            ref={blockRef}
+            style={leftOffset}
             className={styles.container}
             initial={{opacity:0}}
             animate={{opacity:1}}

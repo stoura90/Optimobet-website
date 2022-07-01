@@ -6,8 +6,12 @@ import InfoBlock from '../../components/casino/InfoBlock'
 import BonusBlock from '../../components/casino/BonusBlock'
 import APIRequest from '../../functions/requests/APIRequest';
 import parse from 'html-react-parser';
+import { AnimatePresence } from 'framer-motion'
+import TermsModal from '../../components/TermsModal'
+import { useState } from 'react';
 
 export default function CasinoPage({ casino }) {
+    const [modal, setModal] = useState(false)
 
     return (
         <div className={styles.container}>
@@ -50,7 +54,22 @@ export default function CasinoPage({ casino }) {
                                 >
                                     Visit website
                                 </a>
-                                <span className={styles.bonusApply}>
+                                <span 
+                                    className={styles.bonusApply}
+                                    onClick={() => {
+                                        setModal(!modal)
+                                    }}
+                                >
+                                    {casino.terms_and_conditions && 
+                                        <AnimatePresence>
+                                            {modal && 
+                                                <TermsModal
+                                                    setModalState={setModal}
+                                                    rules={casino.terms_and_conditions}
+                                                />
+                                            }                                
+                                        </AnimatePresence>
+                                    }
                                     T{'&'}C Apply
                                 </span>
                             </div>
