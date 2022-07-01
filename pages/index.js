@@ -248,6 +248,7 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, c
                         {
                             exclusiveBonus.slice(0, 2).map(bonus => (
                                 <PromoBonusBlock
+                                    key={bonus.id}
                                     {...bonus}
                                     charactersImage="/images/main/7880-4.png"
                                     bgColor="#4B4453"
