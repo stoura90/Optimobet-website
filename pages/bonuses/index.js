@@ -10,7 +10,8 @@ import { ReactSVG } from 'react-svg';
 import APIRequest from '../../functions/requests/APIRequest'
 import Link from 'next/link'
 import { BeatLoader } from 'react-spinners'
-import BonusCard from '../../components/BonusCard';
+import BonusCard from '../../components/BonusCard'
+import useUserInfo from '../../hooks/useUserInfo'
 
 const slides = [1, 2, 3, 4, 5]
 
@@ -22,6 +23,7 @@ export default function BonusesPage({ bonuses, filters }) {
     const [page, setPage] = useState(1);
     const loadMoreRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const user = useUserInfo();
 
     const controlVariants = {
         left: {
@@ -69,11 +71,15 @@ export default function BonusesPage({ bonuses, filters }) {
     useEffect(() => {
         let filteredItemsN = [...bonusesRef.current]
         switch (filter) {
-            case "Best for you":
+            case "Best in your country":
+                user?.country_id && (filteredItemsN = filteredItemsN.filter(bonus => bonus.bonusable?.countries?.find(country => country.id === user.country_id)));
                 filteredItemsN = filteredItemsN.sort((a, b) => (b.best_for_you - a.best_for_you))
                 break;
             case "Recently added":
                 filteredItemsN = filteredItemsN.sort((a, b) => (new Date(b.created_at) - new Date(a.created_at)))
+                break;
+            case "Best of the world":
+                filteredItemsN = filteredItemsN.sort((a, b) => (b.best_for_you - a.best_for_you))
                 break;
             default:
                 break;
@@ -88,11 +94,15 @@ export default function BonusesPage({ bonuses, filters }) {
                 setPage(page++);
                 let newDataF = [...res.data]
                 switch (filter) {
-                    case "Best for you":
+                    case "Best in your country":
+                        user?.country_id && (newDataF = newDataF.filter(bonus => bonus.bonusable?.countries?.find(country => country.id === user.country_id)));
                         newDataF = newDataF.sort((a, b) => (b.best_for_you - a.best_for_you))
                         break;
                     case "Recently added":
                         newDataF = newDataF.sort((a, b) => (new Date(b.created_at) - new Date(a.created_at)))
+                        break;
+                    case "Best of the world":
+                        newDataF = newDataF.sort((a, b) => (b.best_for_you - a.best_for_you))
                         break;
                     default:
                         break;
@@ -209,16 +219,22 @@ export default function BonusesPage({ bonuses, filters }) {
                                 All
                             </div>
                             <div
-                                className={`${styles.filterControlsItem} ${filter === 'Best for you' && styles.active}`}
-                                onClick={() => setFilter('Best for you')}
+                                className={`${styles.filterControlsItem} ${filter === 'Best in your country' && styles.active}`}
+                                onClick={() => setFilter('Best in your country')}
                             >
-                                Best for you
+                                Best in your country
                             </div>
                             <div
                                 className={`${styles.filterControlsItem} ${filter === 'Recently added' && styles.active}`}
                                 onClick={() => setFilter('Recently added')}
                             >
                                 Recently added
+                            </div>
+                            <div
+                                className={`${styles.filterControlsItem} ${filter === 'Best of the world' && styles.active}`}
+                                onClick={() => setFilter('Best of the world')}
+                            >
+                                Best of the world
                             </div>
                         </div>
                     </div>
