@@ -58,7 +58,7 @@ export default function PromoBonusBlock({
                         </div>
                         <div className={styles.promoSiteInfo}>
                             <span className={styles.promoCountry}>
-                                {country?.name}
+                                {bonusable.countries[0]?.name}
                             </span>
                             <Image
                                 src={`${process.env.IMAGE_URL}/${bonusable.image_source}`}
