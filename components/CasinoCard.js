@@ -90,6 +90,7 @@ export default function CasinoCard({
                                                 alt={lang.name}
                                                 height={20}
                                                 width={27}
+                                                objectFit='contain'
                                             />
                                         </div>
                                     ))
@@ -110,6 +111,7 @@ export default function CasinoCard({
                                                 alt={lang.name}
                                                 height={20}
                                                 width={27}
+                                                objectFit='contain'
                                             />
                                         </div>
                                     ))

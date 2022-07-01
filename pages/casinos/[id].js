@@ -229,8 +229,8 @@ function ProviderCard({ name, image_source }) {
         <div className={styles.provider}>
             <Image
                 src={`${process.env.IMAGE_URL}/${image_source}`}
-                width={48}
-                height={32}
+                width={86}
+                height={128}
                 objectFit="contain"
             />
         </div>
