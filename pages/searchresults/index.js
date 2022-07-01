@@ -514,9 +514,9 @@ export default function SearchResults({ providers }) {
                                             <CasinoCard 
                                                 {...casino.casino} 
                                                 shared_content={{...casino}} 
-                                                games={[]}
-                                                website_language={[]}
-                                                support_language={[]}
+                                                games={casino?.casino?.games}
+                                                website_language={casino?.casino?.website_language}
+                                                support_language={casino?.casino?.support_language}
                                                 key={`${casino.name}-${casino.id}`} 
                                             />
                                         ))
@@ -639,9 +639,9 @@ export default function SearchResults({ providers }) {
                                             <CasinoCard 
                                                 {...casino.casino} 
                                                 shared_content={{...casino}} 
-                                                games={[]}
-                                                website_language={[]}
-                                                support_language={[]}
+                                                games={casino?.casino?.games}
+                                                website_language={casino?.casino?.website_language}
+                                                support_language={casino?.casino?.support_language}
                                                 key={`${casino.name}-${casino.id}`} 
                                             />
                                         ))
