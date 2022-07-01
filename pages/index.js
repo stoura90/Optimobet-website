@@ -246,13 +246,13 @@ export default function Home({ newCasinos, freeSlots, betting, exclusiveBonus, c
                     </div>
                     <div className={styles.promoBlocksContent}>
                         {
-                            exclusiveBonus.slice(0, 2).map(bonus => (
+                            exclusiveBonus.slice(0, 2).map((bonus,index) => (
                                 <PromoBonusBlock
                                     key={bonus.id}
                                     {...bonus}
-                                    charactersImage="/images/main/7880-4.png"
-                                    bgColor="#4B4453"
-                                    charactersWidth="55%"
+                                    charactersImage={`/images/main/7880-${index+4}.png`}
+                                    bgColor={index==0 ? "#4B4453" : "#00C69C"}
+                                    charactersWidth={index==0 ? "55%" : null}
                                 />
                             ))
                         }
