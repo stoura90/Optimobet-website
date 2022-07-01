@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styles from '../styles/components/SliderWithControls.module.css'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,9 +8,14 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 
 // children = [<SwiperSlide>content</SwiperSlide>,...] 
-export default function SliderWithControls({ children = [], loop = false }) {
+export default function SliderWithControls({ children = [], loop = false, styleWrap={} }) {
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
+    const [styleW, setStyleW] = useState()
+
+    useEffect(()=>{
+        setStyleW(styleWrap || {})
+    },[styleWrap])
 
     return (
         <Swiper
@@ -31,6 +36,7 @@ export default function SliderWithControls({ children = [], loop = false }) {
             height={500}
             allowTouchMove={false}
             className={styles.sliderWrap}
+            style={styleW}
         >
             {children}
             <div ref={navigationPrevRef} className={styles.slideNavPrev}>

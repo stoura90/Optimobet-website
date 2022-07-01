@@ -86,3 +86,16 @@
 .socials *{
     flex-shrink: 0;
 }
+
+@media screen and (max-width: 1440px) {
+    .container{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .footerImg{
+        width: 35%;
+    }
+    .footerText, .footBottom{
+        width: 65%;
+    }    
+}

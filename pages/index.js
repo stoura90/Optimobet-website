@@ -96,9 +96,20 @@ export default function Home({
 }) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
+    const [percent, setPercent] = useState(0.8)
+    const [styleMainSlider, setStyleMainSlider] = useState()
+    const [styleSlotSlider, setStyleSlotSlider] = useState()
 
     useEffect(() => {
-        const chunkSize = Math.trunc(width * 0.8 / (300 + 19))
+        let perc = 0.8 
+        if (width <= 1440) {
+            perc = 0.9
+            setStyleMainSlider({height:480})
+            setStyleSlotSlider({height:430})
+        }            
+        setPercent(perc)
+        
+        const chunkSize = Math.trunc(width * perc / (300 + 19))
         let offset = []
         for (let i = 0; i < freeSlots.length; i += chunkSize) {
             offset.push(freeSlots.slice(i, i + chunkSize))
@@ -116,7 +127,10 @@ export default function Home({
 
             <main className={styles.main}>
                 <div className={styles.mainSlider}>
-                    <SliderWithControls loop>
+                    <SliderWithControls 
+                        loop
+                        styleWrap={styleMainSlider}
+                    >
                         {newCasinos.map(casino => (
                             <SwiperSlide key={casino.id} className={styles.sliderBlock}>
                                 <NewCasino {...casino} />
@@ -282,13 +296,16 @@ export default function Home({
                         </div>
                     </div>
                     {offsetSlots && offsetSlots.length > 0 &&
-                        <SliderWithControls loop>
+                        <SliderWithControls 
+                            loop
+                            styleWrap={styleSlotSlider}
+                        >
                             {offsetSlots.map((item, index) => (
                                 <SwiperSlide className={styles.slotBlock} key={index}>
                                     {item.map(slot => (
                                         <div
                                             style={{
-                                                width: "calc((100% - " + 30 * (Math.trunc(width * 0.8 / (300 + 19)) - 1) + "px)/" + Math.trunc(width * 0.8 / (300 + 19)) + ")",
+                                                width: "calc((100% - " + 30 * (Math.trunc(width * percent / (300 + 19)) - 1) + "px)/" + Math.trunc(width * percent / (300 + 19)) + ")",
                                                 flex: "initial"
                                             }}
                                             key={`slot_${slot.id}`}

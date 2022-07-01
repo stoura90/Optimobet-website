@@ -474,3 +474,54 @@
     border: 1px solid #F2F2F266;
     background-color: transparent;
 }
+
+@media screen and (max-width: 1440px) {
+    .sliderBlock{
+        width: 90%!important;
+    }
+    .sliderBlock>div{
+        height: 480px;
+    }
+    .categoryBlocks{
+        width: 90%;
+    }
+    .promoBlocks{
+        width: 90%;
+    }
+    .sitesGallery{
+        width: 90%;
+    }
+    .sitesLine{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .slotBlock{
+        width: 90%!important;
+    }
+    .slotBlock>div{
+        height: 430px;
+    }
+    .headerBlockWrap{
+        margin-left: 5%;
+    }
+    .rulesList{
+        width: 50%;
+    }
+    .faqQuestions{
+        width: 70%;
+        margin-left: 5%;
+    }
+    .countries{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+    .country{
+        width: 300px;
+    }
+    .optimoText{
+        width: 90%;
+    }
+    .aboutSite{
+        width: 90%;
+    }
+}

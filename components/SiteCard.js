@@ -3,9 +3,10 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 import 'react-circular-progressbar/dist/styles.css'
 import Stars from '../components/Stars'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import TermsModal from './TermsModal'
+import useWindowSize from '../hooks/useWindowSize'
 
 const percentStyles = {
     "badRep": {
@@ -112,6 +113,19 @@ export default function SiteCard({
     }
     const [reputationName, setReputationName] = useState(reputationN)
     const [modal, setModal] = useState(false)
+    const { width } = useWindowSize()
+    const [gamesCount, setGamesCount] = useState(6)
+
+    useEffect(()=>{
+        let gc = 6
+        if (width<=1600) {
+            gc = 5
+        }
+        if (width<=1440) {
+            gc = 4
+        }
+        setGamesCount(gc)
+    },[width])
 
     return (
         <div
@@ -163,7 +177,7 @@ export default function SiteCard({
                     </span>
                     <div className={styles.gamesCircles}>
                         {
-                            games?.slice(0, 6).map(game => (
+                            games?.slice(0, gamesCount).map(game => (
                                 <div key={`game_${game.id}`}>
                                     <Image
                                         src={`${process.env.IMAGE_URL}/${game.image_source}`}
@@ -174,8 +188,8 @@ export default function SiteCard({
                                 </div>
                             ))
                         }
-                        {games?.length > 6 && <div>
-                            +{games?.length - 6}
+                        {games?.length > gamesCount && <div>
+                            +{games?.length - gamesCount}
                         </div>}
                     </div>
                 </div>

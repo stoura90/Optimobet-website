@@ -1,8 +1,18 @@
 import styles from '/styles/components/CategoryBlock.module.css'
 import Image from 'next/image'
 import Link from 'next/link'
+import useWindowSize from '../hooks/useWindowSize'
+import { useEffect, useState } from 'react'
 
 export default function CategoryBlock({ name, info, image, bgColor = "", href = "/" }) {
+    const { width } = useWindowSize()
+    const [widthIcon, setWidthIcon] = useState(140)
+
+    useEffect(()=>{
+        if (width<=1440)
+            setWidthIcon(100)
+    },[width])
+
     return (
         <Link href={href}>
             <a className={styles.categoryBlock}>
@@ -10,8 +20,8 @@ export default function CategoryBlock({ name, info, image, bgColor = "", href = 
                     <Image
                         src={image}
                         objectFit='contain'
-                        width={140}
-                        height={140}
+                        width={widthIcon}
+                        height={widthIcon}
                     />
                 </div>
                 <div className={styles.categoryInfo}>
