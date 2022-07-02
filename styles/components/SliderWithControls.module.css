@@ -15,6 +15,11 @@
     height: 70px;
 }
 
+.mainSl.sliderWrap>*>*:before,
+.mainSl.sliderWrap>*>*::after {
+    top: calc(50% - 35px + 45px);
+}
+
 .sliderWrap>*>*::before {
     left: -54px;
 }
@@ -36,6 +41,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.mainSl .slideNavPrev,
+.mainSl .slideNavNext {
+    top: calc(50% - 25px + 45px);
 }
 
 .slideNavPrev::before,

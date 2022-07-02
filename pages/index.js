@@ -151,12 +151,46 @@ export default function Home({
                 <div className={styles.mainSlider}>
                     {newCasinos.length > 0 &&
                         <SliderWithControls
-                            loop
                             styleWrap={styleMainSlider}
+                            main
                         >
-                            {newCasinos.map(casino => (
+                            {newCasinos.map((casino, index) => (
                                 <SwiperSlide key={casino.id} className={styles.sliderBlock}>
-                                    <NewCasino {...casino} />
+                                    <NewCasino 
+                                        {...casino} 
+                                        image_source={
+                                            `/images/homePageimgs/${
+                                                index>2 ? 
+                                                    ((index % 3 == 0) ? 
+                                                        "1" 
+                                                        : 
+                                                        ((index % 3 == 1) ? 
+                                                            "2" 
+                                                            : 
+                                                            "3"
+                                                        ) 
+                                                    )
+                                                    : 
+                                                    (index+1)
+                                            }.png`
+                                        } 
+                                        image_characters={
+                                            `/images/homePageimgs/c${
+                                                index>2 ? 
+                                                    ((index % 3 == 0) ? 
+                                                        "1" 
+                                                        : 
+                                                        ((index % 3 == 1) ? 
+                                                            "2" 
+                                                            : 
+                                                            "3"
+                                                        ) 
+                                                    )
+                                                    : 
+                                                    (index+1)
+                                            }.png`
+                                        }
+                                    />
                                 </SwiperSlide>
                             ))}
                         </SliderWithControls>}
@@ -320,7 +354,6 @@ export default function Home({
                     </div>
                     {offsetSlots && offsetSlots.length > 0 &&
                         <SliderWithControls
-                            loop
                             styleWrap={styleSlotSlider}
                         >
                             {offsetSlots.map((item, index) => (
@@ -593,14 +626,24 @@ export default function Home({
     )
 }
 
-function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text, image_source }) {
+function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text, image_source, image_characters }) {
     return (
         <div className={styles.casino}>
             <div className={styles.casinoBg}>
                 <Image
-                    src={`${process.env.IMAGE_URL}/${image_source}`}
+                    //src={`${process.env.IMAGE_URL}/${image_source}`}
+                    src={image_source}
+                    layout='fill'
+                    objectFit='cover'
+                />
+            </div>
+            <div className={styles.characters}>
+                <Image
+                    //src={`${process.env.IMAGE_URL}/${image_characters}`}
+                    src={image_characters}
                     layout='fill'
                     objectFit='contain'
+                    objectPosition='right bottom'
                 />
             </div>
             <div className={styles.casinoInfo}>

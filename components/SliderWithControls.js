@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 
 // children = [<SwiperSlide>content</SwiperSlide>,...] 
-export default function SliderWithControls({ children = [], loop = false, styleWrap = {} }) {
+export default function SliderWithControls({ children = [], loop = false, styleWrap = {}, main = false }) {
     const navigationPrevRef = useRef(null)
     const navigationNextRef = useRef(null)
 
@@ -30,7 +30,7 @@ export default function SliderWithControls({ children = [], loop = false, styleW
             }}
             height={500}
             allowTouchMove={false}
-            className={styles.sliderWrap}
+            className={`${styles.sliderWrap} ${main && styles.mainSl}`}
             style={styleWrap}
         >
             {children}
