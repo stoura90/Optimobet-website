@@ -11,6 +11,7 @@
     transition: .2s;
     justify-content: space-between;
     transition: all 0.3s ease-in-out;
+    max-width: 100%;
 }
 
 .logo {
@@ -316,8 +317,19 @@
 }
 
 @media screen and (max-width: 1440px) {
-    .container{
+    .container {
         padding-left: 5%;
         padding-right: 5%;
     }
+}
+
+@media screen and (max-width: 425px) {
+    .container {
+        padding: 16px;
+    }
+
+    .container>div {
+        margin: 0;
+    }
+
 }
