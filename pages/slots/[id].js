@@ -78,10 +78,19 @@ const _slots = [
 export default function SlotPage({ slot, providers, slotsForSlider }) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
+    const [percent, setPercent] = useState(0.8)
 
     useEffect(() => {
         if (slotsForSlider) {
-            const chunkSize = Math.trunc(width * 0.8 / (300 + 19))
+            let perc = 0.8
+            if (width <= 1440) {
+                perc = 0.9
+            }     
+            if (width <= 1366) {
+                perc = 0.92
+            }
+            setPercent(perc)
+            const chunkSize = Math.trunc(width * perc / (290 + 19))
             let offset = []
             for (let i = 0; i < slotsForSlider.length; i += chunkSize) {
                 offset.push(slotsForSlider.slice(i, i + chunkSize))
@@ -265,7 +274,7 @@ export default function SlotPage({ slot, providers, slotsForSlider }) {
                                     {item.map(slot => (
                                         <div
                                             style={{
-                                                width: "calc((100% - " + 30 * (Math.trunc(width * 0.8 / (300 + 19)) - 1) + "px)/" + Math.trunc(width * 0.8 / (300 + 19)) + ")",
+                                                width: "calc((100% - " + 30 * (Math.trunc(width * percent / (290 + 19)) - 1) + "px)/" + Math.trunc(width * percent / (290 + 19)) + ")",
                                                 flex: "initial"
                                             }}
                                             key={`slot_${slot.id}`}

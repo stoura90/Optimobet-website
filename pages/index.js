@@ -106,17 +106,21 @@ export default function Home({
 
     useEffect(() => {
         let perc = 0.8
+        let mainS = { height: 480 }
+        let slotS = { height: 430 }
         if (width <= 1440) {
             perc = 0.9
-            setStyleMainSlider({ height: 480 })
-            setStyleSlotSlider({ height: 430 })
-        } else {
-            setStyleMainSlider({ height: 500 })
-            setStyleSlotSlider({ height: 500 })
+            mainS = { height: 480 }
+            slotS = { height: 430 }
+        }     
+        if (width <= 1366) {
+            perc = 0.92
         }
+        setStyleMainSlider(mainS)
+        setStyleSlotSlider(slotS)
         setPercent(perc)
 
-        const chunkSize = Math.trunc(width * perc / (300 + 19))
+        const chunkSize = Math.trunc(width * perc / (290 + 19))
         let offset = []
         for (let i = 0; i < freeSlots.length; i += chunkSize) {
             offset.push(freeSlots.slice(i, i + chunkSize))
@@ -361,7 +365,7 @@ export default function Home({
                                     {item.map(slot => (
                                         <div
                                             style={{
-                                                width: "calc((100% - " + 30 * (Math.trunc(width * percent / (300 + 19)) - 1) + "px)/" + Math.trunc(width * percent / (300 + 19)) + ")",
+                                                width: "calc((100% - " + 30 * (Math.trunc(width * percent / (290 + 19)) - 1) + "px)/" + Math.trunc(width * percent / (290 + 19)) + ")",
                                                 flex: "initial"
                                             }}
                                             key={`slot_${slot.id}`}

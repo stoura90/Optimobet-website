@@ -116,6 +116,13 @@
     }
 }
 
+@media screen and (max-width: 1366px) {
+    .container {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+}
+
 @media screen and (max-width: 425px) {
     .cols {
         flex-wrap: wrap;

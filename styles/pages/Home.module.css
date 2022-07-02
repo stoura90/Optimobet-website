@@ -183,6 +183,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 12px;
+    z-index: 2;
 }
 
 .rulesList li {
@@ -219,9 +220,18 @@
 }
 
 .gamblingPicture {
-    position: relative;
+    position: absolute;
     width: 30%;
-    margin-bottom: -80px;
+    height: 100%;
+    bottom: -80px;
+}
+
+.gamblingPicture:first-child {
+    left: 0px;
+}
+
+.gamblingPicture:last-child {
+    right: 0px;
 }
 
 .gamblingPicture:first-child img {
@@ -517,9 +527,6 @@
     .headerBlockWrap{
         margin-left: 5%;
     }
-    .rulesList{
-        width: 50%;
-    }
     .faqQuestions{
         width: 70%;
         margin-left: 5%;
@@ -542,5 +549,59 @@
     }
     .characters{
         width: 60%;
+    }
+    .gamblingPicture{
+        width: 32%;
+    }
+    .rulesList{
+        width: 44%;
+    }
+}
+
+@media screen and (max-width: 1366px) {
+    .sliderBlock{
+        width: 92%!important;
+    }
+    .categoryBlocks{
+        width: 92%;
+    }
+    .promoBlocks{
+        width: 92%;
+    }
+    .sitesGallery{
+        width: 92%;
+    }
+    .sitesLine{
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+    .slotBlock{
+        width: 92%!important;
+    }
+    .headerBlockWrap{
+        margin-left: 4%;
+    }
+    .faqQuestions{
+        width: 80%;
+        margin-left: 4%;
+    }
+    .countries{
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+    .country{
+        width: calc(33% - 16px);
+    }
+    .optimoText{
+        width: 92%;
+    }
+    .aboutSite{
+        width: 92%;
+    }
+    .gamblingPicture{
+        bottom: -60px;
+    }
+    .countriesContent{
+        width: 100%;
     }
 }
