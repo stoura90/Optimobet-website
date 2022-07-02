@@ -15,8 +15,9 @@ import CasinoCard from '../../components/CasinoCard'
 
 const slides = [1, 2, 3, 4, 5]
 
-export default function CasinosPage({ casinos, filters }) {
-    const casinosRef = useRef(casinos);
+export default function CasinosPage({ filters }) {
+    const [casinos, setCasinos] = useState([]);
+    const casinosRef = useRef();
     const [sidebarShown, setSidebarShown] = useState(true);
     const [sort, setSort] = useState('All');
     const [filteredItems, setFilteredItems] = useState(casinos);
@@ -69,7 +70,10 @@ export default function CasinosPage({ casinos, filters }) {
     }
 
     function handleFilterByCategory(item, filterName) {
-        if (item === null) setFilteredItems(casinosRef.current);
+        if (item === null) {
+            setFilteredItems(casinosRef.current);
+            return
+        }
         switch (filterName) {
             case 'Games':
                 setFilteredItems(casinosRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
@@ -141,14 +145,23 @@ export default function CasinosPage({ casinos, filters }) {
                 }
             }
         )
-        observer.observe(loadMoreRef.current);
+
+        APIRequest('/casinos', 'GET')
+            .then(res => {
+                setCasinos(res.data)
+                casinosRef.current = res.data;
+                setFilteredItems(res.data);
+                observer.observe(loadMoreRef.current);
+            })
+            .catch(err => console.log(err))
+
         return () => observer.disconnect();
     }, [])
 
     return (
         <div className={styles.container}>
             <div>
-                <SliderWithControls loop>
+                {casinos.length > 0 && <SliderWithControls loop>
                     {
                         casinos.slice(0, 10).map(slide => (
                             <SwiperSlide
@@ -168,7 +181,7 @@ export default function CasinosPage({ casinos, filters }) {
                             </SwiperSlide>
                         ))
                     }
-                </SliderWithControls>
+                </SliderWithControls>}
             </div>
             <div className={styles.contentContainer}>
                 <AnimatePresence
@@ -284,7 +297,6 @@ export default function CasinosPage({ casinos, filters }) {
 }
 
 export async function getStaticProps() {
-    const casinos = await APIRequest('/nolimit/casinos', 'GET')
     const languages = await APIRequest('/nolimit/languages', 'GET')
     const games = await APIRequest('/nolimit/games', 'GET')
     const payments = await APIRequest('/nolimit/payment-methods', 'GET')
@@ -293,7 +305,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            casinos: casinos.data,
+            // casinos: casinos.data,
             filters: [
                 {
                     name: 'Popular filters',
