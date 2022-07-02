@@ -12,6 +12,7 @@ import Link from 'next/link'
 import { BeatLoader } from 'react-spinners'
 import BonusCard from '../../components/BonusCard'
 import useUserInfo from '../../hooks/useUserInfo'
+import useWindowSize from '../../hooks/useWindowSize';
 
 const slides = [1, 2, 3, 4, 5]
 
@@ -25,6 +26,7 @@ export default function BonusesPage({ filters }) {
     const loadMoreRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const user = useUserInfo();
+    const { width } = useWindowSize();
 
     const controlVariants = {
         left: {

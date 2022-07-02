@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import styles from '../styles/components/BonusCard.module.css'
 import { AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import Stars from './Stars'
 import TermsModal from './TermsModal'
+import useWindowSize from '../hooks/useWindowSize'
 
-export default function BonusCard({ name, title, terms_and_condition, bonusable, games = [] }) {
+export default function BonusCard({ name, title, terms_and_condition, bonusable, games = [], id }) {
     const [modal, setModal] = useState(false)
+    const { width } = useWindowSize();
+    const gameCount = useRef(width <= 425 ? 5 : 3);
 
     return (
         <div className={styles.casino}>
@@ -52,7 +55,7 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                     </span>
                     <div className={styles.casinoGames}>
                         {
-                            games.map(game => (
+                            bonusable.games.slice(0, gameCount.current).map(game => (
                                 <div className={styles.casinoGame} key={game} >
                                     <Image
                                         src={`${process.env.IMAGE_URL}/${game.image_source}`}
@@ -63,42 +66,56 @@ export default function BonusCard({ name, title, terms_and_condition, bonusable,
                                 </div>
                             ))
                         }
+                        {bonusable.games.length > gameCount.current && <div className={styles.casinoGame} >
+                            +{bonusable.games.length - gameCount.current}
+                        </div>}
                     </div>
                 </div>
                 <div className={`${styles.casinoColumn} ${styles.right}`}>
                     <div className={styles.casinoLanguages}>
-                        {/* <div className={styles.languageContainer}>
+                        <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Website</span>
                             <div className={styles.languageContent}>
                                 {
-                                    [1, 2, 3].map(item => (
-                                        <div className={styles.language} key={item}>
+                                    bonusable.website_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language} key={`${id}_website_${lang.id}`} >
                                             <Image
-                                                src="/images/icons/flag-en.svg"
+                                                src={`${process.env.IMAGE_URL}/${lang.flag_source}`}
+                                                alt={lang.name}
                                                 height={20}
                                                 width={27}
+                                                objectFit='contain'
                                             />
                                         </div>
                                     ))
                                 }
+                                {bonusable.website_language.length > 2 && <div className={styles.language}>
+                                    +{bonusable.website_language.length - 2}
+                                </div>}
                             </div>
                         </div>
                         <div className={styles.languageContainer}>
                             <span className={styles.languageTitle}>Live chat</span>
                             <div className={styles.languageContent}>
                                 {
-                                    [1, 2, 3].map(item => (
-                                        <div className={styles.language} key={item}>
+                                    bonusable.support_language.slice(0, 2).map(lang => (
+                                        <div className={styles.language} key={`${id}_support_${lang.id}`} >
                                             <Image
-                                                src="/images/icons/flag-en.svg"
+                                                src={`${process.env.IMAGE_URL}/${lang.flag_source}`}
+                                                alt={lang.name}
                                                 height={20}
                                                 width={27}
+                                                objectFit='contain'
                                             />
                                         </div>
                                     ))
                                 }
+                                {bonusable.support_language.length > 2 && <div className={styles.language}>
+                                    +{bonusable.support_language.length - 2}
+                                </div>}
+
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                     <div className={styles.casinoButtons}>
                         <div

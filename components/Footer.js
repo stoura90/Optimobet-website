@@ -12,19 +12,19 @@ export default function Footer() {
                     </span>
                     <Link href={'/casinos'}>
                         <a>
-                            Online Casions 
+                            Online Casions
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'/bonuses'}>
                         <a>
-                            Bonuses 
+                            Bonuses
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/slots'}>
                         <a>
                             Free Slots
@@ -36,19 +36,19 @@ export default function Footer() {
                     </span>
                     <Link href={'/casinos'}>
                         <a>
-                            Online Casions 
+                            Online Casions
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'/bonuses'}>
                         <a>
-                            Bonuses 
+                            Bonuses
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/slots'}>
                         <a>
                             Free Slots
@@ -57,23 +57,23 @@ export default function Footer() {
                 </div>
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
-                        
+
                     </span>
                     <Link href={'/casinos'}>
                         <a>
-                            Online Casions 
+                            Online Casions
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'/bonuses'}>
                         <a>
-                            Bonuses 
+                            Bonuses
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/slots'}>
                         <a>
                             Free Slots
@@ -82,30 +82,30 @@ export default function Footer() {
                 </div>
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
-                        
+
                     </span>
                     <Link href={'/casinos'}>
                         <a>
-                            Online Casions 
+                            Online Casions
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'/bonuses'}>
                         <a>
-                            Bonuses 
+                            Bonuses
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/slots'}>
                         <a>
                             Free Slots
                         </a>
                     </Link>
                 </div>
-            </div> 
+            </div>
             <div className={styles.cols}>
                 <div className={styles.column}>
                     <span className={styles.colTitle}>
@@ -113,19 +113,19 @@ export default function Footer() {
                     </span>
                     <Link href={'/casinos'}>
                         <a>
-                            Online Casions 
+                            Online Casions
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'/bonuses'}>
                         <a>
-                            Bonuses 
+                            Bonuses
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/bookmakers'}>
                         <a>
                             Bookmakers
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'/slots'}>
                         <a>
                             Free Slots
@@ -140,12 +140,12 @@ export default function Footer() {
                         <a>
                             Who we are
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'#'}>
                         <a>
                             Contact support
                         </a>
-                    </Link>                   
+                    </Link>
                     <Link href={'#'}>
                         <a>
                             Subscribe
@@ -160,28 +160,20 @@ export default function Footer() {
                         <a>
                             Terms and conditions
                         </a>
-                    </Link>                    
+                    </Link>
                     <Link href={'#'}>
                         <a>
                             Privacy policy
                         </a>
                     </Link>
                 </div>
-            </div> 
+            </div>
             <span className={styles.footerText}>
-                Optimobet.com has no intention to use any kind of information which it provides for illegal purposes. Carrying on using this site you agree to our terms and policy of confidentiality.<br/> Optimobet.com respects confidentiality of all sides, viewing and using the site in different ways, and undertakes to secure their privacy. The site is able to collect and use “Personal data”, related to its Visitors, to provide them the services of the site. Before registration with the betting operator you take your own responsibility to comply with all aged-related and other relevant requirements. Online bets are illegal in some jurisdictions. Before gambling you are obliged to view the local rules. Optimobet.com bears no responsibility for your actions.<br /> Optimobet.com acts independently and is not controlled by the bookmaker offices or gambling operators. Optimobet.com is intended for only people above 18. Playing with any operator, remember, that gambling causes the addiction, and always play responsibly. We support the responsible game, that’s why if you need any information about gambling addiction or need any support, use begambleaware.org
+                Optimobet.com has no intention to use any kind of information which it provides for illegal purposes. Carrying on using this site you agree to our terms and policy of confidentiality.<br /> Optimobet.com respects confidentiality of all sides, viewing and using the site in different ways, and undertakes to secure their privacy. The site is able to collect and use “Personal data”, related to its Visitors, to provide them the services of the site. Before registration with the betting operator you take your own responsibility to comply with all aged-related and other relevant requirements. Online bets are illegal in some jurisdictions. Before gambling you are obliged to view the local rules. Optimobet.com bears no responsibility for your actions.<br /> Optimobet.com acts independently and is not controlled by the bookmaker offices or gambling operators. Optimobet.com is intended for only people above 18. Playing with any operator, remember, that gambling causes the addiction, and always play responsibly. We support the responsible game, that’s why if you need any information about gambling addiction or need any support, use begambleaware.org
             </span>
             <span className={styles.footerText}>
                 PLEASE, PLAY RESPONSIBLY.
             </span>
-            <div className={styles.footerImg}>
-                <Image
-                    src="/images/footer/brothers.png"
-                    layout='fill'
-                    objectFit='contain'
-                    objectPosition="right bottom"
-                />
-            </div>
             <div className={styles.footBottom}>
                 <div className={styles.footerImgContent}>
                     <Image
@@ -231,9 +223,17 @@ export default function Footer() {
                                     height={24}
                                 />
                             </a>
-                        </Link>                        
+                        </Link>
                     </div>
                 </div>
+            </div>
+            <div className={styles.footerImg}>
+                <Image
+                    src="/images/footer/brothers.png"
+                    layout='fill'
+                    objectFit='contain'
+                    objectPosition="right bottom"
+                />
             </div>
         </footer>
     )

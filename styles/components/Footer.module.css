@@ -1,4 +1,4 @@
-.container{
+.container {
     background: #F2F2F2 0% 0% no-repeat padding-box;
     padding: 40px 10%;
     display: flex;
@@ -6,20 +6,23 @@
     gap: 30px;
     position: relative;
 }
-.linksBlock{
+
+.linksBlock {
     display: flex;
     flex-direction: column;
     gap: 16px;
     width: 100%;
 }
-.colTitle{
+
+.colTitle {
     font: normal normal 500 16px/18px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453;
     text-transform: uppercase;
     min-height: 18px;
 }
-.cols{    
+
+.cols {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -28,74 +31,122 @@
     width: calc(100% + 30px);
     margin-right: -30px;
 }
-.column{
+
+.column {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     gap: 16px;
     width: calc(25% - 30px);
 }
-.column a{    
+
+.column a {
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
     text-decoration: none;
 }
-.footerText{
+
+.footerText {
     font: normal normal normal 15px/26px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453CC;
     width: 55%;
 }
-.footerImg{
+
+.footerImg {
     position: absolute;
     right: 0;
     bottom: 0;
     width: 50%;
     height: 80%;
 }
-.footerImgContent{    
+
+.footerImgContent {
     width: 100%;
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
 }
-.copyright{
+
+.copyright {
     font: normal normal normal 15px/17px Samsung Sans;
     letter-spacing: 0px;
     color: #4B4453B3;
     /* width: 50%; */
 }
-.footBottom{
+
+.footBottom {
     width: 50%;
     display: flex;
     gap: 30px;
     flex-direction: column;
 }
-.copyWithSocial{
+
+.copyWithSocial {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
 }
-.socials{
+
+.socials {
     display: flex;
     gap: 30px;
     align-items: center;
 }
-.socials *{
+
+.socials * {
     flex-shrink: 0;
 }
 
 @media screen and (max-width: 1440px) {
-    .container{
+    .container {
         padding-left: 5%;
         padding-right: 5%;
     }
-    .footerImg{
+
+    .footerImg {
         width: 35%;
     }
-    .footerText, .footBottom{
+
+    .footerText,
+    .footBottom {
         width: 65%;
-    }    
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .cols {
+        flex-wrap: wrap;
+        margin: 0;
+        width: 100%;
+    }
+
+    .column {
+        width: calc(50% - 30px);
+    }
+
+    .footerText {
+        width: 100%;
+    }
+
+    .footerImg {
+        position: relative;
+        height: 314px;
+        width: 100%;
+    }
+
+    .footBottom {
+        width: 100%;
+    }
+
+    .copyWithSocial {
+        gap: 0;
+    }
+
+    .copyright {
+        width: 50%;
+    }
+
 }

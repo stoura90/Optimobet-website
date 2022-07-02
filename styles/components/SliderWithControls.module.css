@@ -58,10 +58,21 @@
 }
 
 @media screen and (max-width: 1440px) {
-    .slideNavPrev{
+    .slideNavPrev {
         left: calc(5% - 25px - 19px);
     }
-    .slideNavNext{
+
+    .slideNavNext {
         right: calc(5% - 25px - 19px);
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .slideNavPrev {
+        left: -15px
+    }
+
+    .slideNavNext {
+        right: -15px;
     }
 }
