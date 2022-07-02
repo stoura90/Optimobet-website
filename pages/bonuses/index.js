@@ -15,7 +15,8 @@ import useUserInfo from '../../hooks/useUserInfo'
 
 const slides = [1, 2, 3, 4, 5]
 
-export default function BonusesPage({ bonuses, filters }) {
+export default function BonusesPage({ filters }) {
+    const [bonuses, setBonuses] = useState([]);
     const [sidebarShown, setSidebarShown] = useState(true);
     const [filter, setFilter] = useState('All');
     const bonusesRef = useRef(bonuses);
@@ -121,14 +122,22 @@ export default function BonusesPage({ bonuses, filters }) {
                 }
             }
         )
-        observer.observe(loadMoreRef.current);
+
+        APIRequest('/bonuses', 'GET')
+            .then(res => {
+                setBonuses(res.data);
+                bonusesRef.current = res.data;
+                setFilteredItems(res.data);
+                observer.observe(loadMoreRef.current);
+            })
+            .catch(err => console.log(err))
         return () => observer.disconnect();
     }, [])
 
     return (
         <div className={styles.container}>
             <div>
-                <SliderWithControls loop>
+                {bonuses.length > 0 && <SliderWithControls loop>
                     {
                         bonuses.slice(0, 10).map(slide => (
                             <SwiperSlide
@@ -146,7 +155,7 @@ export default function BonusesPage({ bonuses, filters }) {
                             </SwiperSlide>
                         ))
                     }
-                </SliderWithControls>
+                </SliderWithControls>}
             </div>
             <div className={styles.contentContainer}>
                 <AnimatePresence
@@ -255,11 +264,11 @@ export default function BonusesPage({ bonuses, filters }) {
 }
 
 export async function getStaticProps() {
-    const bonuses = await APIRequest('/bonuses', 'GET')
+    // const bonuses = await APIRequest('/bonuses', 'GET')
 
     return {
         props: {
-            bonuses: bonuses.data
+            // bonuses: bonuses.data
         },
         revalidate: 10,
     }
