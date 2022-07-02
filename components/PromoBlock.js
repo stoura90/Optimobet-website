@@ -91,7 +91,7 @@ export default function PromoBlock({
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.promoGetBonus}
-                        style={{ backgroundColor: buttonBg }}
+                        style={buttonBg ? { backgroundColor: buttonBg } : {}}
                     >
                         Get Bonus
                     </a>
@@ -104,7 +104,7 @@ export default function PromoBlock({
             </div>
             <div
                 className={styles.characters}
-                style={{ width: charactersWidth || "" }}
+                style={charactersWidth ? { width: charactersWidth || "" } : {}}
             >
                 {charactersImage && <Image
                     src={charactersImage}

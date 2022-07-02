@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function PromoBonusBlock({
-    bgColor,
+    bgColor = null,
     charactersImage,
     charactersWidth,
     claim_bonus_text,
@@ -15,7 +15,7 @@ export default function PromoBonusBlock({
     country,
     bonusable,
 }) {
-    const [buttonBg, setButtonBg] = useState("")
+    const [buttonBg, setButtonBg] = useState(null)
 
     useEffect(() => {
         switch (bgColor) {
@@ -23,7 +23,7 @@ export default function PromoBonusBlock({
                 setButtonBg("#F2F2F233")
                 break;
             default:
-                setButtonBg("")
+                setButtonBg(null)
                 break;
         }
     }, [bgColor])
@@ -32,7 +32,7 @@ export default function PromoBonusBlock({
         <div className={styles.promoBlock}>
             <div
                 className={styles.promoBackground}
-                style={{ background: bgColor || "" }}
+                style={bgColor ? { background: bgColor || "" } : {}}
             />
             <div className={styles.promoContent}>
                 <div className={styles.promoContentInfo}>
@@ -88,7 +88,7 @@ export default function PromoBonusBlock({
                         target="_blank"
                         rel="noopener noreferrer"
                         className={styles.promoGetBonus}
-                        style={{ backgroundColor: buttonBg }}
+                        style={buttonBg ? { backgroundColor: buttonBg } : {}}
                     >
                         Get Bonus
                     </a>
@@ -101,7 +101,7 @@ export default function PromoBonusBlock({
             </div>
             <div
                 className={styles.characters}
-                style={{ width: charactersWidth || "" }}
+                style={charactersWidth ? { width: charactersWidth } : {}}
             >
                 {charactersImage && <Image
                     src={charactersImage}

@@ -42,3 +42,10 @@
     width: 180px;
     height: 180px;
 }
+
+@media screen and (max-width: 1440px) {
+    .ImgWithRound{
+        width: 140px;
+        height: 140px;
+    }
+}

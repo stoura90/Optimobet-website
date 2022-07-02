@@ -314,3 +314,10 @@
     letter-spacing: 0px;
     color: #4B4453B3;
 }
+
+@media screen and (max-width: 1440px) {
+    .container{
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
