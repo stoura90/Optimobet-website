@@ -12,8 +12,9 @@ import CasinoCard from '../../components/CasinoCard';
 
 const slides = [1, 2, 3, 4, 5]
 
-export default function BookmakersPage({ bookmakers, filters }) {
-    const bookmakersRef = useRef(bookmakers);
+export default function BookmakersPage({ filters }) {
+    const [bookmakers, setBookmakers] = useState([]);
+    const bookmakersRef = useRef();
     const [sidebarShown, setSidebarShown] = useState(true);
     const [sort, setSort] = useState('All');
     const [page, setPage] = useState(1);
@@ -66,7 +67,10 @@ export default function BookmakersPage({ bookmakers, filters }) {
     }
 
     function handleFilterByCategory(item, filterName) {
-        if (item === null) setFilteredItems(bookmakersRef.current);
+        if (item === null) {
+            setFilteredItems(bookmakersRef.current);
+            return
+        }
         switch (filterName) {
             case 'Games':
                 setFilteredItems(bookmakersRef.current.filter(casino => casino.games.find(game => game.id === item.id)));
@@ -138,7 +142,17 @@ export default function BookmakersPage({ bookmakers, filters }) {
                 }
             }
         )
-        observer.observe(loadMoreRef.current);
+        APIRequest('/bookmakers', 'GET')
+            .then(res => {
+                setBookmakers(res.data);
+                bookmakersRef.current = res.data;
+                setFilteredItems(res.data);
+                observer.observe(loadMoreRef.current);
+            })
+            .catch(err => console.log(err))
+
+
+
         return () => observer.disconnect();
     }, [])
 
@@ -258,7 +272,7 @@ export default function BookmakersPage({ bookmakers, filters }) {
 }
 
 export async function getStaticProps() {
-    const bookmakers = await APIRequest('/nolimit/bookmakers', 'GET')
+    // const bookmakers = await APIRequest('/nolimit/bookmakers', 'GET')
     const languages = await APIRequest('/nolimit/languages', 'GET')
     const games = await APIRequest('/nolimit/games', 'GET')
     const countries = await APIRequest('/nolimit/countries', 'GET')
@@ -266,7 +280,7 @@ export async function getStaticProps() {
 
     return {
         props: {
-            bookmakers: bookmakers.data,
+            // bookmakers: bookmakers.data,
             filters: [
                 {
                     name: 'Popular filters',
