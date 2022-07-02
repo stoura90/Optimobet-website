@@ -39,8 +39,8 @@ export default function PromoBonusBlock({
                     <div className={styles.promoTitle}>
                         <div className={styles.promoReputation}>
                             <CircularProgressbar
-                                value={bonusable.reputation}
-                                text={`${bonusable.reputation}%`}
+                                value={bonusable?.reputation}
+                                text={`${bonusable?.reputation}%`}
                                 styles={{
                                     root: {},
                                     path: {
@@ -59,10 +59,10 @@ export default function PromoBonusBlock({
                         </div>
                         <div className={styles.promoSiteInfo}>
                             <span className={styles.promoCountry}>
-                                {bonusable.countries[0]?.name}
+                                {bonusable?.countries[0]?.name}
                             </span>
                             <Image
-                                src={`${process.env.IMAGE_URL}/${bonusable.image_source}`}
+                                src={`${process.env.IMAGE_URL}/${bonusable?.image_source}`}
                                 objectFit='cover'
                                 width={80}
                                 height={32}
@@ -74,7 +74,7 @@ export default function PromoBonusBlock({
                             {title || claim_bonus_text}
                         </span>
                         {
-                            bonusable.features?.map(feature => (
+                            bonusable?.features?.map(feature => (
                                 <span key={feature} className={styles.promoCheckInfo}>
                                     {feature}
                                 </span>

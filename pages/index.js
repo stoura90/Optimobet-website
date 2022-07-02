@@ -83,10 +83,10 @@ const _slots = [
 ]
 
 export default function Home({
-    newCasinos,
-    freeSlots,
-    betting,
-    exclusiveBonus,
+    // newCasinos,
+    // freeSlots,
+    // betting,
+    // exclusiveBonus,
     casinosCount,
     bookmakersCount,
     bonusesCount,
@@ -96,6 +96,10 @@ export default function Home({
 }) {
     const { width, height } = useWindowSize()
     const [offsetSlots, setOffsetSlots] = useState()
+    const [newCasinos, setNewCasinos] = useState([])
+    const [freeSlots, setFreeSlots] = useState([])
+    const [betting, setBetting] = useState([])
+    const [exclusiveBonus, setExclusiveBonus] = useState([])
 
     useEffect(() => {
         const chunkSize = Math.trunc(width * 0.8 / (300 + 19))
@@ -104,7 +108,22 @@ export default function Home({
             offset.push(freeSlots.slice(i, i + chunkSize))
         }
         setOffsetSlots(offset)
-    }, [width])
+    }, [width, freeSlots])
+
+    useEffect(() => {
+        APIRequest('/home-components?type=new_casino')
+            .then(res => setNewCasinos(res))
+            .catch(err => console.log(err))
+        APIRequest('/home-components?type=exclusive_bonus')
+            .then(res => setExclusiveBonus(res))
+            .catch(err => console.log(err))
+        APIRequest('/home-components?type=free_slots')
+            .then(res => setFreeSlots(res))
+            .catch(err => console.log(err))
+        APIRequest('/home-components?type=betting')
+            .then(res => setBetting(res))
+            .catch(err => console.log(err))
+    }, [])
 
     return (
         <div className={styles.container}>
@@ -116,13 +135,13 @@ export default function Home({
 
             <main className={styles.main}>
                 <div className={styles.mainSlider}>
-                    <SliderWithControls loop>
+                    {newCasinos.length > 0 && <SliderWithControls loop>
                         {newCasinos.map(casino => (
                             <SwiperSlide key={casino.id} className={styles.sliderBlock}>
                                 <NewCasino {...casino} />
                             </SwiperSlide>
                         ))}
-                    </SliderWithControls>
+                    </SliderWithControls>}
                 </div>
 
                 <div className={styles.categoryBlocks}>
@@ -166,19 +185,19 @@ export default function Home({
                         </span>
                     </div>
                     <div className={styles.promoBlocksContent}>
-                        <PromoBlock
+                        {betting[0] && <PromoBlock
                             charactersImage="/images/main/7880-1.png"
                             bgColor="#7F3FFC"
                             {...betting[0]}
                             rating={betting[0].reputation}
 
-                        />
-                        <PromoBlock
+                        />}
+                        {betting[1] && <PromoBlock
                             charactersImage="/images/main/7880-2.png"
                             bgColor="#4B4453"
                             {...betting[1]}
                             rating={betting[1].reputation}
-                        />
+                        />}
                     </div>
                 </div>
 
@@ -193,13 +212,13 @@ export default function Home({
                         ))
                     }
                     <div className={styles.promoInSites}>
-                        <PromoBlock
+                        {betting[3] && <PromoBlock
                             charactersImage="/images/main/7880-3.png"
                             bgColor="transparent linear-gradient(251deg, #FFC448 0%, #FF8457 100%) 0% 0% no-repeat padding-box"
                             charactersWidth="60%"
                             {...betting[3]}
                             rating={betting[3].reputation}
-                        />
+                        />}
                     </div>
                     {
                         betting.slice(4, 8).map(casino => (
@@ -257,13 +276,13 @@ export default function Home({
                     </div>
                     <div className={styles.promoBlocksContent}>
                         {
-                            exclusiveBonus.slice(0, 2).map((bonus,index) => (
+                            exclusiveBonus.slice(0, 2).map((bonus, index) => (
                                 <PromoBonusBlock
                                     key={bonus.id}
                                     {...bonus}
-                                    charactersImage={`/images/main/7880-${index+4}.png`}
-                                    bgColor={index==0 ? "#4B4453" : "#00C69C"}
-                                    charactersWidth={index==0 ? "55%" : null}
+                                    charactersImage={`/images/main/7880-${index + 4}.png`}
+                                    bgColor={index == 0 ? "#4B4453" : "#00C69C"}
+                                    charactersWidth={index == 0 ? "55%" : null}
                                 />
                             ))
                         }
@@ -295,7 +314,7 @@ export default function Home({
                                         >
                                             <Slot
                                                 {...slot}
-                                                provider={providers.filter(prov => prov.id==slot.provider_id)[0].name || ""}
+                                                provider={providers.filter(prov => prov.id == slot.provider_id)[0].name || ""}
                                             />
                                         </div>
                                     ))}
@@ -600,10 +619,6 @@ function NewCasino({ bonus_url, shared_content, features, id, claim_bonus_text, 
 
 export async function getStaticProps() {
     // uncomment when it works
-    // const newCasinos = await APIRequest('/nolimit/home-components?type=new_casino');
-    // const exclusiveBonus = await APIRequest('/nolimit/home-components?type=exclusive_bonus');
-    // const freeSlots = await APIRequest('/nolimit/home-components?type=free_slots');
-    // const betting = await APIRequest('/nolimit/home-components?type=betting');
     const casinos = await APIRequest('/nolimit/casinos');
     const bonuses = await APIRequest('/nolimit/bonuses');
     const slots = await APIRequest('/nolimit/slots');
@@ -613,10 +628,10 @@ export async function getStaticProps() {
 
     return {
         props: {
-            newCasinos: casinos.data,
-            exclusiveBonus: bonuses.data,
-            freeSlots: slots.data,
-            betting: bookmakers.data,
+            // newCasinos: casinos.data,
+            // exclusiveBonus: bonuses.data,
+            // freeSlots: slots.data,
+            // betting: bookmakers.data,
             casinosCount: casinos.total,
             bonusesCount: bonuses.total,
             slotsCount: slots.total,
